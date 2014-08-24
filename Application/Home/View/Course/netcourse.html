@@ -1,0 +1,121 @@
+<layout name="layout" replace="{__REEPLACE__}" />
+
+
+<include file="./Application/Home/View/welcome2.html" pic1="course_right" pic2="course_book" />
+
+<style>
+#start {
+	height:56px;background-color:rgb(2,183,230);
+	color:white;font-size:16pt;font-family:'Segoe UI';
+	padding:10px 15px;font-style:normal;
+}
+a,#start a{
+	color:white;
+}
+
+
+
+.index_title,.recmd_course_content_title,.recmd_course_info_text1,.recmd_course_info_text2{
+	font-style: normal;font-family:'Segoe UI';
+}
+.index_item{
+	height:300px;padding:19px 5px 19px 15px;
+	margin-bottom:2px;background-color:rgb(234,234,234);
+}
+.recmd_course_content{
+	float:left;
+}
+.recmd_course_content_title{
+	width:309px;font-size:11pt;font-color:blue;margin-top:10px;
+}
+.recmd_course_info{
+	padding-left:309px;
+}
+.recmd_course_info_text{
+width:191px;float:left;
+}
+.recmd_course_info_text1{
+padding-top:60px;padding-left:5px;font-size:12pt;text-align:center;
+}
+.recmd_course_info_text2{
+padding:15px 0 0 5px;font-size:12pt;text-align:center;
+}
+.recmd_course_info_img{
+width:140px;position:relative;float:right;top:30px;
+}
+/*网络课程列表特有*/
+.recmd_course_detail{
+	padding-top: 250px;
+	height:45;
+	text-align:right;
+	font-style: normal;
+}
+.recmd_course_sperator{
+	margin-top: 6px;
+	border-bottom:rgb(2,183,230) 2px solid;
+}
+</style>
+
+<div class="container" style="padding-left:0px;padding-right:0px;background-color:rgb(234,234,234);">
+	<div id="start" style="">
+		<a href="index">虚拟学院</a> &gt; <a href="__ROOT__/Home/Course/netcourse?page=0#start">网络课程</a>
+	</div>
+
+	<div id="recmd_course_area" style="float:left;width:700px;display:block;padding:50px 20px;">
+		<div class="index_title" style="color:white;margin-bottom:5px;font-style:normal;font-size:14pt;font-family:'Segoe UI';">
+			<span style="background-color:rgb(2,183,230);padding:10px 15px;margin:0px;">网络课程汇总</span>
+		</div>
+		<div style="height:4px;background-color:rgb(2,183,230);">&nbsp;</div>
+		<div class="index_item">
+			<div class="recmd_course_content">
+				<img src="__PUBLIC__/assets/image/course_1.png" width="309px" height="195px" />
+				<div class="recmd_course_content_title">理解爱因斯坦：狭义相对论 Understanding Einstein: Understanding Einstein: The Special Theory of Relativity</div>
+			</div>
+			<div class="recmd_course_info">
+				<div class="recmd_course_info_text">
+					<div class="recmd_course_info_text1">斯坦福大学 </div>
+					<div class="recmd_course_info_text2">Stanford University</div>
+					<div class="recmd_course_info_text2">
+						教授：Larry Randles Larry Randles Randles
+					</div>
+				</div>
+				<div class="recmd_course_info_img">
+					<img src="__PUBLIC__/assets/image/teacher_1.png" width="140px" />
+				</div>
+			</div>
+			<div class="recmd_course_detail">
+				<span style="background-color:rgb(2,183,230);padding:10px 15px;margin-bottom:10px;">
+					<a href="__ROOT__/Home/Course/netcourse_dtl?$eid=0#start" >详细信息</a>
+				</span>
+			</div>
+			<div class="recmd_course_sperator"></div>
+		</div>
+		<div class="index_item">
+			<div class="recmd_course_content">
+				<img src="__PUBLIC__/assets/image/course_1.png" width="309px" height="195px" />
+				<div class="recmd_course_content_title">理解爱因斯坦：狭义相对论 Understanding Einstein: Understanding Einstein: The Special Theory of Relativity</div>
+			</div>
+			<div class="recmd_course_info">
+				<div class="recmd_course_info_text">
+					<div class="recmd_course_info_text1">斯坦福大学 </div>
+					<div class="recmd_course_info_text2">Stanford University</div>
+					<div class="recmd_course_info_text2">
+						教授：Larry Randles Larry Randles Randles
+					</div>
+				</div>
+				<div class="recmd_course_info_img">
+					<img src="__PUBLIC__/assets/image/teacher_1.png" width="140px" />
+				</div>
+			</div>
+			<div class="recmd_course_detail">
+				<span style="background-color:rgb(2,183,230);padding:10px 15px;margin-bottom:10px;">
+					<a href="__ROOT__/Home/Course/netcourse_dtl?$eid=0#start" >详细信息</a>
+				</span>
+			</div>
+			<div class="recmd_course_sperator"></div>
+		</div>
+		<div style="text-align:right;margin:50px 20px;font-style:normal;font-size:14pt;">ok,这里是分页</div>
+	</div>
+
+
+</div>

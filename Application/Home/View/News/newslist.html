@@ -1,0 +1,134 @@
+<layout name="layout" replace="{__REEPLACE__}" />
+
+
+<include file="./Application/Home/View/welcome4.html" />
+
+<style>
+.news_left{
+	width:774px;
+	float:left;
+	font-style: normal;
+	padding:20px 30px;
+}
+.news_right{
+	width:1024px;
+	padding:20px 20px;
+	padding-left:794px;
+	font-style: normal;
+}
+.news_item_top_bar{
+	margin-top: 50px;
+	border-bottom-width: 4px;
+	border-bottom-color: rgb(31,105,228);
+	border-bottom-style: solid;
+}
+.news_item_img{
+	float:right;
+	padding:15px;
+}
+.news_item_title{
+	padding: 30px 0 15px 40px;
+	font-size: 14pt;
+	color:rgb(31,105,228);
+	font-family:'Segoe UI';
+}
+.news_item_content{
+	padding-left: 30px;
+}
+.news_item_read_all{
+	text-align: right;
+	font-size: 14pt;
+	font-family:'黑体';
+	color:blue;
+	padding-right: 30px;
+}
+.news_item_by{
+	text-align: right;
+	padding: 5px 30px 15px 0;
+	font-size: 12pt;
+	font-family:'Segoe UI';
+	color:rgb(31,105,228);
+	clear: both;
+}
+.news_item_bar{
+	margin: 10px 0;
+	border-bottom: rgb(31,105,228) solid 4px;
+}
+.news_area_title, .news_type_item {
+	font-size: 14pt;
+	font-family:'黑体';
+	color:rgb(31,105,228);
+}
+.news_type_item{
+	margin:10px 5px;
+}
+.news_type_item_out{
+	margin:15px 0;
+}
+</style>
+
+<div class="container" style="padding-left:0px;padding-right:0px;background-color:rgb(234,234,234);">
+	<div id="start" style="height:56px;background-color:rgb(201,48,59);color:white;font-size:16pt;font-family:'Segoe UI';padding:10px 15px;">
+		新闻动态> {$main_title}专区
+	</div>
+	<div class="news_left">
+		<div class="news_item_top_bar"></div>
+		<div class="news_item">
+			<div>
+				<img src="__PUBLIC__/assets/image/news_list_1.png"  class="news_item_img" />
+				<div class="news_item_title">Water's Tough Skin</div>
+				<div class="news_item_content">
+An ant could step off a cliff and land unharmed. But if it dips a leg in a raindrop, the insect can be caught in a life-threatening morass, all because of thly when something resets the temperature. 
+An ant could step off a cliff and land unharmed. But if it dips a leg in a raindrop, the insect can be caught in a life-threatening morass, all because of thly when something resets the temperature. 
+An ant could step off a cliff and land unharmed. But if it dips a leg in a raindrop, the insect can be caught in a life-threatening morass, all because of thly when something resets the temperature. 
+				</div>
+				<div class="news_item_read_all">
+						<a href="__ROOT__/Home/News/detail?zid=1#start" />阅读全文</a>
+					</div>
+			</div>
+			<div  class="news_item_by">南京大学 2014-3-14</div>
+			<div class="news_item_bar"></div>
+		</div>
+		<div class="news_item">
+			<div>
+				<img src="__PUBLIC__/assets/image/news_list_1.png"  class="news_item_img" />
+				<div class="news_item_title">Water's Tough Skin</div>
+				<div class="news_item_content">
+An ant could step off a cliff and land unharmed. But if it dips a leg in a raindrop, the insect can be caught in a life-threatening morass, all because of thly when something resets the temperature. 
+				</div>
+				<div class="news_item_read_all">
+						<a href="__ROOT__/Home/News/detail?zid=1#start" />阅读全文</a>
+					</div>
+			</div>
+			<div  class="news_item_by">南京大学 2014-3-14</div>
+			<div class="news_item_bar"></div>
+		</div>
+
+<div style="margin:35px 0 100px;text-align:center;">这里是分页</div>
+
+	</div>
+	<div class="news_right">
+		<div class="news_area_title" style="margin-top:20px;">站内传送>></div>
+		<div class="news_item_top_bar" style="margin-top:0"></div>
+		<div style="margin-top:30px;">
+			<div class="news_type_item">
+				<a href="__ROOT__/Home/News/newslist?sub_type=3" />拔尖专区新闻>></a>
+			</div>
+			<div class="news_type_item">
+				<a href="__ROOT__/Home/News/newslist?sub_type=2" />Nature专区新闻>></a>
+			</div>
+			<div class="news_type_item">
+				<a href="__ROOT__/Home/News/newslist?sub_type=0" />中国科学网专区新闻>></a>
+			</div>
+			<div class="news_type_item">
+				<a href="__ROOT__/Home/News/newslist?sub_type=1" />Science专区新闻>></a>
+			</div>
+		</div>
+
+		<div class="news_area_title">站外传送>></div>
+		<div class="news_item_top_bar" style="margin-top:0"></div>
+		<img class="news_type_item_out" src="__PUBLIC__/assets/image/news_type_science.png" />
+		<img class="news_type_item_out" src="__PUBLIC__/assets/image/news_type_nature.png" />
+		<img class="news_type_item_out" src="__PUBLIC__/assets/image/news_type_cn_science.png" />
+	</div>
+</div>

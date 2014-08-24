@@ -1,0 +1,281 @@
+ <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{$page_title}</title>
+    <!-- Sets initial viewport load and disables zooming  -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!-- SmartAddon.com Verification -->
+    <meta name="smartaddon-verification" content="936e8d43184bc47ef34e25e426c508fe" />
+    <link rel="shortcut-icon" href="__PUBLIC__/bootflat/favicon_16.ico"/>
+    <link rel="bookmark" href="__PUBLIC__/bootflat/favicon_16.ico"/>
+    <!-- site css -->
+    <link rel="stylesheet" href="__PUBLIC__/bootflat/css/site.min.css">
+
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="__PUBLIC__/bootflat/js/html5shiv.js"></script>
+      <script src="__PUBLIC__/bootflat/js/respond.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="__PUBLIC__/bootflat/js/site.min.js"></script>
+
+
+    <script type="text/javascript" src="__PUBLIC__/jquery-2.1.1.js"></script>
+
+
+<style type="text/css">
+#frame_bottom_menu ul li{
+	float:left;list-style-type:none;margin:15px 10px;font-size:12pt;font-style:normal;
+}
+.frame_top_info_ul{
+	margin-right:0;text-decoration: none;color: white;padding-top: 15px;line-height: 20px;float:right;list-style-type: none;
+}
+.frame_top_info_ul a{
+	color:white;padding-left:10px;
+}
+#login_form ul{
+	padding-left: 0;
+}
+#login_form li{
+	list-style-type:none;
+}
+.login_form_label{
+	float:left;padding:5px;
+}
+.login_form_btn{
+	margin-top:15px;
+}
+.login_form_tip{
+	font-size:10pt;
+	padding-left: 20px;
+	color:red;
+	display: none;
+}
+#g_alert, #g_info{
+	width:600px;position:absolute;top:300px;left:0;z-index:99999999;display:none;
+}
+</style>
+
+  </head>
+  <body style="background-color: white;"><!--#f1f2f6-->
+
+<!--nav-->
+<nav id="top_nav" class="navbar navbar-default navbar-custom" role="navigation" style="height:108px;background-color:black;position:inherit;">
+	<div class="container" style="width:1024px;">
+		<div class="navbar-header" height="108px;">
+			<div style="position:relative;top:15px;">
+				<a style="font-size:24pt;color:white;">全国物理拔尖人才培养计划</a>
+			</div>
+			<div style="margin-top:13px;">
+				<a style="font-size:16pt;color:white;">Training Plan Of Physics Subject Top-notch Talent</a>
+			</div>
+			
+		</div>
+		<ul  class="frame_top_info_ul" style="">
+			<defined name="Logined">
+				<li><a href="#" style="">wuxiaoshan</a></li>
+				<li><a href="#" style="color:white;padding-left:10px;">注销</a></li>
+			<else />
+				<li><a href="javascript:void(0);" onclick="show_login_form()" style="padding-right:10px;">登录</a></li>
+			</defined>
+		</ul>
+	</div>
+</nav>
+<div class="topic" style="color:black;padding-bottom:10px;padding-top:0;">
+	<div class="container" style="padding:0px 0 0;width:1024px">
+		<span style="padding-right:7px;width:129px;height:128px;">
+			<a href="__ROOT__/Home/Index"><img src="__PUBLIC__/assets/image/nav_index.png" width="118px" height="128px" /></a>
+		</span>
+		<span style="padding-right:7px;width:130px;height:128px;">
+			<a href="__ROOT__/Home/Plan"><img src="__PUBLIC__/assets/image/nav_plan.png" width="119px" height="128px" /></a>
+		</span>
+		<span style="padding-right:7px;width:129px;height:128px;">
+			<a href="__ROOT__/Home/News"><img src="__PUBLIC__/assets/image/nav_news.png" width="118px" height="128px" /></a>
+		</span>
+		<span style="padding-right:7px;width:130px;height:128px;">
+			<a href="__ROOT__/Home/League"><img src="__PUBLIC__/assets/image/nav_league.png" width="119px" height="128px" /></a>
+		</span>
+		<span style="padding-right:7px;width:129px;height:128px;">
+			<a href="__ROOT__/Home/Notice"><img src="__PUBLIC__/assets/image/nav_notice.png" width="118px" height="128px" /></a>
+		</span>
+		<span style="padding-right:7px;width:130px;height:128px;">
+			<a href="__ROOT__/Home/Ex"><img src="__PUBLIC__/assets/image/nav_ex.png" width="118px" height="128px" /></a>
+		</span>
+		<span style="padding-right:7px;width:129px;height:128px;">
+			<a href="__ROOT__/Home/Course"><img src="__PUBLIC__/assets/image/nav_course.png" width="118px" height="128px" /></a>
+		</span>
+		<span style="width:118px;height:128px;">
+			<a href="__ROOT__/Home/Bbs"><img src="__PUBLIC__/assets/image/nav_bbs.png" width="118px" height="128px" /></a>
+		</span>
+	</div>
+</div>
+
+<div class="container" style="padding-left:0px;padding-right:0px;margin-top:20px;width:1024px">
+	{__REEPLACE__}
+</div>
+
+<div id="bottom_nav" style="height:200px;background-color:black;clear:both;margin-top:45px;width:100%;">
+	<div class="container" id="bottom_nav_container" style="color:white;width:1024px;">
+		<div style="float:left;"><img src="__PUBLIC__/assets/image/index_bottom_flag.png" /></div>
+		<div style="float:left;width:490px">
+			<div style="font-size:24pt;margin-top:50px">全国物理学科拔尖人才培养计划</div>
+			<div style="font-size:16pt;">Training Plan Of Physics Subject Top-notch Talent</div>
+			<div id="frame_bottom_menu" style="">
+				<ul>
+					<li>关于我们</li>
+					<li>联系方式</li>
+					<li>隐私政策</li>
+					<li>帮助</li>
+				</ul>
+			</div>
+		</div>
+		<div style="float:right;top:158px;position:relative;font-style:normal;">
+			版权归@网站制作工作室所有
+		</div>
+	</div>
+</div>
+
+<div class="alert alert-danger" id="g_alert">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+  <h4 class="alert-heading">Warning!</h4>
+  <div id="g_alert_text"></div>
+</div>
+<div class="alert alert-info  alert-dismissable" id="g_info" >
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+  <div id="g_info_text"></div>
+</div>
+
+<div id="shielding_layer" style="display:none;position:absolute;top:0;left:0;background-color:#ffffff;filter:alpha(Opacity=80);-moz-opacity:0.5;opacity: 0.5;z-index:10000;">
+</div>
+<div id="login_form" style="display:none;position:absolute;margin:0 auto;width:400px;top:200px;z-index:10001;text-align:center;">
+	<form style="background-color:rgb(234,234,234);padding:20px;">
+		<ul>
+			<li>
+				<div id="login_form_field_raccount">
+					<span class="login_form_label">账号</span>
+					<span class="login_form_tip" id="login_form_tip_raccount">账号长度不能小于6！</span>
+					<input type="text" class="form-control" name="raccount" id="raccount" placeholder="Text input" id="inputError" />
+				</div>
+			</li>
+			<li>
+				<div  id="login_form_field_rpassword">
+					<span class="login_form_label">密码</span>
+					<span class="login_form_tip" id="login_form_tip_rpassword">密码长度不能小于6！</span>
+					<input type="password" class="form-control" name="rpassword" id="rpassword" placeholder="Text input">
+				</div>
+				
+			</li>
+			<li>
+				<button type="button" id="login_form_ok" class="login_form_btn btn btn-info btn-block" onclick="login_validate()">登录</button>
+				<button type="button" id="login_form_cancel" class="login_form_btn btn btn-block" onclick="close_login_window()">取消</button>
+			</li>
+		</ul>
+	</form>
+</div>
+<script>
+//修正顶底两端宽度
+function RepairNav(){
+	//var ev = e || window.event;
+	var w = document.body.scrollWidth + 'px';
+	if(document.body.scrollWidth <=1024){
+		$('#top_nav').css('width',"1024px");
+		$('#bottom_nav').css('width',"1024px");
+		$('#shielding_layer').css('width', "1024px");
+		$('#shielding_layer').css('height', document.body.scrollHeight + 'px');
+	} else {
+		$('#top_nav').css('width', w);
+		$('#bottom_nav').css('width', w);
+		$('#shielding_layer').css('width', w);
+		$('#shielding_layer').css('height', document.body.scrollHeight + 'px');
+	}
+	$('#login_form').css('left', ((document.body.scrollWidth - 400)/2)+"px");
+	$('#g_alert').css('left', ((document.body.scrollWidth - 600)/2)+"px");
+	$('#g_info').css('left', ((document.body.scrollWidth - 600)/2)+"px");
+	//alert(document.body.scrollWidth);
+}
+window.onresize = function(e){
+	var ev =e || window.event;
+	//console.log(ev);
+	$('#top_nav').css('width', "1024px");
+	$('#bottom_nav').css('width', "1024px");
+	setTimeout(RepairNav, 150);
+};
+function show_login_form(){
+	$('#shielding_layer').show();
+	$('#login_form').show();
+}
+function close_login_window(){
+	$('#shielding_layer').hide();
+	$('#login_form').hide();
+}
+function login_validate(){
+	var raccount = $('#raccount').val();
+	var rpassword = $('#rpassword').val();
+	var ok = true;
+	if(raccount.length < 6){
+		$('#login_form_field_raccount').attr('class','has-error');
+		$('#login_form_tip_raccount').show();
+		$('#raccount').focus();
+		ok = false;
+	}
+	if(rpassword.length < 6){
+		$('#login_form_field_rpassword').attr('class','has-error');
+		$('#login_form_tip_rpassword').show();
+		if(ok){
+			$('#rpassword').focus();
+		}
+		ok = false;
+	}
+	if(ok){
+		$('#login_form_ok').attr('disabled', true);
+		$('#login_form_cancel').attr('disabled', true);
+		$.ajax({
+			url:'__ROOT__/Home/Index/login',
+			success:function(t){
+				$('#g_info_text').text('登录成功！');
+				$('#g_info').show();
+				console.log(t);
+			},
+			error:function(t){
+				$('#login_form_ok').attr('disabled', false);
+				$('#login_form_cancel').attr('disabled', false);
+				//console.log(t);
+				$('#g_alert_text').text('登录失败！('+t.status+': '+t.statusText+')');
+				$('#g_alert').show();//alert('fail');
+			}
+		});
+	}
+}
+$(document).ready(function(){
+	RepairNav();
+	$('#raccount').keyup(function(){
+		var val = $('#raccount').val();
+		if(val.length < 6){
+			$('#login_form_field_raccount').attr('class', 'has-error');
+			$('#login_form_tip_raccount').show();
+		} else {
+			$('#login_form_field_raccount').attr('class', '');
+			$('#login_form_tip_raccount').hide();
+		}
+	});
+	$('#rpassword').keyup(function(){
+		var val = $('#rpassword').val();
+		if(val.length < 6){
+			$('#login_form_field_rpassword').attr('class', 'has-error');
+			$('#login_form_tip_rpassword').show();
+		} else {
+			$('#login_form_field_rpassword').attr('class', '');
+			$('#login_form_tip_rpassword').hide();
+		}
+	});
+	$('.close').click(function(e){
+		$(this).parent().hide();
+		return false;
+	});
+});
+</script>
+
+  </body>
+
+  </html>

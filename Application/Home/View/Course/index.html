@@ -1,0 +1,198 @@
+<layout name="layout" replace="{__REEPLACE__}" />
+
+
+<include file="./Application/Home/View/welcome2.html" pic1="course_right" pic2="course_book" />
+
+<style>
+
+.index_title,.recmd_course_content_title,.recmd_course_info_text1,.recmd_course_info_text2{
+	font-style: normal;
+}
+.recmd_course_content_title,.recmd_course_info_text1,.recmd_course_info_text2,.p_l_title,.p_l_author,.p_l_detail{
+	font-family:'Segoe UI';
+}
+.index_title,.p_l_title,.p_l_author,.p_l_detail{
+	font-size: 14pt;
+}
+.index_item,.p_l_item,.link_item, .courseware_item{
+	margin-bottom:2px;background-color:rgb(234,234,234);
+}
+.index_item{
+	height:108px;
+}
+#recmd_course_area .index_title{
+	color:#9A7016;
+}
+#phy_library_area .index_title{
+	color:rgb(31,105,228);
+}
+#link_area .index_title{
+	color:rgb(109,14,106);
+}
+#recmd_course_area .index_item{
+	height:287px;padding:19px 5px 19px 15px;
+}
+.recmd_course_content_title{
+	width:309px;font-size:11pt;font-color:blue;margin-top:10px;
+}
+.recmd_course_content{
+	float:left;
+}
+.recmd_course_info{
+	padding-left:309px;
+}
+.recmd_course_info_text{
+width:155px;float:left;
+}
+.recmd_course_info_text1{
+padding-top:60px;padding-left:5px;font-size:12pt;text-align:center;
+}
+.recmd_course_info_text2{
+padding:15px 0 0 5px;font-size:12pt;text-align:center;
+}
+.recmd_course_info_img{
+width:140px;position:relative;float:right;top:30px;
+}
+
+.p_l_item{
+	padding-left:10px;height:183px;
+}
+.p_l_title{
+	padding-top: 30px;
+	padding-bottom: 10px;
+	font-style: normal;
+}
+.p_l_author{
+	padding: 10px;
+	height:74px;
+	overflow: hidden;
+	font-style: normal;
+}
+.p_l_detail{
+	font-style: normal;text-align:right;padding-right:30px;
+}
+.courseware_item{
+	height:87px;padding-top:28px;font-style:normal;
+}
+.courseware_item_by{
+	float:right;padding-right:30px;padding-top:1px;font-size:12pt;font-family:'黑体';
+}
+.courseware_item_title{
+	padding-left:50px;font-size:14pt;font-family:'黑体';
+}
+
+</style>
+
+<div class="container" style="padding-left:0px;padding-right:0px;">
+	<div id="recmd_course_area" style="float:left;width:628px;display:block;">
+		<div class="index_title">
+			<span style="float:left">优秀网络课程</span>
+			<span style="float:right">
+				<a href="__ROOT__/Home/Course/netcourse?page=0#start" >更多>></a>
+			</span>
+			<span>&nbsp;</span>
+		</div>
+		<div style="height:2px;background-color:#9A7016;">&nbsp;</div>
+		<div class="index_item">
+			<div class="recmd_course_content">
+				<img src="__PUBLIC__/assets/image/course_1.png" width="309px" height="195px" />
+				<div class="recmd_course_content_title">理解爱因斯坦：狭义相对论 Understanding Einstein: Understanding Einstein: The Special Theory of Relativity</div>
+			</div>
+			<div class="recmd_course_info">
+				<div class="recmd_course_info_text">
+					<div class="recmd_course_info_text1">斯坦福大学 </div>
+					<div class="recmd_course_info_text2">Stanford University</div>
+					<div class="recmd_course_info_text2">
+						教授：Larry Randles Larry Randles Randles
+					</div>
+				</div>
+				<div class="recmd_course_info_img">
+					<img src="__PUBLIC__/assets/image/teacher_1.png" width="140px" />
+				</div>
+			</div>
+		</div>
+		<div class="index_item">
+			<div class="recmd_course_content">
+				<img src="__PUBLIC__/assets/image/course_1.png" width="309px" height="195px" />
+				<div class="recmd_course_content_title">理解爱因斯坦：狭义相对论 Understanding Einstein: Understanding Einstein: The Special Theory of Relativity</div>
+			</div>
+			<div class="recmd_course_info">
+				<div class="recmd_course_info_text">
+					<div class="recmd_course_info_text1">斯坦福大学 </div>
+					<div class="recmd_course_info_text2">Stanford University</div>
+					<div class="recmd_course_info_text2">
+						教授：Larry Randles Larry Randles Randles
+					</div>
+				</div>
+				<div class="recmd_course_info_img">
+					<img src="__PUBLIC__/assets/image/teacher_1.png" width="140px" />
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div id="phy_library_area" style="width:1024px;padding-left:643px;">
+		<div class="index_title">
+			<span>物理图书馆</span>
+			<span style="float:right">
+				<a href="__ROOT__/Home/Course/pl?page=0#start" >更多>></a>
+			</span>
+		</div>
+		<div style="height:2px;background-color:rgb(31,105,228);">&nbsp;</div>
+		<div class="p_l_item">
+			<img src="__PUBLIC__/assets/image/course_book_a_brief_history_of_time.png" style="margin:10px;float:left;" width="129px" height="154px"/>
+			<div style="text-align:center">
+				<div class="p_l_title">《时间简史》</div>
+				<div class="p_l_author">作者：史蒂芬霍金</div>
+				<div class="p_l_detail">详情>></div>
+			</div>
+		</div>
+		<div class="p_l_item">
+			<img src="__PUBLIC__/assets/image/course_book_the_theory_of_relativity.png" style="margin:10px;float:left;" width="129px" height="154px"/>
+			<div style="text-align:center">
+				<div class="p_l_title">《时间简史》</div>
+				<div class="p_l_author">作者：史蒂芬霍金作者：史蒂芬霍金</div>
+				<div class="p_l_detail">详情>></div>
+			</div>
+		</div>
+	</div>
+
+
+	<div id="courseware_area" style="width:1024px;padding-left:643px;">
+		<div class="index_title">
+			<span>公共资料</span>&nbsp;&nbsp;|&nbsp;&nbsp; 
+			<span>课程课件</span>
+			<span style="float:right">更多>></span>
+		</div>
+		<div style="height:2px;background-color:rgb(35,17,103);">&nbsp;</div>
+		<div class="courseware_item">
+			<div class="courseware_item_by">南京大学</div>
+			<div class="courseware_item_title">力学研究力学研究力学</div>
+		</div>
+		<div class="courseware_item">
+			<div class="courseware_item_by">南京大学</div>
+			<div class="courseware_item_title">天体课外阅读</div>
+		</div>
+		<div class="courseware_item">
+			<div class="courseware_item_by">南京大学</div>
+			<div class="courseware_item_title">大学综合教程</div>
+		</div>
+	</div>
+
+
+	<div id="link_area" style="width:1024px;padding-left:643px;">
+		<div class="index_title">
+			<span>知识热点链接</span>
+			<span style="float:right">更多>></span>
+		</div>
+		<div style="height:2px;background-color:rgb(109,14,106);">&nbsp;</div>
+		<div class="link_item" style="height:87px;text-align:center;">
+			<img src="__PUBLIC__/assets/image/course_link_zhihu.png" style="margin:5px;" width="294px" height="77px" />
+		</div>
+		<div class="link_item" style="height:87px;text-align:center;">
+			<img src="__PUBLIC__/assets/image/course_link_douban.png" style="margin:5px;" width="294px" height="77px" />
+		</div>
+	</div>
+
+</div>
