@@ -1,0 +1,49 @@
+
+
+
+
+
+
+
+
+
+/*框架顶部*/
+.frame_top_info_ul{
+	margin-right:0;text-decoration: none;color: white;padding-top: 15px;line-height: 20px;float:right;list-style-type: none;
+}
+.frame_top_info_ul a{color:white;padding-left:10px;}
+/*框架底部*/
+#frame_bottom_menu ul li{float:left;list-style-type:none;margin:15px 10px;font-size:12pt;font-style:normal;}
+/*登录和弹出框*/
+#login_form ul{padding-left: 0;font-style: normal;}
+#login_form li{list-style-type:none;}
+.login_form_label{padding:10px 5px 0 10px;font-size:14pt;}
+.login_form_btn{margin-top:15px;}
+.login_form_tip{font-size:10pt;padding-left: 20px;color:red;display: none;}
+#g_alert, #g_info{width:600px;position:absolute;top:200px;left:0;display:none;}
+
+/*以下首页*/
+.index_title {font-size: 14pt;}
+.index_item{height:108px;margin-bottom:2px;background-color:rgb(234,234,234);font-style: normal;}
+.index_item_hot{height:218px;}
+.index_item_content {padding:10px 22px 0;font-family:'Segoe UI';font-size:12pt;float:left;}
+.index_item_info{/* 出处 */font-size:12pt;padding-top:76px;}
+.index_item_info_left {padding-left:22px;float:left;}
+.index_item_info_right {padding-right:22px;float:right;}
+#physics_news_area .index_item_info, #physics_news_area .index_title{color:#007768;}
+#hop_act_area .index_item_info, #hop_act_area .index_title{color:#C51F00;}
+#hot_post_area .index_item_info, #hot_post_area .index_title{color:#6D0E6A;}
+#hot_college_area .index_title{color:#A2A012;}
+#recmd_course_area .index_title{color:#9A7016;}
+.index_item_hot .flag {float:left;padding-left:5px;padding-top: 27px;}
+.index_item_hot_content{font-family:'Segoe UI';font-size:12pt;color:#6D0E6A;vertical-align:middle;}
+#recmd_course_area .index_item{height:287px;padding:19px 5px 19px 15px;}
+.recmd_course_info_text1{padding-top:60px;padding-left:5px;font-family:'Segoe UI';font-size:12pt;text-align:center;}
+.recmd_course_info_text2{padding:15px 0 0 5px;font-family:'Segoe UI';font-size:12pt;text-align:center;}
+.recmd_course_info_img{width:140px;position:relative;float:right;top:30px;}
+.recmd_course_info{padding-left:309px;}
+.recmd_course_info table{float:left;display:inline;overflow:hidden;}
+.recmd_course_info table tr{width:165px;}
+.recmd_course_content{float:left;}
+.recmd_course_content_title{width:309px;font-size:11pt;font-family:'Segoe UI';color:blue;margin-top:10px;}
+.recmd_course_info_text{width:155px;float:left;}

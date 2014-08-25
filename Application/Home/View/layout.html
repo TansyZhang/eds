@@ -23,47 +23,22 @@
 
     <script type="text/javascript" src="__PUBLIC__/jquery-2.1.1.js"></script>
 
-
-<style type="text/css">
-#frame_bottom_menu ul li{
-	float:left;list-style-type:none;margin:15px 10px;font-size:12pt;font-style:normal;
-}
-.frame_top_info_ul{
-	margin-right:0;text-decoration: none;color: white;padding-top: 15px;line-height: 20px;float:right;list-style-type: none;
-}
-.frame_top_info_ul a{
-	color:white;padding-left:10px;
-}
-#login_form ul{
-	padding-left: 0;font-style: normal;
-}
-#login_form li{
-	list-style-type:none;
-}
-.login_form_label{
-	float:left;padding:10px 5px 0 10px;
-	font-size:14pt;
-}
-.login_form_btn{
-	margin-top:15px;
-}
-.login_form_tip{
-	font-size:10pt;
-	padding-left: 20px;
-	color:red;
-	display: none;
-}
-#g_alert, #g_info{
-	width:600px;position:absolute;top:200px;left:0;z-index:99999999;display:none;
-}
-</style>
+	<link rel="stylesheet" href="__PUBLIC__/assets/css/eds-base.css" />
 
   </head>
   <body style="background-color: white;"><!--#f1f2f6-->
 
 <!--nav-->
-<nav id="top_nav" class="navbar navbar-default navbar-custom" role="navigation" style="height:108px;background-color:black;position:inherit;">
+<nav id="top_nav" class="navbar navbar-default navbar-custom" role="navigation" style="height:108px;background-color:black;position:inherit;margin-bottom:10px;">
 	<div class="container" style="width:1024px;">
+		<ul class="frame_top_info_ul">
+			<defined name="Logined">
+				<li><a href="#" style="">wuxiaoshan</a></li>
+				<li><a href="#" style="color:white;padding-left:10px;">注销</a></li>
+			<else />
+				<li><div id="btn_login" onclick="alert('login')" style="padding-right:10px;cursor:pointer;z-index:100000000">登录</div></li>
+			</defined>
+		</ul>
 		<div class="navbar-header" height="108px;">
 			<div style="position:relative;top:15px;">
 				<a style="font-size:24pt;color:white;">全国物理拔尖人才培养计划</a>
@@ -73,14 +48,6 @@
 			</div>
 			
 		</div>
-		<ul  class="frame_top_info_ul" style="">
-			<defined name="Logined">
-				<li><a href="#" style="">wuxiaoshan</a></li>
-				<li><a href="#" style="color:white;padding-left:10px;">注销</a></li>
-			<else />
-				<li><a href="javascript:void(0);" onclick="show_login_window()" style="padding-right:10px;">登录</a></li>
-			</defined>
-		</ul>
 	</div>
 </nav>
 <div class="topic" style="color:black;padding-bottom:10px;padding-top:0;">
@@ -112,7 +79,7 @@
 	</div>
 </div>
 
-<div class="container" style="padding-left:0px;padding-right:0px;margin-top:20px;width:1024px">
+<div class="container" style="padding-left:0px;padding-right:0px;margin-top:5px;width:1024px">
 	{__REEPLACE__}
 </div>
 
@@ -132,7 +99,7 @@
 			</div>
 		</div>
 		<div style="float:right;top:158px;position:relative;font-style:normal;">
-			版权归@网站制作工作室所有
+			版权归@EDS网站制作实验室所有
 		</div>
 	</div>
 </div>
@@ -153,14 +120,14 @@
 	<form style="background-color:rgb(234,234,234);padding:20px;">
 		<ul>
 			<li>
-				<div id="login_form_field_raccount">
+				<div id="login_form_field_raccount" style="text-align:left">
 					<span class="login_form_label">账号</span>
 					<span class="login_form_tip" id="login_form_tip_raccount">账号长度不能小于6！</span>
 					<input type="text" class="form-control" name="raccount" id="raccount" placeholder="Account input" id="inputError" />
 				</div>
 			</li>
 			<li>
-				<div  id="login_form_field_rpassword">
+				<div  id="login_form_field_rpassword" style="text-align:left">
 					<span class="login_form_label">密码</span>
 					<span class="login_form_tip" id="login_form_tip_rpassword">密码长度不能小于6！</span>
 					<input type="password" class="form-control" name="rpassword" id="rpassword" placeholder="Password input">
@@ -174,7 +141,10 @@
 		</ul>
 	</form>
 </div>
-<script>
+
+  </body>
+
+<script language="javascript">
 function CDialog(){
 	var shielding_layer = $('#shielding_layer');
 	var start_index = 99990000;
@@ -192,15 +162,18 @@ function CDialog(){
 		old_display.push(shielding_layer.css('display'));
 		shielding_layer.css('z-index',start_index);
 		shielding_layer.css('display', 'block');
-		return start_index+=100;
+		start_index += 100;
+		return start_index - 99;
 	}
 	this.show_alert = function(text){
-		this.add_shield_layer();
+		var zi = this.add_shield_layer();
+		g_alert.css('z-index',zi);
 		g_alert_text.text(text);
 		g_alert.show();
 	}
 	this.show_info = function(text){
-		this.add_shield_layer();
+		var zi = this.add_shield_layer();
+		g_info.css('z-index',zi);
 		g_info_text.text(text);
 		g_info.show();
 	}
@@ -305,6 +278,9 @@ $(document).ready(function(){
 		$('#bottom_nav').css('width', "1024px");
 		setTimeout(clogin.repair_nav, 150);
 	});
+	$('#btn_login').click(function(){
+		alert('login');show_login_window();
+	});
 });
 
 //以下全局函数列表
@@ -312,7 +288,5 @@ function show_login_window(){ clogin.show_login_window(); return false;}
 function close_login_window(){ clogin.close_login_window();return false;}
 function login_eds(){ clogin.login();return false;}
 </script>
-
-  </body>
 
   </html>

@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>test</title>
+    <title>{$page_title}</title>
     <!-- Sets initial viewport load and disables zooming  -->
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
     <!-- SmartAddon.com Verification -->
@@ -19,320 +19,69 @@
       <script src="__PUBLIC__/bootflat/js/respond.min.js"></script>
     <![endif]-->
     <script type="text/javascript" src="__PUBLIC__/bootflat/js/site.min.js"></script>
+
+
+    <script type="text/javascript" src="__PUBLIC__/jquery-2.1.1.js"></script>
+
+    <link rel="stylesheet" href="__PUBLIC__/assets/css/eds-base.css" />
+
   </head>
   <body style="background-color: white;"><!--#f1f2f6-->
 
 <!--nav-->
 <nav id="top_nav" class="navbar navbar-default navbar-custom" role="navigation" style="height:108px;background-color:black;position:inherit;">
 	<div class="container" style="width:1024px;">
-		<div class="navbar-header">
-			<a style="position:relative;font-size:24pt;color:white;top:15px;">全国物理拔尖人才培养计划</a>
-			<a style="position:relative;font-size:16pt;color:white;top:50px;left:-385px;">Training Plan Of Physics Subject Top-notch Talent</a>
+		<div class="navbar-header" height="108px;">
+			<div style="position:relative;top:15px;">
+				<a style="font-size:24pt;color:white;">全国物理拔尖人才培养计划</a>
+			</div>
+			<div style="margin-top:13px;">
+				<a style="font-size:16pt;color:white;">Training Plan Of Physics Subject Top-notch Talent</a>
+			</div>
+			
 		</div>
-		<div class="collapse navbar-collapse">
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#" style="color:white">wuxiaoshan</a></li>
-				<li><a href="#" style="color:white">注销</a></li>
-			</ul>
-		</div>
+		<ul  class="frame_top_info_ul" style="">
+			<defined name="Logined">
+				<li><a href="#" style="">{$unickname}</a></li>
+				<li><a href="#" style="color:white;padding-left:10px;">注销</a></li>
+			<else />
+				<li><a href="javascript:void(0);" onclick="show_login_window()" style="padding-right:10px;">登录</a></li>
+			</defined>
+		</ul>
 	</div>
 </nav>
 <div class="topic" style="color:black;padding-bottom:10px;padding-top:0;">
 	<div class="container" style="padding:0px 0 0;width:1024px">
-		<div>
-			<span style="padding-right:4px;"><img src="__PUBLIC__/assets/image/nav_index.png" /></span>
-			<span style="padding-right:4px;"><img src="__PUBLIC__/assets/image/nav_plan.png" /></span>
-			<span style="padding-right:4px;"><img src="__PUBLIC__/assets/image/nav_news.png" /></span>
-			<span style="padding-right:4px;"><img src="__PUBLIC__/assets/image/nav_league.png" /></span>
-			<span style="padding-right:4px;"><img src="__PUBLIC__/assets/image/nav_notice.png" /></span>
-			<span style="padding-right:4px;"><img src="__PUBLIC__/assets/image/nav_ex.png" /></span>
-			<span style="padding-right:4px;"><img src="__PUBLIC__/assets/image/nav_course.png" /></span>
-			<span style=""><img src="__PUBLIC__/assets/image/nav_post.png" /></span>
-		</div>
+		<span style="padding-right:7px;width:129px;height:128px;">
+			<a href="__ROOT__/Home/Index"><img src="__PUBLIC__/assets/image/nav_index.png" width="118px" height="128px" /></a>
+		</span>
+		<span style="padding-right:7px;width:130px;height:128px;">
+			<a href="__ROOT__/Home/Plan"><img src="__PUBLIC__/assets/image/nav_plan.png" width="119px" height="128px" /></a>
+		</span>
+		<span style="padding-right:7px;width:129px;height:128px;">
+			<a href="__ROOT__/Home/News"><img src="__PUBLIC__/assets/image/nav_news.png" width="118px" height="128px" /></a>
+		</span>
+		<span style="padding-right:7px;width:130px;height:128px;">
+			<a href="__ROOT__/Home/League"><img src="__PUBLIC__/assets/image/nav_league.png" width="119px" height="128px" /></a>
+		</span>
+		<span style="padding-right:7px;width:129px;height:128px;">
+			<a href="__ROOT__/Home/Notice"><img src="__PUBLIC__/assets/image/nav_notice.png" width="118px" height="128px" /></a>
+		</span>
+		<span style="padding-right:7px;width:130px;height:128px;">
+			<a href="__ROOT__/Home/Ex"><img src="__PUBLIC__/assets/image/nav_ex.png" width="118px" height="128px" /></a>
+		</span>
+		<span style="padding-right:7px;width:129px;height:128px;">
+			<a href="__ROOT__/Home/Course"><img src="__PUBLIC__/assets/image/nav_course.png" width="118px" height="128px" /></a>
+		</span>
+		<span style="width:118px;height:128px;">
+			<a href="__ROOT__/Home/Bbs"><img src="__PUBLIC__/assets/image/nav_bbs.png" width="118px" height="128px" /></a>
+		</span>
 	</div>
 </div>
-
-<div class="container" style="padding-left:0px;margin-bottom:10px;background-color:rgb(35,17,103);width:1024px;">
-	<span><img src="__PUBLIC__/assets/image/head_index.png" width="677px" height="342px" /></span>
-</div>
-
-<style>
-.index_title {
-	font-size: 14pt;
-}
-.index_item{
-	height:108px;margin-bottom:2px;background-color:rgb(234,234,234)
-}
-.index_item_hot{
-	height:218px;
-}
-.index_item_content {
-	padding:10px 22px 0;font-family:Segoe UI;font-size:12pt;float:left;
-}
-.index_item_info{/* 出处 */
-	font-size:12pt;padding-top:76px;
-}
-.index_item_info_left {
-	padding-left:22px;float:left;
-}
-.index_item_info_right {
-	padding-right:22px;float:right;
-}
-#physics_news_area .index_item_info, #physics_news_area .index_title{
-	color:#007768;
-}
-
-#top_act_area .index_item_info, #top_act_area .index_title{
-	color:#C51F00;
-}
-#hot_post_area .index_item_info, #hot_post_area .index_title{
-	color:#6D0E6A;
-}
-#hot_college_area .index_title{
-	color:#A2A012;
-}
-#recmd_course_area .index_title{
-	color:#9A7016;
-}
-.index_item_hot .flag {
-	float:left;padding-left:5px;padding-top: 27px;
-}
-.index_item_hot_content{
-	font-family:Segoe UI;font-size:12pt;color:#6D0E6A;vertical-align:middle;
-}
-#recmd_course_area .index_item{
-	height:287px;padding:19px 5px 19px 15px;
-}
-.recmd_course_info_text1{
-padding-top:60px;padding-left:5px;font-family:Segoe UI;font-size:12pt;text-align:center;
-}
-.recmd_course_info_text2{
-padding:15px 0 0 5px;font-family:Segoe UI;font-size:12pt;text-align:center;
-}
-
-.recmd_course_info_img{
-width:140px;position:relative;float:right;top:30px;
-}
-.recmd_course_info{
-	padding-left:309px;
-}
-.recmd_course_info table{
-float:left;display:inline;overflow:hidden;
-}
-.recmd_course_info table tr{
-	width:165px;
-}
-.recmd_course_content{
-	float:left;
-}
-.recmd_course_content_title{
-	width:309px;font-size:11pt;font-family:Segoe UI;font-color:blue;margin-top:10px;
-}
-.recmd_course_info_text{
-width:155px;float:left;
-}
-
-#bottom_menu ul li{
-	float:left;list-style-type:none;margin:10px;font-size:12pt;
-}
-</style>
 
 <div class="container" style="padding-left:0px;padding-right:0px;margin-top:20px;width:1024px">
-
-	<div style="float:left;margin-right:16px;width:628px;">
-		<div id="physics_news_area" style="float:left;margin-right:12px;width:308px;">
-			<div class="index_title">
-				<span style="float:left">物理前沿</span>
-				<span style="float:right">更多>></span>
-				<span>&nbsp;</span>
-			</div>
-			<div style="width:308px;height:7px;background-color:#007768;">&nbsp;</div>
-			<div class="index_item">
-				<div class="index_item_content">
-					<span>Opening Doors to Engineering</span>
-				</div>
-				<div class="index_item_info">
-					<div>
-						<span class="index_item_info_left">南京大学</span>
-						<span class="index_item_info_right">Nature杂志</span>
-					</div>
-				</div>
-			</div>
-			<div class="index_item">
-				<div class="index_item_content">
-					<span>高校“基础学科拔尖计划”首批毕业生95%继续深造</span>
-				</div>
-				<div class="index_item_info">
-					<div>
-						<span class="index_item_info_left">南京大学</span>
-						<span class="index_item_info_right">Nature杂志</span>
-					</div>
-				</div>
-			</div>
-			<div class="index_item">
-				<div class="index_item_content">
-					<span>Opening Doors to Engineering</span>
-				</div>
-				<div class="index_item_info">
-					<div>
-						<span class="index_item_info_left">南京大学</span>
-						<span class="index_item_info_right">Nature杂志</span>
-					</div>
-				</div>
-			</div>
-			<div class="index_item">
-				<div class="index_item_content">
-					<span>Opening Doors to Engineering</span>
-				</div>
-				<div class="index_item_info">
-					<div>
-						<span class="index_item_info_left">南京大学</span>
-						<span class="index_item_info_right">Nature杂志</span>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div id="top_act_area" style="float:left;width:308px;">
-			<div class="index_title">
-				<span style="float:left">活动</span>
-				<span style="float:right">更多>></span>
-				<span>&nbsp;</span>
-			</div>
-			<div style="width:308px;height:7px;background-color:#C51F00;">&nbsp;</div>
-
-			<div class="index_item">
-				<div class="index_item_content">
-					<span>学生社区2014年师生线上交流大会将在3月28号举行</span>
-				</div>
-				<div class="index_item_info">
-					<div>
-						<span class="index_item_info_right">北京大学&nbsp;&nbsp;2014-3-15</span>
-					</div>
-				</div>
-			</div>
-			<div class="index_item">
-				<div class="index_item_content">
-					<span>学生社区2014年师生线上交流大会将在3月28号举行</span>
-				</div>
-				<div class="index_item_info">
-					<div>
-						<span class="index_item_info_right">北京大学&nbsp;&nbsp;2014-3-15</span>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div id="recmd_course_area" style="clear:both;width:628px;display:block;">
-			<div class="index_title">
-				<span style="float:left">推荐课程</span>
-				<span style="float:right">更多>></span>
-				<span>&nbsp;</span>
-			</div>
-			<div style="width:628px;height:7px;background-color:#9A7016;">&nbsp;</div>
-			<div class="index_item">
-				<div class="recmd_course_content">
-					<img src="__PUBLIC__/assets/image/course_1.png" width="309px" height="195px" />
-					<div class="recmd_course_content_title">理解爱因斯坦：狭义相对论 Understanding Einstein: Understanding Einstein: The Special Theory of Relativity</div>
-				</div>
-				<div class="recmd_course_info">
-					<div class="recmd_course_info_text">
-						<div class="recmd_course_info_text1">斯坦福大学 </div>
-						<div class="recmd_course_info_text2">Stanford University</div>
-						<div class="recmd_course_info_text2">
-							教授：Larry Randles Larry Randles Randles
-						</div>
-					</div>
-					<div class="recmd_course_info_img">
-						<img src="__PUBLIC__/assets/image/teacher_1.png" width="140px" />
-					</div>
-				</div>
-			</div>
-			<div class="index_item">
-				<div class="recmd_course_content">
-					<img src="__PUBLIC__/assets/image/course_1.png" width="309px" height="195px" />
-					<div class="recmd_course_content_title">理解爱因斯坦：狭义相对论 Understanding Einstein: Understanding Einstein: The Special Theory of Relativity</div>
-				</div>
-				<div class="recmd_course_info">
-					<div class="recmd_course_info_text">
-						<div class="recmd_course_info_text1">斯坦福大学 </div>
-						<div class="recmd_course_info_text2">Stanford University</div>
-						<div class="recmd_course_info_text2">
-							教授：Larry Randles Larry Randles Randles
-						</div>
-					</div>
-					<div class="recmd_course_info_img">
-						<img src="__PUBLIC__/assets/image/teacher_1.png" width="140px" />
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-	<div style="float:left;width:380px;">
-		<div id="hot_post_area" style="float:left;margin-right:12px;width:380px;">
-			<div class="index_title">
-				<span style="float:left">学生社区热点</span>
-				<span style="float:right">更多>></span>
-				<span>&nbsp;</span>
-			</div>
-			<div style="height:7px;background-color:#6D0E6A;">&nbsp;</div>
-			<div class="index_item index_item_hot">
-				<div class="flag">
-					<span><img src="__PUBLIC__/assets/image/post_1.png" /></span>
-				</div>
-				<div style="float:right;width:203px;height:169px;padding-top:27px;">
-					<table width="100%" height="100%">
-						<tr><td class="index_item_hot_content">学生社区第二次线上交流大会将于3月28号晚8点开始</td></tr>
-					</table>
-				</div>
-			</div>
-			<div class="index_item index_item_hot">
-				<div class="flag">
-					<span><img src="__PUBLIC__/assets/image/post_1.png" /></span>
-				</div>
-				<div style="float:right;width:203px;height:169px;padding-top:27px;">
-					<table width="100%" height="100%">
-						<tr><td class="index_item_hot_content">学生社区第二次线上交流大会将于3月28号晚8点开始</td></tr>
-					</table>
-				</div>
-			</div>
-			<div class="index_item index_item_hot">
-				<div class="flag">
-					<span><img src="__PUBLIC__/assets/image/post_1.png" /></span>
-				</div>
-				<div style="float:right;width:203px;height:169px;padding-top:27px;">
-					<table width="100%" height="100%">
-						<tr><td class="index_item_hot_content">学生社区第二次线上交流大会将于3月28号晚8点开始</td></tr>
-					</table>
-				</div>
-			</div>
-		</div>
-
-		<div id="hot_college_area" style="float:left;margin-right:12px;width:380px;">
-			<div class="index_title">
-				<span style="float:left">名校链接</span>
-				<span>&nbsp;</span>
-			</div>
-			<div style="height:7px;background-color:#A2A012;">&nbsp;</div>
-			<div style="background-color:rgb(234,234,234);width:189px;margin-right:2px;margin-bottom:2px;height:207px;float:left">
-				<div style="margin-top:10px;margin-left:14px;"><img src="__PUBLIC__/assets/image/index_book_1.png" /></div>
-			</div>
-			<div style="background-color:rgb(234,234,234);width:189px;margin-bottom:2px;height:207px;float:left">
-				<div style="margin-top:10px;margin-left:14px;"><img src="__PUBLIC__/assets/image/index_book_2.png" /></div>
-			</div>
-			<div style="background-color:rgb(234,234,234);width:189px;margin-right:2px;height:207px;float:left">
-				<div style="margin-top:10px;margin-left:14px;"><img src="__PUBLIC__/assets/image/index_book_3.png" /></div>
-			</div>
-			<div style="background-color:rgb(234,234,234);width:189px;height:207px;float:left">
-				<div style="margin-top:10px;margin-left:14px;"><img src="__PUBLIC__/assets/image/index_book_4.png" /></div>
-			</div>
-		</div>
-	</div>
-
+	{__REEPLACE__}
 </div>
-
-
-
 
 <div id="bottom_nav" style="height:200px;background-color:black;clear:both;margin-top:45px;width:100%;">
 	<div class="container" id="bottom_nav_container" style="color:white;width:1024px;">
@@ -340,7 +89,7 @@ width:155px;float:left;
 		<div style="float:left;width:490px">
 			<div style="font-size:24pt;margin-top:50px">全国物理学科拔尖人才培养计划</div>
 			<div style="font-size:16pt;">Training Plan Of Physics Subject Top-notch Talent</div>
-			<div id="bottom_menu" style="">
+			<div id="frame_bottom_menu" style="">
 				<ul>
 					<li>关于我们</li>
 					<li>联系方式</li>
@@ -349,34 +98,189 @@ width:155px;float:left;
 				</ul>
 			</div>
 		</div>
-		<div style="float:right;top:158px;position:relative;">
-			版权归@南京大学所有
+		<div style="float:right;top:158px;position:relative;font-style:normal;">
+			版权归@YGSX网站实验室所有
 		</div>
 	</div>
 </div>
 
-<script>
-//修正顶底两端宽度
-function RepairNav(){
-	//var ev = e || window.event;
-	if(document.body.scrollWidth <=1024){
-		document.getElementById('top_nav').style.width = "1024px";
-		document.getElementById('bottom_nav').style.width ="1024px";
-	} else {
-		document.getElementById('top_nav').style.width = document.body.scrollWidth + "px";
-		document.getElementById('bottom_nav').style.width = document.body.scrollWidth + "px";
-	}
-	//alert(document.body.scrollWidth);
-}
-RepairNav();
-window.onresize = function(e){
-	var ev =e || window.event;
-	//console.log(ev);
-	document.getElementById('top_nav').style.width = "1024px";
-	document.getElementById('bottom_nav').style.width = "1024px";
-	setTimeout(RepairNav, 200);
-};
+<div class="alert alert-danger" id="g_alert">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+  <h4 class="alert-heading">Warning!</h4>
+  <div id="g_alert_text"></div>
+</div>
+<div class="alert alert-info  alert-dismissable" id="g_info" >
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+  <div id="g_info_text"></div>
+</div>
 
+<div id="shielding_layer" style="display:none;position:absolute;top:0;left:0;background-color:#ffffff;filter:alpha(Opacity=80);-moz-opacity:0.5;opacity: 0.5;z-index:10000;">
+</div>
+<div id="login_form" style="display:none;position:absolute;margin:0 auto;width:400px;top:200px;z-index:10001;text-align:center;">
+	<form style="background-color:rgb(234,234,234);padding:20px;">
+		<ul>
+			<li>
+				<div id="login_form_field_raccount">
+					<span class="login_form_label">账号</span>
+					<span class="login_form_tip" id="login_form_tip_raccount">账号长度不能小于6！</span>
+					<input type="text" class="form-control" name="raccount" id="raccount" placeholder="Account input" id="inputError" />
+				</div>
+			</li>
+			<li>
+				<div  id="login_form_field_rpassword">
+					<span class="login_form_label">密码</span>
+					<span class="login_form_tip" id="login_form_tip_rpassword">密码长度不能小于6！</span>
+					<input type="password" class="form-control" name="rpassword" id="rpassword" placeholder="Password input">
+				</div>
+				
+			</li>
+			<li>
+				<button type="button" id="login_form_ok" class="login_form_btn btn btn-info btn-block" onclick="login_eds()">登录</button>
+				<button type="button" id="login_form_cancel" class="login_form_btn btn btn-block" onclick="close_login_window()">取消</button>
+			</li>
+		</ul>
+	</form>
+</div>
+<script>
+function CDialog(){
+	var shielding_layer = $('#shielding_layer');
+	var start_index = 99990000;
+	var old_index = new Array();
+	var old_display = new Array();
+	var g_alert = $('#g_alert');
+	var g_alert_text = $('#g_alert_text');
+	var g_info = $('#g_info');
+	var g_info_text = $('#g_info_text');
+
+	old_index.push(shielding_layer.css('z-index'));
+	old_display.push(shielding_layer.css('display'));
+	this.add_shield_layer = function(){
+		old_index.push(shielding_layer.css('z-index'));
+		old_display.push(shielding_layer.css('display'));
+		shielding_layer.css('z-index',start_index);
+		shielding_layer.css('display', 'block');
+		start_index += 100;
+		return start_index - 99;
+	}
+	this.show_alert = function(text){
+		var zi = this.add_shield_layer();
+		g_alert.css('z-index',zi);
+		g_alert_text.text(text);
+		g_alert.show();
+	}
+	this.show_info = function(text){
+		var zi = this.add_shield_layer();
+		g_info.css('z-index',zi);
+		g_info_text.text(text);
+		g_info.show();
+	}
+	this.restore_shield_layer = function(){
+		if(old_index.length > 1){
+			shielding_layer.css('z-index', old_index.pop());
+			shielding_layer.css('display', old_display.pop());
+		}
+	}
+}
+var cdialoag = new CDialog();
+function CLogin(){
+	var raccount = $('#raccount');
+	var rpassword = $('#rpassword');
+	var login_form = $('#login_form');
+	var shielding_layer = $('#shielding_layer');
+	var btn_ok = $('#login_form_ok');
+	var btn_cancel = $('#login_form_cancel');
+	//var has_login_btn_clicked = false;
+	//修正顶底两端宽度，以及登录框、alert、info框的left属性
+	this.repair_nav = function (){
+		//var ev = e || window.event;
+		var w = document.body.scrollWidth + 'px';
+		if(document.body.scrollWidth <=1024){
+			$('#top_nav').css('width',"1024px");
+			$('#bottom_nav').css('width',"1024px");
+			shielding_layer.css('width', "1024px");
+			shielding_layer.css('height', document.body.scrollHeight + 'px');
+		} else {
+			$('#top_nav').css('width', w);
+			$('#bottom_nav').css('width', w);
+			shielding_layer.css('width', w);
+			shielding_layer.css('height', document.body.scrollHeight + 'px');
+		}
+		$('#login_form').css('left', ((document.body.scrollWidth - 400)/2)+"px");
+		$('#g_alert').css('left', ((document.body.scrollWidth - 600)/2)+"px");
+		$('#g_info').css('left', ((document.body.scrollWidth - 600)/2)+"px");
+		//alert(document.body.scrollWidth);
+	};
+	this.show_login_window = function (){
+		var zindex = cdialoag.add_shield_layer();
+		login_form.css('z-index',zindex).show();
+	};
+	this.close_login_window = function (){login_form.hide();cdialoag.restore_shield_layer();};
+	this.validate_account =function(){
+		if(raccount.val().length < 6){
+			$('#login_form_field_raccount').attr('class','has-error');
+			$('#login_form_tip_raccount').show();
+			$('#raccount').focus();
+			return false;
+		}
+		$('#login_form_field_raccount').attr('class','');
+		$('#login_form_tip_raccount').hide();
+		return true;
+	};
+	this.validate_password =function(){
+		if(rpassword.val().length < 6){
+			$('#login_form_field_rpassword').attr('class','has-error');
+			$('#login_form_tip_rpassword').show();
+			$('#rpassword').focus();
+			return false;
+		} else {
+			$('#login_form_field_rpassword').attr('class','');
+			$('#login_form_tip_rpassword').hide();
+		}
+		return true;
+	}
+	this.validate = function (){ return this.validate_account() && this.validate_password(); }
+	this.login = function (){
+		if(!this.validate()) return false;
+		btn_ok.attr('disabled', true);
+		btn_cancel.attr('disabled', true);
+		$.ajax({
+			url:'__ROOT__/Home/Index/login',
+			success:function(t){
+				cdialoag.show_info('登录成功！');
+				console.log(t);
+			},
+			error:function(t){
+				btn_ok.attr('disabled', false);
+				btn_cancel.attr('disabled', false);
+				//console.log(t);
+				cdialoag.show_alert('登录失败！('+t.status+': '+t.statusText+')');
+			}
+		});
+	};
+}
+var clogin = new CLogin();
+
+
+$(document).ready(function(){
+	clogin.repair_nav();
+	$('#raccount').keyup(clogin.validate_account);
+	$('#rpassword').keyup(clogin.validate_password);//弹出框
+	$('.close').click(function(e){
+		$(this).parent().hide();
+		cdialoag.restore_shield_layer();
+		return false;
+	});
+	$(window).resize(function(){
+		$('#top_nav').css('width', "1024px");
+		$('#bottom_nav').css('width', "1024px");
+		setTimeout(clogin.repair_nav, 150);
+	});
+});
+
+//以下全局函数列表
+function show_login_window(){ clogin.show_login_window(); return false;}
+function close_login_window(){ clogin.close_login_window();return false;}
+function login_eds(){ clogin.login();return false;}
 </script>
 
   </body>

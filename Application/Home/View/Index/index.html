@@ -1,212 +1,35 @@
 <layout name="layout" replace="{__REEPLACE__}" />
 
-<include file="./Application/Home/View/welcome.html" />
-
-<style>
-.index_title {
-	font-size: 14pt;
-}
-.index_item{
-	height:108px;margin-bottom:2px;background-color:rgb(234,234,234);font-style: normal;
-}
-.index_item_hot{
-	height:218px;
-}
-.index_item_content {
-	padding:10px 22px 0;font-family:'Segoe UI';font-size:12pt;float:left;
-}
-.index_item_info{/* 出处 */
-	font-size:12pt;padding-top:76px;
-}
-.index_item_info_left {
-	padding-left:22px;float:left;
-}
-.index_item_info_right {
-	padding-right:22px;float:right;
-}
-#physics_news_area .index_item_info, #physics_news_area .index_title{
-	color:#007768;
-}
-
-#top_act_area .index_item_info, #top_act_area .index_title{
-	color:#C51F00;
-}
-#hot_post_area .index_item_info, #hot_post_area .index_title{
-	color:#6D0E6A;
-}
-#hot_college_area .index_title{
-	color:#A2A012;
-}
-#recmd_course_area .index_title{
-	color:#9A7016;
-}
-.index_item_hot .flag {
-	float:left;padding-left:5px;padding-top: 27px;
-}
-.index_item_hot_content{
-	font-family:'Segoe UI';font-size:12pt;color:#6D0E6A;vertical-align:middle;
-}
-#recmd_course_area .index_item{
-	height:287px;padding:19px 5px 19px 15px;
-}
-.recmd_course_info_text1{
-padding-top:60px;padding-left:5px;font-family:'Segoe UI';font-size:12pt;text-align:center;
-}
-.recmd_course_info_text2{
-padding:15px 0 0 5px;font-family:'Segoe UI';font-size:12pt;text-align:center;
-}
-
-.recmd_course_info_img{
-width:140px;position:relative;float:right;top:30px;
-}
-.recmd_course_info{
-	padding-left:309px;
-}
-.recmd_course_info table{
-float:left;display:inline;overflow:hidden;
-}
-.recmd_course_info table tr{
-	width:165px;
-}
-.recmd_course_content{
-	float:left;
-}
-.recmd_course_content_title{
-	width:309px;font-size:11pt;font-family:'Segoe UI';color:blue;margin-top:10px;
-}
-.recmd_course_info_text{
-width:155px;float:left;
-}
-
-</style>
-
+<include file="./Application/Home/View/welcome_index.html" />
 
 
 <div style="float:left;margin-right:16px;width:628px;">
+	
 	<div id="physics_news_area" style="float:left;margin-right:12px;width:308px;">
 		<div class="index_title">
-			<span style="float:left">物理前沿</span>
-			<span style="float:right">更多>></span>
-			<span>&nbsp;</span>
+			<span>物理前沿</span>
+			<span style="float:right">{$more}</span>
 		</div>
-		<div style="width:308px;height:7px;background-color:#007768;">&nbsp;</div>
-		<div class="index_item">
-			<div class="index_item_content">
-				<span>Opening Doors to Engineering</span>
-			</div>
-			<div class="index_item_info">
-				<div>
-					<span class="index_item_info_left">南京大学</span>
-					<span class="index_item_info_right">Nature杂志</span>
-				</div>
-			</div>
-		</div>
-		<div class="index_item">
-			<div class="index_item_content">
-				<span>高校“基础学科拔尖计划”首批毕业生95%继续深造</span>
-			</div>
-			<div class="index_item_info">
-				<div>
-					<span class="index_item_info_left">南京大学</span>
-					<span class="index_item_info_right">Nature杂志</span>
-				</div>
-			</div>
-		</div>
-		<div class="index_item">
-			<div class="index_item_content">
-				<span>Opening Doors to Engineering</span>
-			</div>
-			<div class="index_item_info">
-				<div>
-					<span class="index_item_info_left">南京大学</span>
-					<span class="index_item_info_right">Nature杂志</span>
-				</div>
-			</div>
-		</div>
-		<div class="index_item">
-			<div class="index_item_content">
-				<span>Opening Doors to Engineering</span>
-			</div>
-			<div class="index_item_info">
-				<div>
-					<span class="index_item_info_left">南京大学</span>
-					<span class="index_item_info_right">Nature杂志</span>
-				</div>
-			</div>
-		</div>
+		<div style="width:100%;height:7px;background-color:#007768;"></div>
+		<div id="physics_news_area_items"></div>
 	</div>
-	<div id="top_act_area" style="float:left;width:308px;">
-		<div class="index_title">
-			<span style="float:left">活动</span>
-			<span style="float:right">更多>></span>
-			<span>&nbsp;</span>
-		</div>
-		<div style="width:308px;height:7px;background-color:#C51F00;">&nbsp;</div>
 
-		<div class="index_item">
-			<div class="index_item_content">
-				<span>学生社区2014年师生线上交流大会将在3月28号举行</span>
-			</div>
-			<div class="index_item_info">
-				<div>
-					<span class="index_item_info_right">北京大学&nbsp;&nbsp;2014-3-15</span>
-				</div>
-			</div>
+	<div id="hot_act_area" style="float:left;width:308px;">
+		<div class="index_title">
+			<span>热门活动</span>
+			<span style="float:right">{$more}</span>
 		</div>
-		<div class="index_item">
-			<div class="index_item_content">
-				<span>学生社区2014年师生线上交流大会将在3月28号举行</span>
-			</div>
-			<div class="index_item_info">
-				<div>
-					<span class="index_item_info_right">北京大学&nbsp;&nbsp;2014-3-15</span>
-				</div>
-			</div>
-		</div>
+		<div style="width:308px;height:7px;background-color:#C51F00;"></div>
+		<div id="hot_act_area_items"></div>
 	</div>
 	<div id="recmd_course_area" style="clear:both;width:628px;display:block;">
 		<div class="index_title">
 			<span style="float:left">推荐课程</span>
-			<span style="float:right">更多>></span>
+			<span style="float:right">{$more}</span>
 			<span>&nbsp;</span>
 		</div>
 		<div style="width:628px;height:7px;background-color:#9A7016;">&nbsp;</div>
-		<div class="index_item">
-			<div class="recmd_course_content">
-				<img src="__PUBLIC__/assets/image/course_1.png" width="309px" height="195px" />
-				<div class="recmd_course_content_title">理解爱因斯坦：狭义相对论 Understanding Einstein: Understanding Einstein: The Special Theory of Relativity</div>
-			</div>
-			<div class="recmd_course_info">
-				<div class="recmd_course_info_text">
-					<div class="recmd_course_info_text1">斯坦福大学 </div>
-					<div class="recmd_course_info_text2">Stanford University</div>
-					<div class="recmd_course_info_text2">
-						教授：Larry Randles Larry Randles Randles
-					</div>
-				</div>
-				<div class="recmd_course_info_img">
-					<img src="__PUBLIC__/assets/image/teacher_1.png" width="140px" />
-				</div>
-			</div>
-		</div>
-		<div class="index_item">
-			<div class="recmd_course_content">
-				<img src="__PUBLIC__/assets/image/course_1.png" width="309px" height="195px" />
-				<div class="recmd_course_content_title">理解爱因斯坦：狭义相对论 Understanding Einstein: Understanding Einstein: The Special Theory of Relativity</div>
-			</div>
-			<div class="recmd_course_info">
-				<div class="recmd_course_info_text">
-					<div class="recmd_course_info_text1">斯坦福大学 </div>
-					<div class="recmd_course_info_text2">Stanford University</div>
-					<div class="recmd_course_info_text2">
-						教授：Larry Randles Larry Randles Randles
-					</div>
-				</div>
-				<div class="recmd_course_info_img">
-					<img src="__PUBLIC__/assets/image/teacher_1.png" width="140px" />
-				</div>
-			</div>
-		</div>
+		<div id="recmd_course_area_items"></div>
 	</div>
 </div>
 
@@ -214,47 +37,16 @@ width:155px;float:left;
 <div style="float:left;width:380px;">
 	<div id="hot_post_area" style="float:left;margin-right:12px;width:380px;">
 		<div class="index_title">
-			<span style="float:left">学生社区热点</span>
-			<span style="float:right">更多>></span>
-			<span>&nbsp;</span>
+			<span>学生社区热点</span>
+			<span style="float:right">{$more}</span>
 		</div>
-		<div style="height:7px;background-color:#6D0E6A;">&nbsp;</div>
-		<div class="index_item index_item_hot">
-			<div class="flag">
-				<span><img src="__PUBLIC__/assets/image/post_1.png" /></span>
-			</div>
-			<div style="float:right;width:203px;height:169px;padding-top:27px;">
-				<table width="100%" height="100%">
-					<tr><td class="index_item_hot_content">学生社区第二次线上交流大会将于3月28号晚8点开始</td></tr>
-				</table>
-			</div>
-		</div>
-		<div class="index_item index_item_hot">
-			<div class="flag">
-				<span><img src="__PUBLIC__/assets/image/post_1.png" /></span>
-			</div>
-			<div style="float:right;width:203px;height:169px;padding-top:27px;">
-				<table width="100%" height="100%">
-					<tr><td class="index_item_hot_content">学生社区第二次线上交流大会将于3月28号晚8点开始</td></tr>
-				</table>
-			</div>
-		</div>
-		<div class="index_item index_item_hot">
-			<div class="flag">
-				<span><img src="__PUBLIC__/assets/image/post_1.png" /></span>
-			</div>
-			<div style="float:right;width:203px;height:169px;padding-top:27px;">
-				<table width="100%" height="100%">
-					<tr><td class="index_item_hot_content">学生社区第二次线上交流大会将于3月28号晚8点开始</td></tr>
-				</table>
-			</div>
-		</div>
+		<div style="height:7px;background-color:#6D0E6A;"></div>
+		<div id="hot_post_area_items"></div>
 	</div>
 
 	<div id="hot_college_area" style="float:left;margin-right:12px;width:380px;">
 		<div class="index_title">
-			<span style="float:left">名校链接</span>
-			<span>&nbsp;</span>
+			<span>名校链接</span>
 		</div>
 		<div style="height:7px;background-color:#A2A012;">&nbsp;</div>
 		<div style="background-color:rgb(234,234,234);width:189px;margin-right:2px;margin-bottom:2px;height:207px;float:left">
@@ -272,3 +64,27 @@ width:155px;float:left;
 	</div>
 </div>
 
+
+<script language="javascript">
+
+$(document).ready(function(){
+	$.ajax({url:'__ROOT__/Home/Index/mphynews',
+		success:function(t,s,r){$('#physics_news_area_items').html(t);},
+		error:function(t){cdialoag.show_alert('加载物理前沿列表失败！('+t.status+': '+t.statusText+')');}
+	});
+	$.ajax({url:'__ROOT__/Home/Index/mhotact',
+		success:function(t,s,r){$('#hot_act_area_items').html(t);},
+		error:function(t){cdialoag.show_alert('加载热门活动列表失败！('+t.status+': '+t.statusText+')');}
+	});
+	$.ajax({url:'__ROOT__/Home/Index/mhotpost',
+		success:function(t,s,r){$('#hot_post_area_items').html(t);},
+		error:function(t){cdialoag.show_alert('加载学生社区热点列表失败！('+t.status+': '+t.statusText+')');}
+	});
+	$.ajax({url:'__ROOT__/Home/Index/mrecmdcourse',
+		success:function(t,s,r){$('#recmd_course_area_items').html(t);},
+		error:function(t){cdialoag.show_alert('加载推荐课程列表失败！('+t.status+': '+t.statusText+')');}
+	});
+	
+});
+
+</script>
