@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50536
 File Encoding         : 65001
 
-Date: 2014-08-24 23:59:23
+Date: 2014-08-26 07:51:48
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -123,6 +123,28 @@ CREATE TABLE `t_dic` (
 -- ----------------------------
 -- Records of t_dic
 -- ----------------------------
+INSERT INTO `t_dic` VALUES ('0', 'gstate', '编辑中', null);
+INSERT INTO `t_dic` VALUES ('0', 'rrole', '系统', null);
+INSERT INTO `t_dic` VALUES ('0', 'rstate', '正常', null);
+INSERT INTO `t_dic` VALUES ('0', 'uchar', '其他', null);
+INSERT INTO `t_dic` VALUES ('0', 'usender', '未知', null);
+INSERT INTO `t_dic` VALUES ('10', 'gstate', '审核中', null);
+INSERT INTO `t_dic` VALUES ('10', 'rrole', '超级管理员', null);
+INSERT INTO `t_dic` VALUES ('10', 'rstate', '登录受限', null);
+INSERT INTO `t_dic` VALUES ('10', 'usender', '女', null);
+INSERT INTO `t_dic` VALUES ('20', 'gstate', '被退回', null);
+INSERT INTO `t_dic` VALUES ('20', 'rrole', '普通管理员', null);
+INSERT INTO `t_dic` VALUES ('20', 'usender', '男', null);
+INSERT INTO `t_dic` VALUES ('30', 'gstate', '发布', null);
+INSERT INTO `t_dic` VALUES ('30', 'rrole', '老师', null);
+INSERT INTO `t_dic` VALUES ('40', 'gstate', '关闭', null);
+INSERT INTO `t_dic` VALUES ('40', 'rrole', '学生', null);
+INSERT INTO `t_dic` VALUES ('50', 'uchar', '学士', null);
+INSERT INTO `t_dic` VALUES ('60', 'uchar', '硕士', null);
+INSERT INTO `t_dic` VALUES ('70', 'uchar', '博士', null);
+INSERT INTO `t_dic` VALUES ('80', 'uchar', '讲师', null);
+INSERT INTO `t_dic` VALUES ('90', 'uchar', '副教授', null);
+INSERT INTO `t_dic` VALUES ('100', 'uchar', '教授', null);
 
 -- ----------------------------
 -- Table structure for `t_download`
