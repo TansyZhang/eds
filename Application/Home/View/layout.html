@@ -35,13 +35,14 @@
 	color:white;padding-left:10px;
 }
 #login_form ul{
-	padding-left: 0;
+	padding-left: 0;font-style: normal;
 }
 #login_form li{
 	list-style-type:none;
 }
 .login_form_label{
-	float:left;padding:5px;
+	float:left;padding:10px 5px 0 10px;
+	font-size:14pt;
 }
 .login_form_btn{
 	margin-top:15px;
@@ -53,7 +54,7 @@
 	display: none;
 }
 #g_alert, #g_info{
-	width:600px;position:absolute;top:300px;left:0;z-index:99999999;display:none;
+	width:600px;position:absolute;top:200px;left:0;z-index:99999999;display:none;
 }
 </style>
 
@@ -77,7 +78,7 @@
 				<li><a href="#" style="">wuxiaoshan</a></li>
 				<li><a href="#" style="color:white;padding-left:10px;">注销</a></li>
 			<else />
-				<li><a href="javascript:void(0);" onclick="show_login_form()" style="padding-right:10px;">登录</a></li>
+				<li><a href="javascript:void(0);" onclick="show_login_window()" style="padding-right:10px;">登录</a></li>
 			</defined>
 		</ul>
 	</div>
@@ -155,125 +156,161 @@
 				<div id="login_form_field_raccount">
 					<span class="login_form_label">账号</span>
 					<span class="login_form_tip" id="login_form_tip_raccount">账号长度不能小于6！</span>
-					<input type="text" class="form-control" name="raccount" id="raccount" placeholder="Text input" id="inputError" />
+					<input type="text" class="form-control" name="raccount" id="raccount" placeholder="Account input" id="inputError" />
 				</div>
 			</li>
 			<li>
 				<div  id="login_form_field_rpassword">
 					<span class="login_form_label">密码</span>
 					<span class="login_form_tip" id="login_form_tip_rpassword">密码长度不能小于6！</span>
-					<input type="password" class="form-control" name="rpassword" id="rpassword" placeholder="Text input">
+					<input type="password" class="form-control" name="rpassword" id="rpassword" placeholder="Password input">
 				</div>
 				
 			</li>
 			<li>
-				<button type="button" id="login_form_ok" class="login_form_btn btn btn-info btn-block" onclick="login_validate()">登录</button>
+				<button type="button" id="login_form_ok" class="login_form_btn btn btn-info btn-block" onclick="login_eds()">登录</button>
 				<button type="button" id="login_form_cancel" class="login_form_btn btn btn-block" onclick="close_login_window()">取消</button>
 			</li>
 		</ul>
 	</form>
 </div>
 <script>
-//修正顶底两端宽度
-function RepairNav(){
-	//var ev = e || window.event;
-	var w = document.body.scrollWidth + 'px';
-	if(document.body.scrollWidth <=1024){
-		$('#top_nav').css('width',"1024px");
-		$('#bottom_nav').css('width',"1024px");
-		$('#shielding_layer').css('width', "1024px");
-		$('#shielding_layer').css('height', document.body.scrollHeight + 'px');
-	} else {
-		$('#top_nav').css('width', w);
-		$('#bottom_nav').css('width', w);
-		$('#shielding_layer').css('width', w);
-		$('#shielding_layer').css('height', document.body.scrollHeight + 'px');
+function CDialog(){
+	var shielding_layer = $('#shielding_layer');
+	var start_index = 99990000;
+	var old_index = new Array();
+	var old_display = new Array();
+	var g_alert = $('#g_alert');
+	var g_alert_text = $('#g_alert_text');
+	var g_info = $('#g_info');
+	var g_info_text = $('#g_info_text');
+
+	old_index.push(shielding_layer.css('z-index'));
+	old_display.push(shielding_layer.css('display'));
+	this.add_shield_layer = function(){
+		old_index.push(shielding_layer.css('z-index'));
+		old_display.push(shielding_layer.css('display'));
+		shielding_layer.css('z-index',start_index);
+		shielding_layer.css('display', 'block');
+		return start_index+=100;
 	}
-	$('#login_form').css('left', ((document.body.scrollWidth - 400)/2)+"px");
-	$('#g_alert').css('left', ((document.body.scrollWidth - 600)/2)+"px");
-	$('#g_info').css('left', ((document.body.scrollWidth - 600)/2)+"px");
-	//alert(document.body.scrollWidth);
-}
-window.onresize = function(e){
-	var ev =e || window.event;
-	//console.log(ev);
-	$('#top_nav').css('width', "1024px");
-	$('#bottom_nav').css('width', "1024px");
-	setTimeout(RepairNav, 150);
-};
-function show_login_form(){
-	$('#shielding_layer').show();
-	$('#login_form').show();
-}
-function close_login_window(){
-	$('#shielding_layer').hide();
-	$('#login_form').hide();
-}
-function login_validate(){
-	var raccount = $('#raccount').val();
-	var rpassword = $('#rpassword').val();
-	var ok = true;
-	if(raccount.length < 6){
-		$('#login_form_field_raccount').attr('class','has-error');
-		$('#login_form_tip_raccount').show();
-		$('#raccount').focus();
-		ok = false;
+	this.show_alert = function(text){
+		this.add_shield_layer();
+		g_alert_text.text(text);
+		g_alert.show();
 	}
-	if(rpassword.length < 6){
-		$('#login_form_field_rpassword').attr('class','has-error');
-		$('#login_form_tip_rpassword').show();
-		if(ok){
-			$('#rpassword').focus();
+	this.show_info = function(text){
+		this.add_shield_layer();
+		g_info_text.text(text);
+		g_info.show();
+	}
+	this.restore_shield_layer = function(){
+		if(old_index.length > 1){
+			shielding_layer.css('z-index', old_index.pop());
+			shielding_layer.css('display', old_display.pop());
 		}
-		ok = false;
 	}
-	if(ok){
-		$('#login_form_ok').attr('disabled', true);
-		$('#login_form_cancel').attr('disabled', true);
+}
+var cdialoag = new CDialog();
+function CLogin(){
+	var raccount = $('#raccount');
+	var rpassword = $('#rpassword');
+	var login_form = $('#login_form');
+	var shielding_layer = $('#shielding_layer');
+	var btn_ok = $('#login_form_ok');
+	var btn_cancel = $('#login_form_cancel');
+	//var has_login_btn_clicked = false;
+	//修正顶底两端宽度，以及登录框、alert、info框的left属性
+	this.repair_nav = function (){
+		//var ev = e || window.event;
+		var w = document.body.scrollWidth + 'px';
+		if(document.body.scrollWidth <=1024){
+			$('#top_nav').css('width',"1024px");
+			$('#bottom_nav').css('width',"1024px");
+			shielding_layer.css('width', "1024px");
+			shielding_layer.css('height', document.body.scrollHeight + 'px');
+		} else {
+			$('#top_nav').css('width', w);
+			$('#bottom_nav').css('width', w);
+			shielding_layer.css('width', w);
+			shielding_layer.css('height', document.body.scrollHeight + 'px');
+		}
+		$('#login_form').css('left', ((document.body.scrollWidth - 400)/2)+"px");
+		$('#g_alert').css('left', ((document.body.scrollWidth - 600)/2)+"px");
+		$('#g_info').css('left', ((document.body.scrollWidth - 600)/2)+"px");
+		//alert(document.body.scrollWidth);
+	};
+	this.show_login_window = function (){
+		var zindex = cdialoag.add_shield_layer();
+		login_form.css('z-index',zindex).show();
+	};
+	this.close_login_window = function (){login_form.hide();cdialoag.restore_shield_layer();};
+	this.validate_account =function(){
+		if(raccount.val().length < 6){
+			$('#login_form_field_raccount').attr('class','has-error');
+			$('#login_form_tip_raccount').show();
+			$('#raccount').focus();
+			return false;
+		}
+		$('#login_form_field_raccount').attr('class','');
+		$('#login_form_tip_raccount').hide();
+		return true;
+	};
+	this.validate_password =function(){
+		if(rpassword.val().length < 6){
+			$('#login_form_field_rpassword').attr('class','has-error');
+			$('#login_form_tip_rpassword').show();
+			$('#rpassword').focus();
+			return false;
+		} else {
+			$('#login_form_field_rpassword').attr('class','');
+			$('#login_form_tip_rpassword').hide();
+		}
+		return true;
+	}
+	this.validate = function (){ return this.validate_account() && this.validate_password(); }
+	this.login = function (){
+		if(!this.validate()) return false;
+		btn_ok.attr('disabled', true);
+		btn_cancel.attr('disabled', true);
 		$.ajax({
 			url:'__ROOT__/Home/Index/login',
 			success:function(t){
-				$('#g_info_text').text('登录成功！');
-				$('#g_info').show();
+				cdialoag.show_info('登录成功！');
 				console.log(t);
 			},
 			error:function(t){
-				$('#login_form_ok').attr('disabled', false);
-				$('#login_form_cancel').attr('disabled', false);
+				btn_ok.attr('disabled', false);
+				btn_cancel.attr('disabled', false);
 				//console.log(t);
-				$('#g_alert_text').text('登录失败！('+t.status+': '+t.statusText+')');
-				$('#g_alert').show();//alert('fail');
+				cdialoag.show_alert('登录失败！('+t.status+': '+t.statusText+')');
 			}
 		});
-	}
+	};
 }
+var clogin = new CLogin();
+
+
 $(document).ready(function(){
-	RepairNav();
-	$('#raccount').keyup(function(){
-		var val = $('#raccount').val();
-		if(val.length < 6){
-			$('#login_form_field_raccount').attr('class', 'has-error');
-			$('#login_form_tip_raccount').show();
-		} else {
-			$('#login_form_field_raccount').attr('class', '');
-			$('#login_form_tip_raccount').hide();
-		}
-	});
-	$('#rpassword').keyup(function(){
-		var val = $('#rpassword').val();
-		if(val.length < 6){
-			$('#login_form_field_rpassword').attr('class', 'has-error');
-			$('#login_form_tip_rpassword').show();
-		} else {
-			$('#login_form_field_rpassword').attr('class', '');
-			$('#login_form_tip_rpassword').hide();
-		}
-	});
+	clogin.repair_nav();
+	$('#raccount').keyup(clogin.validate_account);
+	$('#rpassword').keyup(clogin.validate_password);//弹出框
 	$('.close').click(function(e){
 		$(this).parent().hide();
+		cdialoag.restore_shield_layer();
 		return false;
 	});
+	$(window).resize(function(){
+		$('#top_nav').css('width', "1024px");
+		$('#bottom_nav').css('width', "1024px");
+		setTimeout(clogin.repair_nav, 150);
+	});
 });
+
+//以下全局函数列表
+function show_login_window(){ clogin.show_login_window(); return false;}
+function close_login_window(){ clogin.close_login_window();return false;}
+function login_eds(){ clogin.login();return false;}
 </script>
 
   </body>
