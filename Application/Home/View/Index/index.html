@@ -66,8 +66,7 @@
 
 
 <script language="javascript">
-
-$(document).ready(function(){
+function load_modules(){
 	$.ajax({url:'__ROOT__/Home/Index/mphynews',
 		success:function(t,s,r){$('#physics_news_area_items').html(t);},
 		error:function(t){cdialoag.show_alert('加载物理前沿列表失败！('+t.status+': '+t.statusText+')');}
@@ -84,7 +83,12 @@ $(document).ready(function(){
 		success:function(t,s,r){$('#recmd_course_area_items').html(t);},
 		error:function(t){cdialoag.show_alert('加载推荐课程列表失败！('+t.status+': '+t.statusText+')');}
 	});
-	
+}
+$(document).ready(function(){
+	load_modules();
+	clogin.callback_func_array.push(function(){
+		load_modules();
+	});
 });
 
 </script>

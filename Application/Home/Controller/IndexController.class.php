@@ -5,15 +5,16 @@ class IndexController extends EdsController {
 
 	public function __construct(){
 		parent::__construct();
-		$this->phy_news_title = '物理前沿';
-		$this->hot_act_title = '热门活动';
-		$this->hot_post_title = '学生社区热点';
-		$this->recmd_course_title = '推荐课程';
 		$this->more = '更多>>';
+		$this->rrole_manager_level = 25;
 	}
 	
     public function index(){
         $this->display();
+    }
+
+    public function login(){
+    	$this->show('login ok!','utf-8');
     }
 }
 

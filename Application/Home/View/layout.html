@@ -36,12 +36,17 @@
 				<li><a href="#" style="">wuxiaoshan</a></li>
 				<li><a href="#" style="color:white;padding-left:10px;">注销</a></li>
 			<else />
-				<li><div id="btn_login" onclick="alert('login')" style="padding-right:10px;cursor:pointer;z-index:100000000">登录</div></li>
+				<li><div id="btn_login" onclick="" style="padding-right:10px;cursor:pointer;z-index:100000000">登录</div></li>
 			</defined>
 		</ul>
 		<div class="navbar-header" height="108px;">
 			<div style="position:relative;top:15px;">
-				<a style="font-size:24pt;color:white;">全国物理拔尖人才培养计划</a>
+				<div style="font-size:24pt;">
+					<a href="__ROOT__" style="color:white;">全国物理拔尖人才培养计划</a>
+					<?php if(isset($rrole) && $rrole < $rrole_manager_level) {?>
+						<span style="font-size:12pt;">(<?php echo $dic_rrole_value ?>模式)</span>
+					<?php } ?>
+				</div>
 			</div>
 			<div style="margin-top:13px;">
 				<a style="font-size:16pt;color:white;">Training Plan Of Physics Subject Top-notch Talent</a>
@@ -186,12 +191,13 @@ function CDialog(){
 }
 var cdialoag = new CDialog();
 function CLogin(){
-	var raccount = $('#raccount');
-	var rpassword = $('#rpassword');
-	var login_form = $('#login_form');
-	var shielding_layer = $('#shielding_layer');
-	var btn_ok = $('#login_form_ok');
-	var btn_cancel = $('#login_form_cancel');
+	this.raccount = $('#raccount');
+	this.rpassword = $('#rpassword');
+	this.login_form = $('#login_form');
+	this.shielding_layer = $('#shielding_layer');
+	this.btn_ok = $('#login_form_ok');
+	this.btn_cancel = $('#login_form_cancel');
+	this.callback_func_array = new Array();//登录后的回调函数
 	//var has_login_btn_clicked = false;
 	//修正顶底两端宽度，以及登录框、alert、info框的left属性
 	this.repair_nav = function (){
@@ -200,13 +206,13 @@ function CLogin(){
 		if(document.body.scrollWidth <=1024){
 			$('#top_nav').css('width',"1024px");
 			$('#bottom_nav').css('width',"1024px");
-			shielding_layer.css('width', "1024px");
-			shielding_layer.css('height', document.body.scrollHeight + 'px');
+			this.shielding_layer.css('width', "1024px");
+			this.shielding_layer.css('height', document.body.scrollHeight + 'px');
 		} else {
 			$('#top_nav').css('width', w);
 			$('#bottom_nav').css('width', w);
-			shielding_layer.css('width', w);
-			shielding_layer.css('height', document.body.scrollHeight + 'px');
+			this.shielding_layer.css('width', w);
+			this.shielding_layer.css('height', document.body.scrollHeight + 'px');
 		}
 		$('#login_form').css('left', ((document.body.scrollWidth - 400)/2)+"px");
 		$('#g_alert').css('left', ((document.body.scrollWidth - 600)/2)+"px");
@@ -215,14 +221,14 @@ function CLogin(){
 	};
 	this.show_login_window = function (){
 		var zindex = cdialoag.add_shield_layer();
-		login_form.css('z-index',zindex).show();
+		this.login_form.css('z-index',zindex).show();
 	};
-	this.close_login_window = function (){login_form.hide();cdialoag.restore_shield_layer();};
+	this.close_login_window = function (){this.login_form.hide();cdialoag.restore_shield_layer();};
 	this.validate_account =function(){
-		if(raccount.val().length < 6){
+		if(this.raccount.val().length < 6){
 			$('#login_form_field_raccount').attr('class','has-error');
 			$('#login_form_tip_raccount').show();
-			$('#raccount').focus();
+			this.raccount.focus();
 			return false;
 		}
 		$('#login_form_field_raccount').attr('class','');
@@ -230,10 +236,10 @@ function CLogin(){
 		return true;
 	};
 	this.validate_password =function(){
-		if(rpassword.val().length < 6){
+		if(this.rpassword.val().length < 6){
 			$('#login_form_field_rpassword').attr('class','has-error');
 			$('#login_form_tip_rpassword').show();
-			$('#rpassword').focus();
+			this.rpassword.focus();
 			return false;
 		} else {
 			$('#login_form_field_rpassword').attr('class','');
@@ -244,17 +250,23 @@ function CLogin(){
 	this.validate = function (){ return this.validate_account() && this.validate_password(); }
 	this.login = function (){
 		if(!this.validate()) return false;
-		btn_ok.attr('disabled', true);
-		btn_cancel.attr('disabled', true);
+		this.callback_func_array.push(function(){
+			cdialoag.show_info('登录成功！');
+		});
+		this.btn_ok.attr('disabled', true);
+		this.btn_cancel.attr('disabled', true);
 		$.ajax({
 			url:'__ROOT__/Home/Index/login',
-			success:function(t){
-				cdialoag.show_info('登录成功！');
-				console.log(t);
+			success:function(data,status,ajax_object){
+				clogin.close_login_window();
+				var i = 0;
+				for(;i<clogin.callback_func_array.length;i++){
+					(clogin.callback_func_array[i])();
+				}
 			},
 			error:function(t){
-				btn_ok.attr('disabled', false);
-				btn_cancel.attr('disabled', false);
+				this.btn_ok.attr('disabled', false);
+				this.btn_cancel.attr('disabled', false);
 				//console.log(t);
 				cdialoag.show_alert('登录失败！('+t.status+': '+t.statusText+')');
 			}
@@ -266,8 +278,8 @@ var clogin = new CLogin();
 
 $(document).ready(function(){
 	clogin.repair_nav();
-	$('#raccount').keyup(clogin.validate_account);
-	$('#rpassword').keyup(clogin.validate_password);//弹出框
+	$('#raccount').keyup(function(){clogin.validate_account();});
+	$('#rpassword').keyup(function(){clogin.validate_password();});//弹出框
 	$('.close').click(function(e){
 		$(this).parent().hide();
 		cdialoag.restore_shield_layer();
@@ -276,10 +288,10 @@ $(document).ready(function(){
 	$(window).resize(function(){
 		$('#top_nav').css('width', "1024px");
 		$('#bottom_nav').css('width', "1024px");
-		setTimeout(clogin.repair_nav, 150);
+		setTimeout(function(){clogin.repair_nav();}, 150);
 	});
 	$('#btn_login').click(function(){
-		alert('login');show_login_window();
+		show_login_window();
 	});
 });
 
