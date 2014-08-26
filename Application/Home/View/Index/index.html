@@ -66,29 +66,54 @@
 
 
 <script language="javascript">
-function load_modules(){
-	$.ajax({url:'__ROOT__/Home/Index/mphynews',
-		success:function(t,s,r){$('#physics_news_area_items').html(t);},
-		error:function(t){cdialoag.show_alert('加载物理前沿列表失败！('+t.status+': '+t.statusText+')');}
-	});
-	$.ajax({url:'__ROOT__/Home/Index/mhotact',
-		success:function(t,s,r){$('#hot_act_area_items').html(t);},
-		error:function(t){cdialoag.show_alert('加载热门活动列表失败！('+t.status+': '+t.statusText+')');}
-	});
-	$.ajax({url:'__ROOT__/Home/Index/mhotpost',
-		success:function(t,s,r){$('#hot_post_area_items').html(t);},
-		error:function(t){cdialoag.show_alert('加载学生社区热点列表失败！('+t.status+': '+t.statusText+')');}
-	});
-	$.ajax({url:'__ROOT__/Home/Index/mrecmdcourse',
-		success:function(t,s,r){$('#recmd_course_area_items').html(t);},
-		error:function(t){cdialoag.show_alert('加载推荐课程列表失败！('+t.status+': '+t.statusText+')');}
-	});
-}
+/*
+
+			$('#physics_news_area_items .index_item').mouseenter(function(e){
+				var tdiv = $('#delete_item_div');//console.log(e);
+				tdiv.css('width', e.currentTarget.clientWidth+"px");
+				tdiv.css('height', e.currentTarget.clientHeight+"px");
+				tdiv.css('left', e.currentTarget.offsetLeft+"px");
+				tdiv.css('top', e.currentTarget.offsetTop+"px");
+				tdiv.show();
+				return false;
+			});
+*/
+
+
 $(document).ready(function(){
-	load_modules();
+	var t = new Array();
+	t[eds_framework.T_URL] = '__ROOT__/Home/Index/mphynews';
+	t[eds_framework.T_ELEM] = '#physics_news_area_items';
+	t[eds_framework.T_HINT] = '物理前沿列表';
+	t[eds_framework.T_TYPE] = 'post';
+	eds_framework.metadata.push(t);
+	t = new Array();
+	t[eds_framework.T_URL] = '__ROOT__/Home/Index/mhotact';
+	t[eds_framework.T_ELEM] = '#hot_act_area_items';
+	t[eds_framework.T_HINT] = '热门活动列表';
+	t[eds_framework.T_TYPE] = 'post';
+	eds_framework.metadata.push(t);
+	t = new Array();
+	t[eds_framework.T_URL] = '__ROOT__/Home/Index/mhotpost';
+	t[eds_framework.T_ELEM] = '#hot_post_area_items';
+	t[eds_framework.T_HINT] = '学生社区热点列表';
+	t[eds_framework.T_TYPE] = 'post';
+	eds_framework.metadata.push(t);
+	t = new Array();
+	t[eds_framework.T_URL] = '__ROOT__/Home/Index/mrecmdcourse';
+	t[eds_framework.T_ELEM] = '#recmd_course_area_items';
+	t[eds_framework.T_HINT] = '推荐课程列表';
+	t[eds_framework.T_TYPE] = 'post';
+	eds_framework.metadata.push(t);
+	/*
 	clogin.callback_func_array.push(function(){
-		load_modules();
-	});
+		eds_framework.load();
+	});//*/
 });
+//删除物理前沿
+function remove_phynews_item(id){
+	$('#physics_news_area_items').html('');
+	eds_framework.load();
+}
 
 </script>

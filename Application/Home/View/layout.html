@@ -24,20 +24,225 @@
     <script type="text/javascript" src="__PUBLIC__/jquery-2.1.1.js"></script>
 
 	<link rel="stylesheet" href="__PUBLIC__/assets/css/eds-base.css" />
-
+<script>
+function CEdsFramework(){
+	this.metadata = new Array();
+	this.T_URL = 0;
+	this.T_TYPE = 1;
+	this.T_DATA = 2;
+	this.T_ELEM = 3;
+	this.T_HINT = 4;
+}
+var eds_framework = new CEdsFramework();
+</script>
   </head>
   <body style="background-color: white;"><!--#f1f2f6-->
+<?php  ?>
 
+<!--弹出窗口及窗口类-->
+<div class="alert alert-danger" id="g_alert">
+  <button type="button" class="close eds_window_btn_close" data-dismiss="alert" aria-hidden="true">×</button>
+  <h4 class="alert-heading">Warning!</h4>
+  <div id="g_alert_text"></div>
+</div>
+<div class="alert alert-info  alert-dismissable" id="g_info" >
+  <button type="button" class="close eds_window_btn_close" data-dismiss="alert" aria-hidden="true">×</button>
+  <div id="g_info_text"></div>
+</div>
+<div id="shielding_layer" style="display:none;position:absolute;top:0;left:0;background-color:#ffffff;filter:alpha(Opacity=80);-moz-opacity:0.5;opacity: 0.5;z-index:10000;">
+</div>
+<script language="javascript">
+function CDialog(){
+	/*private*/
+	this.start_index = 10000000;
+	this.old_index = new Array();
+	this.old_display = new Array();
+	var shielding_layer = $('#shielding_layer');
+	var g_alert = $('#g_alert');
+	var g_alert_text = $('#g_alert_text');
+	var g_info = $('#g_info');
+	var g_info_text = $('#g_info_text');
+
+	this.old_index.push(shielding_layer.css('z-index'));
+	this.old_display.push(shielding_layer.css('display'));
+
+	this.add_shield_layer = function(){
+		this.old_index.push(shielding_layer.css('z-index'));
+		this.old_display.push(shielding_layer.css('display'));
+		shielding_layer.css('z-index',this.start_index);
+		shielding_layer.css('display', 'block');
+		this.start_index += 100;
+		return this.start_index - 99;
+	}
+	this.show_alert = function(text){
+		var zi = this.add_shield_layer();
+		g_alert.css('z-index',zi);
+		g_alert_text.text(text);
+		g_alert.show();
+	}
+	this.show_info = function(text){
+		var zi = this.add_shield_layer();
+		g_info.css('z-index',zi);
+		g_info_text.text(text);
+		g_info.show();
+	}
+	this.restore_shield_layer = function(){
+		if(this.old_index.length > 1){
+			shielding_layer.css('z-index', this.old_index.pop());
+			shielding_layer.css('display', this.old_display.pop());
+		} else {
+			shielding_layer.css('z-index', this.old_index[0]);
+			shielding_layer.css('display', this.old_display[0]);
+		}
+	}
+	this.init = function(){
+		$('.eds_window_btn_close').click(function(e){
+			$(this).parent().hide();
+			cdialoag.restore_shield_layer();
+			return false;
+		});
+	}
+}
+var cdialoag = new CDialog();
+</script>
+<!--登录界面及登录类-->
+<div id="login_form" style="display:none;position:absolute;margin:0 auto;width:400px;top:200px;z-index:10001;text-align:center;">
+	<form style="background-color:rgb(234,234,234);padding:20px;">
+		<ul>
+			<li>
+				<div id="login_form_field_raccount" style="text-align:left">
+					<span class="login_form_label">账号</span>
+					<span class="login_form_tip" id="login_form_tip_raccount">账号长度不能小于6！</span>
+					<input type="text" class="form-control" name="raccount" id="raccount" placeholder="Account input" id="inputError" />
+				</div>
+			</li>
+			<li>
+				<div  id="login_form_field_rpassword" style="text-align:left">
+					<span class="login_form_label">密码</span>
+					<span class="login_form_tip" id="login_form_tip_rpassword">密码长度不能小于6！</span>
+					<input type="password" class="form-control" name="rpassword" id="rpassword" placeholder="Password input">
+				</div>
+				
+			</li>
+			<li>
+				<button type="button" id="login_form_ok" class="login_form_btn btn btn-info btn-block" onclick="login_eds()">登录</button>
+				<button type="button" id="login_form_cancel" class="login_form_btn btn btn-block" onclick="close_login_window()">取消</button>
+			</li>
+		</ul>
+	</form>
+</div>
+<script language="javascript">
+function CLogin(){
+	this.raccount = $('#raccount');
+	this.rpassword = $('#rpassword');
+	this.login_form = $('#login_form');
+	this.shielding_layer = $('#shielding_layer');
+	this.btn_ok = $('#login_form_ok');
+	this.btn_cancel = $('#login_form_cancel');
+	this.callback_func_array = new Array();//登录后的回调函数
+	//var has_login_btn_clicked = false;
+	//修正顶底两端宽度，以及登录框、alert、info框的left属性
+	this.repair_nav = function (){
+		//var ev = e || window.event;
+		var w = document.body.scrollWidth + 'px';
+		if(document.body.scrollWidth <=1024){
+			$('#top_nav').css('width',"1024px");
+			$('#bottom_nav').css('width',"1024px");
+			this.shielding_layer.css('width', "1024px");
+			this.shielding_layer.css('height', document.body.scrollHeight + 'px');
+		} else {
+			$('#top_nav').css('width', w);
+			$('#bottom_nav').css('width', w);
+			this.shielding_layer.css('width', w);
+			this.shielding_layer.css('height', document.body.scrollHeight + 'px');
+		}
+		$('#login_form').css('left', ((document.body.scrollWidth - 400)/2)+"px");
+		$('#g_alert').css('left', ((document.body.scrollWidth - 600)/2)+"px");
+		$('#g_info').css('left', ((document.body.scrollWidth - 600)/2)+"px");
+		//alert(document.body.scrollWidth);
+	};
+	this.show_login_window = function (){
+		var zindex = cdialoag.add_shield_layer();
+		this.login_form.css('z-index',zindex).show();
+	};
+	this.close_login_window = function (){this.login_form.hide();cdialoag.restore_shield_layer();};
+	this.validate_account =function(){
+		if(this.raccount.val().length < 6){
+			$('#login_form_field_raccount').attr('class','has-error');
+			$('#login_form_tip_raccount').show();
+			this.raccount.focus();
+			return false;
+		}
+		$('#login_form_field_raccount').attr('class','');
+		$('#login_form_tip_raccount').hide();
+		return true;
+	};
+	this.validate_password =function(){
+		if(this.rpassword.val().length < 6){
+			$('#login_form_field_rpassword').attr('class','has-error');
+			$('#login_form_tip_rpassword').show();
+			this.rpassword.focus();
+			return false;
+		} else {
+			$('#login_form_field_rpassword').attr('class','');
+			$('#login_form_tip_rpassword').hide();
+		}
+		return true;
+	}
+	this.validate = function (){ return this.validate_account() && this.validate_password(); }
+	this.login = function (){
+		if(!this.validate()) return false;
+		this.callback_func_array.push(function(){
+			cdialoag.show_info('登录成功！');
+		});
+		this.btn_ok.attr('disabled', true);
+		this.btn_cancel.attr('disabled', true);
+		$.ajax({
+			url:'__ROOT__/Home/Index/login',
+			type:'post',
+			data:{raccount:this.raccount.val(),rpassword:this.rpassword.val()},
+			dataType:'json',
+			success:function(data,status,ajax_object){
+				if(data.result != 0){
+					cdialoag.show_alert('登录失败！用户名或密码错误！');
+					return;
+				}
+				clogin.close_login_window();
+				var i = 0;
+				for(;i<clogin.callback_func_array.length;i++){
+					(clogin.callback_func_array[i])();
+				}
+				clogin.btn_ok.attr('disabled', false);
+				clogin.btn_cancel.attr('disabled', false);
+				window.location.reload(true);
+			},
+			error:function(t){
+				clogin.btn_ok.attr('disabled', false);
+				clogin.btn_cancel.attr('disabled', false);
+				console.log(t);
+				cdialoag.show_alert('登录失败！('+t.status+': '+t.statusText+')');
+			}
+		});
+	};
+	this.init = function(){
+		this.repair_nav();
+		this.raccount.keyup(function(){clogin.validate_account();});
+		this.rpassword.keyup(function(){clogin.validate_password();});//弹出框
+		$('#btn_login').click(this.show_login_window);
+	}
+}
+var clogin = new CLogin();
+</script>
 <!--nav-->
 <nav id="top_nav" class="navbar navbar-default navbar-custom" role="navigation" style="height:108px;background-color:black;position:inherit;margin-bottom:10px;">
 	<div class="container" style="width:1024px;">
 		<ul class="frame_top_info_ul">
-			<defined name="Logined">
-				<li><a href="#" style="">wuxiaoshan</a></li>
+			<?php if(session('rnickname')) { ?>
+				<li><a href="#" style="">{$Think.session.rnickname}</a></li>
 				<li><a href="#" style="color:white;padding-left:10px;">注销</a></li>
-			<else />
+			<?php } else { ?>
 				<li><div id="btn_login" onclick="" style="padding-right:10px;cursor:pointer;z-index:100000000">登录</div></li>
-			</defined>
+			<?php } ?>
 		</ul>
 		<div class="navbar-header" height="108px;">
 			<div style="position:relative;top:15px;">
@@ -109,191 +314,45 @@
 	</div>
 </div>
 
-<div class="alert alert-danger" id="g_alert">
-  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-  <h4 class="alert-heading">Warning!</h4>
-  <div id="g_alert_text"></div>
-</div>
-<div class="alert alert-info  alert-dismissable" id="g_info" >
-  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-  <div id="g_info_text"></div>
-</div>
 
-<div id="shielding_layer" style="display:none;position:absolute;top:0;left:0;background-color:#ffffff;filter:alpha(Opacity=80);-moz-opacity:0.5;opacity: 0.5;z-index:10000;">
-</div>
-<div id="login_form" style="display:none;position:absolute;margin:0 auto;width:400px;top:200px;z-index:10001;text-align:center;">
-	<form style="background-color:rgb(234,234,234);padding:20px;">
-		<ul>
-			<li>
-				<div id="login_form_field_raccount" style="text-align:left">
-					<span class="login_form_label">账号</span>
-					<span class="login_form_tip" id="login_form_tip_raccount">账号长度不能小于6！</span>
-					<input type="text" class="form-control" name="raccount" id="raccount" placeholder="Account input" id="inputError" />
-				</div>
-			</li>
-			<li>
-				<div  id="login_form_field_rpassword" style="text-align:left">
-					<span class="login_form_label">密码</span>
-					<span class="login_form_tip" id="login_form_tip_rpassword">密码长度不能小于6！</span>
-					<input type="password" class="form-control" name="rpassword" id="rpassword" placeholder="Password input">
-				</div>
-				
-			</li>
-			<li>
-				<button type="button" id="login_form_ok" class="login_form_btn btn btn-info btn-block" onclick="login_eds()">登录</button>
-				<button type="button" id="login_form_cancel" class="login_form_btn btn btn-block" onclick="close_login_window()">取消</button>
-			</li>
-		</ul>
-	</form>
-</div>
+<div id="delete_item_div" style="display:none;position:absolute;width:10px;height:10px;font-size:30px;color:red;text-align:center;">X</div>
+
 
   </body>
 
 <script language="javascript">
-function CDialog(){
-	var shielding_layer = $('#shielding_layer');
-	var start_index = 99990000;
-	var old_index = new Array();
-	var old_display = new Array();
-	var g_alert = $('#g_alert');
-	var g_alert_text = $('#g_alert_text');
-	var g_info = $('#g_info');
-	var g_info_text = $('#g_info_text');
 
-	old_index.push(shielding_layer.css('z-index'));
-	old_display.push(shielding_layer.css('display'));
-	this.add_shield_layer = function(){
-		old_index.push(shielding_layer.css('z-index'));
-		old_display.push(shielding_layer.css('display'));
-		shielding_layer.css('z-index',start_index);
-		shielding_layer.css('display', 'block');
-		start_index += 100;
-		return start_index - 99;
-	}
-	this.show_alert = function(text){
-		var zi = this.add_shield_layer();
-		g_alert.css('z-index',zi);
-		g_alert_text.text(text);
-		g_alert.show();
-	}
-	this.show_info = function(text){
-		var zi = this.add_shield_layer();
-		g_info.css('z-index',zi);
-		g_info_text.text(text);
-		g_info.show();
-	}
-	this.restore_shield_layer = function(){
-		if(old_index.length > 1){
-			shielding_layer.css('z-index', old_index.pop());
-			shielding_layer.css('display', old_display.pop());
-		}
+CEdsFramework.prototype.load = function(){
+	var i;
+	for(i = 0;i<this.metadata.length;i++){
+		(function(index,eds_framework,metadata){
+			$.ajax({
+				url:metadata[index][eds_framework.T_URL],
+				type:metadata[index][eds_framework.T_TYPE] || "get",
+				data:metadata[index][eds_framework.T_DATA] || {},
+				success:function(t,s,r){$(metadata[index][eds_framework.T_ELEM]).html(t);},
+				error:function(t){cdialoag.show_alert('加载'+(metadata[index][eds_framework.T_HINT]||"")+'失败！('+t.status+': '+t.statusText+')');}
+			});
+		})(i,this,this.metadata);
 	}
 }
-var cdialoag = new CDialog();
-function CLogin(){
-	this.raccount = $('#raccount');
-	this.rpassword = $('#rpassword');
-	this.login_form = $('#login_form');
-	this.shielding_layer = $('#shielding_layer');
-	this.btn_ok = $('#login_form_ok');
-	this.btn_cancel = $('#login_form_cancel');
-	this.callback_func_array = new Array();//登录后的回调函数
-	//var has_login_btn_clicked = false;
-	//修正顶底两端宽度，以及登录框、alert、info框的left属性
-	this.repair_nav = function (){
-		//var ev = e || window.event;
-		var w = document.body.scrollWidth + 'px';
-		if(document.body.scrollWidth <=1024){
-			$('#top_nav').css('width',"1024px");
-			$('#bottom_nav').css('width',"1024px");
-			this.shielding_layer.css('width', "1024px");
-			this.shielding_layer.css('height', document.body.scrollHeight + 'px');
-		} else {
-			$('#top_nav').css('width', w);
-			$('#bottom_nav').css('width', w);
-			this.shielding_layer.css('width', w);
-			this.shielding_layer.css('height', document.body.scrollHeight + 'px');
-		}
-		$('#login_form').css('left', ((document.body.scrollWidth - 400)/2)+"px");
-		$('#g_alert').css('left', ((document.body.scrollWidth - 600)/2)+"px");
-		$('#g_info').css('left', ((document.body.scrollWidth - 600)/2)+"px");
-		//alert(document.body.scrollWidth);
-	};
-	this.show_login_window = function (){
-		var zindex = cdialoag.add_shield_layer();
-		this.login_form.css('z-index',zindex).show();
-	};
-	this.close_login_window = function (){this.login_form.hide();cdialoag.restore_shield_layer();};
-	this.validate_account =function(){
-		if(this.raccount.val().length < 6){
-			$('#login_form_field_raccount').attr('class','has-error');
-			$('#login_form_tip_raccount').show();
-			this.raccount.focus();
-			return false;
-		}
-		$('#login_form_field_raccount').attr('class','');
-		$('#login_form_tip_raccount').hide();
-		return true;
-	};
-	this.validate_password =function(){
-		if(this.rpassword.val().length < 6){
-			$('#login_form_field_rpassword').attr('class','has-error');
-			$('#login_form_tip_rpassword').show();
-			this.rpassword.focus();
-			return false;
-		} else {
-			$('#login_form_field_rpassword').attr('class','');
-			$('#login_form_tip_rpassword').hide();
-		}
-		return true;
-	}
-	this.validate = function (){ return this.validate_account() && this.validate_password(); }
-	this.login = function (){
-		if(!this.validate()) return false;
-		this.callback_func_array.push(function(){
-			cdialoag.show_info('登录成功！');
-		});
-		this.btn_ok.attr('disabled', true);
-		this.btn_cancel.attr('disabled', true);
-		$.ajax({
-			url:'__ROOT__/Home/Index/login',
-			success:function(data,status,ajax_object){
-				clogin.close_login_window();
-				var i = 0;
-				for(;i<clogin.callback_func_array.length;i++){
-					(clogin.callback_func_array[i])();
-				}
-			},
-			error:function(t){
-				this.btn_ok.attr('disabled', false);
-				this.btn_cancel.attr('disabled', false);
-				//console.log(t);
-				cdialoag.show_alert('登录失败！('+t.status+': '+t.statusText+')');
-			}
-		});
-	};
-}
-var clogin = new CLogin();
-
 
 $(document).ready(function(){
-	clogin.repair_nav();
-	$('#raccount').keyup(function(){clogin.validate_account();});
-	$('#rpassword').keyup(function(){clogin.validate_password();});//弹出框
-	$('.close').click(function(e){
-		$(this).parent().hide();
-		cdialoag.restore_shield_layer();
-		return false;
-	});
+	cdialoag.init();
+	clogin.init();
 	$(window).resize(function(){
-		$('#top_nav').css('width', "1024px");
-		$('#bottom_nav').css('width', "1024px");
+		$('nav#top_nav').css('width', "1024px");
+		$('div#bottom_nav').css('width', "1024px");
 		setTimeout(function(){clogin.repair_nav();}, 150);
 	});
-	$('#btn_login').click(function(){
-		show_login_window();
+	$('#delete_item_div').mouseleave(function(e){
+		$(e.currentTarget).hide();
+		// console.log($(e.currentTarget).css('display'));
+		return false;
 	});
+	eds_framework.load();
 });
+
 
 //以下全局函数列表
 function show_login_window(){ clogin.show_login_window(); return false;}

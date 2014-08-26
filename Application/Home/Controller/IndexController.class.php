@@ -13,8 +13,32 @@ class IndexController extends EdsController {
         $this->display();
     }
 
-    public function login(){
-    	$this->show('login ok!','utf-8');
+    public function login($raccount='',$rpassword=''){
+    	$raccount = I('raccount');
+    	$rpassword = I('rpassword');
+    	if($raccount == '' || $rpassword == ''){
+    		$this->show('{"result":1,"msg":"parameters error."}','utf-8');
+    		return;
+    	}
+    	$m = M('Register');
+    	$cond['raccount'] = $raccount;
+    	$resultset = $m->where($cond)->field('rpassword')->find();
+    	if($resultset){
+    		$rpassword = sha1(md5($rpassword));
+    		if($rpassword == $resultset['rpassword']){//123456->10470c3b4b1fed12c3baac014be15fac67c6e815
+    			$this->show('{"result":"0","msg":"succeed."}','utf-8');
+    		}else {
+    			$this->show('{"result":3,"msg":"password error."}','utf-8');
+    		}
+    	} else {
+    		$this->show('{"result":2,"msg":"account error!"}'.$raccount,'utf-8');
+    	}
+    	//以下设置session
+    	$mv = M('RegisterView');
+    	$resultset = $mv->where($cond)->field(true)->find();
+    	session('g_logined', 'logined');
+    	session('rnickname',$resultset['rnickname']);
+    	session('register', $resultset);
     }
 }
 
