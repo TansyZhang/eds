@@ -81,11 +81,11 @@
 
 
 $(document).ready(function(){
-	var obj = {
+	eds_framework.metadata.push({
 		"load":{
 			"url":"__ROOT__/Home/Index/mphynews",
-			"type":"post",
-			"mdl":
+			"action":"post",
+			"tpl":
 				'<div class="index_item">'+
 					'<div class="index_item_content">'+
 						'<span>{title}</span>'+
@@ -97,10 +97,10 @@ $(document).ready(function(){
 						'</div>'+
 					'</div>'+
 				'</div>',
-			"mdl_args":["{title}","{college}","{by}"],
+			"tpl_args":["{title}","{college}","{by}"],/*使用mdl_args可以加快替换速度*/
 			"error":"加载物理前沿列表失败！{status}:{statusText}",
 			"clear":true,
-			"elem":"#physics_news_area_items"
+			"parent":"#physics_news_area_items"
 		},
 		"add":{
 
@@ -109,15 +109,14 @@ $(document).ready(function(){
 
 		},
 		"rmv":{
-			"elem":"#physics_news_area_items .index_item",
+			"parent":"#physics_news_area_items .index_item",
 			"type":"img",
 			"url":"__ROOT__/Home/Index/mphynews_rmv"
 		},
 		"shld":{
 
 		}
-	};
-	eds_framework.metadata.push(obj);
+	});
 	/*
 	var t = new Array();
 	t[eds_framework.T_URL] = '__ROOT__/Home/Index/mphynews';

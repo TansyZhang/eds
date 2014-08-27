@@ -25,14 +25,7 @@
 
 	<link rel="stylesheet" href="__PUBLIC__/assets/css/eds-base.css" />
 <script>
-function CEdsFramework(){
-	this.metadata = new Array();
-	this.T_URL = 0;
-	this.T_TYPE = 1;
-	this.T_DATA = 2;
-	this.T_ELEM = 3;
-	this.T_HINT = 4;
-}
+function CEdsFramework(){ this.metadata = new Array();}
 var eds_framework = new CEdsFramework();
 </script>
   </head>
@@ -237,20 +230,15 @@ var clogin = new CLogin();
 <nav id="top_nav" class="navbar navbar-default navbar-custom" role="navigation" style="height:108px;background-color:black;position:inherit;margin-bottom:10px;">
 	<div class="container" style="width:1024px;">
 		<ul class="frame_top_info_ul">
-			<?php if(session('rnickname')) { ?>
-				<li><a href="#" style="">{$Think.session.rnickname}</a></li>
-				<li><a href="#" style="color:white;padding-left:10px;">注销</a></li>
-			<?php } else { ?>
-				<li><div id="btn_login" onclick="" style="padding-right:10px;cursor:pointer;z-index:100000000">登录</div></li>
-			<?php } ?>
+				<li><div id="btn_rnickname" style="display:none;cursor:pointer;">nickname</div></li>
+				<li><div id="btn_logoff" style="color:white;padding-left:10px;padding-right:10px;display:none;cursor:pointer;">注销</div></li>
+				<li><div id="btn_login" style="padding-right:10px;cursor:pointer;display:none">登录</div></li>
 		</ul>
 		<div class="navbar-header" height="108px;">
 			<div style="position:relative;top:15px;">
 				<div style="font-size:24pt;">
 					<a href="__ROOT__" style="color:white;">全国物理拔尖人才培养计划</a>
-					<?php if(isset($rrole) && $rrole < $rrole_manager_level) {?>
-						<span style="font-size:12pt;">(<?php echo $dic_rrole_value ?>模式)</span>
-					<?php } ?>
+					<span style="font-size:12pt;display:none:color:white;">(<span id="user_mode_hint"></span>模式)</span>
 				</div>
 			</div>
 			<div style="margin-top:13px;">
@@ -328,18 +316,22 @@ CEdsFramework.prototype.load = function(){
 		if(this.metadata[i].load){
 			(function(eds_framework,item){
 				if(item.load.clear){ $(item.load.elem).html(''); }
-				$.ajax({ url:item.load.url, type:item.load.type || "get", data:item.load.data || {}, dataType:'json',
+				$.ajax({ url:item.load.url, type:item.load.action || "get", data:item.load.data || {}, dataType:'json',
 					success:function(t,s,r){
 						if(t.result == 0){
-							$.each(t.data,function(n,value){
-								var e = item.load.mdl;
-								$.each(item.load.mdl_args,function(k,v){
-									e = e.replace(v, value[v.substring(1,v.length-1)]);
+							if(item.load.handler){
+								item.load.handler(t.data);
+							} else {
+								$.each(t.data,function(n,value){
+									var e = item.load.tpl;
+									if(item.load.tpl_args){
+										$.each(item.load.tpl_args,function(k,v){ e = e.replace(v, value[v.substring(1,v.length-1)]); });
+									} else { e = e.replace(/{([^}]*)}/g, function(m){return value[RegExp.$1];}); }
+									$(item.load.parent).append(e);
 								});
-								$(item.load.elem).append(e);
-							});
-							if(item.rmv){
-								$(item.rmv.elem).prepend('<div style="float:right;position:relative;margin-top:8px;margin-right:0px;font-size:26px;color:red;font-weight:700;cursor:pointer;z-index:10;" onclick="remove_phynews_item(3)" title="删除此项">&nbsp;X&nbsp;</div>');
+								if(item.rmv){
+									$(item.rmv.parent).prepend('<div style="float:right;position:relative;margin-top:8px;margin-right:0px;font-size:26px;color:red;font-weight:700;cursor:pointer;z-index:10;" onclick="remove_phynews_item(3)" title="删除此项">&nbsp;X&nbsp;</div>');
+								}
 							}
 						} else {
 							cdialoag.show_alert('error:'+t.msg);
@@ -367,6 +359,31 @@ $(document).ready(function(){
 		$(e.currentTarget).hide();
 		// console.log($(e.currentTarget).css('display'));
 		return false;
+	});
+	eds_framework.metadata.push({
+		"load":{
+			"url":"__ROOT__/Home/Index/user_conscise_info",
+			"action":"post",
+			"data":{},
+			"error":'加载用户信息失败！{status}:{statusText}',
+			"handler":function(data){
+				if(data.mode){
+					$('span#user_mode_hint').text(data.mode).parent().show();
+				} else {
+					$('span#user_mode_hint').parent().hide();
+				}
+				if(data.rnickname){
+					$('div#btn_rnickname').text(data.rnickname).show();
+					$('div#btn_logoff').show();
+					$('div#btn_login').hide();
+				} else {
+					$('div#btn_rnickname').hide();
+					$('div#btn_logoff').hide();
+					$('div#btn_login').show();
+				}
+				
+			}
+		}
 	});
 	eds_framework.load();
 });
