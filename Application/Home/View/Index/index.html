@@ -81,6 +81,44 @@
 
 
 $(document).ready(function(){
+	var obj = {
+		"load":{
+			"url":"__ROOT__/Home/Index/mphynews",
+			"type":"post",
+			"mdl":
+				'<div class="index_item">'+
+					'<div class="index_item_content">'+
+						'<span>{title}</span>'+
+					'</div>'+
+					'<div class="index_item_info">'+
+						'<div>'+
+							'<span class="index_item_info_left">{college}</span>'+
+							'<span class="index_item_info_right">{by}</span>'+
+						'</div>'+
+					'</div>'+
+				'</div>',
+			"mdl_args":["{title}","{college}","{by}"],
+			"error":"加载物理前沿列表失败！{status}:{statusText}",
+			"clear":true,
+			"elem":"#physics_news_area_items"
+		},
+		"add":{
+
+		},
+		"mdf":{
+
+		},
+		"rmv":{
+			"elem":"#physics_news_area_items .index_item",
+			"type":"img",
+			"url":"__ROOT__/Home/Index/mphynews_rmv"
+		},
+		"shld":{
+
+		}
+	};
+	eds_framework.metadata.push(obj);
+	/*
 	var t = new Array();
 	t[eds_framework.T_URL] = '__ROOT__/Home/Index/mphynews';
 	t[eds_framework.T_ELEM] = '#physics_news_area_items';
@@ -105,6 +143,7 @@ $(document).ready(function(){
 	t[eds_framework.T_HINT] = '推荐课程列表';
 	t[eds_framework.T_TYPE] = 'post';
 	eds_framework.metadata.push(t);
+	//*/
 	/*
 	clogin.callback_func_array.push(function(){
 		eds_framework.load();

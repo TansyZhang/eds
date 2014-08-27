@@ -325,15 +325,33 @@ var clogin = new CLogin();
 CEdsFramework.prototype.load = function(){
 	var i;
 	for(i = 0;i<this.metadata.length;i++){
-		(function(index,eds_framework,metadata){
-			$.ajax({
-				url:metadata[index][eds_framework.T_URL],
-				type:metadata[index][eds_framework.T_TYPE] || "get",
-				data:metadata[index][eds_framework.T_DATA] || {},
-				success:function(t,s,r){$(metadata[index][eds_framework.T_ELEM]).html(t);},
-				error:function(t){cdialoag.show_alert('加载'+(metadata[index][eds_framework.T_HINT]||"")+'失败！('+t.status+': '+t.statusText+')');}
-			});
-		})(i,this,this.metadata);
+		if(this.metadata[i].load){
+			(function(eds_framework,item){
+				if(item.load.clear){ $(item.load.elem).html(''); }
+				$.ajax({ url:item.load.url, type:item.load.type || "get", data:item.load.data || {}, dataType:'json',
+					success:function(t,s,r){
+						if(t.result == 0){
+							$.each(t.data,function(n,value){
+								var e = item.load.mdl;
+								$.each(item.load.mdl_args,function(k,v){
+									e = e.replace(v, value[v.substring(1,v.length-1)]);
+								});
+								$(item.load.elem).append(e);
+							});
+							if(item.rmv){
+								$(item.rmv.elem).prepend('<div style="float:right;position:relative;margin-top:8px;margin-right:0px;font-size:26px;color:red;font-weight:700;cursor:pointer;z-index:10;" onclick="remove_phynews_item(3)" title="删除此项">&nbsp;X&nbsp;</div>');
+							}
+						} else {
+							cdialoag.show_alert('error:'+t.msg);
+						}
+					},
+					error:function(t){
+						if(item.load.error){ cdialoag.show_alert(item.load.error.replace('{status}', t.status).replace('{statusText}',t.statusText));
+						} else { console.log("[EDS][loading(url=\""+item.load.url+"\") failed.][item.load.error not true]"); }
+					}
+				});
+			})(this,this.metadata[i]);
+		}
 	}
 }
 

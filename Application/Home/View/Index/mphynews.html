@@ -3,8 +3,6 @@
 <?php if(session('rnickname')) {?>
 
 <div class="index_item">
-	<div style="float:right;position:relative;margin-top:8px;margin-right:0px;font-size:26px;color:red;font-weight:700;cursor:pointer;z-index:10;" 
-	onclick="remove_phynews_item(3)" title="删除此项">&nbsp;X&nbsp;</div>
 	<div class="index_item_content">
 		<span>Opening Doors to Engineering</span>
 	</div>
@@ -18,16 +16,21 @@
 
 
 <?php } else { ?>
-<div class="index_item">
-	<div class="index_item_content">
-		<span>Opening Doors to Engineering</span>
-	</div>
-	<div class="index_item_info">
-		<div>
-			<span class="index_item_info_left">南京大学</span>
-			<span class="index_item_info_right">Nature杂志</span>
-		</div>
-	</div>
-</div>
+
+
+{
+	"result":0,
+	"msg":"succeed",
+	"data":[{
+		"title":"Opening Doors to Engineering",
+		"college":"南京大学",
+		"by":"Nature杂志"
+	},{
+		"title":"Opening Doors to Engineering",
+		"college":"北京大学",
+		"by":"Nature杂志"
+	}]
+}
+
 <?php } ?>
 
