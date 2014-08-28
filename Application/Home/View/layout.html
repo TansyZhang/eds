@@ -25,7 +25,7 @@
 
 	<link rel="stylesheet" href="__PUBLIC__/assets/css/eds-base.css" />
 <script>
-function CEdsFramework(){ this.metadata = new Array();}
+function CEdsFramework(){ this.metadata = new Array();this.push=function(item){this.metadata.push(item);}}
 var eds_framework = new CEdsFramework();
 </script>
   </head>
@@ -35,7 +35,7 @@ var eds_framework = new CEdsFramework();
 <!--弹出窗口及窗口类-->
 <div class="alert alert-danger" id="g_alert">
   <button type="button" class="close eds_window_btn_close" data-dismiss="alert" aria-hidden="true">×</button>
-  <h4 class="alert-heading">Warning!</h4>
+  <h4 class="alert-heading">Error!</h4>
   <div id="g_alert_text"></div>
 </div>
 <div class="alert alert-info  alert-dismissable" id="g_info" >
@@ -97,6 +97,13 @@ function CDialog(){
 	}
 }
 var cdialoag = new CDialog();
+CEdsFramework.prototype.error_handler = function(url,response_object,error_hint){
+	if(error_hint){ cdialoag.show_alert(error_hint.replace('{status}', response_object.status).replace('{statusText}',response_object.statusText));
+	} else { 
+		cdialoag.show_alert('操作失败！错误信息：url="'+url+'", status='+response_object.status+',msg="'+ response_object.statusText+'"');
+	}
+	console.error("[EDS][loading(url=\""+url+"\") failed.][item.load.error not true]"); 
+}
 </script>
 <!--登录界面及登录类-->
 <div id="login_form" style="display:none;position:absolute;margin:0 auto;width:400px;top:200px;z-index:10001;text-align:center;">
@@ -118,12 +125,63 @@ var cdialoag = new CDialog();
 				
 			</li>
 			<li>
-				<button type="button" id="login_form_ok" class="login_form_btn btn btn-info btn-block" onclick="login_eds()">登录</button>
-				<button type="button" id="login_form_cancel" class="login_form_btn btn btn-block" onclick="close_login_window()">取消</button>
+				<button type="button" id="login_form_ok" class="login_form_btn btn btn-info btn-block">登录</button>
+				<button type="button" id="login_form_cancel" class="login_form_btn btn btn-block">取消</button>
 			</li>
 		</ul>
 	</form>
 </div>
+<!--nav-->
+<nav id="top_nav" class="navbar navbar-default navbar-custom" role="navigation" style="height:108px;background-color:black;position:inherit;margin-bottom:10px;">
+	<div class="container" style="width:1024px;">
+		<ul class="frame_top_info_ul">
+				<li><div style="display:none;cursor:pointer;float:right;">您好，<span id="btn_rnickname" >nickname</span>！</div></li>
+				<li><div id="btn_logoff" style="float:right;color:white;padding-left:10px;padding-right:10px;display:none;cursor:pointer;">注销</div></li>
+				<li><div id="btn_login" style="padding-right:10px;cursor:pointer;display:none">登录</div></li>
+		</ul>
+		<div class="navbar-header" height="108px;">
+			<div style="position:relative;top:15px;">
+				<div style="font-size:24pt;">
+					<a href="__ROOT__" style="color:white;">全国物理拔尖人才培养计划</a>
+					<span style="font-size:12pt;display:none;color:red;">（<span id="user_mode_hint"></span>模式）</span>
+				</div>
+			</div>
+			<div style="margin-top:13px;">
+				<a style="font-size:16pt;color:white;">Training Plan Of Physics Subject Top-notch Talent</a>
+			</div>
+			
+		</div>
+	</div>
+</nav>
+<div class="topic" style="color:black;padding-bottom:10px;padding-top:0;">
+	<div class="container" style="padding:0px 0 0;width:1024px">
+		<span style="padding-right:7px;width:129px;height:128px;">
+			<a href="__ROOT__/Home/Index"><img src="__PUBLIC__/assets/image/nav_index.png" width="118px" height="128px" /></a>
+		</span>
+		<span style="padding-right:7px;width:130px;height:128px;">
+			<a href="__ROOT__/Home/Plan"><img src="__PUBLIC__/assets/image/nav_plan.png" width="119px" height="128px" /></a>
+		</span>
+		<span style="padding-right:7px;width:129px;height:128px;">
+			<a href="__ROOT__/Home/News"><img src="__PUBLIC__/assets/image/nav_news.png" width="118px" height="128px" /></a>
+		</span>
+		<span style="padding-right:7px;width:130px;height:128px;">
+			<a href="__ROOT__/Home/League"><img src="__PUBLIC__/assets/image/nav_league.png" width="119px" height="128px" /></a>
+		</span>
+		<span style="padding-right:7px;width:129px;height:128px;">
+			<a href="__ROOT__/Home/Notice"><img src="__PUBLIC__/assets/image/nav_notice.png" width="118px" height="128px" /></a>
+		</span>
+		<span style="padding-right:7px;width:130px;height:128px;">
+			<a href="__ROOT__/Home/Ex"><img src="__PUBLIC__/assets/image/nav_ex.png" width="118px" height="128px" /></a>
+		</span>
+		<span style="padding-right:7px;width:129px;height:128px;">
+			<a href="__ROOT__/Home/Course"><img src="__PUBLIC__/assets/image/nav_course.png" width="118px" height="128px" /></a>
+		</span>
+		<span style="width:118px;height:128px;">
+			<a href="__ROOT__/Home/Bbs"><img src="__PUBLIC__/assets/image/nav_bbs.png" width="118px" height="128px" /></a>
+		</span>
+	</div>
+</div>
+
 <script language="javascript">
 function CLogin(){
 	this.raccount = $('#raccount');
@@ -201,10 +259,7 @@ function CLogin(){
 					return;
 				}
 				clogin.close_login_window();
-				var i = 0;
-				for(;i<clogin.callback_func_array.length;i++){
-					(clogin.callback_func_array[i])();
-				}
+				clogin.callback_func();
 				clogin.btn_ok.attr('disabled', false);
 				clogin.btn_cancel.attr('disabled', false);
 				window.location.reload(true);
@@ -212,71 +267,51 @@ function CLogin(){
 			error:function(t){
 				clogin.btn_ok.attr('disabled', false);
 				clogin.btn_cancel.attr('disabled', false);
-				console.log(t);
+				//console.log(t);
 				cdialoag.show_alert('登录失败！('+t.status+': '+t.statusText+')');
 			}
 		});
 	};
+	this.callback_func = function(){
+		var i = 0;
+		for(;i<clogin.callback_func_array.length;i++){
+			(clogin.callback_func_array[i])();
+		}
+	}
 	this.init = function(){
 		this.repair_nav();
 		this.raccount.keyup(function(){clogin.validate_account();});
 		this.rpassword.keyup(function(){clogin.validate_password();});//弹出框
+		this.btn_ok.click(this.login);
+		this.btn_cancel.click(this.close_login_window);
 		$('#btn_login').click(this.show_login_window);
+		$('#btn_logoff').click(function(){
+			$.ajax({
+				url:'__ROOT__/Home/Index/logoff',
+				success:clogin.callback_func,
+				error:function(t){eds_framework.error_handler('__ROOT__/Home/Index/logoff',t);}
+			});
+		});
+	}
+	this.updateUi = function(mode,rnickname){
+		if(mode){
+			$('span#user_mode_hint').text(mode).parent().show();
+		} else {
+			$('span#user_mode_hint').parent().hide();
+		}
+		if(rnickname){
+			$('span#btn_rnickname').text(rnickname).parent().show();
+			$('div#btn_logoff').show();
+			$('div#btn_login').hide();
+		} else {
+			$('span#btn_rnickname').parent().hide();
+			$('div#btn_logoff').hide();
+			$('div#btn_login').show();
+		}
 	}
 }
 var clogin = new CLogin();
 </script>
-<!--nav-->
-<nav id="top_nav" class="navbar navbar-default navbar-custom" role="navigation" style="height:108px;background-color:black;position:inherit;margin-bottom:10px;">
-	<div class="container" style="width:1024px;">
-		<ul class="frame_top_info_ul">
-				<li><div id="btn_rnickname" style="display:none;cursor:pointer;">nickname</div></li>
-				<li><div id="btn_logoff" style="color:white;padding-left:10px;padding-right:10px;display:none;cursor:pointer;">注销</div></li>
-				<li><div id="btn_login" style="padding-right:10px;cursor:pointer;display:none">登录</div></li>
-		</ul>
-		<div class="navbar-header" height="108px;">
-			<div style="position:relative;top:15px;">
-				<div style="font-size:24pt;">
-					<a href="__ROOT__" style="color:white;">全国物理拔尖人才培养计划</a>
-					<span style="font-size:12pt;display:none:color:white;">(<span id="user_mode_hint"></span>模式)</span>
-				</div>
-			</div>
-			<div style="margin-top:13px;">
-				<a style="font-size:16pt;color:white;">Training Plan Of Physics Subject Top-notch Talent</a>
-			</div>
-			
-		</div>
-	</div>
-</nav>
-<div class="topic" style="color:black;padding-bottom:10px;padding-top:0;">
-	<div class="container" style="padding:0px 0 0;width:1024px">
-		<span style="padding-right:7px;width:129px;height:128px;">
-			<a href="__ROOT__/Home/Index"><img src="__PUBLIC__/assets/image/nav_index.png" width="118px" height="128px" /></a>
-		</span>
-		<span style="padding-right:7px;width:130px;height:128px;">
-			<a href="__ROOT__/Home/Plan"><img src="__PUBLIC__/assets/image/nav_plan.png" width="119px" height="128px" /></a>
-		</span>
-		<span style="padding-right:7px;width:129px;height:128px;">
-			<a href="__ROOT__/Home/News"><img src="__PUBLIC__/assets/image/nav_news.png" width="118px" height="128px" /></a>
-		</span>
-		<span style="padding-right:7px;width:130px;height:128px;">
-			<a href="__ROOT__/Home/League"><img src="__PUBLIC__/assets/image/nav_league.png" width="119px" height="128px" /></a>
-		</span>
-		<span style="padding-right:7px;width:129px;height:128px;">
-			<a href="__ROOT__/Home/Notice"><img src="__PUBLIC__/assets/image/nav_notice.png" width="118px" height="128px" /></a>
-		</span>
-		<span style="padding-right:7px;width:130px;height:128px;">
-			<a href="__ROOT__/Home/Ex"><img src="__PUBLIC__/assets/image/nav_ex.png" width="118px" height="128px" /></a>
-		</span>
-		<span style="padding-right:7px;width:129px;height:128px;">
-			<a href="__ROOT__/Home/Course"><img src="__PUBLIC__/assets/image/nav_course.png" width="118px" height="128px" /></a>
-		</span>
-		<span style="width:118px;height:128px;">
-			<a href="__ROOT__/Home/Bbs"><img src="__PUBLIC__/assets/image/nav_bbs.png" width="118px" height="128px" /></a>
-		</span>
-	</div>
-</div>
-
 <div class="container" style="padding-left:0px;padding-right:0px;margin-top:5px;width:1024px">
 	{__REEPLACE__}
 </div>
@@ -310,6 +345,8 @@ var clogin = new CLogin();
 
 <script language="javascript">
 
+
+
 CEdsFramework.prototype.load = function(){
 	var i;
 	for(i = 0;i<this.metadata.length;i++){
@@ -337,10 +374,7 @@ CEdsFramework.prototype.load = function(){
 							cdialoag.show_alert('error:'+t.msg);
 						}
 					},
-					error:function(t){
-						if(item.load.error){ cdialoag.show_alert(item.load.error.replace('{status}', t.status).replace('{statusText}',t.statusText));
-						} else { console.log("[EDS][loading(url=\""+item.load.url+"\") failed.][item.load.error not true]"); }
-					}
+					error:function(t){error_handler(item.load.url,t,item.load.error);}
 				});
 			})(this,this.metadata[i]);
 		}
@@ -360,29 +394,13 @@ $(document).ready(function(){
 		// console.log($(e.currentTarget).css('display'));
 		return false;
 	});
-	eds_framework.metadata.push({
+	eds_framework.push({
 		"load":{
 			"url":"__ROOT__/Home/Index/user_conscise_info",
 			"action":"post",
 			"data":{},
 			"error":'加载用户信息失败！{status}:{statusText}',
-			"handler":function(data){
-				if(data.mode){
-					$('span#user_mode_hint').text(data.mode).parent().show();
-				} else {
-					$('span#user_mode_hint').parent().hide();
-				}
-				if(data.rnickname){
-					$('div#btn_rnickname').text(data.rnickname).show();
-					$('div#btn_logoff').show();
-					$('div#btn_login').hide();
-				} else {
-					$('div#btn_rnickname').hide();
-					$('div#btn_logoff').hide();
-					$('div#btn_login').show();
-				}
-				
-			}
+			"handler":function(data){clogin.updateUi(data.mode,data.rnickname);}
 		}
 	});
 	eds_framework.load();
@@ -390,9 +408,6 @@ $(document).ready(function(){
 
 
 //以下全局函数列表
-function show_login_window(){ clogin.show_login_window(); return false;}
-function close_login_window(){ clogin.close_login_window();return false;}
-function login_eds(){ clogin.login();return false;}
 </script>
 
   </html>

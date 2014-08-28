@@ -1,0 +1,111 @@
+<layout name="layout" replace="{__REEPLACE__}" />
+
+
+<include file="./Application/Home/View/welcome_bbs.html" />
+
+<style>
+.separator{
+	border-bottom:rgb(139,60,126) 2px solid;
+	margin-bottom: 10px;
+}
+.center_title{
+	font-size: 14pt;
+	font-weight: blod;
+	padding: 5px 10px;
+}
+.state{
+	font-size:10pt;
+}
+.op{
+	float:right;
+	font-size: 12pt;
+}
+.ta_item{
+	line-height: 30px;
+	font-size: 14pt;
+	clear: left;
+	margin-bottom: 30px;
+}
+.ta_item li {
+	list-style-type: none;
+	line-height: 40px;
+	color:rgb(2,183,230);
+	font-style: normal;
+	font-size:14pt;
+	padding-left: 120px;
+}
+.info{
+	margin-left: 100px;
+	width:490px;
+}
+</style>
+
+<div class="container" style="padding-left:0px;padding-right:0px;">
+	<include file="./Application/Home/View/layout_banner.html" bgcolor="139,60,126" display0="inline-block" display1="block" display2="block"
+	title0="师生社区" href0="__ROOT__/Home/Bbs" title1="个人中心" href1="__ROOT__/Home/Bbs/center?uid=1#start" 
+	title2="助教管理" href2="#start" />
+</div>
+
+
+<div class="container" style="padding-left:0px;padding-right:0px;background-color:rgb(234,234,234);">
+	<div style="width:300px;float:right;">
+		<include file="./Application/Home/View/Bbs/right.html" />
+	</div>
+	<div style="width:724px;padding:40px;">
+		<div class="post_list_div">
+			<div class="center_title">助教列表</div>
+			<div class="separator"></div>
+			<div class="ta_list">
+				<div class="ta_item">
+					<img src="__PUBLIC__/assets/image/course_cw_teacher.png" style="float:left;margin:20px 40px;" />
+					<div class="info">
+						<ul>
+							<li>
+								<span><span>李XX</span>（<span>助教</span>）</span>
+							</li>
+							<li>
+								<span>电话：<span>025-89680000</span></span>
+							</li>
+							<li>
+								<span>邮箱：<span>li@nju.edu.cn</span></span>
+							</li>
+							<li>
+								<span>办公室：<span>仙林XX楼233</span></span>
+							</li>
+							<li>
+								<span>修改&nbsp;&nbsp;删除</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="ta_item">
+					<img src="__PUBLIC__/assets/image/course_cw_teacher.png" style="float:left;margin:20px 40px;" />
+					<div class="info">
+						<ul>
+							<li>
+								<span><span>李XX</span>（<span>助教</span>）</span>
+							</li>
+							<li>
+								<span>电话：<span>025-89680000</span></span>
+							</li>
+							<li>
+								<span>邮箱：<span>li@nju.edu.cn</span></span>
+							</li>
+							<li>
+								<span>办公室：<span>仙林XX楼233</span></span>
+							</li>
+							<li>
+								<span>修改&nbsp;&nbsp;删除</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="ta_item">
+					<div><a href="#">添加</a></div>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+</div>

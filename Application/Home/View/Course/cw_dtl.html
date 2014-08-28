@@ -1,0 +1,160 @@
+<layout name="layout" replace="{__REEPLACE__}" />
+
+
+<include file="./Application/Home/View/welcome_picmotto.html" pic1="course_right" pic2="course_book"  />
+
+
+<style>
+.cw_dtl_list{
+	margin-top:30px;
+}
+.cw_dtl_list_item{
+	height:40px;
+}
+.cw_dtl_list_item .title{
+	font-size: 16pt;
+	font-style: normal;
+	color:rgb(2,183,230);
+	margin: 10px;
+}
+.cw_dtl_list_item .time{
+	font-size: 11pt;
+	font-style: normal;
+	color:rgb(2,183,230);
+	float:right;
+	margin: 5px 5px;
+}
+.cw_dtl_title{
+	font-size:14pt;font-family:'Segoe UI';color:rgb(2,183,230);font-style:normal;margin-bottom:10px;
+}
+.cw_dtl_courseinfo{
+	padding-top: 20px;
+}
+.cw_dtl_courseinfo li, .tah_item li{
+	list-style-type: none;
+	line-height: 45px;
+	color:rgb(2,183,230);
+	font-style: normal;
+	font-size:14pt;
+	padding-left: 120px;
+}
+.tah_item{
+	margin-top: 25px;
+}
+.tah_item li{
+	line-height: 35px;
+}
+</style>
+
+<div class="container" style="padding-left:0px;padding-right:0px;background-color:rgb(234,234,234);">
+	<include file="./Application/Home/View/layout_banner.html" bgcolor="2,183,230" display0="inline-block" display1="block" display2="block" display3="block"
+	title0="虚拟学院" href0="__ROOT__/Home/Course" title1="课程课件" href1="__ROOT__/Home/Course/cw#start" title2="2014年秋季" href2="#start"
+	title3="物理力学" href3="__ROOT__/Home/Course/cw_dtl?id=1#start" />
+	<div style="margin:50px 25px;padding:0;">
+		<div style="float:left;width:500px">
+			<div style="font-size:14pt;font-family:'Segoe UI';color:rgb(2,183,230);font-style:normal;margin-bottom:10px;">
+				<span class="">课件列表</span><span></span>
+			</div>
+			<div style="border-bottom:rgb(2,183,230) 2px solid;width:480px;"></div>
+			<div class="cw_dtl_list">
+				<div class="cw_dtl_list_item">
+					<img src="__PUBLIC__/assets/image/course_cw_item.png"  class="cw_item_pic"/>
+					<span class="title"><a href="__ROOT__/Home/Course/download?eid=1">物理力学第一章1.1</a></span>
+					<span class="time">2014-07-25</span>
+				</div>
+				<div class="cw_dtl_list_item">
+					<img src="__PUBLIC__/assets/image/course_cw_item.png"  class="cw_item_pic"/>
+					<span class="title"><a href="__ROOT__/Home/Course/download?eid=1">物理力学第一章1.2</a></span>
+					<span class="time">2014-07-25</span>
+				</div>
+				<div class="cw_dtl_list_item">
+					<img src="__PUBLIC__/assets/image/course_cw_item.png"  class="cw_item_pic"/>
+					<span class="title"><a href="__ROOT__/Home/Course/download?eid=1">物理力学第一章1.3</a></span>
+					<span class="time">2014-07-25</span>
+				</div>
+				<div class="cw_dtl_list_item">
+					<img src="__PUBLIC__/assets/image/course_cw_item.png"  class="cw_item_pic"/>
+					<span class="title"><a href="__ROOT__/Home/Course/download?eid=1">物理力学第二章2.1</a></span>
+					<span class="time">2014-07-25</span>
+				</div>
+				<div class="cw_dtl_list_item">
+					<img src="__PUBLIC__/assets/image/course_cw_item.png"  class="cw_item_pic"/>
+					<span class="title"><a href="__ROOT__/Home/Course/download?eid=1">物理力学第二章2.2</a></span>
+					<span class="time">2014-07-25</span>
+				</div>
+			</div>
+		</div>
+
+
+		<div style="width:974px;padding-left:520px;padding-right:0px;">
+			<div class="cw_dtl_title">
+				<span class="">课程信息</span><span></span>
+			</div>
+			<div style="border-bottom:rgb(2,183,230) 2px solid;"></div>
+			<div style="margin-bottom:20px;">
+				<img src="__PUBLIC__/assets/image/course_cw_book.png"  style="float:left;margin-top:15px;" />
+				<div class="cw_dtl_courseinfo">
+					<ul>
+						<li>
+							<span>课程名称：<span>物理力学</span></span>
+						</li>
+						<li>
+							<span>课程时间：<span>2014年秋季</span></span>
+						</li>
+						<li>
+							<span>上课地点：<span>仙二207</span></span>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="cw_dtl_title">
+				<span class="">课程负责人</span><span></span>
+			</div>
+			<div style="border-bottom:rgb(2,183,230) 2px solid;"></div>
+			<div class="tah_items">
+				<div class="tah_item">
+					<img src="__PUBLIC__/assets/image/course_cw_teacher.png" style="float:left;" />
+					<div class="info">
+						<ul>
+							<li>
+								<span><span>李教授</span>（<span>主讲教师</span>）</span>
+							</li>
+							<li>
+								<span>电话：<span>025-89680000</span></span>
+							</li>
+							<li>
+								<span>邮箱：<span>li@nju.edu.cn</span></span>
+							</li>
+							<li>
+								<span>办公室：<span>仙林XX楼233</span></span>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="tah_item">
+					<img src="__PUBLIC__/assets/image/course_cw_teacher.png" style="float:left;" />
+					<div class="info">
+						<ul>
+							<li>
+								<span><span>XXX</span>（<span>助教</span>）</span>
+							</li>
+							<li>
+								<span>电话：<span>025-89680000</span></span>
+							</li>
+							<li>
+								<span>邮箱：<span>li@nju.edu.cn</span></span>
+							</li>
+							<li>
+								<span>办公室：<span>仙林XX楼233</span></span>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+

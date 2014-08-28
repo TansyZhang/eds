@@ -1,0 +1,92 @@
+<layout name="layout" replace="{__REEPLACE__}" />
+
+
+<include file="./Application/Home/View/welcome_bbs.html" />
+
+<style>
+.separator{
+	border-bottom:rgb(139,60,126) 2px solid;
+	margin-bottom: 10px;
+}
+.center_title{
+	font-size: 14pt;
+	font-weight: blod;
+	padding: 5px 10px;
+}
+.name{
+	float:left;
+	width:130px;
+}
+.basic_list_div li,.personal_list_div li, .perm_list_div li{
+	list-style-type: none;
+	line-height: 30px;
+	font-size: 12pt;
+	margin-left: 20px;
+}
+</style>
+
+<div class="container" style="padding-left:0px;padding-right:0px;">
+	<include file="./Application/Home/View/layout_banner.html" bgcolor="139,60,126" display0="inline-block" display1="block" display2="block"
+	title0="师生社区" href0="__ROOT__/Home/Bbs" title1="个人中心" href1="__ROOT__/Home/Bbs/center?uid=1#start" 
+	title2="个人资料" href2="#start" />
+</div>
+
+
+<div class="container" style="padding-left:0px;padding-right:0px;background-color:rgb(234,234,234);">
+	<div style="width:300px;float:right;">
+		<include file="./Application/Home/View/Bbs/right.html" />
+	</div>
+	<div style="width:724px;padding:40px;">
+		<div class="basic_list_div">
+			<div class="center_title">基本信息</div>
+			<div class="separator"></div>
+			<div style="">
+				<ul>
+					<li><div class="name">姓名</div><div class="value">XXX</div></li>
+					<li><div class="name">性别</div><div class="value">男</div></li>
+					<li><div class="name">学校</div><div class="value">XXX</div></li>
+					<li><div class="name">学工号</div><div class="value">XXX</div></li>
+					<li><div class="name">账号</div><div class="value">XXX</div></li>
+					<li><div class="name">职称</div><div class="value">XXX</div></li>
+					<li><div class="name">办公地址/宿舍</div><div class="value">XXX</div></li>
+					<li><div class="name">入学年份</div><div class="value">XXX</div></li>
+				</ul>
+			</div>
+		</div>
+		<div class="personal_list_div">
+			<div class="center_title">个性信息</div>
+			<div class="separator"></div>
+			<div style="">
+				<ul>
+					<li><div class="name">昵称</div><div class="value">XXX</div></li>
+					<li><div class="name">邮箱</div><div class="value">XXX</div></li>
+					<li><div class="name">手机号</div><div class="value">XXX</div></li>
+					<li><div class="name">星座</div><div class="value">XXX</div></li>
+					<li><div class="name">生日</div><div class="value">XXX</div></li>
+					<!--<li><div class="name">个人说明</div><div class="value">XXX</div></li>-->
+				</ul>
+			</div>
+		</div>
+
+
+		<div class="perm_list_div">
+			<div class="center_title">权限信息</div>
+			<div class="separator"></div>
+			<div style="">
+				<ul>
+					<li><div class="name">登录</div><div class="value">是</div></li>
+					<li><div class="name">发帖</div><div class="value">是</div></li>
+					<li><div class="name">回帖</div><div class="value">否(封禁时间：<span>2014-09-23 13:56:09</span>，封禁时长：<span>一周</span>)</div></li>
+					<li><div class="name">发送站内信</div><div class="value">是</div></li>
+					<li><div class="name">创建交流札记</div><div class="value">是</div></li>
+					<li><div class="name">创建留学动态</div><div class="value">是</div></li>
+					<li><div class="name">创建交换项目</div><div class="value">是</div></li>
+					<li><div class="name">上传课件</div><div class="value">是</div></li>
+					<li><div class="name">下载课件</div><div class="value">是</div></li>
+					<li><div class="name">创建学生账号</div><div class="value">是</div></li>
+				</ul>
+			</div>
+		</div>
+
+	</div>
+</div>

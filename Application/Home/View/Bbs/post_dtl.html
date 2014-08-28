@@ -1,0 +1,133 @@
+<layout name="layout" replace="{__REEPLACE__}" />
+
+
+<include file="./Application/Home/View/welcome_bbs.html" />
+
+
+<style>
+.bbs_t_nav{
+	height:60px;
+}
+.bbs_t_nav_item{
+	width:130px;
+	margin-right: 1px;
+	line-height:60px;
+	background-color:rgb(139,60,126);
+	color: white;
+	float: left;
+	text-align:center;
+	font-size: 12pt;
+}
+.chosed-nav-item{
+	background-color:rgb(9,80,46);
+}
+.post{
+	margin-top: 10px;
+	margin-right: 15px;
+	clear:left;
+	border-top:rgb(9,80,46) 2px solid;
+	background-color: rgb(234,234,234);
+}
+.post-title{
+	padding: 20px;
+	font-weight: bold;
+	font-size: 14pt;
+}
+.post-by{
+	padding: 0px 50px 5px;
+	font-size: 10pt;
+	color:gray;
+}
+.post-content{
+	padding: 20px;
+}
+</style>
+
+<div class="container" style="padding-left:0px;padding-right:0px;width:1024px" id="start">
+	<div style="width:800px;float:left;">
+		<div class="bbs_t_nav">
+			<div class="bbs_t_nav_item chosed-nav-item">师生答疑区</div>
+			<div class="bbs_t_nav_item">研究讨论区</div>
+			<div class="bbs_t_nav_item">书籍推荐区</div>
+			<div class="bbs_t_nav_item">课程交流区</div>
+			<div class="bbs_t_nav_item">idea狂想区</div>
+			<div class="bbs_t_nav_item">谈天说地区</div>
+		</div>
+
+		<div class="post">
+			<div class="post-title">这音乐是几维的？依我看啊~</div>
+			<div class="post-by">
+				<span>2014-08-28 17:31:36</span>&nbsp;&nbsp;&nbsp;&nbsp;查看(<span>45</span>)&nbsp;&nbsp;楼层(<span>37</span>)
+			</div>
+			<div class="post-content">
+				<div style="border-top:rgb(139,60,126) 2px solid;"></div>
+				<div class="post-content-real" style="padding-top:10px">
+					<pre>
+					数学上有一个词 Harmonic 和音乐紧密相关。因此说到音乐，数学上对应的分支是调和分析 Harmonic analysis。这是傅里叶变换的升级版，其本质也是把函数或信号表示成基本波的叠加。 
+					维度，如果理解成描述对象所需的参数个数，在调和分析的意义上，一段音乐是无穷维的，因为一段乐曲有复杂的节奏、强度、频率变化，并不是单色波，傅里叶变换后的谱不是离散的。 
+					再深入一点：为了描述音乐，我们需要的是 频率／强度／空气密度 对时间的函数。这个函数是有界的、连续的、二次可积的。由于音乐有始有终，这个函数是 compactly supported 的。数学上，这是 L^2 函数空间的子集。这个空间是不可数无穷维的。（参考 Lp space） 
+
+					如果只考虑一个音，那么维度等于乐器可能同时发出的音的个数，其「坐标」是不同音的强度（非简谐分析）。比如（例子都是瞎扯的）小提琴好像最多可以让两根弦同时发音（评论中有人指出可以发四音），钢琴最多应该可以用十个手指同时按键（评论中有人指出可以躺上去发 88 音），那他们发出一个固定的音就分别是二维和十维的（或者四维和 88 维）。
+					</pre>
+
+				</div>
+				<div style="text-align:right">
+					这里是回复区
+				</div>
+			</div>
+		</div>
+		<div class="post-push" style="clear:both;float:left;width:1024px;background-color: rgb(234,234,234);">
+			<div class="push-item" style="padding-top:15px;">
+				<div style="float:right;" style="width:224px;">
+					<div style="width:224px;">
+						<include file="./Application/Home/View/Bbs/master_info.html" op="none" opfloor="block" />
+					</div>
+				</div>
+				<div style="margin-left:15px;margin-right:264px;">
+					<div style="border-top:rgb(139,60,126) 2px solid;"></div>
+					<div>
+						<div class="post-content-real" style="padding-top:10px">
+							<pre> 
+							这个问题真的很好，我来说说我的看法 
+							 从信号的角度看声音就是一维信号,是关于时间的函数 sound = f(t); 
+
+							这里所谓一维只是说它的自变量只有一个那就是时间，而在每个时间点上的振幅是因变量，所以画出图来还是两个坐标轴的，但在计算机里其实就是一维的矩阵或向量，比如[0 0 128 120 6 3 10 80 .......]，就这么一串数字即是承载音乐的信息，就可以播放出来。 
+
+							至于从音乐的角度分析，那就看怎么定义维度了，可以随便列举什么音高啊节奏啊音色啊成为一个维度，但这已经是人为定义了，不是最底层的物理性质。
+							</pre>
+						</div>
+						<div style="text-align:right">
+							这里是回复区
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="push-item" style="padding-top:15px;">
+				<div style="float:right;" style="width:224px;">
+					<div style="width:224px;">
+						<include file="./Application/Home/View/Bbs/master_info.html" op="none" opfloor="block" />
+					</div>
+				</div>
+				<div style="margin-left:15px;margin-right:264px;">
+					<div style="border-top:rgb(139,60,126) 2px solid;"></div>
+					<div>
+						<div class="post-content-real" style="padding-top:10px">
+							<pre> 阿三，你又来胡思乱想了，药不能停啊！！！还挺有意思~</pre>
+						</div>
+						<div style="text-align:right">
+							这里是回复区
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<div class="pages" style="margin:20px 0;text-align:center;">这里是分页</div>
+	</div>
+
+
+	<div style="padding-left:800px;">
+		<include file="./Application/Home/View/Bbs/master_info.html" op="none" />
+	</div>
+</div>

@@ -21,7 +21,7 @@
 .login_form_btn{margin-top:15px;}
 .login_form_tip{font-size:10pt;padding-left: 20px;color:red;display: none;}
 #g_alert, #g_info{width:600px;position:absolute;top:200px;left:0;display:none;}
-
+.clickable{cursor: pointer;}
 /*以下首页*/
 .index_title {font-size: 14pt;}
 .index_item{height:108px;margin-bottom:2px;background-color:rgb(234,234,234);font-style: normal;}

@@ -1,0 +1,66 @@
+<layout name="layout" replace="{__REEPLACE__}" />
+
+
+<include file="./Application/Home/View/welcome_bbs.html" />
+
+<style>
+.separator{
+	border-bottom:rgb(139,60,126) 2px solid;
+	margin-bottom: 10px;
+}
+.center_title{
+	font-size: 14pt;
+	font-weight: blod;
+	padding: 5px 10px;
+}
+.state{
+	font-size:10pt;
+}
+.op{
+	float:right;
+	font-size: 12pt;
+}
+.post_item{
+	line-height: 30px;
+	font-size: 14pt;
+}
+</style>
+
+<div class="container" style="padding-left:0px;padding-right:0px;">
+	<include file="./Application/Home/View/layout_banner.html" bgcolor="139,60,126" display0="inline-block" display1="block" display2="block"
+	title0="师生社区" href0="__ROOT__/Home/Bbs" title1="个人中心" href1="__ROOT__/Home/Bbs/center?uid=1#start" 
+	title2="我的帖子" href2="#start" />
+</div>
+
+
+<div class="container" style="padding-left:0px;padding-right:0px;background-color:rgb(234,234,234);">
+	<div style="width:300px;float:right;">
+		<include file="./Application/Home/View/Bbs/right.html" />
+	</div>
+	<div style="width:724px;padding:40px;">
+		<div class="post_list_div">
+			<div class="center_title">我的帖子</div>
+			<div class="separator"></div>
+			<div class="post_list">
+				<div class="post_item">
+					<span class="op"><span>2014-08-08 15:45:29</span>&nbsp;<span>修改</span>&nbsp;<span>查看</span>&nbsp;<span>删除</span></span>
+					<div><a href="#">帖子标题</a><span class="state">(编辑中)</span></div>
+				</div>
+				<div class="post_item">
+					<span class="op"><span>2014-08-08 15:45:29</span>&nbsp;<span>修改</span>&nbsp;<span>查看</span>&nbsp;<span>删除</span></span>
+					<div><a href="#">帖子标题</a><span class="state">(编辑中)</span></div>
+				</div>
+				<div class="post_item">
+					<span class="op"><span>2014-08-08 15:45:29</span>&nbsp;<span>修改</span>&nbsp;<span>查看</span>&nbsp;<span>删除</span></span>
+					<div><a href="#">帖子标题</a><span class="state">(编辑中)</span></div>
+				</div>
+				<div class="post_item">
+					<span class="op"><span>2014-08-08 15:45:29</span>&nbsp;<span style="color:gray;cursor:default;" title="已经发布的帖子不能修改">修改</span>&nbsp;<span>查看</span>&nbsp;<span>删除</span></span>
+					<div><a href="#">帖子标题</a><span class="state"></span></div>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+</div>

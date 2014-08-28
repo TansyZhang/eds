@@ -7,12 +7,28 @@
 <style>
 .bbs_nav{
 }
+.bbs_t_nav{
+	height:60px;
+}
+.bbs_t_nav_item{
+	width:130px;
+	margin-right: 1px;
+	line-height:60px;
+	background-color:rgb(139,60,126);
+	color: white;
+	float: left;
+	text-align:center;
+	font-size: 12pt;
+}
+.chosed-nav-item{
+	background-color:rgb(9,80,46);
+}
 .post_list{
 	clear:both;
 	width:775px;
 }
 .post_list,.topn_list{
-	margin-top: 30px;
+	margin-top: 10px;
 }
 .post_item{
 	border-top:rgb(139,60,126) 2px solid;background-color: rgb(234,234,234);
@@ -57,22 +73,20 @@
 
 <div class="container" style="padding-left:0px;padding-right:0px;width:1024px;">
 	<div style="width:800px;float:left;">
-		<div class="bbs_nav">
-			<div style="margin-bottom:10px;">
-				<img src="__PUBLIC__/assets/image/bbs_nav_1.png" width="250px" height="102px;" style="margin-right:10px;" />
-				<img src="__PUBLIC__/assets/image/bbs_nav_2.png" width="250px" height="102px;" style="margin-right:10px;" />
-				<img src="__PUBLIC__/assets/image/bbs_nav_3.png" width="250px" height="102px;" style="margin-right:10px;" />
-			</div>
-			<div>
-				<img src="__PUBLIC__/assets/image/bbs_nav_4.png" width="250px" height="102px;" style="margin-right:10px;" />
-				<img src="__PUBLIC__/assets/image/bbs_nav_5.png" width="250px" height="102px;" style="margin-right:10px;" />
-				<img src="__PUBLIC__/assets/image/bbs_nav_6.png" width="250px" height="102px;" style="margin-right:10px;" />
-			</div>
+		<div class="bbs_t_nav">
+			<div class="bbs_t_nav_item chosed-nav-item">师生答疑区</div>
+			<div class="bbs_t_nav_item">研究讨论区</div>
+			<div class="bbs_t_nav_item">书籍推荐区</div>
+			<div class="bbs_t_nav_item">课程交流区</div>
+			<div class="bbs_t_nav_item">idea狂想区</div>
+			<div class="bbs_t_nav_item">谈天说地区</div>
 		</div>
 
 		<div class="post_list">
 			<div class="post_item">
-				<span style="top:10px;left:10px;position:relative;float:left;"><img src="__PUBLIC__/assets/image/bbs_headphoto_cat.png" width="79px" height="79px" /></span>
+				<span style="top:10px;left:10px;position:relative;float:left;">
+					<img src="__PUBLIC__/assets/image/bbs_headphoto_cat.png" width="79px" height="79px" />
+				</span>
 				<div>
 					<div class="title">
 						<a href="__ROOT__/Home/Bbs/post_dtl?pid=1#start" style="color:red;">[置顶]学生社区第二次线上交流大会将于3月28号晚8点开始</a>
@@ -137,59 +151,5 @@
 
 	<div style="padding-left:800px;">
 		<include file="./Application/Home/View/Bbs/master_info.html" op="block" />
-		<div class="topn_list">
-			<div class="topn_item">
-				<div class="no_title">
-					<span class="no_span">
-						TOP.<span class="no">1</span>
-					</span>
-					<span class="title">
-						<a href="__ROOT__/Home/Bbs/post_dtl?pid=1#start" style="color:black;">
-							学生社区第二次线上交流大会将于3月28号晚8点开始学生社区第二次线上交
-						</a>
-					</span>
-				</div>
-				<div class="ac"><span class="time">2014-08-28</span>&nbsp;&nbsp;查看(<span class="">999+</span>)&nbsp;&nbsp;回复(<span class="">999+</span>)</div>
-			</div> 
-			<div class="topn_item">
-				<div class="no_title">
-					<span class="no_span">
-						TOP.<span class="no">2</span>
-					</span>
-					<span class="title">
-						<a href="__ROOT__/Home/Bbs/post_dtl?pid=1#start" style="color:black;">
-							音乐是几维的？依我看啊~
-						</a>
-					</span>
-				</div>
-				<div class="ac"><span class="time">2014-08-28</span>&nbsp;&nbsp;查看(<span class="">10</span>)&nbsp;&nbsp;回复(<span class="">10</span>)</div>
-			</div>
-			<div class="topn_item">
-				<div class="no_title">
-					<span class="no_span">
-						TOP.<span class="no">3</span>
-					</span>
-					<span class="title">
-						<a href="__ROOT__/Home/Bbs/post_dtl?pid=1#start" style="color:black;">
-							学生社区第二次线上交流大会将于3月28号晚8点开始学生社区第二次线上交
-						</a>
-					</span>
-				</div>
-				<div class="ac"><span class="time">2014-08-28</span>&nbsp;&nbsp;查看(<span class="">10</span>)&nbsp;&nbsp;回复(<span class="">10</span>)</div>
-			</div>
-			<div class="topn_item">
-				<div class="no_title">
-					<span class="no_span">
-						TOP.<span class="no">4</span>
-					</span>
-					<span class="title">
-						<a href="__ROOT__/Home/Bbs/post_dtl?pid=1#start" style="color:black;">
-							学生社区第二次线上交流大会将于3月28号晚8点开始学生社区第二次线上交
-						</a>
-					</span>
-				</div>
-				<div class="ac"><span class="time">2014-08-28</span>&nbsp;&nbsp;查看(<span class="">10</span>)&nbsp;&nbsp;回复(<span class="">10</span>)</div>
-			</div>
-		</div>
 	</div>
 </div>

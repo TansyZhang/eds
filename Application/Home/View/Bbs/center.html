@@ -1,0 +1,118 @@
+<layout name="layout" replace="{__REEPLACE__}" />
+
+
+<include file="./Application/Home/View/welcome_bbs.html" />
+
+<style>
+.separator{
+	border-bottom:rgb(139,60,126) 2px solid;
+}
+.center_title{
+	font-size: 14pt;
+	font-weight: blod;
+	padding: 5px 10px;
+}
+.reply_list,.msg_list{
+	margin-top: 10px;
+}
+.reply_item, .msg_item{
+	font-size: 12pt;
+	line-height: 40px;
+}
+.op{
+	font-size: 12pt;float:right;
+}
+.time{
+	font-size: 10pt;
+	padding:5px;
+	color:gray;
+}
+</style>
+
+<div class="container" style="padding-left:0px;padding-right:0px;">
+	<include file="./Application/Home/View/layout_banner.html" bgcolor="139,60,126" display0="inline-block" display1="block" display2="block"
+	title0="师生社区" href0="__ROOT__/Home/Bbs" title1="个人中心" href1="__ROOT__/Home/Bbs/center?uid=1#start" title2="社区动态" href2="#start" />
+</div>
+
+
+<div class="container" style="padding-left:0px;padding-right:0px;background-color:rgb(234,234,234);">
+	<div style="width:300px;float:right;">
+		<include file="./Application/Home/View/Bbs/right.html" />
+	</div>
+	<div style="width:724px;padding:40px;">
+		<div class="reply_list_div">
+			<div class="center_title">帖子回复</div>
+			<div class="separator"></div>
+			<div class="reply_list">
+				<div class="reply_item">
+					<span>
+						<span><span class="time">2014-08-28 16:31:22</span><a href="__ROOT__/Home/Bbs/center?uid=1#start" target="_blank">张三</a></span>在帖子“<a href="#">学生社区第二次线上交流大会……</a>”中回复了你<span></span>
+					</span>
+					<span class="op">
+						<span onclick="" class="clickable" title="不再显示此条消息">忽略</span>&nbsp;|&nbsp;<span onclick="" class="clickable">查看</span>
+					</span>
+				</div>
+				<div class="reply_item">
+					<span>
+						<span><span class="time">2014-08-28 16:31:22</span><a href="__ROOT__/Home/Bbs/center?uid=1#start" target="_blank">李四</a></span>在帖子“<a href="#">学生社区第二次……</a>”中回复了你<span></span>
+					</span>
+					<span class="op">
+						<span onclick="" class="clickable" title="不再显示此条消息">忽略</span>&nbsp;|&nbsp;<span onclick="" class="clickable">查看</span>
+					</span>
+				</div>
+				<div class="reply_item">
+					<span>
+						<span><span class="time">2014-08-28 16:31:22</span><a href="__ROOT__/Home/Bbs/center?uid=1#start" target="_blank">王五</a></span>在帖子“<a href="#">学生社区第二次……</a>”中回复了你<span></span>
+					</span>
+					<span class="op">
+						<span onclick="" class="clickable" title="不再显示此条消息">忽略</span>&nbsp;|&nbsp;<span onclick="" class="clickable">查看</span>
+					</span>
+				</div>
+				<div class="reply_item">
+					<span>
+						<span><span class="time">2014-08-28 16:31:22</span><a href="__ROOT__/Home/Bbs/center?uid=1#start" target="_blank">赵六</a></span>在帖子“<a href="#">学生社区第二次……</a>”中回复了你<span></span>
+					</span>
+					<span class="op">
+						<span onclick="" class="clickable" title="不再显示此条消息">忽略</span>&nbsp;|&nbsp;<span onclick="" class="clickable">查看</span>
+					</span>
+				</div>
+				<div class="reply_item">
+					<span>
+						<span><span class="time">2014-08-28 16:31:22</span><a href="__ROOT__/Home/Bbs/center?uid=1#start" target="_blank">周七</a></span>在帖子“<a href="#">学生社区第二次……</a>”中回复了你<span></span>
+					</span>
+					<span class="op">
+						<span onclick="" class="clickable" title="不再显示此条消息">忽略</span>&nbsp;|&nbsp;<span onclick="" class="clickable">查看</span>
+					</span>
+				</div>
+			</div>
+			<div class="pages" style="margin:20px 0;text-align:center;">这里是分页</div>
+		</div>
+
+
+
+
+		<div class="msg_list_div" style="margin-top:20px;">
+			<div class="center_title">站内信</div>
+			<div class="separator"></div>
+			<div class="msg_list">
+				<div class="msg_item">
+					<span>
+						<span><span class="time">2014-08-28 16:31:22</span><a href="__ROOT__/Home/Bbs/center?uid=1#start" target="_blank">张三</a>向你发送了站内信“<a href="#">这里是标题</a>”</span>
+					</span>
+					<span class="op">
+						<span onclick="" class="clickable" title="不再显示此条消息">忽略</span>&nbsp;|&nbsp;<span onclick="" class="clickable">查看</span>
+					</span>
+				</div>
+				<div class="msg_item">
+					<span>
+						<span><span class="time">2014-08-28 16:31:22</span><a href="__ROOT__/Home/Bbs/center?uid=1#start" target="_blank">张三</a>向你发送了站内信“<a href="#">这里是标题</a>”</span>
+					</span>
+					<span class="op">
+						<span onclick="" class="clickable" title="不再显示此条消息">忽略</span>&nbsp;|&nbsp;<span onclick="" class="clickable">查看</span>
+					</span>
+				</div>
+			</div>
+			<div class="pages" style="margin:20px 0;text-align:center;">这里是分页</div>
+		</div>
+	</div>
+</div>

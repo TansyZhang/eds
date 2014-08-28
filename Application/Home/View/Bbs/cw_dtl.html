@@ -1,0 +1,85 @@
+<layout name="layout" replace="{__REEPLACE__}" />
+
+
+<include file="./Application/Home/View/welcome_bbs.html" />
+
+<style>
+.separator{
+	border-bottom:rgb(139,60,126) 2px solid;
+	margin-bottom: 10px;
+}
+.center_title{
+	font-size: 14pt;
+	font-weight: blod;
+	padding: 5px 10px;
+}
+.cw_info_item{
+	float: left;
+	width:260px;
+	line-height: 40px;
+	font-size: 12pt;
+	margin-left: 20px;
+}
+.state{
+	font-size:10pt;
+}
+.op{
+	float:right;
+	font-size: 12pt;
+}
+.cw_item{
+	line-height: 30px;
+	font-size: 14pt;
+}
+</style>
+
+<div class="container" style="padding-left:0px;padding-right:0px;">
+	<include file="./Application/Home/View/layout_banner.html" bgcolor="139,60,126" display0="inline-block" display1="block" display2="block" display3="block"
+	title0="师生社区" href0="__ROOT__/Home/Bbs" title1="个人中心" href1="__ROOT__/Home/Bbs/center?uid=1#start" 
+	title2="课程课件" href2="__ROOT__/Home/Bbs/cw#start" title3="物理力学" href3="#start" />
+</div>
+
+
+<div class="container" style="padding-left:0px;padding-right:0px;background-color:rgb(234,234,234);">
+	<div style="width:300px;float:right;">
+		<include file="./Application/Home/View/Bbs/right.html" />
+	</div>
+	<div style="width:724px;padding:40px;">
+		<div class="post_list_div">
+			<div class="center_title">物理力学</div>
+			<div class="cw_info" style="height:100px;">
+				<div class="cw_info_item">任课老师：吴小山</div>
+				<div class="cw_info_item">面向年级：2010级</div>
+				<div class="cw_info_item">上课地点：仙二207</div>
+				<div class="cw_info_item">开课学期：2014年秋季学期</div>
+			</div>
+
+			<div class="separator"></div>
+			<div class="cw_list">
+				<div class="cw_item">
+					<span class="op">
+						<span>2014-08-08 15:45:29</span>&nbsp;
+						<span>删除</span>
+					</span>
+					<div><a href="__ROOT__/Home/Course/download?eid=1#start">物理力学第一章1.1</a></div>
+				</div>
+				<div class="cw_item">
+					<span class="op">
+						<span>2014-08-08 15:45:29</span>&nbsp;
+						<span>删除</span>
+					</span>
+					<div><a href="__ROOT__/Home/Course/download?eid=1#start">物理力学第一章1.2</a></div>
+				</div>
+				<div class="cw_item">
+					<span class="op">
+						<span>2014-08-08 15:45:29</span>&nbsp;
+						<span>删除</span>
+					</span>
+					<div><a href="__ROOT__/Home/Course/download?eid=1#start">物理力学第一章1.3</a></div>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+</div>

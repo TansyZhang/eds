@@ -1,0 +1,80 @@
+<layout name="layout" replace="{__REEPLACE__}" />
+
+
+<include file="./Application/Home/View/welcome_bbs.html" />
+
+<style>
+.separator{
+	border-bottom:rgb(139,60,126) 2px solid;
+	margin-bottom: 10px;
+}
+.center_title{
+	font-size: 14pt;
+	font-weight: blod;
+	padding: 5px 10px;
+}
+.state{
+	font-size:10pt;
+}
+.op{
+	float:right;
+	font-size: 12pt;
+}
+.post_item{
+	line-height: 30px;
+	font-size: 14pt;
+}
+</style>
+
+<div class="container" style="padding-left:0px;padding-right:0px;">
+	<include file="./Application/Home/View/layout_banner.html" bgcolor="139,60,126" display0="inline-block" display1="block" display2="block"
+	title0="师生社区" href0="__ROOT__/Home/Bbs" title1="个人中心" href1="__ROOT__/Home/Bbs/center?uid=1#start" 
+	title2="课程课件" href2="#start" />
+</div>
+
+
+<div class="container" style="padding-left:0px;padding-right:0px;background-color:rgb(234,234,234);">
+	<div style="width:300px;float:right;">
+		<include file="./Application/Home/View/Bbs/right.html" />
+	</div>
+	<div style="width:724px;padding:40px;">
+		<div class="post_list_div">
+			<div class="center_title">课程列表</div>
+			<div class="separator"></div>
+			<div class="ex_note_list">
+				<div class="post_item">
+					<span class="op">
+						<span>2014-08-08 15:45:29</span>&nbsp;
+						<span>修改</span>&nbsp;
+						<span><a href="cw_dtl?eid=1#start">查看</a></span>&nbsp;
+						<span>删除</span>
+					</span>
+					<div><a href="cw_dtl?eid=1#start">物理力学</a>（2014年秋季学期）<span class="state">(已发布)</span></div>
+				</div>
+				<div class="post_item">
+					<span class="op">
+						<span>2014-08-08 15:45:29</span>&nbsp;
+						<span>修改</span>&nbsp;
+						<span><a href="cw_dtl?eid=1#start">查看</a></span>&nbsp;
+						<span>删除</span>
+					</span>
+					<div><a href="cw_dtl?eid=1#start">物理力学</a>（2014年秋季学期）<span class="state">(已发布)</span></div>
+				</div>
+				<div class="post_item">
+					<span class="op">
+						<span>2014-08-08 15:45:29</span>&nbsp;
+						<span>修改</span>&nbsp;
+						<span><a href="cw_dtl?eid=1#start">查看</a></span>&nbsp;
+						<span>删除</span>
+					</span>
+					<div><a href="cw_dtl?eid=1#start">物理力学</a>（2014年秋季学期）<span class="state">(已发布)</span></div>
+				</div>
+				<div class="post_item">
+					<div><a href="#">添加</a></div>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+</div>
