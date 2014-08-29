@@ -14,7 +14,8 @@ class IndexController extends EdsController {
     }
 
     public function user_conscise_info(){
-        $this->show('{"result":0,"data":{"mode":"系统管理员","rnickname":"系统管理员"}}');
+        //$this->show('{"result":1,"msg":"error"}');
+        $this->show('{"result":0,"msg":"succeed","data":{"mode":"系统管理员","rnickname":"系统管理员"}}');
     }
 
     public function login($raccount='',$rpassword=''){

@@ -34,6 +34,7 @@ var eds_framework = new CEdsFramework();
 
 <!--弹出窗口及窗口类-->
 <div class="alert alert-danger" id="g_alert">
+  <a href="#g_alert" id="a_g_alert" style="display:none"></a>
   <button type="button" class="close eds_window_btn_close" data-dismiss="alert" aria-hidden="true">×</button>
   <h4 class="alert-heading">Error!</h4>
   <div id="g_alert_text"></div>
@@ -72,6 +73,8 @@ function CDialog(){
 		g_alert.css('z-index',zi);
 		g_alert_text.text(text);
 		g_alert.show();
+		//$('#a_g_alert').trigger('click');
+		document.getElementById("a_g_alert").click();
 	}
 	this.show_info = function(text){
 		var zi = this.add_shield_layer();
@@ -102,7 +105,7 @@ CEdsFramework.prototype.error_handler = function(url,response_object,error_hint)
 	} else { 
 		cdialoag.show_alert('操作失败！错误信息：url="'+url+'", status='+response_object.status+',msg="'+ response_object.statusText+'"');
 	}
-	console.error("[EDS][loading(url=\""+url+"\") failed.][item.load.error not true]"); 
+	console.error("[EDS][loading(url=\""+url+"\") failed.]"); 
 }
 </script>
 <!--登录界面及登录类-->
