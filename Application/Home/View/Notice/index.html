@@ -30,38 +30,56 @@
 	<include file="./Application/Home/View/Notice/left.html" />
 
 	<div class="notice_main" style="width:1024px;padding:40px 90px 0px 300px;margin-top:20px;">
-		<div class="notice_item">
-			<div class="notice_title">
-				南京大学2013年物理学院拔尖选拔结果
-			</div>
-			<div class="notice_summary">
-				经过笔试、面试，并综合高考成绩（参考），物理学院初步遴选以下30位同学进入拔尖计划。请名单中各位同学于明天（9月15日）中午12:00在仙林校区教学楼仙II-217签名确认（带校园卡）。今天不需要在网上审核确认。&nbsp;&nbsp;&nbsp;&nbsp;
-				<span>
-					<a href="__ROOT__/Home/Notice/detail?zid=1#start" />查看全文</a>
-				</span>
-			</div>
-			<div class="notice_by">
-				作者：南京大学&nbsp;&nbsp;&nbsp;&nbsp;2013-10-01
-			</div>
-			<div class="notice_bar">
-			</div>
-		</div>
 
-		<div class="notice_item">
-			<div class="notice_title">
-				“基础学科拔尖学生培养试验计划”阶段性总结交流会将在清华举行
+		<volist name="notice_list" id="notice_vo" key="k" >
+			<div class="notice_item">
+				<div class="notice_title">
+					{$notice_vo.ztitle}
+				</div>
+				<div class="notice_summary">
+					{$notice_vo.zsummary}&nbsp;&nbsp;&nbsp;&nbsp;
+					<span>
+						<a href="__ROOT__/Home/Notice/edit?zid={$notice_vo.zid}#start" />编辑</a>&nbsp;&nbsp;
+						<a href="javascript:void(0);"  onclick="notice_delete({$notice_vo.zid})"/>删除</a>&nbsp;&nbsp;
+						<a href="__ROOT__/Home/Notice/detail?zid={$notice_vo.zid}#start" />查看全文</a>
+					</span>
+				</div>
+				<div class="notice_by">
+					作者：南京大学&nbsp;&nbsp;&nbsp;&nbsp;{$notice_vo.zreleased_time}
+				</div>
+				<div class="notice_bar">
+				</div>
 			</div>
-			<div class="notice_summary">
-				 “基础学科拔尖学生培养试验计划”（以下简称“拔尖计划”）阶段性总结交流会在主楼接待厅举行。时间定在9月26号，欢迎参加拔尖计划的各校老师莅临指导。 &nbsp;&nbsp;&nbsp;&nbsp;<span>
-					<a href="__ROOT__/Home/Notice/detail?zid=1#start" />查看全文</a>
-				</span>
-			</div>
-			<div class="notice_by">
-				作者：清华大学&nbsp;&nbsp;&nbsp;&nbsp;2013-10-01
-			</div>
-			<div class="notice_bar">
-			</div>
+	</volist>
+		
+		<div style="text-align:center;font-style:normal;margin:20px;"></div>
+		<div style="font-style:normal;margin:20px;">
+			<button type="button" class="btn btn-info btn-block" id="btn_add" onclick="notice_add()">添加</button>
 		</div>
-		<div style="text-align:center;font-style:normal;margin:20px;">这里是分页</div>
 	</div>
 </div>
+<script type="text/javascript">
+function notice_add(){
+	window.location.href="__ROOT__/Home/Notice/edit?zid=-1";
+}
+function notice_delete(zid){
+	if(!confirm('你确定要删除此通知吗？')) return;
+	var url = '__ROOT__/Home/Notice/delete';
+	$.ajax({
+		url:url,
+		type:'post',
+		data:{zid:zid},
+		dataType:'json',
+		success:function(t,s,r){
+			if(t.result == 0){
+				cdialog.show_info('删除成功！',function(){
+					window.location.reload()
+				});
+			} else {
+				cdialog.show_alert('删除失败！错误信息：'+t.msg);
+			}
+		},
+		error:function(t){eds_framework.error_handler(url,t);}
+	});
+}
+</script>

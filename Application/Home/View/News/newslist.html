@@ -67,44 +67,54 @@
 }
 </style>
 
+<script>
+function news_delete(zid){
+	if(!confirm('你确定要删除此新闻吗？')) return;
+	var url = '__ROOT__/Home/News/delete';
+	$.ajax({
+		url:url,
+		type:'post',
+		data:{zid:zid},
+		dataType:'json',
+		success:function(t,s,r){
+			if(t.result == 0){
+				cdialog.show_info('删除成功！',function(){
+					window.location.reload()
+				});
+			} else {
+				cdialog.show_alert('删除失败！错误信息：'+t.msg);
+			}
+		},
+		error:function(t){eds_framework.error_handler(url,t);}
+	});
+}
+</script>
+
 <div class="container" style="padding-left:0px;padding-right:0px;background-color:rgb(234,234,234);">
 	<div id="start" style="height:56px;background-color:rgb(201,48,59);color:white;font-size:16pt;font-family:'Segoe UI';padding:10px 15px;">
-		新闻动态> {$main_title}专区
+		新闻动态 > {$main_title}
 	</div>
 	<div class="news_left">
 		<div class="news_item_top_bar"></div>
-		<div class="news_item">
-			<div>
-				<img src="__PUBLIC__/assets/image/news_list_1.png"  class="news_item_img" />
-				<div class="news_item_title">Water's Tough Skin</div>
-				<div class="news_item_content">
-An ant could step off a cliff and land unharmed. But if it dips a leg in a raindrop, the insect can be caught in a life-threatening morass, all because of thly when something resets the temperature. 
-An ant could step off a cliff and land unharmed. But if it dips a leg in a raindrop, the insect can be caught in a life-threatening morass, all because of thly when something resets the temperature. 
-An ant could step off a cliff and land unharmed. But if it dips a leg in a raindrop, the insect can be caught in a life-threatening morass, all because of thly when something resets the temperature. 
-				</div>
-				<div class="news_item_read_all">
-						<a href="__ROOT__/Home/News/detail?zid=1#start" />阅读全文</a>
+		<volist name="news_list" id="news_vo" key="k" >
+			<div class="news_item">
+				<div>
+					<img src="__PUBLIC__/uploads{$news_vo.zflag}"  class="news_item_img" width="164px" height="182px" />
+					<div class="news_item_title">{$news_vo.ztitle}</div>
+					<div class="news_item_content">{$news_vo.zsummary}
 					</div>
-			</div>
-			<div  class="news_item_by">南京大学 2014-3-14</div>
-			<div class="news_item_bar"></div>
-		</div>
-		<div class="news_item">
-			<div>
-				<img src="__PUBLIC__/assets/image/news_list_1.png"  class="news_item_img" />
-				<div class="news_item_title">Water's Tough Skin</div>
-				<div class="news_item_content">
-An ant could step off a cliff and land unharmed. But if it dips a leg in a raindrop, the insect can be caught in a life-threatening morass, all because of thly when something resets the temperature. 
-				</div>
-				<div class="news_item_read_all">
-						<a href="__ROOT__/Home/News/detail?zid=1#start" />阅读全文</a>
+					<div class="news_item_read_all">
+						<a href="__ROOT__/Home/News/edit?zid={$news_vo.zid}#start" />编辑</a>&nbsp;&nbsp;
+						<a href="javascript:void(0);"  onclick="news_delete({$news_vo.zid})"/>删除</a>&nbsp;&nbsp;
+						<a href="__ROOT__/Home/News/detail?zid={$news_vo.zid}#start" />阅读全文</a>
 					</div>
+				</div>
+				<div  class="news_item_by">南京大学&nbsp;{$news_vo.zreleased_time}</div>
+				<div class="news_item_bar"></div>
 			</div>
-			<div  class="news_item_by">南京大学 2014-3-14</div>
-			<div class="news_item_bar"></div>
-		</div>
+		</volist>
 
-<div style="margin:35px 0 100px;text-align:center;">这里是分页</div>
+<div style="margin:35px 0 100px;text-align:center;"></div>
 
 	</div>
 	<div class="news_right">
@@ -112,16 +122,16 @@ An ant could step off a cliff and land unharmed. But if it dips a leg in a raind
 		<div class="news_item_top_bar" style="margin-top:0"></div>
 		<div style="margin-top:30px;">
 			<div class="news_type_item">
-				<a href="__ROOT__/Home/News/newslist?sub_type=3" />拔尖专区新闻>></a>
+				<a href="__ROOT__/Home/News/newslist?zsub_type=3" />拔尖专区新闻>></a>
 			</div>
 			<div class="news_type_item">
-				<a href="__ROOT__/Home/News/newslist?sub_type=2" />Nature专区新闻>></a>
+				<a href="__ROOT__/Home/News/newslist?zsub_type=2" />Nature专区新闻>></a>
 			</div>
 			<div class="news_type_item">
-				<a href="__ROOT__/Home/News/newslist?sub_type=0" />中国科学网专区新闻>></a>
+				<a href="__ROOT__/Home/News/newslist?zsub_type=0" />中国科学网专区新闻>></a>
 			</div>
 			<div class="news_type_item">
-				<a href="__ROOT__/Home/News/newslist?sub_type=1" />Science专区新闻>></a>
+				<a href="__ROOT__/Home/News/newslist?zsub_type=1" />Science专区新闻>></a>
 			</div>
 		</div>
 

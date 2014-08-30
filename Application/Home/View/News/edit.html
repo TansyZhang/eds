@@ -1,0 +1,149 @@
+<layout name="layout" replace="{__REEPLACE__}" />
+
+
+<include file="./Application/Home/View/welcome4.html" />
+
+<link rel="stylesheet" href="__PUBLIC__/kindeditor-4.1.10/themes/default/default.css" />
+<script charset="utf-8" src="__PUBLIC__/kindeditor-4.1.10/kindeditor-min.js"></script>
+<script charset="utf-8" src="__PUBLIC__/kindeditor-4.1.10/lang/zh_CN.js"></script>
+<style>
+</style>
+
+<div class="container" style="padding-left:0px;padding-right:0px;background-color:rgb(234,234,234);">
+	<include file="./Application/Home/View/layout_banner.html" bgcolor="201,48,59" display0="block" display1="block"
+	title0="新闻动态" href0="__ROOT__/Home/News" title1="新闻编辑" href1="#start" />
+
+	<div style="padding:100px;">
+		<div class="news_title" style="text-align:left;color:rgb(35,17,103);font-size:16pt;">
+			专区：
+		</div>
+		<div class="news_title" style="text-align:left;color:rgb(35,17,103);font-size:14pt;">
+			<select name="zsub_type" class="selecter_1" id="zsub_type" subtype="{$zsub_type}">
+				<option value="3" <?php if($zsub_type==3) echo "selected"; ?> >拔尖计划专区</option>
+				<option value="0" <?php if($zsub_type==0) echo "selected"; ?> >中国科学网</option>
+				<option value="1" <?php if($zsub_type==1) echo "selected"; ?> >Science专区</option>
+				<option value="2" <?php if($zsub_type==2) echo "selected"; ?> >Nature专区</option>
+			</select>
+		</div>
+		<div class="news_title" style="text-align:left;color:rgb(35,17,103);font-size:16pt;">
+			标题：
+		</div>
+		<div class="news_title" style="text-align:center;color:rgb(35,17,103);font-size:16pt;">
+			<input type="hidden" id="zid" value="{$zid}" />
+			<input type="text" id="ztitle" class="form-control" placeholder="title input" value="{$ztitle}" />
+		</div>
+		<div class="news_title" style="text-align:left;color:rgb(35,17,103);font-size:16pt;">
+			封面：
+		</div>
+		<div class="news_title" style="text-align:left;color:rgb(35,17,103);font-size:16pt;">
+			<?php if($zflag != '') { ?>
+				<img id="zflag_show" src="__PUBLIC__/uploads/{$zflag}"  width="164px" height="182px"  style="margin:10px;" />
+			<?php } ?>
+			<form name="form" action="" method="POST" enctype="multipart/form-data">
+				<input type="file" size="45"  id="zflag" name="zflag" class="form-control" placeholder="title input" value="{$zflag}" />
+			</form>
+		</div>
+		<div class="news_title" style="margin-top:20px;text-align:left;color:rgb(35,17,103);font-size:16pt;">
+			内容：
+		</div>
+		<div class="news_content">
+			<textarea name="zcontent" class="form-control" style="width:100%;height:200px;visibility:hidden;">{$zcontent}</textarea>
+		</div>
+		<button type="button" class="btn btn-info btn-block" id="btn_save">暂存</button>
+		<button type="button" class="btn btn-info btn-block" id="btn_release">发布</button>
+
+<script type="text/javascript">
+var editor;
+KindEditor.ready(function(K) {
+	editor = K.create('textarea[name="zcontent"]', {
+		resizeType : 1,
+		allowPreviewEmoticons : true,
+		allowImageUpload : true,
+		autoHeightMode : true,
+		allowFileManager: true,
+		afterCreate : function() {
+			this.loadPlugin('autoheight');
+		},
+		items : [
+			'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+			'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+			'insertunorderedlist', '|', 'emoticons', 'image', 'link']
+	});
+});
+function zsave(url,path,release){
+	var subtype = $('select[name="zsub_type"]').val();
+	$.ajax({
+		url:url,
+		dataType:'json',
+		type:'post',
+		data:{
+			zid:$('#zid').val(),
+			zsub_type:subtype,
+			ztitle:$('#ztitle').val(),
+			zflag:path,
+			zsummary:editor.text().substr(0,100),
+			release:release,
+			zcontent:editor.html()
+		},
+		success:function(t,s,r){
+			if(t.result==0){
+				cdialog.show_info('操作成功！',function(){
+					window.location.href="__ROOT__/Home/News/newslist?zsub_type="+subtype;
+				});
+			}else {
+				cdialog.show_alert('操作失败！错误消息:'+t.msg);
+			}
+			$('#btn_save').attr('disabled',false);
+			$('#btn_release').attr('disabled',false);
+		},
+		error:function(t){
+			eds_framework.error_handler(url,t);
+			$('#btn_save').attr('disabled',false);
+			$('#btn_release').attr('disabled',false);
+		}
+	});
+}
+function zsave_or_release(release){
+	var url = '__ROOT__/Home/News/save';
+	if(release == 1){
+		url = '__ROOT__/Home/News/release';
+	}
+	$('#btn_save').attr('disabled',true);
+	$('#btn_release').attr('disabled',true);
+
+
+	if($('#zflag').val().length == 0){
+		zsave(url, '',release);
+		return;
+	}
+	$.ajaxFileUpload({
+		url:'__ROOT__/Home/News/dtl_img',
+		secureuri:false,
+		fileElementId:'zflag',
+		dataType: 'json',
+		data:{},
+		success: function (data, status){
+			if(data.result == 0){
+				//alert('保存图片成功！图片信息为'+data.msg+'\nkey='+data.key+'\npath='+(data.savepath+data.savename)+'');
+				zsave(url,data.savepath+data.savename,release);
+				$('#zflag_show').attr('src', '__PUBLIC__/uploads'+data.savepath+data.savename);
+			} else {
+				cdialog.show_alert('暂存失败！错误信息：'+data.msg);
+				$('#btn_save').attr('disabled',false);
+				$('#btn_release').attr('disabled',false);
+			}
+		},
+		error: function (data, status, e){
+			cdialog.show_alert(e);
+		}
+	});
+}
+$(document).ready(function(){
+	$('#btn_save').click(function(){zsave_or_release(0);});
+	$('#btn_release').click(function(){zsave_or_release(1);});
+});
+</script>
+
+
+	</div>
+</div>

@@ -42,7 +42,9 @@ class IndexController extends EdsController {
     	$mv = M('RegisterView');
     	$resultset = $mv->where($cond)->field(true)->find();
     	session('g_logined', 'logined');
-    	session('rnickname',$resultset['rnickname']);
+        session('rid',$resultset['rid']);
+        session('raccount',$resultset['raccount']);
+        session('rnickname',$resultset['rnickname']);
     	session('register', $resultset);
     }
 }

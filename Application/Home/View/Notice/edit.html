@@ -1,0 +1,97 @@
+<layout name="layout" replace="{__REEPLACE__}" />
+
+
+<include file="./Application/Home/View/welcome4.html" />
+
+<link rel="stylesheet" href="__PUBLIC__/kindeditor-4.1.10/themes/default/default.css" />
+<script charset="utf-8" src="__PUBLIC__/kindeditor-4.1.10/kindeditor-min.js"></script>
+<script charset="utf-8" src="__PUBLIC__/kindeditor-4.1.10/lang/zh_CN.js"></script>
+<style>
+</style>
+
+<div class="container" style="padding-left:0px;padding-right:0px;background-color:rgb(234,234,234);">
+	<div id="start" style="height:56px;background-color:rgb(104,165,61);color:white;font-size:16pt;font-family:'Segoe UI';padding:10px 15px;">
+		公告通知 > 
+	</div>
+	<div style="padding:100px;">
+		<div class="notice_title" style="text-align:center;margin-bottom:20px;">
+			标题：
+		</div>
+		<div class="notice_title" style="text-align:center;margin-bottom:20px;">
+			<input type="hidden" id="zid" value="{$zid}" />
+			<input type="text" id="ztitle" class="form-control" placeholder="title input" value="{$ztitle}" />
+		</div>
+		<div class="notice_content">
+			内容：
+		</div>
+		<div class="notice_content">
+			<textarea name="zcontent" class="form-control" style="width:100%;height:200px;visibility:hidden;">{$zcontent}</textarea>
+		</div>
+		<button type="button" class="btn btn-info btn-block" id="btn_save">暂存</button>
+		<button type="button" class="btn btn-info btn-block" id="btn_release">发布</button>
+	</div>
+</div>
+
+<script type="text/javascript">
+var editor;
+KindEditor.ready(function(K) {
+	editor = K.create('textarea[name="zcontent"]', {
+		resizeType : 1,
+		allowPreviewEmoticons : true,
+		allowImageUpload : true,
+		autoHeightMode : true,
+		allowFileManager: true,
+		afterCreate : function() {
+			this.loadPlugin('autoheight');
+		},
+		items : [
+			'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+			'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+			'insertunorderedlist', '|', 'emoticons', 'image', 'link']
+	});
+});
+function zsave(url,path,release){
+	$.ajax({
+		url:url,
+		dataType:'json',
+		type:'post',
+		data:{
+			zid:$('#zid').val(),
+			ztitle:$('#ztitle').val(),
+			zsummary:editor.text().substr(0,100),
+			release:release,
+			zcontent:editor.html()
+		},
+		success:function(t,s,r){
+			if(t.result==0){
+				cdialog.show_info('操作成功！',function(){
+					window.location.href="__ROOT__/Home/Notice/index#start";
+				});
+			}else {
+				cdialog.show_alert('操作失败！错误消息:'+t.msg);
+			}
+			$('#btn_save').attr('disabled',false);
+			$('#btn_release').attr('disabled',false);
+		},
+		error:function(t){
+			eds_framework.error_handler(url,t);
+			$('#btn_save').attr('disabled',false);
+			$('#btn_release').attr('disabled',false);
+		}
+	});
+}
+function zsave_or_release(release){
+	var url = '__ROOT__/Home/Notice/save';
+	if(release == 1){
+		url = '__ROOT__/Home/Notice/release';
+	}
+	$('#btn_save').attr('disabled',true);
+	$('#btn_release').attr('disabled',true);
+
+	zsave(url, '',release);
+}
+$(document).ready(function(){
+	$('#btn_save').click(function(){zsave_or_release(0);});
+	$('#btn_release').click(function(){zsave_or_release(1);});
+});
+</script>

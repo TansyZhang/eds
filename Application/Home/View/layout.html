@@ -21,7 +21,7 @@
     <script type="text/javascript" src="__PUBLIC__/bootflat/js/site.min.js"></script>
 
 
-    <script type="text/javascript" src="__PUBLIC__/jquery-2.1.1.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/jquery-1.11.1.js"></script>
 
 	<link rel="stylesheet" href="__PUBLIC__/assets/css/eds-base.css" />
 <script>
@@ -35,12 +35,13 @@ var eds_framework = new CEdsFramework();
 <!--弹出窗口及窗口类-->
 <div class="alert alert-danger" id="g_alert">
   <a href="#g_alert" id="a_g_alert" style="display:none"></a>
-  <button type="button" class="close eds_window_btn_close" data-dismiss="alert" aria-hidden="true">×</button>
+  <button type="button" class="close eds_window_btn_close" id="g_alert_btn_close" data-dismiss="alert" aria-hidden="true">×</button>
   <h4 class="alert-heading">Error!</h4>
   <div id="g_alert_text"></div>
 </div>
 <div class="alert alert-info  alert-dismissable" id="g_info" >
-  <button type="button" class="close eds_window_btn_close" data-dismiss="alert" aria-hidden="true">×</button>
+  <a href="#g_info" id="a_g_info" style="display:none"></a>
+  <button type="button" class="close eds_window_btn_close" id="g_info_btn_close" data-dismiss="alert" aria-hidden="true">×</button>
   <div id="g_info_text"></div>
 </div>
 <div id="shielding_layer" style="display:none;position:absolute;top:0;left:0;background-color:#ffffff;filter:alpha(Opacity=80);-moz-opacity:0.5;opacity: 0.5;z-index:10000;">
@@ -68,19 +69,36 @@ function CDialog(){
 		this.start_index += 100;
 		return this.start_index - 99;
 	}
-	this.show_alert = function(text){
+	this.show_alert = function(text,callback){
 		var zi = this.add_shield_layer();
 		g_alert.css('z-index',zi);
 		g_alert_text.text(text);
 		g_alert.show();
 		//$('#a_g_alert').trigger('click');
 		document.getElementById("a_g_alert").click();
+		if(callback){
+			var t = function(){
+				callback();
+				var temp = arguments.callee;
+				$('#g_alert_btn_close').unbind("click",temp);
+			};
+			$('#g_alert_btn_close').bind("click", t);
+		}
 	}
-	this.show_info = function(text){
+	this.show_info = function(text,callback){
 		var zi = this.add_shield_layer();
 		g_info.css('z-index',zi);
 		g_info_text.text(text);
 		g_info.show();
+		document.getElementById("a_g_info").click();
+		if(callback){
+			var t = function(){
+				callback();
+				var temp = arguments.callee;
+				$('#g_info_btn_close').unbind("click",temp);
+			};
+			$('#g_info_btn_close').bind("click", t);
+		}
 	}
 	this.restore_shield_layer = function(){
 		if(this.old_index.length > 1){
@@ -94,16 +112,16 @@ function CDialog(){
 	this.init = function(){
 		$('.eds_window_btn_close').click(function(e){
 			$(this).parent().hide();
-			cdialoag.restore_shield_layer();
+			cdialog.restore_shield_layer();
 			return false;
 		});
 	}
 }
-var cdialoag = new CDialog();
+var cdialog = new CDialog();
 CEdsFramework.prototype.error_handler = function(url,response_object,error_hint){
-	if(error_hint){ cdialoag.show_alert(error_hint.replace('{status}', response_object.status).replace('{statusText}',response_object.statusText));
+	if(error_hint){ cdialog.show_alert(error_hint.replace('{status}', response_object.status).replace('{statusText}',response_object.statusText));
 	} else { 
-		cdialoag.show_alert('操作失败！错误信息：url="'+url+'", status='+response_object.status+',msg="'+ response_object.statusText+'"');
+		cdialog.show_alert('操作失败！错误信息：url="'+url+'", status='+response_object.status+',msg="'+ response_object.statusText+'"');
 	}
 	console.error("[EDS][loading(url=\""+url+"\") failed.]"); 
 }
@@ -216,10 +234,10 @@ function CLogin(){
 		//alert(document.body.scrollWidth);
 	};
 	this.show_login_window = function (){
-		var zindex = cdialoag.add_shield_layer();
+		var zindex = cdialog.add_shield_layer();
 		this.login_form.css('z-index',zindex).show();
 	};
-	this.close_login_window = function (){this.login_form.hide();cdialoag.restore_shield_layer();};
+	this.close_login_window = function (){this.login_form.hide();cdialog.restore_shield_layer();};
 	this.validate_account =function(){
 		if(this.raccount.val().length < 6){
 			$('#login_form_field_raccount').attr('class','has-error');
@@ -247,7 +265,7 @@ function CLogin(){
 	this.login = function (){
 		if(!this.validate()) return false;
 		this.callback_func_array.push(function(){
-			cdialoag.show_info('登录成功！');
+			cdialog.show_info('登录成功！');
 		});
 		this.btn_ok.attr('disabled', true);
 		this.btn_cancel.attr('disabled', true);
@@ -258,7 +276,7 @@ function CLogin(){
 			dataType:'json',
 			success:function(data,status,ajax_object){
 				if(data.result != 0){
-					cdialoag.show_alert('登录失败！用户名或密码错误！');
+					cdialog.show_alert('登录失败！用户名或密码错误！');
 					return;
 				}
 				clogin.close_login_window();
@@ -271,7 +289,7 @@ function CLogin(){
 				clogin.btn_ok.attr('disabled', false);
 				clogin.btn_cancel.attr('disabled', false);
 				//console.log(t);
-				cdialoag.show_alert('登录失败！('+t.status+': '+t.statusText+')');
+				cdialog.show_alert('登录失败！('+t.status+': '+t.statusText+')');
 			}
 		});
 	};
@@ -374,7 +392,7 @@ CEdsFramework.prototype.load = function(){
 								}
 							}
 						} else {
-							cdialoag.show_alert('error:'+t.msg);
+							cdialog.show_alert('error:'+t.msg);
 						}
 					},
 					error:function(t){error_handler(item.load.url,t,item.load.error);}
@@ -385,7 +403,7 @@ CEdsFramework.prototype.load = function(){
 }
 
 $(document).ready(function(){
-	cdialoag.init();
+	cdialog.init();
 	clogin.init();
 	$(window).resize(function(){
 		$('nav#top_nav').css('width', "1024px");

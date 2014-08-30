@@ -17,7 +17,13 @@
 		</span>
 		<a href="__ROOT__/Home/Bbs/center?uid=1#start"><img src="__PUBLIC__/assets/image/bbs_headphoto_cat.png" width="80px" height="80px" style="float:right;margin:10px 10px 10px 0;"/></a>
 	</div>
-	<div class="quick_op" style="margin:20px;background-color:rgb(139,60,126);padding:5px;text-align:center;display:[op]">
-		<span><a href="#" style="color:white;">我要发帖</a></span>
+	<div class="quick_op" onclick="to_post()" style="cursor:pointer;margin:20px;background-color:rgb(139,60,126);padding:5px;text-align:center;display:[op]">
+		<spa style="color:white">我要发帖</span>
 	</div>
 </div>
+
+<script type="text/javascript">
+	function to_post(){
+		window.location.href="__ROOT__/Home/Bbs/post";
+	}
+</script>

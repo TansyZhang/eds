@@ -31,52 +31,62 @@
 			<div class="plan_content" style="margin-top:45px;">
 
 
-<div>
+<div class="plan_list">
+
+<volist name="project_list" id="project_vo" key="k">
 <div class="plan_item">
-	<img src="__PUBLIC__/assets/image/plan_project_item_flag.png" style="float:right;"/>
-	<div class="plan_item_title">标题：XX学生研究出什么成果之类的</div>
+	<img src="__PUBLIC__/uploads{$project_vo.zflag}" style="float:right;margin:10px;" width="200px" height="200px"/>
+	<div class="plan_item_title">{$project_vo.ztitle}</div>
 	<div class="plan_item_content" >
-		<p>主要写一些拔尖计划里面学生的研究成果、获奖情况，出国留学取得的成绩，在后续的职业生涯中对物理学科做出的贡献，获得的荣誉。会附有一张图片，内容的展示和新闻稿差不多，会对学生的荣誉和学生个人做一些解读（暂时找不到相关内容</p>
+		<?php echo htmlspecialchars_decode($project_vo['zsummary'],ENT_QUOTES); ?>
 	</div>
 	<div class="plan_item_read_all">
-		<a href="#">编辑</a>&nbsp;&nbsp;<a href="#">删除</a>&nbsp;&nbsp;
-		<a href="__ROOT__/Home/Plan/project_detail?zid=1#plan_title_span" >阅读全文</a>
+		<a href="__ROOT__/Home/Plan/project_dtl?op_edit=1&zid={$project_vo.zid}#plan_title_span">编辑</a>&nbsp;&nbsp;
+		<a href="javascript:void(0);" onclick="project_delete({$project_vo.zid})">删除</a>&nbsp;&nbsp;
+		<a href="__ROOT__/Home/Plan/project_dtl?zid={$project_vo.zid}#plan_title_span" >阅读全文</a>
 	</div>
 	<div class="plan_item_bottom_bar" style="">
 	</div>
 </div>
-<div class="plan_item">
-	<img src="__PUBLIC__/assets/image/plan_project_item_flag.png" style="float:right;"/>
-	<div class="plan_item_title">标题：XX学生研究出什么成果之类的</div>
-	<div class="plan_item_content" >
-		<p>主要写一些拔尖计划里面学生的研究成果、获奖情况，出国留学取得的成绩，在后续的职业生涯中对物理学科做出的贡献，获得的荣誉。会附有一张图片，内容的展示和新闻稿差不多，会对学生的荣誉和学生个人做一些解读（暂时找不到相关内容</p>
-	</div>
-	<div class="plan_item_read_all">
-		<a href="#">编辑</a>&nbsp;&nbsp;<a href="#">删除</a>&nbsp;&nbsp;
-		<a href="__ROOT__/Home/Plan/project_detail?zid=1#plan_title_span" >阅读全文</a>
-	</div>
-	<div class="plan_item_bottom_bar" style="">
-	</div>
-</div>
-<div class="plan_item">
-	<img src="__PUBLIC__/assets/image/plan_project_item_flag.png" style="float:right;"/>
-	<div class="plan_item_title">标题：XX学生研究出什么成果之类的</div>
-	<div class="plan_item_content" >
-		<p>主要写一些拔尖计划里面学生的研究成果、获奖情况，出国留学取得的成绩，在后续的职业生涯中对物理学科做出的贡献，获得的荣誉。会附有一张图片，内容的展示和新闻稿差不多，会对学生的荣誉和学生个人做一些解读（暂时找不到相关内容</p>
-	</div>
-	<div class="plan_item_read_all">
-		<a href="#">编辑</a>&nbsp;&nbsp;<a href="#">删除</a>&nbsp;&nbsp;
-		<a href="__ROOT__/Home/Plan/project_detail?zid=1#plan_title_span" >阅读全文</a>
-	</div>
-	<div class="plan_item_bottom_bar" style="">
-	</div>
-</div>
+</volist>
+
 </div>
 
+
+<div style="text-align:left;margin:30px;">
+<!--这里是翻页-->
+</div>
 
 <div style="text-align:left">
-这里是翻页
+<button type="button" class="btn btn-info btn-block" id="btn_add" onclick="project_add()">添加</button>
 </div>
+
+<script>
+function project_delete(zid){
+	if(!confirm('你确定要删除此项成果吗？')) return;
+	var url = '__ROOT__/Home/Plan/project_delete';
+	$.ajax({
+		url:url,
+		type:'post',
+		data:{zid:zid},
+		dataType:'json',
+		success:function(t,s,r){
+			if(t.result == 0){
+				cdialog.show_info('删除成功！',function(){
+					window.location.reload()
+				});
+			} else {
+				cdialog.show_alert('删除失败！错误信息：'+t.msg);
+			}
+		},
+		error:function(t){eds_framework.error_handler(url,t);}
+	});
+}
+function project_add(){
+	window.location.href="__ROOT__/Home/Plan/project_dtl?op_edit=1&zid=-1";
+}
+</script>
+
 			</div>
 		</div>
 	</div>
