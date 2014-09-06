@@ -119,11 +119,13 @@ function CDialog(){
 }
 var cdialog = new CDialog();
 CEdsFramework.prototype.error_handler = function(url,response_object,error_hint){
-	if(error_hint){ cdialog.show_alert(error_hint.replace('{status}', response_object.status).replace('{statusText}',response_object.statusText));
+	if(error_hint){ 
+		cdialog.show_alert(error_hint.replace('{status}', response_object.status).replace('{statusText}',response_object.statusText));
 	} else { 
-		cdialog.show_alert('操作失败！错误信息：url="'+url+'", status='+response_object.status+',msg="'+ response_object.statusText+'"');
+		cdialog.show_alert('操作失败！错误信息：url="'+url+'", status='+response_object.status+',text="'+ response_object.statusText+'",respText='+response_object.responseText);
 	}
 	console.error("[EDS][loading(url=\""+url+"\") failed.]"); 
+	console.error(response_object); 
 }
 </script>
 <!--登录界面及登录类-->

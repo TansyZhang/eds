@@ -1,0 +1,150 @@
+<layout name="layout" replace="{__REEPLACE__}" />
+
+
+<include file="./Application/Home/View/welcome_bbs.html" />
+
+<style>
+.separator{
+	border-bottom:rgb(139,60,126) 2px solid;
+	margin-bottom: 10px;
+}
+.center_title{
+	font-size: 14pt;
+	font-weight: blod;
+	padding: 5px 10px;
+}
+
+.acc_info li,.acc_info2 li{
+	list-style-type:none;
+	line-height:40px;
+	font-size:14pt;
+}
+.op{
+	color:gray;
+	font-size:12pt;
+}
+.perm_title{
+	width:350px;
+	margin-right:20px;
+}
+.toggle .handle{
+	top:-40px;
+}
+</style>
+
+<div class="container" style="padding-left:0px;padding-right:0px;">
+	<include file="./Application/Home/View/layout_banner.html" bgcolor="139,60,126" display0="inline-block" display1="block" display2="block"
+	title0="师生社区" href0="__ROOT__/Home/Bbs" title1="个人中心" href1="__ROOT__/Home/Bbs/center?uid=1#start" 
+	title2="账户管理" href2="#start" />
+</div>
+
+
+<div class="container" style="padding-left:0px;padding-right:0px;background-color:rgb(234,234,234);font-style:normal;">
+	<div style="width:300px;float:right;">
+		<include file="./Application/Home/View/Bbs/right.html" />
+	</div>
+	<div style="width:724px;padding:40px;">
+		<div class="post_list_div">
+			<div class="center_title">基本信息</div>
+			<div class="separator"></div>
+			<div class="acc_info">
+				<ul>
+					<li>
+						<div>账号：“s”+数字
+							<input type="text" class="form-control" placeholder="account input" value="s" id="raccount1" name="raccount1" />
+						</div>
+					</li>
+					<li>
+						<div>密码：默认为“000000”
+							<input type="password" class="form-control" placeholder="password input" value="000000" id="rpassword1" name="rpassword1" />
+						</div>
+					</li>
+					<li>
+						<div>昵称：
+							<input type="text" class="form-control" placeholder="nickname input" id="rnickname" name="rnickname" />
+						</div>
+					</li>
+				</ul>
+			</div>
+
+
+
+			<div class="center_title">权限信息</div>
+			<div class="separator"></div>
+			<div class="acc_info2">
+
+<?php 
+
+	$perm_array = array(
+		array('是否允许登录','rstate'),
+		array('是否允许创建老师账号','mpcreate_teacher'),
+		array('是否允许创建资讯','mpcreate_news'),
+		array('是否允许创建活动','mpcreate_act'),
+		array('是否允许创建拔尖计划成果','mpcreate_plan_project'),
+		array('是否允许编辑本校高校联盟信息','mpedit_league_college'),
+		array('是否允许创建通知','mpcreate_notice'),
+		array('是否允许审核交流札记','mpcheck_ex_note'),
+		array('是否允许创建留学动态','mpcreate_ex_trend'),
+		array('是否允许交换项目信息','mpcreate_ex_project'),
+		array('是否允许审核课件','mpcheck_courseware'),
+		array('是否允许创建帖子主题','mpcreate_topic'),
+		array('是否允许发布帖子','mpcreate_post'),
+		array('是否允许回复帖子','mpcreate_reply'),
+		array('是否允许发送站内信','mpcreate_msg'),
+		array('是否允许管理师生权限','mpmanager_user'),
+		array('是否允许管理帖子及回复','mpmanager_bbs')
+	);
+ ?>
+				<ul>
+					<?php foreach ($perm_array as $key) { ?>
+						<li>
+							<div class="perm_title"><?php echo $key[0] ?></div>
+							<div class="checkbox">
+								<input type="checkbox" id="<?php echo $key[1]; ?>" name="<?php echo $key[1]; ?>" checked>
+							</div>
+						</li>
+					<?php } ?>
+				</ul>
+			</div>
+		</div>
+
+		<div>
+			<button type="button" class="btn btn-info btn-block" id="btn_add">添加</button>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#btn_add').click(function(){
+		var url = '__ROOT__/Home/Bbs/acc_save';
+		//alert($('#raccount1').val());return;
+		$.ajax({
+			url:url,
+			dataType:'json',
+			type:'post',
+			data:{
+				<?php foreach ($perm_array as $key) { ?>
+					<?php echo $key[1]; ?>:$('#<?php echo $key[1]; ?>').parent().attr('class').indexOf('checked')>-1,
+				<?php } ?>
+				raccount:$('#raccount1').val(),
+				rpassword:$('#rpassword1').val(),
+				rnickname:$('#rnickname').val()
+
+			},
+			success:function(t,s,r){
+				if(t.result == 0){
+					cdialog.show_info('操作成功！',function(){
+						window.location.href="__ROOT__/Home/Bbs/acc";
+					});
+				}else{
+					cdialog.show_alert('操作失败！错误信息：'+t.msg);
+				}
+			},
+			error:function(t){
+				eds_framework.error_handler(url,t);
+			}
+		});
+	});
+});
+</script>

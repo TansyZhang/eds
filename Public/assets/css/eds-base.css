@@ -47,3 +47,7 @@
 .recmd_course_content{float:left;}
 .recmd_course_content_title{width:309px;font-size:11pt;font-family:'Segoe UI';color:blue;margin-top:10px;}
 .recmd_course_info_text{width:155px;float:left;}
+
+#bottom_nav{
+	font-style: normal;
+}

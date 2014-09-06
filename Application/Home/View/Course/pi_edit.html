@@ -1,0 +1,114 @@
+<layout name="layout" replace="{__REEPLACE__}" />
+
+
+<include file="./Application/Home/View/welcome_picmotto.html" pic1="course_right" pic2="course_book"  />
+
+
+<style>
+.pi_item{
+	width:480px;
+	float:left;
+	margin-top: 15px;
+	margin-right: 5px;
+}
+.pi_item_title,.pi_item_summary,.pi_item_by {
+	margin-left: 5px;
+	margin-right: 5px;
+	font-style: normal;
+}
+.pi_item_title{
+	font-size: 13pt;
+	color:rgb(2,183,230);
+}
+.pi_item_summary{
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+.pi_item_by{
+	float: right;color:rgb(2,183,230);
+}
+.pi_pages{
+	clear:both;
+	text-align:center;
+	font-style: normal;
+	font-size: 12pt;
+	padding:50px; 
+}
+.input_title{
+	margin:10px;
+}
+</style>
+
+<div class="container" style="padding-left:0px;padding-right:0px;background-color:rgb(234,234,234);font-style:normal;">
+	<include file="./Application/Home/View/layout_banner.html" bgcolor="2,183,230" display0="inline-block" display1="block" display2="none"
+	title0='虚拟学院' href0='__ROOT__/Home/Course' title1="公共资料" href1='__ROOT__/Home/Course/pi#start'  />
+	<div style="margin:50px 25px;padding:0;">
+
+
+		<div style="font-size:14pt;font-family:'Segoe UI';color:rgb(2,183,230);font-style:normal;margin-bottom:10px;">公共资料</div>
+		<div style="border-bottom:rgb(2,183,230) 2px solid;width:600px;">
+
+		</div>
+		<div style="width:600px;">
+			<input type="hidden" id="eid" value="{$eid}" />
+			<div class="input_title">标题</div>
+			<input type="text" id="etitle" class="form-control" placeholder="title input" value="{$etitle}" />
+			<div class="input_title">文件：<span id="epath_show">{$epath}</span></div>
+			<input type="file" id="epath" name="epath" class="form-control" placeholder="file input" value="" pathname="{$epath}" />
+			<div class="input_title">简介</div>
+			<textarea name="econtent" id="econtent" class="form-control" style="width:100%;height:300px;">{$econtent}</textarea>
+		
+			<button type="button" class="btn btn-info btn-block" id="btn_ok" style="margin-top:20px 0;">确定</button>
+		</div>
+	</div>
+</div>
+
+
+<<script type="text/javascript">
+$(document).ready(function(){
+	$('#epath').change(function(){
+		var url = '__ROOT__/Home/Course/pi_upload';
+		$.ajaxFileUpload({
+			url:url,
+			secureuri:false,
+			fileElementId:'epath',
+			dataType: 'json',
+			data:{},
+			success:function(t,s,r){
+				if(t.result == 0){
+					$('#epath').attr('pathname', t.pathname);
+					$('#epath_show').text(t.pathname);
+				} else {
+					cdialog.show_alert('保存失败！错误信息：'+data.msg);
+					$('#btn_save').attr('disabled',false);
+					$('#btn_release').attr('disabled',false);
+				}
+			},
+			error:function(t){ eds_framwork.error_handler(url,t); }
+		});
+	});
+	$('#btn_ok').click(function(){
+		var url = '__ROOT__/Home/Course/pi_save';
+		$.ajax({
+			url:url,
+			dataType:'json',
+			data:{
+				eid:$('#eid').val(),
+				etitle:$('#etitle').val(),
+				epath:$('#epath').attr('pathname'),
+				econtent:$('#econtent').val()
+			},
+			success:function(t,s,r){
+				if(t.result == 0){
+					cdialog.show_info('操作成功！',function(){
+						window.location.href="__ROOT__/Home/Course/pi#start";
+					});
+				} else {
+					cdialog.show_alert('操作失败！错误信息：'+t.msg);
+				}
+			},
+			error:function(t){eds_framwork.error_handler(url,t);}
+		});
+	});
+});
+</script>

@@ -10402,7 +10402,7 @@ jQuery.extend({
 			}
             if ( xml || isTimeout == "timeout") 
 			{				
-                requestDone = true;
+                requestDone = true;console.log(xml);
                 var status;
                 try {
                     status = isTimeout != "timeout" ? "success" : "error";

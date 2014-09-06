@@ -1,0 +1,119 @@
+<layout name="layout" replace="{__REEPLACE__}" />
+
+
+<include file="./Application/Home/View/welcome_bbs.html" />
+
+<style>
+.separator{
+	border-bottom:rgb(139,60,126) 2px solid;
+	margin-bottom: 10px;
+}
+.center_title{
+	font-size: 14pt;
+	font-weight: blod;
+	padding: 5px 10px;
+}
+.state{
+	font-size:10pt;
+}
+.op{
+	float:right;
+	font-size: 12pt;
+}
+.acc_item{
+	line-height: 30px;
+	font-size: 14pt;
+	clear: left;
+	margin-bottom: 30px;
+	clear:left;
+}
+.acc_item li {
+	list-style-type: none;
+	line-height: 40px;
+	color:rgb(2,183,230);
+	font-style: normal;
+	font-size:14pt;
+	padding-left: 120px;
+}
+.info{
+	margin-left: 100px;
+	width:490px;
+}
+.acc_raccount {
+width:100%;overflow:hidden;margin-right:20px;
+}
+.acc_item_info{
+	font-size:11pt;
+	color:gray;
+}
+</style>
+
+<div class="container" style="padding-left:0px;padding-right:0px;">
+	<include file="./Application/Home/View/layout_banner.html" bgcolor="139,60,126" display0="inline-block" display1="block" display2="block"
+	title0="师生社区" href0="__ROOT__/Home/Bbs" title1="个人中心" href1="__ROOT__/Home/Bbs/center?uid=1#start" 
+	title2="账户管理" href2="#start" />
+</div>
+
+
+<div class="container" style="padding-left:0px;padding-right:0px;background-color:rgb(234,234,234);">
+	<div style="width:300px;float:right;">
+		<include file="./Application/Home/View/Bbs/right.html" />
+	</div>
+	<div style="width:724px;padding:40px;">
+		<div class="post_list_div">
+			<div class="center_title">账户列表</div>
+			<div class="separator"></div>
+			<div class="acc_list">
+
+				<volist name="acc_list" id="acc_vo" key="k" >
+					<div class="acc_item">
+						<div class="acc_raccount">{$acc_vo.raccount}</div>
+						<div class="acc_item_info">
+							创建于{$acc_vo.rcreated_time}&nbsp;&nbsp;最后登录{$acc_vo.lgtime}
+							&nbsp;&nbsp;
+							<a href="acc_dtl?rid={$acc_vo.rid}#start" style="color:gray;text-decoration:underline;">查看</a>
+							&nbsp;&nbsp;
+							<a href="acc_edit?rid={$acc_vo.rid}#start" style="color:gray;text-decoration:underline;">修改</a>
+							&nbsp;&nbsp;
+							<a href="javascript:void(0);" onclick="acc_delete(this,{$acc_vo.rid})" style="color:gray;text-decoration:underline;">删除</a>
+						</div>
+					</div>
+
+				</volist>
+
+
+				<div class="acc_item">
+					<div><a href="acc_edit#start">添加</a></div>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+</div>
+
+<script type="text/javascript">
+function acc_delete(elem, rid){
+	var url = '__ROOT__/Home/Bbs/acc_delete';
+	//console.log(this);
+	//var elem = this;
+	var oldtext = $(elem).text();
+	$(elem).css('text-decoration','none').text('正在删除……');
+	$.ajax({
+		url:url,
+		data:{rid:rid},
+		dataType:'json',
+		success:function(t,s,r){
+			$(elem).text(oldtext);
+			if(t.result == 0){
+				cdialog.show_info('操作成功！',function(){
+					window.location.reload();
+				});
+			} else{
+				cdialog.show_alert('操作失败！错误信息：'+t.msg);
+			}
+		},
+		error:function(t){eds_framework.error_handler(url,t);}
+	});
+}
+</script>

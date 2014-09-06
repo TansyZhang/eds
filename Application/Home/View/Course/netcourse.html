@@ -1,7 +1,7 @@
 <layout name="layout" replace="{__REEPLACE__}" />
 
 
-<include file="./Application/Home/View/welcome2.html" pic1="course_right" pic2="course_book" />
+<include file="./Application/Home/View/welcome_picmotto.html" pic1="course_right" pic2="course_book" />
 
 <style>
 #start {
@@ -66,56 +66,48 @@ width:140px;position:relative;float:right;top:30px;
 			<span style="background-color:rgb(2,183,230);padding:10px 15px;margin:0px;">网络课程汇总</span>
 		</div>
 		<div style="height:4px;background-color:rgb(2,183,230);">&nbsp;</div>
-		<div class="index_item">
-			<div class="recmd_course_content">
-				<img src="__PUBLIC__/assets/image/course_1.png" width="309px" height="195px" />
-				<div class="recmd_course_content_title">理解爱因斯坦：狭义相对论 Understanding Einstein: Understanding Einstein: The Special Theory of Relativity</div>
-			</div>
-			<div class="recmd_course_info">
-				<div class="recmd_course_info_text">
-					<div class="recmd_course_info_text1">斯坦福大学 </div>
-					<div class="recmd_course_info_text2">Stanford University</div>
-					<div class="recmd_course_info_text2">
-						教授：Larry Randles Larry Randles Randles
+		<volist name="netcourse_list" id="netcourse_vo" key="k" >
+			<div class="index_item">
+				<div class="recmd_course_content">
+					<img src="__PUBLIC__/uploads{$netcourse_vo.eflag}" width="309px" height="195px" />
+					<div class="recmd_course_content_title">
+						<a href="__ROOT__/Home/Course/netcourse_dtl?eid={$netcourse_vo.eid}#start" style="color:black;">{$netcourse_vo.etitle}</a>
 					</div>
 				</div>
-				<div class="recmd_course_info_img">
-					<img src="__PUBLIC__/assets/image/teacher_1.png" width="140px" />
-				</div>
-			</div>
-			<div class="recmd_course_detail">
-				<span style="background-color:rgb(2,183,230);padding:10px 15px;margin-bottom:10px;">
-					<a href="__ROOT__/Home/Course/netcourse_dtl?$eid=0#start" >详细信息</a>
-				</span>
-			</div>
-			<div class="recmd_course_sperator"></div>
-		</div>
-		<div class="index_item">
-			<div class="recmd_course_content">
-				<img src="__PUBLIC__/assets/image/course_1.png" width="309px" height="195px" />
-				<div class="recmd_course_content_title">理解爱因斯坦：狭义相对论 Understanding Einstein: Understanding Einstein: The Special Theory of Relativity</div>
-			</div>
-			<div class="recmd_course_info">
-				<div class="recmd_course_info_text">
-					<div class="recmd_course_info_text1">斯坦福大学 </div>
-					<div class="recmd_course_info_text2">Stanford University</div>
-					<div class="recmd_course_info_text2">
-						教授：Larry Randles Larry Randles Randles
+				<div class="recmd_course_info">
+					<div class="recmd_course_info_text">
+						<div class="recmd_course_info_text1">{$netcourse_vo.eauthor_college}</div>
+						<div class="recmd_course_info_text2">{$netcourse_vo.elevel}</div>
+						<div class="recmd_course_info_text2">{$netcourse_vo.eauthor_name}</div>
+					</div>
+					<div class="recmd_course_info_img">
+						<img src="__PUBLIC__/uploads{$netcourse_vo.eauthor_photo}" width="140px"  height="157px" />
 					</div>
 				</div>
-				<div class="recmd_course_info_img">
-					<img src="__PUBLIC__/assets/image/teacher_1.png" width="140px" />
+				<div class="recmd_course_detail">
+					<span style="background-color:rgb(2,183,230);padding:10px 15px;margin-bottom:10px;">
+						<a href="__ROOT__/Home/Course/netcourse_edit?eid={$netcourse_vo.eid}#start" >编辑</a>
+					</span>
+					<span style="background-color:rgb(2,183,230);padding:10px 15px;margin-bottom:10px;">
+						<a href="__ROOT__/Home/Course/netcourse_dtl?eid={$netcourse_vo.eid}#start" >详细信息</a>
+					</span>
 				</div>
+				<div class="recmd_course_sperator"></div>
 			</div>
-			<div class="recmd_course_detail">
-				<span style="background-color:rgb(2,183,230);padding:10px 15px;margin-bottom:10px;">
-					<a href="__ROOT__/Home/Course/netcourse_dtl?$eid=0#start" >详细信息</a>
-				</span>
-			</div>
-			<div class="recmd_course_sperator"></div>
+		</volist>
+
+
+		<div style="text-align:right;margin:50px 20px;font-style:normal;font-size:14pt;"></div>
+		<div>
+			<button type="button" style="font-style:normal;" class="btn btn-info btn-block" id="btn_add" onclick="netcourse_add()">添加</button>
 		</div>
-		<div style="text-align:right;margin:50px 20px;font-style:normal;font-size:14pt;">ok,这里是分页</div>
 	</div>
 
 
 </div>
+
+<script type="text/javascript">
+function netcourse_add(){
+	window.location.href="__ROOT__/Home/Course/netcourse_edit";
+}
+</script>

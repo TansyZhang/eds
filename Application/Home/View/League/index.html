@@ -4,7 +4,62 @@
 <include file="./Application/Home/View/welcome_picmotto.html" pic1="league_right" pic2="league_star" />
 
 
+<style type="text/css">
+.league_item{
+	margin-bottom: 20px;
+}
+.league_flag{
+	float: right;
+	z-index: 10;
+	margin-left:10px;
+}
+.league_seperator{
+	border-bottom: #231167 2px solid;
+	clear:right;
+	position:relative;
+	top:-2px;
+}
+.league_name{
+	font-family: 'Segoe UI';
+	font-size: 14pt;
+	font-weight: bold;
+	margin:10px 0px 10px 50px;
+}
+.league_summary{
+	height:220px;
+	overflow: hidden;
+	margin-left: 10px;
+}
+.league_op{
+	text-align: right;
+}
+a{
+	color: black;!important;
+}
+</style>
 
-<div class="container" style="padding-left:0px;padding-right:0px;">
+<div class="container" style="padding-left:0px;padding-right:0px;padding-bottom:50px;background-color:rgb(234,234,234);font-style: normal;">
+	<include file="./Application/Home/View/League/left.html" />
 
+	<div class="league_main" style="width:100%;padding:40px 90px 0px 300px;margin-top:20px;">
+		<div class="league_list">
+
+			<volist name="league_list" id="league_vo" key="k">
+				<div class="league_item">
+					<div class="league_name">{$league_vo.gname}</div>
+					<div class="league_flag">
+						<img src="__PUBLIC__{$league_vo.gflag}" width="223px" height="265px" />
+					</div>
+					<div class="league_summary">{$league_vo.gsummary}</div>
+					<div class="league_op">
+						<span><a href="#">编辑</a>&nbsp;&nbsp;</span>
+						<span><a href="#">删除</a>&nbsp;&nbsp;</span>
+						<span><a href="#">阅读全文</a>&nbsp;&nbsp;</span>
+					</div>
+					<div class="league_seperator"></div>
+				</div>
+			</volist>
+
+		</div>
+	</div>
 </div>

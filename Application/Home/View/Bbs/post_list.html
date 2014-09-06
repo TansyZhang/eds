@@ -19,6 +19,7 @@
 	float: left;
 	text-align:center;
 	font-size: 12pt;
+	cursor:pointer;
 }
 .chosed-nav-item{
 	background-color:rgb(9,80,46);
@@ -71,85 +72,52 @@
 }
 </style>
 
-<div class="container" style="padding-left:0px;padding-right:0px;width:1024px;">
+<div class="container" style="padding-left:0px;padding-right:0px;width:1024px;" id="start">
 	<div style="width:800px;float:left;">
 		<div class="bbs_t_nav">
-			<div class="bbs_t_nav_item chosed-nav-item">师生答疑区</div>
-			<div class="bbs_t_nav_item">研究讨论区</div>
-			<div class="bbs_t_nav_item">书籍推荐区</div>
-			<div class="bbs_t_nav_item">课程交流区</div>
-			<div class="bbs_t_nav_item">idea狂想区</div>
-			<div class="bbs_t_nav_item">谈天说地区</div>
+			<div onclick="to_post_list(1);" class="bbs_t_nav_item<?php if($cid==1)echo " chosed-nav-item"; ?>">师生答疑区</div>
+			<div onclick="to_post_list(2);" class="bbs_t_nav_item<?php if($cid==2)echo " chosed-nav-item"; ?>">研究讨论区</div>
+			<div onclick="to_post_list(3);" class="bbs_t_nav_item<?php if($cid==3)echo " chosed-nav-item"; ?>">书籍推荐区</div>
+			<div onclick="to_post_list(4);" class="bbs_t_nav_item<?php if($cid==4)echo " chosed-nav-item"; ?>">课程交流区</div>
+			<div onclick="to_post_list(5);" class="bbs_t_nav_item<?php if($cid==5)echo " chosed-nav-item"; ?>">idea狂想区</div>
+			<div onclick="to_post_list(6);" class="bbs_t_nav_item<?php if($cid==6)echo " chosed-nav-item"; ?>">谈天说地区</div>
 		</div>
 
 		<div class="post_list">
-			<div class="post_item">
-				<span style="top:10px;left:10px;position:relative;float:left;">
-					<img src="__PUBLIC__/assets/image/bbs_headphoto_cat.png" width="79px" height="79px" />
-				</span>
-				<div>
-					<div class="title">
-						<a href="__ROOT__/Home/Bbs/post_dtl?pid=1#start" style="color:red;">[置顶]学生社区第二次线上交流大会将于3月28号晚8点开始</a>
-					</div>
-					<div class="by">
-						<span>南京大学</span>
-						<span>李同学</span>
-						<span>李同学</span>
-						<span>于<span>2014-07-21</span></span>
-						<span>谈天说地区</span>
-					</div>
-				</div>
-			</div>
-			<div class="post_item">
-				<span style="top:10px;left:10px;position:relative;float:left;"><img src="__PUBLIC__/assets/image/bbs_headphoto_cat.png" width="79px" height="79px" /></span>
-				<div>
-					<div class="title" >
-						<a href="__ROOT__/Home/Bbs/post_dtl?pid=1#start" style="color:black;">费曼物理有什么特别之处？</a>
-					</div>
-					<div class="by">
-						<span>南京大学</span>
-						<span>李同学</span>
-						<span>李同学</span>
-						<span>于<span>2014-07-21</span></span>
-						<span>谈天说地区</span>
+			<volist name="post_list" id="post_vo" key="k" >
+				<div class="post_item">
+					<span style="top:10px;left:10px;position:relative;float:left;">
+						<img src="__PUBLIC__/assets/image/bbs_headphoto_cat.png" width="79px" height="79px" />
+					</span>
+					<div>
+						<div class="title">
+							<?php if($post_vo['tstate'] == 20/*置顶*/){ ?>
+								<a href="__ROOT__/Home/Bbs/post_dtl?tid={$post_vo.tid}#start" style="color:red;">[置顶]{$post_vo.ttitle}</a>
+							<?php } else { ?>
+								<a href="__ROOT__/Home/Bbs/post_dtl?tid={$post_vo.tid}#start" style="color:black;">{$post_vo.ttitle}</a>
+							<?php } ?>
+						</div>
+						<div class="by">
+							<span>{$post_vo.tcollege}</span>
+							<span>{$post_vo.tcreator_name}</span>
+							<span>&nbsp;&nbsp;</span>
+							<span>于<span>{$post_vo.tcreated_time}</span></span>
+							<span>{$post_vo.ttopic_name}</span>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="post_item">
-				<span style="top:10px;left:10px;position:relative;float:left;"><img src="__PUBLIC__/assets/image/bbs_headphoto_cat.png" width="79px" height="79px" /></span>
-				<div>
-					<div class="title">
-						<a href="__ROOT__/Home/Bbs/post_dtl?pid=1#start" style="color:black;">学生社区第二次线上交流大会将于3月28号晚8点开始</a>
-					</div>
-					<div class="by">
-						<span>南京大学</span>
-						<span>李同学</span>
-						<span>李同学</span>
-						<span>于<span>2014-07-21</span></span>
-						<span>谈天说地区</span>
-					</div>
-				</div>
-			</div>
-			<div class="post_item">
-				<span style="top:10px;left:10px;position:relative;float:left;"><img src="__PUBLIC__/assets/image/bbs_headphoto_cat.png" width="79px" height="79px" /></span>
-				<div>
-					<div class="title">
-						<a href="__ROOT__/Home/Bbs/post_dtl?pid=1#start" style="color:black;">学生社区第二次线上交流大会将于3月28号晚8点开始学生社区第二次线上交</a>
-					</div>
-					<div class="by">
-						<span>南京大学</span>
-						<span>李同学</span>
-						<span>李同学</span>
-						<span>于<span>2014-07-21</span></span>
-						<span>谈天说地区</span>
-					</div>
-				</div>
-			</div>
+			</volist>
 		</div>
 	</div>
 
 
 	<div style="padding-left:800px;">
-		<include file="./Application/Home/View/Bbs/master_info.html" op="block" />
+		<include file="./Application/Home/View/Bbs/master_info.html" op="block" rnickname="{$Think.session.rnickname}"  rhead_photo="{$Think.session.rhead_photo}" />
 	</div>
 </div>
+
+<script type="text/javascript">
+function to_post_list(cid){
+	window.location.href="__ROOT__/Home/Bbs/post_list?cid="+cid+"#start";
+}
+</script>

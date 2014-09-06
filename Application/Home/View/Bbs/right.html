@@ -21,12 +21,12 @@
 <div style="background-color: rgb(234,234,234);height:164px;">
 	<div style="text-align:center;">
 		<span style="width:120px;display:inline-block;margin:0;padding-top:10px;line-height:30px;padding:20px 0px;">
-			<div style="font-weight:bold;">小山</div>
+			<div style="font-weight:bold;">{$Think.session.rnickname}</div>
 			<div style="font-size:10pt;">帖子(99+)站内信(99)</div>
 		</span>
-		<a href="__ROOT__/Home/Bbs/center?uid=1#start"><img src="__PUBLIC__/assets/image/bbs_headphoto_cat.png" width="80px" height="80px" style="float:right;margin:10px 10px 10px 0;"/></a>
+		<a href="__ROOT__/Home/Bbs/center?rid={$Think.session.rid}#start"><img src="__PUBLIC__{$Think.session.rhead_photo}" width="80px" height="80px" style="float:right;margin:20px 20px 20px 0;"/></a>
 	</div>
-	<div class="quick_op" style="margin:20px;background-color:rgb(139,60,126);padding:5px;text-align:center;">
+	<div class="quick_op" style="margin:20px;background-color:rgb(139,60,126);padding:5px;text-align:center;clear:both">
 		<span><a href="#" style="color:white;">我要发帖</a></span>
 	</div>
 </div>
@@ -42,10 +42,10 @@
 
 	<li><a href="#">--【管理员】--</a></li>
 	<li><a href="__ROOT__/Home/Bbs/tah?#start">教师管理</a></li>
-	<li><a href="__ROOT__/Home/Bbs/tah?#start">学生管理</a></li>
+	<li><a href="__ROOT__/Home/Bbs/stu?#start">学生管理</a></li>
 	<li><a href="__ROOT__/Home/Bbs/xx?#start">敏感词管理</a></li>
-	<li><a href="__ROOT__/Home/Bbs/tah?#start">XX管理</a></li>
+	<li><a href="__ROOT__/Home/Bbs/xx?#start">XX管理</a></li>
 	<li><a href="__ROOT__/Home/Bbs/xx?#start">XX管理</a></li>
 	<li><a href="#">--【超管】--</a></li>
-	<li><a href="__ROOT__/Home/Bbs/tah?#start">账户管理</a></li>
+	<li><a href="__ROOT__/Home/Bbs/acc?#start">账户管理</a></li>
 </ul>

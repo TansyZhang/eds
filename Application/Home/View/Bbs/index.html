@@ -1,7 +1,7 @@
 <layout name="layout" replace="{__REEPLACE__}" />
 
 
-<include file="./Application/Home/View/welcome_bbs2.html" />
+<include file="./Application/Home/View/welcome_bbs.html" />
 
 
 <style>
@@ -71,72 +71,37 @@
 		</div>
 
 		<div class="post_list">
-			<div class="post_item">
-				<span style="top:10px;left:10px;position:relative;float:left;"><img src="__PUBLIC__/assets/image/bbs_headphoto_cat.png" width="79px" height="79px" /></span>
-				<div>
-					<div class="title">
-						<a href="__ROOT__/Home/Bbs/post_dtl?pid=1#start" style="color:red;">[置顶]学生社区第二次线上交流大会将于3月28号晚8点开始</a>
-					</div>
-					<div class="by">
-						<span>南京大学</span>
-						<span>李同学</span>
-						<span>李同学</span>
-						<span>于<span>2014-07-21</span></span>
-						<span>谈天说地区</span>
-					</div>
-				</div>
-			</div>
-			<div class="post_item">
-				<span style="top:10px;left:10px;position:relative;float:left;"><img src="__PUBLIC__/assets/image/bbs_headphoto_cat.png" width="79px" height="79px" /></span>
-				<div>
-					<div class="title" >
-						<a href="__ROOT__/Home/Bbs/post_dtl?pid=1#start" style="color:black;">费曼物理有什么特别之处？</a>
-					</div>
-					<div class="by">
-						<span>南京大学</span>
-						<span>李同学</span>
-						<span>李同学</span>
-						<span>于<span>2014-07-21</span></span>
-						<span>谈天说地区</span>
+
+			<volist name="post_list" id="post_vo" key="k">
+				<div class="post_item">
+					<span style="top:10px;left:10px;position:relative;float:left;">
+						<img src="__PUBLIC__{$post_vo.rhead_photo}" width="79px" height="79px" />
+					</span>
+					<div>
+						<div class="title">
+							<?php if($post_vo['tstate'] == 20/*置顶*/){ ?>
+								<a href="__ROOT__/Home/Bbs/post_dtl?tid={$post_vo.tid}#start" style="color:red;">[置顶]{$post_vo.ttitle}</a>
+							<?php } else { ?>
+								<a href="__ROOT__/Home/Bbs/post_dtl?tid={$post_vo.tid}#start" style="color:black;">{$post_vo.ttitle}</a>
+							<?php } ?>		
+						</div>
+						<div class="by">
+							<span>{$post_vo.ucollege}</span>
+							<span>{$post_vo.rnickname}</span>
+							<span>&nbsp;</span>
+							<span>于<span>{$post_vo.tcreated_time}</span></span>
+							<span>{$post_vo.cname}</span>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="post_item">
-				<span style="top:10px;left:10px;position:relative;float:left;"><img src="__PUBLIC__/assets/image/bbs_headphoto_cat.png" width="79px" height="79px" /></span>
-				<div>
-					<div class="title">
-						<a href="__ROOT__/Home/Bbs/post_dtl?pid=1#start" style="color:black;">学生社区第二次线上交流大会将于3月28号晚8点开始</a>
-					</div>
-					<div class="by">
-						<span>南京大学</span>
-						<span>李同学</span>
-						<span>李同学</span>
-						<span>于<span>2014-07-21</span></span>
-						<span>谈天说地区</span>
-					</div>
-				</div>
-			</div>
-			<div class="post_item">
-				<span style="top:10px;left:10px;position:relative;float:left;"><img src="__PUBLIC__/assets/image/bbs_headphoto_cat.png" width="79px" height="79px" /></span>
-				<div>
-					<div class="title">
-						<a href="__ROOT__/Home/Bbs/post_dtl?pid=1#start" style="color:black;">学生社区第二次线上交流大会将于3月28号晚8点开始学生社区第二次线上交</a>
-					</div>
-					<div class="by">
-						<span>南京大学</span>
-						<span>李同学</span>
-						<span>李同学</span>
-						<span>于<span>2014-07-21</span></span>
-						<span>谈天说地区</span>
-					</div>
-				</div>
-			</div>
+			</volist>
+
 		</div>
 	</div>
 
 
 	<div style="padding-left:800px;">
-		<include file="./Application/Home/View/Bbs/master_info.html" op="block" />
+		<include file="./Application/Home/View/Bbs/master_info.html" op="block"  rnickname="{$Think.session.rnickname}"  rhead_photo="{$Think.session.rhead_photo}"  />
 		<div class="topn_list">
 			<div class="topn_item">
 				<div class="no_title">

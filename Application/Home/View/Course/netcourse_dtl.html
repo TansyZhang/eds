@@ -1,7 +1,7 @@
 <layout name="layout" replace="{__REEPLACE__}" />
 
 
-<include file="./Application/Home/View/welcome2.html" pic1="course_right" pic2="course_book" />
+<include file="./Application/Home/View/welcome_picmotto.html" pic1="course_right" pic2="course_book" />
 
 <style>
 #start {
@@ -17,44 +17,35 @@
 
 </style>
 
-<div class="container" style="padding-left:0px;padding-right:0px;background-color:rgb(234,234,234);">
+<div class="container" style="padding-left:0px;padding-right:0px;background-color:rgb(234,234,234);font-style:normal;">
 	<div id="start" style="">
 		<a href="index">虚拟学院</a> &gt; <a href="__ROOT__/Home/Course/netcourse?page=0#start">网络课程</a>
 	</div>
 
-	<div>
-<pre>
-Stanford University 
+	
+	<div style="margin:50px;">
+		<div style="margin:10px 0;">
+			<div style="width:525px;float:left;margin:100px 20px;text-align:center;font-size:16pt;color:red;">
+				{$etitle}
+			</div>
+			<div style="width:100%;padding-left:575px;text-align:center;">
+				<img id="eflag_show" src="__PUBLIC__/uploads{$eflag}" pathname="{$eflag}" width="309px" height="195px" style="margin:10px;" />
+			</div>
+		</div>
 
-
-Understanding Einstein: The Special Theory of Relativity 
-
-This course offers you the opportunity to gain a deeper understanding of the life and work of the young Albert Einstein and especially his mind-bending special theory of relativity. 
-
-Watch Intro Vide 
- image
-About the Course 
-     In this course we will seek to “understand Einstein,” especially focusing on the special theory of relativity that Albert Einstein, as a 26-year-old patent clerk, introduced in his so-called “miracle year” of 1905. Our goal will be to go behind the myth-making and beyond the popularized presentations of relativity in order to gain a deeper understanding of both Einstein the person and the concepts, predictions, and strange paradoxes of his theory. Some of the questions we will address include: How did Einstein come up with his ideas? What was the nature of his genius? What is the meaning of relativity? What’s “special” about the special theory of relativity? Why did the theory initially seem to be dead on arrival? What does it mean to say that time is the “fourth dimension”? Can time actually run more slowly for one person than another, and the size of things change depending on their velocity? Is time travel possible, and if so, how? Why can’t things travel faster than the speed of light? Is it possible to travel to the center of the galaxy and return in one lifetime? Is there any evidence that definitively confirms the theory, or is it mainly speculation? Why didn’t Einstein win the Nobel Prize for the theory of relativity? 
-
-Students may choose one of three approaches to the course: a more quantitative approach, a more qualitative approach, or an auditing approach. The more quantitative approach will include weekly problem sets, while the more qualitative approach will include a creative project relating to the young Einstein and/or the special theory of relativity. 
-Course Syllabus 
-Week One (Einstein in Context): Einstein quotes of the week; a thought experiment involving relativity; physics and Einstein circa 1900. 
-
-Week Two (Events, Clocks, and Reference Frames): Einstein quotes of the week; synchronizing clocks; the famous June 1905 paper; thinking more deeply about events and observers; understanding inertial frames of reference; spacetime diagrams; the Galilean transformation; Einstein's starting point: the two postulates. 
-
-Week Three (Ethereal Problems and Solutions): Einstein quotes of the week; a few words about waves; the luminiferous ether; the Michelson-Morley experiment vs. stellar aberration; how do you solve a problem like the ether?; the solutions of Fitzgerald, Lorentz, Poincare, and Einstein. 
-
-Week Four (The Weirdness Begins): Einstein quotes of the week; the light constancy principle; time and length are suspect; what isn't suspect; exploring the Lorentz factor; the miracle of the muon. 
-
-Week Five (Spacetime Switching): Einstein quotes of the week; the Lorentz transformation; leading clocks lag; the ultimate speed limit. 
-
-Week Six (Breaking the Spacetime Speed Limit?): Einstein quotes of the week; spacetime diagrams revisited; regions of spacetime; cause and effect, or vice versa?; faster than light paradoxes. 
-
-Week Seven (Paradoxes to Ponder): Einstein quotes of the week; the pole-in-the-barn paradox; the spaceships-on-a-rope paradox; how length contraction actually works; the twin paradox. 
-
-Week Eight (To the Center of the Galaxy and Back): Einstein quotes of the week; traveling the 
-
-</pre>
+		<div style="clear:both;">
+			{$econtent}
+		</div>
+		<div>
+			<button type="button" class="btn btn-info btn-block" id="btn_modify">修改</button>
+		</div>
 	</div>
 
 </div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#btn_modify').click(function(){
+		window.location.href="__ROOT__/Home/Course/netcourse_edit?eid={$eid}#start";
+	});
+});
+</script>

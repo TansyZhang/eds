@@ -1,9 +1,12 @@
 <layout name="layout" replace="{__REEPLACE__}" />
 
 
-<include file="./Application/Home/View/welcome_bbs.html" />
+<include file="./Application/Home/View/welcome_bbs2.html" />
 
 
+<link rel="stylesheet" href="__PUBLIC__/kindeditor-4.1.10/themes/default/default.css" />
+<script charset="utf-8" src="__PUBLIC__/kindeditor-4.1.10/kindeditor-min.js"></script>
+<script charset="utf-8" src="__PUBLIC__/kindeditor-4.1.10/lang/zh_CN.js"></script>
 <style>
 .bbs_t_nav{
 	height:60px;
@@ -17,6 +20,7 @@
 	float: left;
 	text-align:center;
 	font-size: 12pt;
+	cursor:pointer;
 }
 .chosed-nav-item{
 	background-color:rgb(9,80,46);
@@ -41,35 +45,31 @@
 .post-content{
 	padding: 20px;
 }
+.push-item{
+	clear:both;
+}
 </style>
 
 <div class="container" style="padding-left:0px;padding-right:0px;width:1024px" id="start">
 	<div style="width:800px;float:left;">
 		<div class="bbs_t_nav">
-			<div class="bbs_t_nav_item chosed-nav-item">师生答疑区</div>
-			<div class="bbs_t_nav_item">研究讨论区</div>
-			<div class="bbs_t_nav_item">书籍推荐区</div>
-			<div class="bbs_t_nav_item">课程交流区</div>
-			<div class="bbs_t_nav_item">idea狂想区</div>
-			<div class="bbs_t_nav_item">谈天说地区</div>
+			<div onclick="to_post_list(1);" class="bbs_t_nav_item<?php if($cid==1)echo " chosed-nav-item"; ?>">师生答疑区</div>
+			<div onclick="to_post_list(2);" class="bbs_t_nav_item<?php if($cid==2)echo " chosed-nav-item"; ?>">研究讨论区</div>
+			<div onclick="to_post_list(3);" class="bbs_t_nav_item<?php if($cid==3)echo " chosed-nav-item"; ?>">书籍推荐区</div>
+			<div onclick="to_post_list(4);" class="bbs_t_nav_item<?php if($cid==4)echo " chosed-nav-item"; ?>">课程交流区</div>
+			<div onclick="to_post_list(5);" class="bbs_t_nav_item<?php if($cid==5)echo " chosed-nav-item"; ?>">idea狂想区</div>
+			<div onclick="to_post_list(6);" class="bbs_t_nav_item<?php if($cid==6)echo " chosed-nav-item"; ?>">谈天说地区</div>
 		</div>
 
 		<div class="post">
-			<div class="post-title">这音乐是几维的？依我看啊~</div>
+			<div class="post-title">{$ttitle}</div>
 			<div class="post-by">
-				<span>2014-08-28 17:31:36</span>&nbsp;&nbsp;&nbsp;&nbsp;查看(<span>45</span>)&nbsp;&nbsp;楼层(<span>37</span>)
+				<span>{$tcreated_time}</span>&nbsp;&nbsp;&nbsp;&nbsp;查看(<span>{$tscan_count}</span>)&nbsp;&nbsp;楼层(<span>{$treply_count}</span>)
 			</div>
 			<div class="post-content">
 				<div style="border-top:rgb(139,60,126) 2px solid;"></div>
 				<div class="post-content-real" style="padding-top:10px">
-					<pre>
-					数学上有一个词 Harmonic 和音乐紧密相关。因此说到音乐，数学上对应的分支是调和分析 Harmonic analysis。这是傅里叶变换的升级版，其本质也是把函数或信号表示成基本波的叠加。 
-					维度，如果理解成描述对象所需的参数个数，在调和分析的意义上，一段音乐是无穷维的，因为一段乐曲有复杂的节奏、强度、频率变化，并不是单色波，傅里叶变换后的谱不是离散的。 
-					再深入一点：为了描述音乐，我们需要的是 频率／强度／空气密度 对时间的函数。这个函数是有界的、连续的、二次可积的。由于音乐有始有终，这个函数是 compactly supported 的。数学上，这是 L^2 函数空间的子集。这个空间是不可数无穷维的。（参考 Lp space） 
-
-					如果只考虑一个音，那么维度等于乐器可能同时发出的音的个数，其「坐标」是不同音的强度（非简谐分析）。比如（例子都是瞎扯的）小提琴好像最多可以让两根弦同时发音（评论中有人指出可以发四音），钢琴最多应该可以用十个手指同时按键（评论中有人指出可以躺上去发 88 音），那他们发出一个固定的音就分别是二维和十维的（或者四维和 88 维）。
-					</pre>
-
+					{$tcontent}
 				</div>
 				<div style="text-align:right">
 					这里是回复区
@@ -77,57 +77,88 @@
 			</div>
 		</div>
 		<div class="post-push" style="clear:both;float:left;width:1024px;background-color: rgb(234,234,234);">
-			<div class="push-item" style="padding-top:15px;">
-				<div style="float:right;" style="width:224px;">
-					<div style="width:224px;">
-						<include file="./Application/Home/View/Bbs/master_info.html" op="none" opfloor="block" />
-					</div>
-				</div>
-				<div style="margin-left:15px;margin-right:264px;">
-					<div style="border-top:rgb(139,60,126) 2px solid;"></div>
-					<div>
-						<div class="post-content-real" style="padding-top:10px">
-							<pre> 
-							这个问题真的很好，我来说说我的看法 
-							 从信号的角度看声音就是一维信号,是关于时间的函数 sound = f(t); 
-
-							这里所谓一维只是说它的自变量只有一个那就是时间，而在每个时间点上的振幅是因变量，所以画出图来还是两个坐标轴的，但在计算机里其实就是一维的矩阵或向量，比如[0 0 128 120 6 3 10 80 .......]，就这么一串数字即是承载音乐的信息，就可以播放出来。 
-
-							至于从音乐的角度分析，那就看怎么定义维度了，可以随便列举什么音高啊节奏啊音色啊成为一个维度，但这已经是人为定义了，不是最底层的物理性质。
-							</pre>
+			<volist name="reply_list" id="reply_vo" key="k">
+				<div class="push-item" style="padding-top:15px;">
+					<div style="float:right;" style="width:224px;">
+						<div style="width:224px;">
+							<include file="./Application/Home/View/Bbs/master_info.html" op="none" opfloor="block" floor="{$k}" reply_time="{$reply_vo.tcreated_time}" rnickname="{$reply_vo.rnickname}" rhead_photo="{$reply_vo.rhead_photo}" />
 						</div>
-						<div style="text-align:right">
-							这里是回复区
+					</div>
+					<div style="margin-left:15px;margin-right:264px;">
+						<div style="border-top:rgb(139,60,126) 2px solid;"></div>
+						<div>
+							<div class="post-content-real" style="padding-top:10px">
+								<?php echo htmlspecialchars_decode($reply_vo['tcontent'],ENT_QUOTES); ?>
+							</div>
+							<div style="text-align:right">
+								这里是回复区
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-
-			<div class="push-item" style="padding-top:15px;">
-				<div style="float:right;" style="width:224px;">
-					<div style="width:224px;">
-						<include file="./Application/Home/View/Bbs/master_info.html" op="none" opfloor="block" />
-					</div>
-				</div>
-				<div style="margin-left:15px;margin-right:264px;">
-					<div style="border-top:rgb(139,60,126) 2px solid;"></div>
-					<div>
-						<div class="post-content-real" style="padding-top:10px">
-							<pre> 阿三，你又来胡思乱想了，药不能停啊！！！还挺有意思~</pre>
-						</div>
-						<div style="text-align:right">
-							这里是回复区
-						</div>
-					</div>
-				</div>
-			</div>
-
+			</volist>
 		</div>
 		<div class="pages" style="margin:20px 0;text-align:center;">这里是分页</div>
+
+		<div style="background-color:rgb(234,234,234);padding:15px;">
+			<div style="margin:10px;">回复帖子：{$ttitle}</div>
+			<div style="margin-bottom:10px;">
+				<input type="hidden" id="tid" value="{$tid}"/>
+				<textarea name="zcontent" class="form-control" style="width:100%;height:200px;visibility:hidden;"></textarea>
+			</div>
+			<button type="button" class="btn btn-info btn-block" id="btn_reply" >回复</button>
+		</div>
 	</div>
 
 
 	<div style="padding-left:800px;">
-		<include file="./Application/Home/View/Bbs/master_info.html" op="none" />
+		<include file="./Application/Home/View/Bbs/master_info.html" op="none" rnickname="{$Think.session.rnickname}" rhead_photo="{$Think.session.rhead_photo}" />
 	</div>
 </div>
+
+
+<script type="text/javascript">
+var editor;
+KindEditor.ready(function(K) {
+	editor = K.create('textarea[name="zcontent"]', {
+		resizeType : 1,
+		allowPreviewEmoticons : true,
+		allowImageUpload : true,
+		autoHeightMode : true,
+		allowFileManager: true,
+		afterCreate : function() {
+			this.loadPlugin('autoheight');
+		},
+		items : [
+			'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+			'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+			'insertunorderedlist', '|', 'emoticons', 'image', 'link']
+	});
+});
+$(document).ready(function(){
+	$('#btn_reply').click(function(){
+		var url = '__ROOT__/Home/Bbs/post_reply';
+		$.ajax({
+			url:url,
+			dataType:'json',
+			data:{
+				tid:$('#tid').val(),
+				tsummary:editor.text().substr(0,100),
+				tcontent:editor.html()
+			},
+			success:function(t,s,r){
+				cdialog.show_info('回复成功！',function(){
+					window.location.reload();
+				});
+			},
+			error:function(t){
+				eds_framework.error_handler(url, t);
+			}
+		});
+	});
+});
+function to_post_list(cid){
+	window.location.href="__ROOT__/Home/Bbs/post_list?cid="+cid+"#start";
+}
+
+</script>

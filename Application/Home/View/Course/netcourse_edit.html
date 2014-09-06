@@ -1,0 +1,147 @@
+<layout name="layout" replace="{__REEPLACE__}" />
+
+
+<include file="./Application/Home/View/welcome_picmotto.html" pic1="course_right" pic2="course_book" />
+
+<link rel="stylesheet" href="__PUBLIC__/kindeditor-4.1.10/themes/default/default.css" />
+<script charset="utf-8" src="__PUBLIC__/kindeditor-4.1.10/kindeditor-min.js"></script>
+<script charset="utf-8" src="__PUBLIC__/kindeditor-4.1.10/lang/zh_CN.js"></script>
+<style>
+
+
+.input_title{
+	font-style: normal;
+	padding: 10px;
+}
+
+</style>
+
+<div class="container" style="padding-left:0px;padding-right:0px;background-color:rgb(234,234,234);">
+	<include file="./Application/Home/View/layout_banner.html" display0="block" display1="block"  bgcolor="2,183,230"
+		title0="网络学院" href0="__ROOT__/Home/Course/index#start"
+		title1="网络课程" href1="__ROOT__/Home/Course/netcourse?page=0#start"
+	/>
+
+	<div style="margin:50px;">
+		<div style="margin:10px 0;">
+			<div style="width:525px;float:left;margin:10px 20px;">
+				<input type="hidden" id="eid" value="{$eid}" />
+				<div class="input_title">标题</div>
+				<input type="text" id="etitle" class="form-control" placeholder="title input" value="{$etitle}" />
+				<div class="input_title">作者</div>
+				<input type="text" id="eauthor_name" class="form-control" placeholder="author_name input" value="{$eauthor_name}" />
+				<div class="input_title">作者职称</div>
+				<input type="text" id="elevel" class="form-control" placeholder="position input" value="{$elevel}" />
+				<div class="input_title">作者任职学校</div>
+				<input type="text" id="eauthor_college" class="form-control" placeholder="college input" value="{$eauthor_college}" />
+			</div>
+			<div style="width:100%;padding-left:575px;text-align:center;">
+				<img id="eflag_show" src="__PUBLIC__/uploads{$eflag}" pathname="{$eflag}" width="309px" height="195px" style="margin:10px;" />
+				<form name="form_eflag" method="post" enctype="multipart/form-data">
+					<input type="file" id="eflag" name="eflag" class="form-control" placeholder="flag input" value="{$eflag}" />
+				</form>
+				<img id="eauthor_photo_show" src="__PUBLIC__/uploads{$eauthor_photo}" pathname="{$eauthor_photo}" width="140px" height="157px" style="margin:10px;" />
+				<form name="form_eauthor_photo" method="post" enctype="multipart/form-data">
+					<input type="file" id="eauthor_photo" name="eauthor_photo" class="form-control" placeholder="author_photo input" value="{$eauthor_photo}" />
+				</form>
+			</div>
+		</div>
+
+		<div style="clear:both;">
+			<textarea name="econtent" class="form-control" style="width:100%;height:300px;visibility:hidden;">{$econtent}</textarea>
+		</div>
+		<<div>
+			<button type="button" class="btn btn-info btn-block" id="btn_save">暂存</button>
+			<button type="button" class="btn btn-info btn-block" id="btn_release">发布</button>
+		</div>
+	</div>
+
+</div>
+
+<script type="text/javascript">
+var editor;
+KindEditor.ready(function(K) {
+	editor = K.create('textarea[name="econtent"]', {
+		resizeType : 1,
+		allowPreviewEmoticons : true,
+		allowImageUpload : true,
+		autoHeightMode : true,
+		allowFileManager: true,
+		afterCreate : function() {
+			this.loadPlugin('autoheight');
+		},
+		items : [
+			'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+			'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+			'insertunorderedlist', '|', 'emoticons', 'image', 'link']
+	});
+});
+
+function netcourse_upload(url,elem_id,elem_show){
+	$.ajaxFileUpload({
+		url:url,
+		secureuri:false,
+		fileElementId:elem_id,
+		data:{type:'flag'},
+		dataType:'json',
+		success:function(t,s,r){
+			if(t.result == 0){
+				elem_show.attr('src', '__PUBLIC__/uploads'+t.pathname);
+				elem_show.attr('pathname', t.pathname);
+			} else {
+				cdialog.show_alert(t.msg);
+			}
+		},
+		error:function(t){
+			eds_framework.error_handler(url,t);
+		}
+	});
+}
+function save(release){
+	var url = "__ROOT__/Home/Course/netcourse_save";
+	$.ajax({
+		url:url,
+		type:'post',
+		dataType:'json',
+		data:{
+			eid:$('#eid').val(),
+			etitle:$('#etitle').val(),
+			eauthor_name:$('#eauthor_name').val(),
+			elevel:$('#elevel').val(),
+			eauthor_college:$('#eauthor_college').val(),
+			eauthor_photo:$('#eauthor_photo_show').attr('pathname'),
+			eflag:$('#eflag_show').attr('pathname'),
+			econtent:editor.html(),
+			esummary:editor.text().substr(0,100),
+			release:release,
+		},
+		success:function(t,s,r){
+			if(t.result == 0){
+				cdialog.show_info('操作成功！',function(){
+					window.location.href="__ROOT__/home/Course/netcourse#start";
+				});
+			} else {
+				console.log(t);
+				cdialog.show_alert('操作失败！错误信息：'+t.msg);
+			}
+		},
+		error:function(t){eds_framework.error_handler(url,t);}
+	});
+}
+$(document).ready(function(){
+	$('#eflag').change(function(){
+		var url = '__ROOT__/Home/Course/netcourse_upload';
+		netcourse_upload(url,'eflag',$('#eflag_show'));
+	});
+	$('#eauthor_photo').change(function(){
+		var url = '__ROOT__/Home/Course/netcourse_upload';
+		netcourse_upload(url,'eauthor_photo',$('#eauthor_photo_show'));
+	});
+	$('#btn_save').click(function(){
+		save(0);
+	});
+	$('#btn_release').click(function(){
+		save(1);
+	});
+});
+</script>
