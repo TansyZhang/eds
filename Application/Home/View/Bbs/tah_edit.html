@@ -183,7 +183,7 @@ $(document).ready(function(){
 			success:function(t,s,r){
 				if(t.result == 0){
 					cdialog.show_info('操作成功！',function(){
-						window.location.href="__ROOT__/Home/Bbs/tah";
+						window.location.href="__ROOT__/Home/Bbs/tah_dtl?rid={$rid}";
 					});
 				}else{
 					cdialog.show_alert('操作失败！错误信息：'+t.msg);

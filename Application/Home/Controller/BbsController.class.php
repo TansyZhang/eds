@@ -349,6 +349,7 @@ class BbsController extends EdsController {
     	$m = M('Register');
     	$data['rid'] = $rid;
     	$data['rpassword'] = sha1(md5('000000'));
+        $data['rlast_edited_time'] = date('Y-m-d H:i:s', time());
     	if($m->save($data)){
 			$this->show('{"result":0,"msg":"succeed."}', 'utf-8');
     	} else {
@@ -382,7 +383,7 @@ class BbsController extends EdsController {
 		$lim['rstate'] = array('in', '(0,10)');
 		$lim['rrole'] = array('gt', 25);//使用25作为分界线
 		$this->tah_list = $m->where($lim)->field(true)->select();
-		echo $m->_sql();
+		//echo $m->_sql();
 		$this->display();
 	}
 
@@ -392,13 +393,40 @@ class BbsController extends EdsController {
     		$this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
             return;
 		}
-    	$m = M('ManagerView');
+    	$m = M('UserView');
     	$lim['rid'] = I('rid');
     	$register = $m->where($lim)->find();
-    	if(!$register){
+    	if($register == false){
     		$this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
             return;
     	}
+        $this->rid = $register['rid'];
+        $this->raccount = $register['raccount'];
+        $this->rnickname = $register['rnickname'];
+        $this->rcreated_time = $register['rcreated_time'];
+        $this->rlast_edited_time = $register['rlast_edited_time'];
+        $this->rstate = $register['rstate'];
+        $this->rstate_name = $register['rstate_name'];
+
+        $this->gname = $register['gname'];
+        $this->uname = $register['uname'];
+        $this->uchar = $register['uchar'];
+        $this->uchar_name = $register['uchar_name'];
+
+        $this->rstate = $register['rstate'];
+        $this->ucreate_post = $register['ucreate_post'];
+        $this->ucreate_reply = $register['ucreate_reply'];
+        $this->ucreate_msg = $register['ucreate_msg'];
+        $this->ucreate_ex_note = $register['ucreate_ex_note'];
+        $this->ucreate_ex_trend = $register['ucreate_ex_trend'];
+        $this->ucreate_ex_project = $register['ucreate_ex_project'];
+        $this->uupload_courseware = $register['uupload_courseware'];
+        $this->udownload_courseware = $register['udownload_courseware'];
+        $this->umanage_student = $register['umanage_student'];
+
+        //$this->mpcreate_teacher=$register['mpcreate_teacher'];
+        //dump($register);
+        $this->display();
 	}
 
 	public function tah_edit($rid = -1){
@@ -414,6 +442,36 @@ class BbsController extends EdsController {
 			return;
 		}
 
+        $m = M('UserView');
+        $lim['rid'] = $rid;
+        $register = $m->where($lim)->find();
+        if($register == false){
+            $this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
+            return;
+        }
+        $this->rid = $register['rid'];
+        $this->raccount = $register['raccount'];
+        $this->rnickname = $register['rnickname'];
+        $this->rcreated_time = $register['rcreated_time'];
+        $this->rlast_edited_time = $register['rlast_edited_time'];
+        $this->rstate = $register['rstate'];
+        $this->rstate_name = $register['rstate_name'];
+
+        $this->uchar = $register['uchar'];
+
+        $this->rstate = $register['rstate'];
+        $this->ucreate_post = $register['ucreate_post'];
+        $this->ucreate_reply = $register['ucreate_reply'];
+        $this->ucreate_msg = $register['ucreate_msg'];
+        $this->ucreate_ex_note = $register['ucreate_ex_note'];
+        $this->ucreate_ex_trend = $register['ucreate_ex_trend'];
+        $this->ucreate_ex_project = $register['ucreate_ex_project'];
+        $this->uupload_courseware = $register['uupload_courseware'];
+        $this->udownload_courseware = $register['udownload_courseware'];
+        $this->umanage_student = $register['umanage_student'];
+
+        //dump($register);
+        $this->display();
 	}
     public function tah_save($rid = -1,$ugid=-1,$uchar=-1,$raccount='',$rpassword='',$rnickname='',
     	$rstate='',
@@ -491,7 +549,7 @@ class BbsController extends EdsController {
     		//$data['rcreated_time'] = date('Y-m-d H:i:s',time());
     		$data['rlast_edited_time']  = date('Y-m-d H:i:s',time());
     		$data['rhead_photo'] = '/assets/image/headphoto/default.png';
-			$rid = $m->add($data);
+			$m->save($data);
     		if($rid){
     			$data2['urid'] = $rid;
     			$data2['uchar'] = $uchar;
@@ -499,7 +557,7 @@ class BbsController extends EdsController {
     			$data2['uname'] = $rnickname;
     			$data2['udisplay_name'] = $rnickname;
     			//$data2['usender'] = 0;//0-未知
-    			$data2['uuid'] = session('uid');
+    			//$data2['uuid'] = session('uid');
     			$data2['uhead_photo'] = '/assets/image/headphoto/default.png';
     			$data2['ucreate_post']=$ucreate_post=='true'?1:0;
 				$data2['ucreate_reply']=$ucreate_reply=='true'?1:0;
@@ -510,11 +568,15 @@ class BbsController extends EdsController {
 				$data2['uupload_courseware']=$uupload_courseware=='true'?1:0;
 				$data2['udownload_courseware']=$udownload_courseware=='true'?1:0;
 				$data2['umanage_student']=$umanage_student=='true'?1:0;
+                $data2['ulast_edited_time']=date('Y-m-d H:i:s',time());
     			$m2 = M('User');
-    			if($m2->add($data2)){
-    				$this->show('{"result":0,"msg":"adding succeed."}', 'utf-8');
+                $data2['uid'] = $m2->where('`urid`='.$rid)->find()['uid'];
+                $result = $m2->save($data2);
+    			if($result){
+    				$this->show('{"result":0,"msg":"saving succeed."}', 'utf-8');
     			} else{
-    				$this->show('{"result":1,"msg":"error1."}', 'utf-8');
+    				$this->show('{"result":1,"msg":"'.$m2->_sql().
+                        $m2->getDbError().'"}', 'utf-8');
     			}
     		}else{
     			$this->show('{"result":1,"msg":"'.htmlspecialchars($m->_sql(),ENT_QUOTES).'"}', 'utf-8');
