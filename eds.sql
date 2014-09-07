@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : localhost
-Source Server Version : 50536
+Source Server Version : 50611
 Source Host           : localhost:3306
 Source Database       : eds
 
 Target Server Type    : MYSQL
-Target Server Version : 50536
+Target Server Version : 50611
 File Encoding         : 65001
 
-Date: 2014-09-06 14:45:05
+Date: 2014-09-07 14:34:50
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -385,7 +385,7 @@ INSERT INTO `t_register` VALUES ('1', 'system', '10470c3b4b1fed12c3baac014be15fa
 INSERT INTO `t_register` VALUES ('20', 's1234', '1f604490cbdd4ec35cfa681bcf3df8fac26e0cb5', 'nick', '/assets/image/headphoto/default.png', '0', '0', '20', null, null, null, '2014-08-31 21:14:30', '2014-08-31 20:11:06', null);
 INSERT INTO `t_register` VALUES ('21', 's', '1f604490cbdd4ec35cfa681bcf3df8fac26e0cb5', '', '/assets/image/headphoto/default.png', '0', '0', '20', null, null, null, '2014-08-31 21:00:55', '2014-08-31 21:00:55', null);
 INSERT INTO `t_register` VALUES ('22', 's123', '1f604490cbdd4ec35cfa681bcf3df8fac26e0cb5', '任人人', '/assets/image/headphoto/default.png', '0', '0', '20', null, null, null, '2014-08-31 21:30:45', '2014-08-31 21:30:45', null);
-INSERT INTO `t_register` VALUES ('23', 'NJU123', '1f604490cbdd4ec35cfa681bcf3df8fac26e0cb5', '张三', '/assets/image/headphoto/default.png', '0', '0', '30', null, null, null, '2014-09-06 14:13:20', '2014-09-06 14:13:20', null);
+INSERT INTO `t_register` VALUES ('23', 'NJU123', '1f604490cbdd4ec35cfa681bcf3df8fac26e0cb5', '张三', '/assets/image/headphoto/default.png', '0', '0', '30', null, null, null, '2014-09-07 14:29:01', '2014-09-06 14:13:20', null);
 
 -- ----------------------------
 -- Table structure for `t_reply`
@@ -485,13 +485,14 @@ CREATE TABLE `t_user` (
   `uupload_courseware` int(2) NOT NULL DEFAULT '1' COMMENT '是否有权上传课件',
   `umanage_student` int(2) NOT NULL DEFAULT '1' COMMENT '是否有权创建学生',
   `udownload_courseware` int(2) NOT NULL DEFAULT '1' COMMENT '是否有权下载[登录才允许下载的]课件',
+  `ulast_edited_time` datetime DEFAULT NULL COMMENT '最后修改时间',
   PRIMARY KEY (`uid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_user
 -- ----------------------------
-INSERT INTO `t_user` VALUES ('1', '23', '90', '0', '123', '张三', null, '0', '0', null, '0', null, null, null, null, null, '/assets/image/headphoto/default.png', null, null, null, '1', '1', '1', '1', '1', '1', '1', '1', '0');
+INSERT INTO `t_user` VALUES ('1', '23', '90', '0', 'NJU123', '张三', null, '0', '0', null, '0', null, null, null, null, null, '/assets/image/headphoto/default.png', null, null, null, '0', '0', '0', '0', '0', '0', '0', '0', '0', '2014-09-07 14:29:01');
 
 -- ----------------------------
 -- Table structure for `t_z`
@@ -553,4 +554,4 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- View structure for `t_user_view`
 -- ----------------------------
 DROP VIEW IF EXISTS `t_user_view`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `t_user_view` AS select `t_register`.`rid` AS `rid`,`t_register`.`raccount` AS `raccount`,`t_register`.`rpassword` AS `rpassword`,`t_register`.`rnickname` AS `rnickname`,`t_register`.`rhead_photo` AS `rhead_photo`,`t_register`.`rlast_lgid` AS `rlast_lgid`,`t_register`.`rstate` AS `rstate`,`t_register`.`rrole` AS `rrole`,`t_register`.`rshield_role` AS `rshield_role`,`t_register`.`rshielded_time` AS `rshielded_time`,`t_register`.`rshielded_type` AS `rshielded_type`,`t_register`.`rlast_edited_time` AS `rlast_edited_time`,`t_register`.`rcreated_time` AS `rcreated_time`,`t_register`.`rshielded_tick` AS `rshielded_tick`,`t_user`.`uchar` AS `uchar`,`t_user`.`ugid` AS `ugid`,`t_user`.`uno` AS `uno`,`t_user`.`uname` AS `uname`,`t_user`.`uen_name` AS `uen_name`,`t_user`.`udisplay_name` AS `udisplay_name`,`t_user`.`usender` AS `usender`,`t_user`.`ubirthday` AS `ubirthday`,`t_user`.`uuid` AS `uuid`,`t_user`.`uemail` AS `uemail`,`t_user`.`umobile_phone` AS `umobile_phone`,`t_user`.`utel` AS `utel`,`t_user`.`uqq` AS `uqq`,`t_user`.`uoffice_addr` AS `uoffice_addr`,`t_user`.`uhead_photo` AS `uhead_photo`,`t_user`.`uprofile` AS `uprofile`,`t_user`.`uconstellation` AS `uconstellation`,`t_user`.`ugrade` AS `ugrade`,`t_user`.`ucreate_post` AS `ucreate_post`,`t_user`.`ucreate_reply` AS `ucreate_reply`,`t_user`.`ucreate_msg` AS `ucreate_msg`,`t_user`.`ucreate_ex_note` AS `ucreate_ex_note`,`t_user`.`ucreate_ex_trend` AS `ucreate_ex_trend`,`t_user`.`ucreate_ex_project` AS `ucreate_ex_project`,`t_user`.`uupload_courseware` AS `uupload_courseware`,`t_user`.`umanage_student` AS `umanage_student`,`t_user`.`udownload_courseware` AS `udownload_courseware`,`dic_a`.`dic_value` AS `rstate_name`,`dic_b`.`dic_value` AS `usender_name` from (((`t_register` join `t_user`) join `t_dic` `dic_a`) join `t_dic` `dic_b`) where ((`t_register`.`rid` = `t_user`.`urid`) and (`t_register`.`rstate` = `dic_a`.`dic_key`) and (`dic_a`.`dic_type` = 'rstate') and (`dic_b`.`dic_key` = `t_user`.`usender`) and (`dic_b`.`dic_type` = 'usender')) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `t_user_view` AS select `t_register`.`rid` AS `rid`,`t_register`.`raccount` AS `raccount`,`t_register`.`rpassword` AS `rpassword`,`t_register`.`rnickname` AS `rnickname`,`t_register`.`rhead_photo` AS `rhead_photo`,`t_register`.`rlast_lgid` AS `rlast_lgid`,`t_register`.`rstate` AS `rstate`,`t_register`.`rrole` AS `rrole`,`t_register`.`rshield_role` AS `rshield_role`,`t_register`.`rshielded_time` AS `rshielded_time`,`t_register`.`rshielded_type` AS `rshielded_type`,`t_register`.`rlast_edited_time` AS `rlast_edited_time`,`t_register`.`rcreated_time` AS `rcreated_time`,`t_register`.`rshielded_tick` AS `rshielded_tick`,`t_user`.`uchar` AS `uchar`,`t_user`.`ugid` AS `ugid`,`t_user`.`uno` AS `uno`,`t_user`.`uname` AS `uname`,`t_user`.`uen_name` AS `uen_name`,`t_user`.`udisplay_name` AS `udisplay_name`,`t_user`.`usender` AS `usender`,`t_user`.`ubirthday` AS `ubirthday`,`t_user`.`uuid` AS `uuid`,`t_user`.`uemail` AS `uemail`,`t_user`.`umobile_phone` AS `umobile_phone`,`t_user`.`utel` AS `utel`,`t_user`.`uqq` AS `uqq`,`t_user`.`uoffice_addr` AS `uoffice_addr`,`t_user`.`uhead_photo` AS `uhead_photo`,`t_user`.`uprofile` AS `uprofile`,`t_user`.`uconstellation` AS `uconstellation`,`t_user`.`ugrade` AS `ugrade`,`t_user`.`ucreate_post` AS `ucreate_post`,`t_user`.`ucreate_reply` AS `ucreate_reply`,`t_user`.`ucreate_msg` AS `ucreate_msg`,`t_user`.`ucreate_ex_note` AS `ucreate_ex_note`,`t_user`.`ucreate_ex_trend` AS `ucreate_ex_trend`,`t_user`.`ucreate_ex_project` AS `ucreate_ex_project`,`t_user`.`uupload_courseware` AS `uupload_courseware`,`t_user`.`umanage_student` AS `umanage_student`,`t_user`.`udownload_courseware` AS `udownload_courseware`,`dic_a`.`dic_value` AS `rstate_name`,`dic_b`.`dic_value` AS `usender_name`,`dic_c`.`dic_value` AS `uchar_name`,`t_college`.`gname` AS `gname`,`t_college`.`gstate` AS `gstate` from (((((`t_register` join `t_user`) join `t_dic` `dic_a`) join `t_dic` `dic_b`) join `t_dic` `dic_c`) join `t_college`) where ((`t_register`.`rid` = `t_user`.`urid`) and (`t_register`.`rstate` = `dic_a`.`dic_key`) and (`dic_a`.`dic_type` = 'rstate') and (`dic_b`.`dic_key` = `t_user`.`usender`) and (`dic_b`.`dic_type` = 'usender') and (`t_user`.`uchar` = `dic_c`.`dic_key`) and (`dic_c`.`dic_type` = 'uchar') and (`t_user`.`ugid` = `t_college`.`gid`)) ;
