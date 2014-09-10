@@ -80,61 +80,147 @@ class BbsController extends EdsController {
 		}
     }
 
-    public function post($zid=-1){
-    	$zid = I('zid');
-    	if($zid == ''){
-    		$zid = -1;
+    public function post($tid=-1){
+    	$tid = I('tid');
+    	if($tid == ''){
+    		$tid = -1;
     	}
-    	if($zid != -1){
-    		$m = M('');
+    	if($tid != -1){
+    		$m = M('Bbs');
+            $lim['tid'] = $tid;
+            $record = $m->where($lim)->find();
+            $this->tid = $tid;
+            $this->ttitle = $record['ttitle'];
+            $this->tsummary = $record['tsummary'];
+            $this->tcontent = $record['tcontent'];
+            $this->ttopic = $record['ttopic'];
+            $this->cid = $record['ttopic'];
+            $this->tstate = $record['tstate'];
+            $this->tcreated_time = $record['tcreated_time'];
     	}
     	$this->display();
     }
 
     public function post_release($zid=-1,$zsub_type='',$ztitle='',$zsummary='',$zcontent=''){
-    	$zid = I('zid');
-    	$zsub_type = I('zsub_type');
-    	$ztitle = I('ztitle');
-    	$zsummary = I('zsummary');
-    	$zcontent = I('zcontent');
-    	if($zsub_type==''||$ztitle==''||$zsummary==''||$zcontent==''){
-    		$this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
+        $zid = I('zid');
+        $zsub_type = I('zsub_type');
+        $ztitle = I('ztitle');
+        $zsummary = I('zsummary');
+        $zcontent = I('zcontent');
+        if($zsub_type==''||$ztitle==''||$zsummary==''||$zcontent==''){
+            $this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
             return;
-    	}
-    	if($zid == ''){
-    		$m = M('Bbs');
-    		$data['ttopic'] = $zsub_type;
-    		$data['trid'] = 1;//TODO 系统管理员
-    		$data['ttitle'] = $ztitle;
-    		$data['tsummary'] = $zsummary;
-    		$data['tcontent'] = $zcontent;
-    		$data['tstate'] = 10;//发布
-    		$data['tcreated_time'] = date('Y-m-d H:i:s',time());
-    		if($m->add($data)){
-    			$this->show('{"result":0,"msg":"adding succeed."}', 'utf-8');
-            	return;
-    		}else{
-    			$this->show('{"result":1,"msg":"'.($m->getDbError()).'"}', 'utf-8');
-            	return;
-    		}
-    	} else {
-    		$m = M('Bbs');
-    		$data['tid'] = $zid;
-    		$data['ttopic'] = $zsub_type;
-    		$data['ttitle'] = $ztitle;
-    		$data['tsummary'] = $zsummary;
-    		$data['tcontent'] = $zcontent;
-    		$data['tstate'] = 10;//发布
-    		if($m->save($data)){
-    			$this->show('{"result":0,"msg":"adding succeed."}', 'utf-8');
-            	return;
-    		}else{
-    			$this->show('{"result":1,"msg":"'.($m->getDbError()).'"}', 'utf-8');
-            	return;
-    		}
-    	}
+        }
+        $this->p_post_save($zid,$zsub_type,$ztitle,$zsummary,$zcontent,10);//10-发布
+    }
+    public function post_save($zid=-1,$zsub_type='',$ztitle='',$zsummary='',$zcontent=''){
+        $zid = I('zid');
+        $zsub_type = I('zsub_type');
+        $ztitle = I('ztitle');
+        $zsummary = I('zsummary');
+        $zcontent = I('zcontent');
+        if($zsub_type==''||$ztitle==''||$zsummary==''||$zcontent==''){
+            $this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
+            return;
+        }
+        $this->p_post_save($zid,$zsub_type,$ztitle,$zsummary,$zcontent,0);//0-编辑中
+    }
+    private function p_post_save($zid,$zsub_type,$ztitle,$zsummary,$zcontent,$tstate){
+        if($zid == '' || $zid == -1){
+            $m = M('Bbs');
+            $data['ttopic'] = $zsub_type;
+            $data['trid'] = session('rid');
+            $data['ttitle'] = $ztitle;
+            $data['tsummary'] = $zsummary;
+            $data['tcontent'] = $zcontent;
+            $data['tstate'] = $tstate;//编辑中
+            $data['tcreated_time'] = date('Y-m-d H:i:s',time());
+            $data['tlast_edited_time'] = $data['tcreated_time'];
+            if($m->add($data)){
+                $this->show('{"result":0,"msg":"adding succeed."}', 'utf-8');
+                return;
+            }else{
+                $this->show('{"result":1,"msg":"'.($m->getDbError()).'"}', 'utf-8');
+                return;
+            }
+        } else {
+            $m = M('Bbs');
+            $data['tid'] = $zid;
+            $data['ttopic'] = $zsub_type;
+            $data['ttitle'] = $ztitle;
+            $data['tsummary'] = $zsummary;
+            $data['tcontent'] = $zcontent;
+            $data['tstate'] = $tstate;//编辑中
+            $data['tlast_edited_time'] = date('Y-m-d H:i:s',time());
+            if($m->save($data)){
+                $this->show('{"result":0,"msg":"adding succeed."}', 'utf-8');
+                return;
+            }else{
+                $this->show('{"result":1,"msg":"'.($m->getDbError()).'"}', 'utf-8');
+                return;
+            }
+        }
     }
 
+    public function post_top($tid=-1,$ttop=0){
+        $tid = I('tid');
+        $ttop = I('ttop');
+        if($tid != ''){
+            if($ttop == 0){//取消置顶
+                $m = M('Bbs');
+                $data['tid'] = $tid;
+                $data['tstate'] = 10;
+                $data['ttop_time'] = date('Y-m-d H:i:s',time());
+                if($m->save($data)){
+                    $this->show('{"result":0,"msg":"succeed."}', 'utf-8');
+                    return;
+                } else {
+                    $this->show('{"result":1,"msg":"db error."}', 'utf-8');
+                    return;
+                }
+            } else if($ttop == 1){//置顶
+                $m = M('Bbs');
+                $data['tid'] = $tid;
+                $data['tstate'] = 20;
+                $data['ttop_time'] = date('Y-m-d H:i:s',time());
+                if($m->save($data)){
+                    $this->show('{"result":0,"msg":"succeed."}', 'utf-8');
+                    return;
+                } else {
+                    $this->show('{"result":1,"msg":"db error.'.$m->_sql().'"}', 'utf-8');
+                    return;
+                }
+
+            }
+        }
+        $this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
+    }
+    public function post_delete($tid = -1){
+        $tid = I('tid');
+        if($tid == ''){
+            $this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
+        }
+        $m = M('Bbs');
+        $data['tid'] = $tid;
+        $data['tstate'] = 30;//被原作者删除
+        if($m->save($data)){
+            $this->show('{"result":0,"msg":"succeed."}', 'utf-8');
+        } else{
+            $this->show('{"result":1,"msg":"db error."}', 'utf-8');
+        }
+    }
+
+    public function my_post(){
+        session('rid',1);
+        $m = M('Bbs');
+        $lim['tstate'] = array('in', '0,10,20');//0-编辑中,10-发布,20-置顶
+        $lim['trid'] = session('rid');
+        $lim['treply_id'] = array('exp', ' is null ');
+        $this->post_list = $m->where($lim)->order('tstate')->select();
+        //echo $m->_sql();return;
+        //dump($this->post_list);
+        $this->display();
+    }
 
 
 	public function acc(){

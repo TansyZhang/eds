@@ -15,6 +15,9 @@
 	padding-left: 50px;
 	letter-spacing:5px;
 }
+#right_btn_post:active{
+	color:gray;
+}
 </style>
 
 
@@ -26,8 +29,8 @@
 		</span>
 		<a href="__ROOT__/Home/Bbs/center?rid={$Think.session.rid}#start"><img src="__PUBLIC__{$Think.session.rhead_photo}" width="80px" height="80px" style="float:right;margin:20px 20px 20px 0;"/></a>
 	</div>
-	<div class="quick_op" style="margin:20px;background-color:rgb(139,60,126);padding:5px;text-align:center;clear:both">
-		<span><a href="#" style="color:white;">我要发帖</a></span>
+	<div class="quick_op" id="right_btn_post" style="cursor:pointer;margin:20px;background-color:rgb(139,60,126);padding:5px;text-align:center;clear:both;color:white;">
+		我要发帖
 	</div>
 </div>
 
@@ -40,12 +43,20 @@
 	<li><a href="__ROOT__/Home/Bbs/cw?uid=1#start">课程课件</a></li>
 	<li><a href="__ROOT__/Home/Bbs/ta?uid=1#start">助教管理</a></li>
 
-	<li><a href="#">--【管理员】--</a></li>
+	<li><a href="#">【管理员】</a></li>
 	<li><a href="__ROOT__/Home/Bbs/tah?#start">教师管理</a></li>
 	<li><a href="__ROOT__/Home/Bbs/stu?#start">学生管理</a></li>
 	<li><a href="__ROOT__/Home/Bbs/xx?#start">敏感词管理</a></li>
 	<li><a href="__ROOT__/Home/Bbs/xx?#start">XX管理</a></li>
 	<li><a href="__ROOT__/Home/Bbs/xx?#start">XX管理</a></li>
-	<li><a href="#">--【超管】--</a></li>
+	<li><a href="#">【超管】</a></li>
 	<li><a href="__ROOT__/Home/Bbs/acc?#start">账户管理</a></li>
 </ul>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#right_btn_post').click(function(){
+		window.location.href="post#start";
+	});
+});
+</script>

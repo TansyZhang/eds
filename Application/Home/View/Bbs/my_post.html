@@ -24,6 +24,9 @@
 	line-height: 30px;
 	font-size: 14pt;
 }
+.post_item_op{
+	cursor: pointer;
+}
 </style>
 
 <div class="container" style="padding-left:0px;padding-right:0px;">
@@ -42,25 +45,106 @@
 			<div class="center_title">我的帖子</div>
 			<div class="separator"></div>
 			<div class="post_list">
-				<div class="post_item">
-					<span class="op"><span>2014-08-08 15:45:29</span>&nbsp;<span>修改</span>&nbsp;<span>查看</span>&nbsp;<span>删除</span></span>
-					<div><a href="#">帖子标题</a><span class="state">(编辑中)</span></div>
-				</div>
-				<div class="post_item">
-					<span class="op"><span>2014-08-08 15:45:29</span>&nbsp;<span>修改</span>&nbsp;<span>查看</span>&nbsp;<span>删除</span></span>
-					<div><a href="#">帖子标题</a><span class="state">(编辑中)</span></div>
-				</div>
-				<div class="post_item">
-					<span class="op"><span>2014-08-08 15:45:29</span>&nbsp;<span>修改</span>&nbsp;<span>查看</span>&nbsp;<span>删除</span></span>
-					<div><a href="#">帖子标题</a><span class="state">(编辑中)</span></div>
-				</div>
-				<div class="post_item">
-					<span class="op"><span>2014-08-08 15:45:29</span>&nbsp;<span style="color:gray;cursor:default;" title="已经发布的帖子不能修改">修改</span>&nbsp;<span>查看</span>&nbsp;<span>删除</span></span>
-					<div><a href="#">帖子标题</a><span class="state"></span></div>
-				</div>
+
+				<volist name="post_list" id="post_vo" key="k">
+					<div class="post_item">
+						<span class="op">
+							<span class="datetime">{$post_vo.tcreated_time}</span>
+							<?php if($post_vo['tstate'] == 10/*只有发布中的才可以被置顶*/){ ?>
+							&nbsp;<span class="post_item_op post_item_2_top" onclick="post_2_top({$post_vo.tid},1)" id="post_top_text_{$post_vo.tid}" title="将该帖子置顶">置顶</span>
+							<?php } else if($post_vo['tstate'] == 20){ ?>
+							&nbsp;<span class="post_item_op post_item_2_top" onclick="post_2_top({$post_vo.tid},0)" id="post_top_c_text_{$post_vo.tid}"  title="取消该帖子置顶">取消置顶</span>
+							<?php } ?>
+							&nbsp;<span class="post_item_op post_item_delete" onclick="post_delete({$post_vo.tid},this)" title="删除“{$post_vo.ttitle}”">删除</span>
+						</span>
+						<div>
+							<a 
+								<?php if($post_vo['tstate'] == 0/*编辑中*/){ ?>
+								href="post?tid={$post_vo.tid}#start" title="点击编辑“{$post_vo.ttitle}”"
+								<?php } else { ?>
+								href="post_dtl?tid={$post_vo.tid}#start" title="点击查看“{$post_vo.ttitle}”"
+								<?php } ?>
+							>
+								<?php if($post_vo['tstate'] == 20){ ?>
+									<span style="color:red" title="该帖子已经被管理员置顶">[顶]</span>
+								<?php } ?>
+								<span style="post_item_title">
+									<?php if(mb_strlen($post_vo['ttitle'],'utf-8') < 10){
+										echo $post_vo['ttitle'];
+									} else { 
+										echo mb_substr($post_vo['ttitle'], 0, 10, 'utf-8').'……';
+									} ?>
+								</span>
+							</a>
+							<?php if($post_vo['tstate'] == 0){ ?>
+								<span class="state">(编辑中)</span>
+							<?php } ?>
+						</div>
+					</div>
+				</volist>
+
+
 			</div>
 		</div>
 
+		<include file="./Application/Home/View/control_btn.html" style="margin:20px 0;" id="btn_post" text="我要发帖" />
 
 	</div>
 </div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#btn_post').click(function(){
+		window.location.href="post#start";
+	});
+});
+function post_2_top(tid,ttop){
+	var url = '__ROOT__/Home/Bbs/post_top';
+	//$(this).text('正在操作……');
+	$.ajax({
+		url:url,
+		dataType:'json',
+		type:'post',
+		data:{
+			tid:tid,
+			ttop:ttop
+		},
+		success:function(t,s,r){
+			if(t.result==0){
+				cdialog.show_info('操作成功！',function(){
+					window.location.reload();
+				});
+			}else {
+				cdialog.show_alert('操作失败！错误消息:'+t.msg);
+			}
+		},
+		error:function(t){
+			eds_framework.error_handler(url,t);
+		}
+	});
+}
+function post_delete(tid,elem){
+	var url = '__ROOT__/Home/Bbs/post_delete';
+	$(elem).text('正在删除……');
+	$.ajax({
+		url:url,
+		dataType:'json',
+		type:'post',
+		data:{
+			tid:tid
+		},
+		success:function(t,s,r){
+			if(t.result==0){
+				cdialog.show_info('操作成功！',function(){
+					window.location.reload();
+				});
+			}else {
+				cdialog.show_alert('操作失败！错误消息:'+t.msg);
+			}
+		},
+		error:function(t){
+			eds_framework.error_handler(url,t);
+		}
+	});
+}
+</script>

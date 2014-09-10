@@ -1,0 +1,19 @@
+
+
+var [editor];
+KindEditor.ready(function(K) {
+	[editor] = K.create('textarea[name="[name]"]', {
+		resizeType : 1,
+		allowPreviewEmoticons : true,
+		allowImageUpload : true,
+		autoHeightMode : true,
+		allowFileManager: true,
+		afterCreate : function() {
+			this.loadPlugin('autoheight');
+		},
+		items : [
+			'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+			'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+			'insertunorderedlist', '|', 'emoticons', 'image', 'link']
+	});
+});
