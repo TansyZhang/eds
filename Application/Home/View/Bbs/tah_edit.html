@@ -68,7 +68,7 @@
 						</div>
 					</li>
 					<li>
-						<div>账号：
+						<div style="font-size:11pt;"><span style="font-size:14pt;">账号：</span>
 							<span class="input_hint">用户将使用“<span id="ugid_show">{$ugid}</span>
 							<span id="ugid_right_show"></span>”登录</span>
 							<input type="hidden" value="{$rid}" id="rid1" name="rid1" />
@@ -93,7 +93,7 @@
 						</div>
 					</li>
 					<li>
-						<div>职称：
+						<div style="font-size:11pt;"><span style="font-size:14pt;">职称：</span>
 							<select name="uchar" class="selecter_1" id="uchar" key="k">
 								<volist name="uchar_list" id="uchar_vo">
 									<option value="{$uchar_vo.dic_key}"
@@ -182,8 +182,12 @@ $(document).ready(function(){
 			},
 			success:function(t,s,r){
 				if(t.result == 0){
+					var rid = {$rid};
+					if(rid == -1){
+						rid = t.rid;
+					}
 					cdialog.show_info('操作成功！',function(){
-						window.location.href="__ROOT__/Home/Bbs/tah_dtl?rid={$rid}";
+						window.location.href="__ROOT__/Home/Bbs/tah_dtl?rid="+rid+"#start";
 					});
 				}else{
 					cdialog.show_alert('操作失败！错误信息：'+t.msg);
@@ -194,9 +198,13 @@ $(document).ready(function(){
 			}
 		});
 	});
-	$('#ugid_show').text($('select[name="ugid"]').val());
+	var val = $('select[name="ugid"]').val();
+	$('#ugid_show').text(val);
+	val = $('#raccount1').val().substr(val.length);
+	$('#raccount1').val(val);
+	$('#ugid_right_show').text(val);
 	$('#raccount1').keyup(function(){
-	$('#ugid_right_show').text($('#raccount1').val());
+		$('#ugid_right_show').text($('#raccount1').val());
 	});
 });
 </script>

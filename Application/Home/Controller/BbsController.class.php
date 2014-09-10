@@ -519,7 +519,7 @@ class BbsController extends EdsController {
     			$data2['uname'] = $rnickname;
     			$data2['udisplay_name'] = $rnickname;
     			$data2['usender'] = 0;//0-未知
-    			$data2['uuid'] = session('uid');
+    			$data2['uuid'] = session('uid'); if(is_null($data2['uuid']))$data2['uuid'] = 0;
     			$data2['uhead_photo'] = '/assets/image/headphoto/default.png';
     			$data2['ucreate_post']=$ucreate_post=='true'?1:0;
 				$data2['ucreate_reply']=$ucreate_reply=='true'?1:0;
@@ -530,18 +530,19 @@ class BbsController extends EdsController {
 				$data2['uupload_courseware']=$uupload_courseware=='true'?1:0;
 				$data2['udownload_courseware']=$udownload_courseware=='true'?1:0;
 				$data2['umanage_student']=$umanage_student=='true'?1:0;
+                $data2['ulast_edited_time']=date('Y-m-d H:i:s',time());
     			$m2 = M('User');
     			if($m2->add($data2)){
-    				$this->show('{"result":0,"msg":"adding succeed."}', 'utf-8');
+    				$this->show('{"result":0,"msg":"adding succeed.","rid":"'.$rid.'"}', 'utf-8');
     			} else{
-    				$this->show('{"result":1,"msg":"error1."}', 'utf-8');
+    				$this->show('{"result":1,"msg":"error1.'.$m2->getDbError().'"}', 'utf-8');
     			}
     		}else{
-    			$this->show('{"result":1,"msg":"'.htmlspecialchars($m->_sql(),ENT_QUOTES).'"}', 'utf-8');
+    			$this->show('{"result":1,"msg":"'.$m->getDbError().'"}', 'utf-8');
     		}
     	} else {
-    		$data['rid'] = $rid;//教师级别
-			//$data['raccount'] = $ugid.$raccount;
+    		$data['rid'] = $rid;
+			$data['raccount'] = $ugid.$raccount;
     		//$data['rpassword'] = sha1(md5($rpassword));
     		$data['rnickname'] = $rnickname;
     		//$data['rrole'] = 30;//教师级别
@@ -549,8 +550,7 @@ class BbsController extends EdsController {
     		//$data['rcreated_time'] = date('Y-m-d H:i:s',time());
     		$data['rlast_edited_time']  = date('Y-m-d H:i:s',time());
     		$data['rhead_photo'] = '/assets/image/headphoto/default.png';
-			$m->save($data);
-    		if($rid){
+    		if($m->save($data)){
     			$data2['urid'] = $rid;
     			$data2['uchar'] = $uchar;
     			$data2['uno'] = $raccount;
@@ -572,14 +572,14 @@ class BbsController extends EdsController {
     			$m2 = M('User');
                 $data2['uid'] = $m2->where('`urid`='.$rid)->find()['uid'];
                 $result = $m2->save($data2);
+                //echo $m2->_sql();
     			if($result){
-    				$this->show('{"result":0,"msg":"saving succeed."}', 'utf-8');
+    				$this->show('{"result":0,"msg":"saving succeed.","rid":"'.$rid.'"}', 'utf-8');
     			} else{
-    				$this->show('{"result":1,"msg":"'.$m2->_sql().
-                        $m2->getDbError().'"}', 'utf-8');
+    				$this->show('{"result":1,"msg":"'.$m2->getDbError().'"}', 'utf-8');
     			}
     		}else{
-    			$this->show('{"result":1,"msg":"'.htmlspecialchars($m->_sql(),ENT_QUOTES).'"}', 'utf-8');
+    			$this->show('{"result":1,"msg":"'.htmlspecialchars($m->getDbError(),ENT_QUOTES).'"}', 'utf-8');
     		}
     	}
     }
