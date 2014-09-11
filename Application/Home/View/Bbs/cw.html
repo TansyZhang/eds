@@ -20,7 +20,7 @@
 	float:right;
 	font-size: 12pt;
 }
-.post_item{
+.cw_item{
 	line-height: 30px;
 	font-size: 14pt;
 }
@@ -42,36 +42,28 @@
 			<div class="center_title">课程列表</div>
 			<div class="separator"></div>
 			<div class="ex_note_list">
-				<div class="post_item">
-					<span class="op">
-						<span>2014-08-08 15:45:29</span>&nbsp;
-						<span>修改</span>&nbsp;
-						<span><a href="cw_dtl?eid=1#start">查看</a></span>&nbsp;
-						<span>删除</span>
-					</span>
-					<div><a href="cw_dtl?eid=1#start">物理力学</a>（2014年秋季学期）<span class="state">(已发布)</span></div>
+
+				<volist name="course_list" id="course_vo" key="k" >
+					<div class="cw_item">
+						<span class="op">
+							<span class="datetime">{$course_vo.fcreated_time}</span>&nbsp;
+							<span>修改</span>&nbsp;
+							<span><a href="cw_dtl?fid={$course_vo.fid}#start">查看</a></span>&nbsp;
+							<span>删除</span>
+						</span>
+						<div>
+							<a href="cw_dtl?fid={$course_vo.fid}#start">{$course_vo.fname}</a>
+							（{$course_vo.fterm_name}）
+							<span class="state">({$course_vo.fstate_name})</span>
+						</div>
+					</div>
+				</volist>
+
+
+				<div class="cw_item">
+					<include file="./Application/Home/View/control_btn.html" text="添加" />
 				</div>
-				<div class="post_item">
-					<span class="op">
-						<span>2014-08-08 15:45:29</span>&nbsp;
-						<span>修改</span>&nbsp;
-						<span><a href="cw_dtl?eid=1#start">查看</a></span>&nbsp;
-						<span>删除</span>
-					</span>
-					<div><a href="cw_dtl?eid=1#start">物理力学</a>（2014年秋季学期）<span class="state">(已发布)</span></div>
-				</div>
-				<div class="post_item">
-					<span class="op">
-						<span>2014-08-08 15:45:29</span>&nbsp;
-						<span>修改</span>&nbsp;
-						<span><a href="cw_dtl?eid=1#start">查看</a></span>&nbsp;
-						<span>删除</span>
-					</span>
-					<div><a href="cw_dtl?eid=1#start">物理力学</a>（2014年秋季学期）<span class="state">(已发布)</span></div>
-				</div>
-				<div class="post_item">
-					<div><a href="#">添加</a></div>
-				</div>
+
 			</div>
 		</div>
 

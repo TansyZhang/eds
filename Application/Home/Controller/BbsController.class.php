@@ -670,6 +670,37 @@ class BbsController extends EdsController {
     	}
     }
 
+
+
+    public function cw(){
+        session('rid',1);
+        $m = M('CourseView');
+        $lim['fcreator'] = session('rid');
+        $this->course_list = $m->where($lim)->select();
+        $this->display();
+    }
+
+    public function cw_dtl($fid = -1){
+        $fid = I('fid');
+        if($fid == '' || $fid == -1){
+            $this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
+            return;
+        }
+        $m = M('CourseView');
+        $lim['fid'] = $fid;
+        $course = $m->where($lim)->find();
+        if($course == false){
+            $this->show('{"result":1,"msg":"parameters error2."}', 'utf-8');
+            return;
+        }
+        //dump($course);
+        $this->fname = $course['fname'];
+        $this->fgrade = $course['fgrade'];
+        $this->faddr = $course['faddr'];
+        $this->fterm_name = $course['fterm_name'];
+        $this->display();
+    }
+
 }
 
 ?>
