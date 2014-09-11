@@ -676,6 +676,7 @@ class BbsController extends EdsController {
         session('rid',1);
         $m = M('CourseView');
         $lim['fcreator'] = session('rid');
+        $lim['fstate'] = array('in', '0,10,20');
         $this->course_list = $m->where($lim)->select();
         $this->display();
     }
@@ -697,10 +698,121 @@ class BbsController extends EdsController {
         $this->fname = $course['fname'];
         $this->fgrade = $course['fgrade'];
         $this->faddr = $course['faddr'];
+        $this->fteacher = $course['fteacher'];
         $this->fterm_name = $course['fterm_name'];
         $this->display();
     }
 
+    public function cw_edit($fid=-1){
+        $fid = I('fid');
+
+        $mterm = M('Dic');
+        $limterm['dic_type'] = 'fterm';
+        $this->term_list = $mterm->where($limterm)->select();
+        //dump($this->term_list);
+        if($fid == '' || $fid == -1){
+            $this->fid = -1;
+            $this->display();
+            return;
+        }
+        $m = M('CourseView');
+        $lim['fid'] = $fid;
+        $record = $m->where($lim)->find();
+        if($record == false){
+            $this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
+            return;
+        }
+        $this->fid = $record['fid'];
+        $this->fname = $record['fname'];
+        $this->faddr = $record['faddr'];
+        $this->fgrade = $record['fgrade'];
+        $this->fterm = $record['fterm'];
+        $this->fteacher = $record['fteacher'];
+        $this->flast_edited_time = $record['flast_edited_time'];
+
+
+        $this->display();
+    }
+
+
+    public function cw_save($fid=-1,$fname='',$fteacher='',$fgrade='',$faddr='',$fterm='',$release=0){
+        $fid = I('fid');
+        $fname = I('fname');
+        $fteacher = I('fteacher');
+        $fgrade = I('fgrade');
+        $faddr = I('faddr');
+        $fterm = I('fterm');
+        $release = I('release');
+        if($fname == '' || $fteacher == '' || $fgrade==''||$fterm==''){
+            $this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
+            return;
+        }
+        if($fid == -1 || $fid == ''){//add
+            $m = M('Course');
+            $data['fname'] = $fname;
+            $data['fcreator'] = session('rid');
+            $data['fteacher'] = $fteacher;
+            $data['fgrade'] = $fgrade;
+            $data['faddr'] = $faddr;
+            $data['fterm'] = $fterm;
+            $data['fstate'] = $release==1?10:0;
+            $data['fcreated_time'] = date('Y-m-d H:i:s', time());
+            $data['flast_edited_time'] = $data['fcreated_time'];
+            if($m->add($data)){
+                $this->show('{"result":0,"msg":"adding succeed.","fid":"'.$fid.'"}', 'utf-8');
+            } else {
+                $this->show('{"result":1,"msg":"error1.'.$m->getDbError().'"}', 'utf-8');
+            }
+        }  else {//modify
+            $m = M('Course');
+            $data['fid'] = $fid;
+            $data['fname'] = $fname;
+            $data['fteacher'] = $fteacher;
+            $data['fgrade'] = $fgrade;
+            $data['faddr'] = $faddr;
+            $data['fterm'] = $fterm;
+            $data['fstate'] = $release==1?10:0;
+            $data['flast_edited_time'] = date('Y-m-d H:i:s', time());
+            if($m->save($data)){
+                $this->show('{"result":0,"msg":"saving succeed.","fid":"'.$fid.'"}', 'utf-8');
+            } else {
+                $this->show('{"result":1,"msg":"error2.'.$m->getDbError().'"}', 'utf-8');
+            }
+        }
+    }
+    public function cw_delete($fid=-1,$close=0){
+        $fid = I('fid');
+        $close = I('close');
+        if($fid == '' || $close == ''){
+            $this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
+            return;
+        }
+        $m = M('Course');
+        $data['fid'] = $fid;
+        $data['fstate'] = $close==1?20:30;//20-关闭，30-被删除
+        $data['flast_edited_time'] = date('Y-m-d H:i:s', time());
+        if($m->save($data)){
+            $this->show('{"result":0,"msg":"deleting succeed.","fid":"'.$fid.'"}', 'utf-8');
+        } else {
+            $this->show('{"result":1,"msg":"error.'.$m->getDbError().'"}', 'utf-8');
+        }
+    }
+    public function cw_release($fid=-1){
+        $fid = I('fid');
+        if($fid == ''){
+            $this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
+            return;
+        }
+        $m = M('Course');
+        $data['fid'] = $fid;
+        $data['fstate'] = 10;//10-已发布
+        $data['flast_edited_time'] = date('Y-m-d H:i:s', time());
+        if($m->save($data)){
+            $this->show('{"result":0,"msg":"succeed.","fid":"'.$fid.'"}', 'utf-8');
+        } else {
+            $this->show('{"result":1,"msg":"error.'.$m->getDbError().'"}', 'utf-8');
+        }
+    }
 }
 
 ?>

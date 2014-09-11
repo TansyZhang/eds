@@ -15,10 +15,15 @@
 }
 .cw_info_item{
 	float: left;
-	width:260px;
 	line-height: 40px;
 	font-size: 12pt;
 	margin-left: 20px;
+}
+.item-odd{
+	width:250px;
+}
+.item-even{
+	width:330px;
 }
 .state{
 	font-size:10pt;
@@ -30,6 +35,9 @@
 .cw_item{
 	line-height: 30px;
 	font-size: 14pt;
+}
+.cw_title{
+	margin: 8px;
 }
 </style>
 
@@ -48,34 +56,40 @@
 		<div class="post_list_div">
 			<div class="center_title">{$fname}</div>
 			<div class="cw_info" style="height:100px;">
-				<div class="cw_info_item">任课老师：吴小山</div>
-				<div class="cw_info_item">面向年级：{$fgrade}级</div>
-				<div class="cw_info_item">上课地点：{$faddr}</div>
-				<div class="cw_info_item">开课学期：{$fterm_name}</div>
+				<div class="cw_info_item item-odd">任课老师：{$fteacher}</div>
+				<div class="cw_info_item item-even">面向年级：{$fgrade}级</div>
+				<div class="cw_info_item item-odd">上课地点：{$faddr}</div>
+				<div class="cw_info_item item-even">开课学期：{$fterm_name}</div>
 			</div>
 
 			<div class="separator"></div>
 			<div class="cw_list">
 				<div class="cw_item">
-					<span class="op">
+					<div class="op">
 						<span>2014-08-08 15:45:29</span>&nbsp;
 						<span>删除</span>
-					</span>
-					<div><a href="__ROOT__/Home/Course/download?eid=1#start">物理力学第一章1.1</a></div>
+					</div>
+					<div class="cw_title">
+						<a href="__ROOT__/Home/Course/download?eid=1#start">物理力学第一章1.1</a>
+					</div>
 				</div>
 				<div class="cw_item">
 					<span class="op">
 						<span>2014-08-08 15:45:29</span>&nbsp;
 						<span>删除</span>
 					</span>
-					<div><a href="__ROOT__/Home/Course/download?eid=1#start">物理力学第一章1.2</a></div>
+					<div class="cw_title">
+						<a href="__ROOT__/Home/Course/download?eid=1#start">物理力学第一章1.2</a>
+					</div>
 				</div>
 				<div class="cw_item">
 					<span class="op">
 						<span>2014-08-08 15:45:29</span>&nbsp;
 						<span>删除</span>
 					</span>
-					<div><a href="__ROOT__/Home/Course/download?eid=1#start">物理力学第一章1.3</a></div>
+					<div class="cw_title">
+						<a href="__ROOT__/Home/Course/download?eid=1#start">物理力学第一章1.3</a>
+					</div>
 				</div>
 			</div>
 		</div>

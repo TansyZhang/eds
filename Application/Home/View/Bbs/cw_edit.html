@@ -1,0 +1,105 @@
+<layout name="layout" replace="{__REEPLACE__}" />
+
+
+<include file="./Application/Home/View/welcome_bbs.html" />
+
+<style>
+.ce_edit_item{
+
+}
+.ce_edit_item_title{
+	margin: 5px;
+}
+
+</style>
+
+<div class="container" style="padding-left:0px;padding-right:0px;">
+	<include file="./Application/Home/View/layout_banner.html" bgcolor="139,60,126" display0="inline-block" display1="block" display2="block" display3="block"
+	title0="师生社区" href0="__ROOT__/Home/Bbs" title1="个人中心" href1="__ROOT__/Home/Bbs/center?uid=1#start" 
+	title2="课程课件" href2="__ROOT__/Home/Bbs/cw#start" title3="课程详情" href3="#start" />
+</div>
+
+
+<div class="container" style="padding-left:0px;padding-right:0px;background-color:rgb(234,234,234);">
+	<div style="width:300px;float:right;">
+		<include file="./Application/Home/View/Bbs/right.html" />
+	</div>
+	<div style="width:724px;padding:40px;">
+		<input type="hidden" class="form-control" id="fid" value="{$fid}" placeholder="course input" />
+		<div class="ce_edit_item">
+			<span class="ce_edit_item_title">课程名称</span>
+			<span>
+				<input type="text" class="form-control" id="fname" value="{$fname}" placeholder="course input" />
+			</span>
+		</div>
+		<div class="ce_edit_item">
+			<span class="ce_edit_item_title">任课老师</span>
+			<span>
+				<input type="text" class="form-control" id="fteacher" value="{$fteacher}" placeholder="teacher input" />
+			</span>
+		</div>
+		<div class="ce_edit_item">
+			<span class="ce_edit_item_title">面向年级</span>
+			<span>
+				<input type="text" class="form-control" id="fgrade" value="{$fgrade}" placeholder="grade input" />
+			</span>
+		</div>
+		<div class="ce_edit_item">
+			<span class="ce_edit_item_title">上课地点</span>
+			<span>
+				<input type="text" class="form-control" id="faddr" value="{$faddr}" placeholder="addr input" />
+			</span>
+		</div>
+		<div class="ce_edit_item">
+			<span class="ce_edit_item_title">开课学期</span>
+			<span>
+				<select name="fterm" class="selecter_1" id="fterm" key="k">
+					<volist name="term_list" id="term_vo">
+						<option value="{$term_vo.dic_key}"
+							<?php if($term_vo['dic_key']==$fterm || $k==1&&$fid==-1){ ?>selected<?php } ?>
+						>{$term_vo.dic_value}</option>
+					</volist>
+				</select>
+			</span>
+		</div>
+		<include file="./Application/Home/View/control_btn.html" id="btn_cw_save" text="暂存" style="margin:20px 0;" />
+		<include file="./Application/Home/View/control_btn.html" id="btn_cw_release" text="发布" style="margin:20px 0;" />
+	</div>
+</div>
+
+<script type="text/javascript">
+function cw(url,release){
+	$.ajax({
+		url:url,
+		dataType:'json',
+		type:'post',
+		data:{
+			fid:$('#fid').val(),
+			fname:$('#fname').val(),
+			fteacher:$('#fteacher').val(),
+			fgrade:$('#fgrade').val(),
+			faddr:$('#faddr').val(),
+			fterm:$('#fterm').val(),
+			release:release
+		},
+		success:function(t,s,r){
+			if(t.result == 0){
+				cdialog.show_info('操作成功！',function(){
+					window.location.href="__ROOT__/Home/Bbs/cw#start";
+				});
+			}else{
+				cdialog.show_alert('操作失败！错误信息：'+t.msg);
+			}
+		},
+		error:function(t){eds_framework.error_handler(url,t);}
+	});
+}
+$(document).ready(function(){
+	$('#btn_cw_save').click(function(){
+		cw('__ROOT__/Home/Bbs/cw_save',0);
+	});
+	$('#btn_cw_release').click(function(){
+		cw('__ROOT__/Home/Bbs/cw_save',1);
+	});
+});
+</script>

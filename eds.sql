@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50536
 File Encoding         : 65001
 
-Date: 2014-09-10 23:32:16
+Date: 2014-09-11 23:17:03
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -37,7 +37,7 @@ CREATE TABLE `t_bbs` (
   `tscan_count` int(11) NOT NULL DEFAULT '0' COMMENT '帖子被查看次数',
   `tfloor` int(11) DEFAULT '0' COMMENT '帖子楼层，帖子楼层，楼主该字段为0，沙发为1',
   PRIMARY KEY (`tid`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_bbs
@@ -50,6 +50,9 @@ INSERT INTO `t_bbs` VALUES ('5', null, '1', '&lt;img src=&quot;/eds/Public/kinde
 INSERT INTO `t_bbs` VALUES ('6', '罕见超长伽玛射线暴 或源于神秘大质量恒星', '1', '【科技讯】8月29日消息，据媒体报道，伽玛射线暴被认为是宇宙中最强大的爆炸之一，大部分的伽玛射线暴在一分钟左右，科学家提出的新型伽玛暴可持续几个小时。英国研究小组通过观测提出了一种新型伽玛射线暴理论，', '&lt;p&gt;\n	&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;&amp;nbsp;【&lt;/span&gt;&lt;a href=&quot;http://www.kejixun.com/&quot; target=&quot;_blank&quot; class=&quot;keylink&quot;&gt;科技&lt;/a&gt;&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;讯】8月29日消息，据媒体报道，伽玛射线暴被认为是宇宙中最强大的爆炸之一，大部分的伽玛射线暴在一分钟左右，&lt;/span&gt;&lt;a href=&quot;http://www.kejixun.com/kexue/&quot; target=&quot;_blank&quot; class=&quot;keylink&quot;&gt;科学&lt;/a&gt;&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;家提出的新型伽玛暴可持续几个小时。英国研究小组通过观测提出了一种新型伽玛射线暴理论，其形成于质量更大的超巨星。&lt;/span&gt;\n&lt;/p&gt;\n&lt;p style=&quot;text-align:center;&quot;&gt;\n	&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;&lt;img src=&quot;/eds/Public/kindeditor-4.1.10/attached/image/20140830/20140830155625_89689.jpg&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;\n&lt;/span&gt;\n&lt;/p&gt;\n&lt;p&gt;\n	&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;\n	&lt;p style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;&quot;&gt;\n		&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 宇宙中存在的大质量恒星，该型恒星的“燃烧”速度非常快，其寿命很短，可形成能量异常高的伽玛射线。&lt;a href=&quot;http://www.kejixun.com/kexue/&quot; target=&quot;_blank&quot; class=&quot;keylink&quot;&gt;科学&lt;/a&gt;家小组观测到不寻常的新型伽玛暴，超长伽玛暴的红移值达到0.847，大约在70亿光年左右，认为其爆炸产生于超巨星，一种质量达到太阳质量20倍以上的天体，爆发瞬间可变成宇宙中最大最亮的恒星之一，半径可达到太阳的1000倍左右。\n	&lt;/p&gt;\n	&lt;p style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;&quot;&gt;\n		&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 恒星演化的最后阶段，其自身会在引力作用下坍缩形成一个黑洞，当物质被吸入黑洞时，会在两个垂直方向上形成伽玛射线喷流，其速度可接近光速，一般情况下这个伽玛射线暴仅会持续数秒，发现的恒星质量较大，形成伽玛射线喷流的持续时间也较长。\n	&lt;/p&gt;\n&lt;br /&gt;\n&lt;/span&gt;\n&lt;/p&gt;', '2', '30', null, '2014-08-30 21:56:30', null, null, null, null, null, '0', '0');
 INSERT INTO `t_bbs` VALUES ('7', '试试看', '1', '好吧，我就试试看看而发生大法师打发斯蒂芬', '&lt;div style=&quot;text-align:center;&quot;&gt;\n	&lt;span style=&quot;line-height:1.5;&quot;&gt;好吧，我就试试&lt;/span&gt;&lt;span style=&quot;line-height:1.5;&quot;&gt;看看而发生大法师打发斯蒂芬&lt;/span&gt;\n&lt;/div&gt;', '1', '10', null, '2014-08-30 22:42:55', '2014-09-10 22:47:54', null, null, '2014-09-10 23:27:25', null, '0', '0');
 INSERT INTO `t_bbs` VALUES ('8', '按时打算', '1', '阿瑟大声道v24534', '阿瑟大声道v24534', '3', '30', null, '2014-09-10 22:01:23', '2014-09-10 22:40:32', null, null, null, null, '0', '0');
+INSERT INTO `t_bbs` VALUES ('9', '我就发个帖', '1', '好久没有发帖了 看看这个功能有木有受影响', '好久没有发帖了 看看这个功能有木有受影响', '1', '10', null, '2014-09-11 22:52:03', '2014-09-11 22:52:03', null, null, null, null, '0', '0');
+INSERT INTO `t_bbs` VALUES ('10', null, '1', '看来是没有咦', '看来是没有咦', null, '10', null, '2014-09-11 22:54:30', null, null, null, null, '9', '0', '0');
+INSERT INTO `t_bbs` VALUES ('11', null, '1', '这楼层怎么算', '这楼层怎么算', null, '10', null, '2014-09-11 22:54:45', null, null, null, null, '9', '0', '0');
 
 -- ----------------------------
 -- Table structure for `t_college`
@@ -79,21 +82,29 @@ INSERT INTO `t_college` VALUES ('NJU', '南京大学', '1', '1', '亲爱的各�
 -- ----------------------------
 DROP TABLE IF EXISTS `t_course`;
 CREATE TABLE `t_course` (
-  `fid` int(11) NOT NULL,
+  `fid` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `fname` varchar(50) NOT NULL,
   `fcollege` int(11) NOT NULL COMMENT '开课学校',
   `fgrade` int(11) NOT NULL COMMENT '课程面向年级，引用自字典表dic_grade',
   `fterm` int(11) NOT NULL COMMENT '开课学期，引用自字典表fterm',
   `faddr` varchar(50) DEFAULT NULL COMMENT '上课地点',
   `fcreator` int(11) NOT NULL COMMENT '课程创建者',
+  `flast_edited_time` datetime NOT NULL,
   `fcreated_time` datetime NOT NULL COMMENT '被创建时间',
+  `fstate` int(11) NOT NULL,
   `fflag` varchar(250) DEFAULT NULL COMMENT '课程图标',
+  `fteacher` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`fid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_course
 -- ----------------------------
+INSERT INTO `t_course` VALUES ('1', '物理力学', '1', '2014', '1', '仙一教学楼233', '1', '2014-09-11 23:02:26', '2014-09-11 20:17:19', '20', null, '吴教授');
+INSERT INTO `t_course` VALUES ('2', '物理力学2', '1', '2014', '2', '仙二教学楼207', '1', '2014-09-11 23:03:07', '2014-09-11 20:33:47', '20', null, '张教授');
+INSERT INTO `t_course` VALUES ('3', '高等数学', '0', '2014', '2', '系楼233', '1', '2014-09-11 23:11:09', '2014-09-11 22:18:00', '20', null, '张老师');
+INSERT INTO `t_course` VALUES ('4', '高等数学1', '0', '2015', '1', '仙二教学楼302', '1', '2014-09-11 22:25:07', '2014-09-11 22:25:07', '0', null, '李老师');
+INSERT INTO `t_course` VALUES ('5', '课程三', '0', '2015', '2', '大法师打发', '1', '2014-09-11 22:50:53', '2014-09-11 22:33:16', '30', null, '老师');
 
 -- ----------------------------
 -- Table structure for `t_courseware`
@@ -146,6 +157,7 @@ CREATE TABLE `t_dic` (
 -- Records of t_dic
 -- ----------------------------
 INSERT INTO `t_dic` VALUES ('0', 'eattr', '网络课程', null);
+INSERT INTO `t_dic` VALUES ('0', 'fstate', '编辑中', null);
 INSERT INTO `t_dic` VALUES ('0', 'gstate', '编辑中', null);
 INSERT INTO `t_dic` VALUES ('0', 'rrole', '系统', null);
 INSERT INTO `t_dic` VALUES ('0', 'rstate', '正常', null);
@@ -158,8 +170,10 @@ INSERT INTO `t_dic` VALUES ('0', 'ztype', '资讯', null);
 INSERT INTO `t_dic` VALUES ('1', 'dic_city', '南京市', '1');
 INSERT INTO `t_dic` VALUES ('1', 'dic_province', '江苏省', null);
 INSERT INTO `t_dic` VALUES ('1', 'etype', '物理力学', '1');
+INSERT INTO `t_dic` VALUES ('1', 'fterm', '2014-2015年秋季（第一）学期', null);
 INSERT INTO `t_dic` VALUES ('1', 'zsub_type', 'Science专区', '0');
 INSERT INTO `t_dic` VALUES ('1', 'ztype', '活动', null);
+INSERT INTO `t_dic` VALUES ('2', 'fterm', '2014-2015年春季（第二）学期', null);
 INSERT INTO `t_dic` VALUES ('2', 'zsub_type', 'Nature专区', '0');
 INSERT INTO `t_dic` VALUES ('3', 'zsub_type', '拔尖计划专区', '0');
 INSERT INTO `t_dic` VALUES ('3', 'ztype', '成果', null);
@@ -169,6 +183,7 @@ INSERT INTO `t_dic` VALUES ('6', 'ztype', '留学动态', null);
 INSERT INTO `t_dic` VALUES ('9', 'ztype', '交换项目', null);
 INSERT INTO `t_dic` VALUES ('10', 'eattr', '物理图书馆', null);
 INSERT INTO `t_dic` VALUES ('10', 'estate', '审核中', null);
+INSERT INTO `t_dic` VALUES ('10', 'fstate', '已发布', null);
 INSERT INTO `t_dic` VALUES ('10', 'gstate', '审核中', null);
 INSERT INTO `t_dic` VALUES ('10', 'rrole', '超级管理员', null);
 INSERT INTO `t_dic` VALUES ('10', 'rstate', '登录受限', null);
@@ -177,6 +192,7 @@ INSERT INTO `t_dic` VALUES ('10', 'usender', '女', null);
 INSERT INTO `t_dic` VALUES ('10', 'zstate', '提交/审核中', null);
 INSERT INTO `t_dic` VALUES ('20', 'eattr', '公共课件', null);
 INSERT INTO `t_dic` VALUES ('20', 'estate', '审核通过', null);
+INSERT INTO `t_dic` VALUES ('20', 'fstate', '已关闭', null);
 INSERT INTO `t_dic` VALUES ('20', 'gstate', '被退回', null);
 INSERT INTO `t_dic` VALUES ('20', 'rrole', '普通管理员', null);
 INSERT INTO `t_dic` VALUES ('20', 'rstate', '已删除', null);
@@ -185,11 +201,13 @@ INSERT INTO `t_dic` VALUES ('20', 'usender', '男', null);
 INSERT INTO `t_dic` VALUES ('20', 'zstate', '被退回', null);
 INSERT INTO `t_dic` VALUES ('30', 'eattr', '内部课件', null);
 INSERT INTO `t_dic` VALUES ('30', 'estate', '被退回', null);
+INSERT INTO `t_dic` VALUES ('30', 'fstate', '已删除', null);
 INSERT INTO `t_dic` VALUES ('30', 'gstate', '发布', null);
 INSERT INTO `t_dic` VALUES ('30', 'rrole', '老师', null);
 INSERT INTO `t_dic` VALUES ('30', 'tstate', '被删除', null);
 INSERT INTO `t_dic` VALUES ('30', 'zstate', '已发布', null);
 INSERT INTO `t_dic` VALUES ('40', 'estate', '已下架', null);
+INSERT INTO `t_dic` VALUES ('40', 'fstate', '已被管理员屏蔽', null);
 INSERT INTO `t_dic` VALUES ('40', 'gstate', '关闭', null);
 INSERT INTO `t_dic` VALUES ('40', 'rrole', '学生', null);
 INSERT INTO `t_dic` VALUES ('40', 'tstate', '被屏蔽', null);
@@ -537,6 +555,12 @@ INSERT INTO `t_z` VALUES ('7', '1', '0', '2014-08-30 15:53:08', '2014-09-06 10:0
 INSERT INTO `t_z` VALUES ('8', '1', '0', '2014-08-30 15:54:33', '2014-08-30 16:13:57', null, '2014-08-30 16:13:57', null, '南京大学2013年物理学院拔尖选拔结果', '经过笔试、面试，并综合高考成绩（参考），物理学院初步遴选以下30位同学进入拔尖计划。请名单中各位同学于明天（9月15日）中午12:00在仙林校区教学楼仙II-217签名确认（带校园卡）。今天不需要在网', '经过笔试、面试，并综合高考成绩（参考），物理学院初步遴选以下30位同学进入拔尖计划。请名单中各位同学于明天（9月15日）中午12:00在仙林校区教学楼仙II-217签名确认（带校园卡）。今天不需要在网上审核确认。&amp;nbsp;&lt;br /&gt;\n&lt;br /&gt;\n如果以下名单中的同学提出放弃物理学院拔尖计划，请尽快用电话与我联系。并填写放弃拔尖计划承诺书，签名后于明天中午一并在仙II-217给我。&amp;nbsp;&lt;br /&gt;\n&lt;br /&gt;\n&lt;br /&gt;\n&lt;br /&gt;\n朱敏超 131150057 &amp;nbsp; 地球科学与工程学院&amp;nbsp;&lt;br /&gt;\n周子恒 131120155 &amp;nbsp; 物理学院&amp;nbsp;&lt;br /&gt;\n张雪琪 131160069 &amp;nbsp; 地理与海洋科学学院&amp;nbsp;&lt;br /&gt;\n张楠 &amp;nbsp; &amp;nbsp; 131170043 &amp;nbsp; 大气科学学院&amp;nbsp;&lt;br /&gt;\n张杰同 131180019 &amp;nbsp; 电子科学与工程学院&amp;nbsp;&lt;br /&gt;\n张光耀 131120159 &amp;nbsp; &amp;nbsp;物理学院&amp;nbsp;&lt;br /&gt;\n易伟柱 131120078 &amp;nbsp; &amp;nbsp;物理学院&amp;nbsp;&lt;br /&gt;\n杨王飞 131170036 &amp;nbsp; &amp;nbsp;大气科学学院&amp;nbsp;&lt;br /&gt;\n杨硕 &amp;nbsp; &amp;nbsp; 131120112 &amp;nbsp; &amp;nbsp;物理学院&amp;nbsp;&lt;br /&gt;\n许凡 &amp;nbsp; &amp;nbsp; 131250121 &amp;nbsp; &amp;nbsp;软件学院&amp;nbsp;&lt;br /&gt;\n邢奕飞 131120011 &amp;nbsp; &amp;nbsp;物理学院&amp;nbsp;&lt;br /&gt;\n魏博超 131120142 &amp;nbsp; &amp;nbsp;物理学院&amp;nbsp;&lt;br /&gt;\n王泽俊 131130054 &amp;nbsp; &amp;nbsp;化学化工学院&amp;nbsp;&lt;br /&gt;\n王伟 &amp;nbsp; &amp;nbsp; 131270016 &amp;nbsp; &amp;nbsp;工程管理学院&amp;nbsp;&lt;br /&gt;\n王沛宇 131140037 &amp;nbsp; &amp;nbsp;生命科学学院&amp;nbsp;&lt;br /&gt;\n孙泽维 131220096 &amp;nbsp; &amp;nbsp;计算机科学与技术系&amp;nbsp;&lt;br /&gt;\n宋谦 &amp;nbsp; &amp;nbsp; 131120018 &amp;nbsp; &amp;nbsp;物理学院&amp;nbsp;&lt;br /&gt;\n钱祉源 131120006 &amp;nbsp; &amp;nbsp;物理学院&amp;nbsp;&lt;br /&gt;\n马同川 131150016 &amp;nbsp; &amp;nbsp;地球科学与工程学院&amp;nbsp;&lt;br /&gt;\n林泽勋 131160056 &amp;nbsp; &amp;nbsp;地理与海洋科学学院&amp;nbsp;&lt;br /&gt;\n连震 &amp;nbsp; &amp;nbsp; 131120075 &amp;nbsp; &amp;nbsp;物理学院&amp;nbsp;&lt;br /&gt;\n纪宵宇 131120198 &amp;nbsp; &amp;nbsp;物理学院&amp;nbsp;&lt;br /&gt;\n李昊阳 131120191 &amp;nbsp; &amp;nbsp;物理学院&amp;nbsp;&lt;br /&gt;\n黄贤雷 131130091 &amp;nbsp; &amp;nbsp;化学化工学院&amp;nbsp;&lt;br /&gt;\n黄诗华 131120144 &amp;nbsp; &amp;nbsp;物理学院&amp;nbsp;&lt;br /&gt;\n胡博伦 131120202 &amp;nbsp; &amp;nbsp;物理学院&amp;nbsp;&lt;br /&gt;\n高凡 &amp;nbsp; &amp;nbsp; 131190051 &amp;nbsp; &amp;nbsp;现代工程与应用科学学院&amp;nbsp;&lt;br /&gt;\n程恩泽 131120025 &amp;nbsp; &amp;nbsp;物理学院&amp;nbsp;&lt;br /&gt;\n陈天宇 131150053 &amp;nbsp; &amp;nbsp;地球科学与工程学院&amp;nbsp;&lt;br /&gt;\n陈墨雨 131130128 &amp;nbsp; &amp;nbsp;化学化工学院&amp;nbsp;&lt;br /&gt;\n&lt;br /&gt;', '60', '4', '0', null, null, '0');
 INSERT INTO `t_z` VALUES ('9', '1', '0', '2014-08-30 15:59:07', '2014-08-30 15:59:07', null, '2014-08-30 15:59:07', null, 'asdfsdfasdf', 'asfasfasdfasgasdfgdfgasdfa', 'asfasfasdfasgasdfgdfgasdfa', '60', '4', '0', null, null, '0');
 INSERT INTO `t_z` VALUES ('10', '1', '0', '2014-08-30 16:18:49', '2014-08-30 16:19:32', null, '2014-08-30 16:19:32', null, '“基础学科拔尖学生培养试验计划”阶段性总结交流会将在清华举行', '“基础学科拔尖学生培养试验计划”（以下简称“拔尖计划”）阶段性总结交流会在主楼接待厅举行。时间定在9月26号，欢迎参加拔尖计划的各校老师莅临指导。', '&lt;span style=&quot;color:#006600;font-size:24px;&quot;&gt;&amp;nbsp;&lt;span style=&quot;font-size:32px;&quot;&gt;“基础学科拔尖学生培养试验计划”（以下简称“拔尖计划”）阶段性总结交流会在主楼接待厅举行。时间定在9月26号，欢迎参加拔尖计划的各校老师莅临指导。&lt;/span&gt;&lt;/span&gt;', '30', '4', '0', null, null, '0');
+
+-- ----------------------------
+-- View structure for `t_course_view`
+-- ----------------------------
+DROP VIEW IF EXISTS `t_course_view`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `t_course_view` AS select `t_course`.`fid` AS `fid`,`t_course`.`fname` AS `fname`,`t_course`.`fcollege` AS `fcollege`,`t_course`.`fgrade` AS `fgrade`,`t_course`.`fterm` AS `fterm`,`t_course`.`faddr` AS `faddr`,`t_course`.`fcreator` AS `fcreator`,`t_course`.`flast_edited_time` AS `flast_edited_time`,`t_course`.`fcreated_time` AS `fcreated_time`,`t_course`.`fstate` AS `fstate`,`t_course`.`fflag` AS `fflag`,`dic_a`.`dic_value` AS `fstate_name`,`dic_b`.`dic_value` AS `fterm_name`,`t_course`.`fteacher` AS `fteacher` from ((`t_course` join `t_dic` `dic_a`) join `t_dic` `dic_b`) where ((`t_course`.`fstate` = `dic_a`.`dic_key`) and (`dic_a`.`dic_type` = 'fstate') and (`t_course`.`fterm` = `dic_b`.`dic_key`) and (`dic_b`.`dic_type` = 'fterm')) ;
 
 -- ----------------------------
 -- View structure for `t_manager_view`

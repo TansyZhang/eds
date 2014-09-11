@@ -47,21 +47,28 @@
 					<div class="cw_item">
 						<span class="op">
 							<span class="datetime">{$course_vo.fcreated_time}</span>&nbsp;
-							<span>修改</span>&nbsp;
+							<?php if($course_vo['fstate'] == 10){ ?>
+							<span><a href="javascript:void(0)" onclick="cw_delete({$course_vo.fid},1)" 
+								title="关闭后学生将无法查看">关闭</a></span>&nbsp;
+							<?php }else if($course_vo['fstate'] == 20 || $course_vo['fstate'] == 0) { ?>
+							<span><a href="javascript:void(0)" onclick="cw_release({$course_vo.fid})" 
+								title="发布后学生将可以查看">发布</a></span>&nbsp;
+							<?php } ?>
+							<span><a href="cw_edit?fid={$course_vo.fid}#start">修改</a></span>&nbsp;
 							<span><a href="cw_dtl?fid={$course_vo.fid}#start">查看</a></span>&nbsp;
-							<span>删除</span>
+							<span><a href="javascript:void(0)" onclick="cw_delete({$course_vo.fid},0)">删除</a></span>
 						</span>
 						<div>
 							<a href="cw_dtl?fid={$course_vo.fid}#start">{$course_vo.fname}</a>
-							（{$course_vo.fterm_name}）
-							<span class="state">({$course_vo.fstate_name})</span>
+							<span class="" style="font-size:10pt;">{$course_vo.fterm_name}</span>
+							<span class="state" style="color:gray;">({$course_vo.fstate_name})</span>
 						</div>
 					</div>
 				</volist>
 
 
-				<div class="cw_item">
-					<include file="./Application/Home/View/control_btn.html" text="添加" />
+				<div class="cw_item" style="margin:20px 0;">
+					<include file="./Application/Home/View/control_btn.html" id="btn_cw_add" text="添加" />
 				</div>
 
 			</div>
@@ -70,3 +77,54 @@
 
 	</div>
 </div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#btn_cw_add').click(function(){
+		window.location.href="cw_edit?#start";
+	});
+});
+function cw_delete(fid,close){
+	var url = '__ROOT__/Home/Bbs/cw_delete';
+	$.ajax({
+		url:url,
+		dataType:'json',
+		type:'post',
+		data:{
+			fid:fid,
+			close:close
+		},
+		success:function(t,s,r){
+			if(t.result == 0){
+				cdialog.show_info('操作成功！',function(){
+					window.location.reload();
+				});
+			}else{
+				cdialog.show_alert('操作失败！错误信息：'+t.msg);
+			}
+		},
+		error:function(t){eds_framework.error_handler(url,t);}
+	});
+}
+function cw_release(fid){
+	var url = '__ROOT__/Home/Bbs/cw_release';
+	$.ajax({
+		url:url,
+		dataType:'json',
+		type:'post',
+		data:{
+			fid:fid
+		},
+		success:function(t,s,r){
+			if(t.result == 0){
+				cdialog.show_info('操作成功！',function(){
+					window.location.reload();
+				});
+			}else{
+				cdialog.show_alert('操作失败！错误信息：'+t.msg);
+			}
+		},
+		error:function(t){eds_framework.error_handler(url,t);}
+	});
+}
+</script>
