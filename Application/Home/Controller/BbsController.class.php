@@ -5,9 +5,18 @@ class BbsController extends EdsController {
 
 
     public function index($page=0){
+        $this->post_list = array();
     	$m = M('PostListView');
-    	$list = $m->order('tstate desc')->select();
-    	$this->post_list = $list;
+        $lim['tstate'] = array('eq', '20');//20-置顶
+    	$list1 = $m->where($lim)->order('tlast_edited_time desc')->select();
+        if($list1){
+            $this->post_list = $list1;
+        }
+        $lim['tstate'] = array('eq', '10');//10-发布
+        $list2 = $m->where($lim)->order('tlast_edited_time desc')->select();
+        if($list2){
+            $this->post_list = array_merge($this->post_list,$list2);
+        }
         $this->display();
     }
 
@@ -17,11 +26,25 @@ class BbsController extends EdsController {
     		$cid = 1;
     	}
     	$m = M('Bbs');
+        $m2 = M('Bbs');
     	$lim['ttopic'] = $cid;
-    	$lim['tstate'] = array('in', '10,20');//10-发布,20-置顶
-    	$this->post_list = $m->where($lim)->select();
+    	$lim['tstate'] = 20;//20-置顶
+    	$post_list1 = $m->where($lim)->order('tlast_edited_time desc')->select();
+        if($post_list1){
+            $this->post_list = $post_list1;
+        } else{
+            $this->post_list = array();
+        }
+        $lim2['ttopic'] = $cid;
+        $lim2['tstate'] = 10;//10-发布
+        $post_list2 = $m2->where($lim2)->order('tlast_edited_time desc')->select();
     	//echo $m->_sql();return;
+        if($post_list2){
+            $this->post_list = array_merge($this->post_list,$post_list2);
+        }
     	$this->cid = $cid;
+        //dump($post_list1);
+        //dump($post_list2);
     	$this->display();
     }
 
