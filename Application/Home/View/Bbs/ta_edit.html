@@ -1,0 +1,178 @@
+<layout name="layout" replace="{__REEPLACE__}" />
+
+
+<include file="./Application/Home/View/welcome_bbs.html" />
+
+<style>
+.separator{
+	border-bottom:rgb(139,60,126) 2px solid;
+	margin-bottom: 10px;
+}
+.center_title{
+	font-size: 14pt;
+	font-weight: bold;
+	padding: 5px 10px;
+}
+.state{
+	font-size:10pt;
+}
+.op{
+	float:right;
+	font-size: 12pt;
+}
+.ta_item{
+	clear: left;
+	margin-bottom: 30px;
+}
+.ta_item li {
+	list-style-type: none;
+
+	color:black;/*rgb(2,183,230);*/
+	font-style: normal;
+
+	padding-left: 60px;
+	margin:8px 0;
+}
+.info{
+	padding-top: 15px;
+	padding-left: 200px;
+	width:100%;
+}
+</style>
+
+<div class="container" style="padding-left:0px;padding-right:0px;">
+	<include file="./Application/Home/View/layout_banner.html" bgcolor="139,60,126" display0="inline-block" display1="block" display2="block"
+	title0="师生社区" href0="__ROOT__/Home/Bbs" title1="个人中心" href1="__ROOT__/Home/Bbs/center?uid=1#start" 
+	title2="助教管理" href2="ta#start" />
+</div>
+
+
+<div class="container" style="padding-left:0px;padding-right:0px;background-color:rgb(234,234,234);">
+	<div style="width:300px;float:right;">
+		<include file="./Application/Home/View/Bbs/right.html" />
+	</div>
+	<div style="width:724px;padding:40px;">
+		<div class="post_list_div">
+			<div class="center_title">助教添加</div>
+			<div class="separator"></div>
+			<div class="ta_list">
+				<div class="ta_item">
+					<div style="float:left;margin:20px 40px;text-align:center;width:200px;">
+						<img  width="119px" height="135px"
+						<?php if($uphoto == ''){?> 
+						src="__PUBLIC__/assets/image/course_cw_teacher.png" 
+						<?php } else { ?> 
+						src="__PUBLIC__/uploads{$uphoto}" 
+						<?php } ?>
+						style="margin:10px auto;" />
+						<input type="hidden" id="input_ta_id"  value="{$rid}" class="form-control"/>
+						<form name="form" method="POST" enctype="multipart/form-data">
+							<input type="file" id="input_ta_photo" name="input_ta_photo" class="form-control" />
+						</form>
+					</div>
+					<div class="info">
+						<ul>
+							<li>
+								<span>
+									<input type="text" id="input_ta_name" value="{$uname}" class="form-control"/>
+								</span>
+							</li>
+							<li>
+								<div style="font-size:11pt;">
+									<select class="selecter_1" id="input_ta_q">
+										<volist name="uchar_list" id="uchar_vo" key="k">
+											<option value="{$uchar_vo.dic_key}"
+												<?php if(($uchar==''||$rid==-1)&&$k==1 || $uchar==$uchar_vo['dic_key']) { ?>
+													selected
+												<?php } ?>
+											>{$uchar_vo.dic_value}</option>
+										</volist>
+									</select>
+								</div>
+							</li>
+							<li>
+								<span>
+									<input type="text" id="input_ta_tel" value="{$utel}" class="form-control"/>
+								</span>
+							</li>
+							<li>
+								<span>
+									<input type="text" id="input_ta_office" value="{$uoffice_addr}"  class="form-control"/>
+								</span>
+							</li>
+							<li>
+								<span>
+									<input type="text" id="input_ta_email"  value="{$uemail}" class="form-control"/>
+								</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="ta_item" style="width:100px;">
+					<div><include file="./Application/Home/View/Control_btn.html" id="btn_ta_add" /></div>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	var btn_ta_add_tip = "提交";
+	var tip_array = new Array("姓名","联系电话","办公室","邮箱");
+	var elem_array = new Array('ta_name','ta_tel','ta_office','ta_email');
+	var rid = $('#input_ta_id').val();
+	for(var i=0;i<elem_array.length;i++){
+		(function(elem,tip){
+			if(rid == -1){
+				elem.val(tip).css('color','gray');
+			}
+			elem.focus(function(){
+				if(elem.val()==tip)elem.val('').css('color','black');
+			}).blur(function(){
+				if(elem.val()=='')elem.val(tip).css('color','gray');
+			});
+		})($('#input_'+elem_array[i]),tip_array[i]);
+	}
+	$('#btn_ta_add').text(btn_ta_add_tip);
+	$('#btn_ta_add').click(function(){
+		$('#btn_ta_add').text('正在提交……');
+		$('#btn_ta_add').attr('disabled',true);
+		var input_ta_photo_val = $('#input_ta_photo').val();
+		$.ajaxFileUpload({
+			url:'__ROOT__/Home/Bbs/ta_save',
+			secureuri:false,
+			fileElementId:'input_ta_photo',
+			dataType: 'json',
+			data:{
+				rid:$('#input_ta_id').val(),
+				uname:$('#input_ta_name').val(),
+				utel:$('#input_ta_tel').val(),
+				uoffice_addr:$('#input_ta_office').val(),
+				uemail:$('#input_ta_email').val(),
+				uchar:$('#input_ta_q').val()
+			},
+			success: function (data, status){
+				$('#btn_ta_add').text(btn_ta_add_tip);
+				$('#btn_ta_add').attr('disabled',false);
+				if(data.result == 0){
+					cdialog.show_info('提交成功！',function(){
+						window.location.reload();
+					});
+				} else {
+					cdialog.show_alert('提交失败！错误信息：'+data.msg);
+					$('#input_ta_photo').val(input_ta_photo_val);
+				}
+			},
+			error: function (data, status, e){
+				$('#btn_ta_add').text(btn_ta_add_tip);
+				$('#btn_ta_add').attr('disabled',false);
+				cdialog.show_alert(e);
+			}
+		});
+	});
+
+});
+</script>

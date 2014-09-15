@@ -8,7 +8,7 @@
 	border-bottom:rgb(139,60,126) 2px solid;
 	margin-bottom: 10px;
 }
-.center_title{
+.cw_title{
 	font-size: 16pt;
 	font-weight: bolder;
 	padding: 5px 10px;
@@ -32,12 +32,23 @@
 	float:right;
 	font-size: 12pt;
 }
-.cw_item{
+.cw_item,.ta_item{
 	line-height: 30px;
 	font-size: 14pt;
+	margin: 8px;
+	
+}
+.ta_item{
+	text-align: center;
 }
 .cw_title{
-	margin: 8px;
+}
+.cw_delete_btn:hover, .cw_delete_btn:active{
+	text-decoration: underline;
+}
+.cw_deleting_btn:hover, .cw_deleting_btn:active{
+	text-decoration: none;
+	cursor:auto;
 }
 </style>
 
@@ -54,7 +65,10 @@
 	</div>
 	<div style="width:724px;padding:40px;">
 		<div class="post_list_div">
-			<div class="center_title">{$fname}</div>
+			<div class="cw_title">
+				{$fname}
+				<a href="cw_edit?fid={$fid}" style="margin-left:20px;font-size:12pt;color:gray;text-decoration:underline;" title="修改课程基本信息">修改</a>&nbsp;<a  style="margin-left:20px;font-size:12pt;color:gray;text-decoration:underline;" href="__ROOT__/Home/Course/cw_dtl?fid={$fid}" title="转到虚拟学院课程详情">转到前台</a>
+			</div>
 			<div class="cw_info" style="height:100px;">
 				<div class="cw_info_item item-odd">任课老师：{$fteacher}</div>
 				<div class="cw_info_item item-even">面向年级：{$fgrade}级</div>
@@ -64,37 +78,205 @@
 
 			<div class="separator"></div>
 			<div class="cw_list">
-				<div class="cw_item">
-					<div class="op">
-						<span>2014-08-08 15:45:29</span>&nbsp;
-						<span>删除</span>
+
+				<volist name="cw_list" id="cw_vo" key="k">
+					<div class="cw_item">
+						<div class="op">
+							<span>{$cw_vo.ecreated_time}</span>&nbsp;
+							<span class="cw_delete_btn" onclick="cw_e_delete(this,{$cw_vo.eid});" style="cursor:pointer;">删除</span>
+						</div>
+						<div class="cw_title">
+							<a href="__ROOT__/Home/Course/download?eid={$cw_vo.eid}">{$cw_vo.etitle}</a>
+						</div>
 					</div>
-					<div class="cw_title">
-						<a href="__ROOT__/Home/Course/download?eid=1#start">物理力学第一章1.1</a>
-					</div>
-				</div>
+				</volist>
 				<div class="cw_item">
-					<span class="op">
-						<span>2014-08-08 15:45:29</span>&nbsp;
-						<span>删除</span>
-					</span>
-					<div class="cw_title">
-						<a href="__ROOT__/Home/Course/download?eid=1#start">物理力学第一章1.2</a>
+					<div style="width:100px;margin:10px;">
+						<include file="./Application/Home/View/control_btn.html" id="btn_switch_div_cw_upload" style="font-size:12pt;" text="课件添加" />
 					</div>
-				</div>
-				<div class="cw_item">
-					<span class="op">
-						<span>2014-08-08 15:45:29</span>&nbsp;
-						<span>删除</span>
-					</span>
-					<div class="cw_title">
-						<a href="__ROOT__/Home/Course/download?eid=1#start">物理力学第一章1.3</a>
+					<div id="div_cw_upload">
+						<form name="form" method="POST" enctype="multipart/form-data">
+							<input type="hidden" id="fid" value="{$fid}" class="form-control"/>
+							课件名称：<input type="text" id="input_cw_title" class="form-control"/>
+							课件文件：<input type="file" id="input_cw_file" name="input_cw_file" class="form-control" />
+						</form>
+						<include file="./Application/Home/View/control_btn.html" id="btn_cw_upload" text="确定上传" style="margin:20px 0;" />
 					</div>
 				</div>
 			</div>
-			<include file="./Application/Home/View/control_btn.html" id="btn_cw_upload" text="上传课件" style="margin:20px 0;" />
-		</div>
 
+			<div class="separator"></div>
+			<div class="ta_list">
+				<volist name="ta_c_list" id="ta_c_vo" key="k">
+					<div class="ta_item">
+						<div><img  width="119px" height="135px"
+						<?php if($ta_c_vo['uphoto'] == ''){?> 
+							src="__PUBLIC__/assets/image/course_cw_teacher.png" 
+						<?php } else { ?> 
+							src="__PUBLIC__/uploads{$ta_c_vo.uphoto}" 
+						<?php } ?>
+						style="margin:10px auto;" /></div>
+						<div>{$ta_c_vo.uname}</div><span onclick="pdelete({$ta_c_vo.pid})" style="cursor:pointer;">删除</span>
+					</div>
+				</volist>
+				<div class="ta_item">
+					<div style="width:100px;margin:10px;">
+						<include file="./Application/Home/View/control_btn.html" id="btn_switch_div_ta_select" style="font-size:12pt;" text="助教添加" />
+					</div>
+					<div id="div_ta_select">
+						<?php if(is_null($ta_list)||count($ta_list)==0){ ?>
+							<div>请先到“<a href="ta_edit?#start">助教管理</a>”中添加助教信息后才能在课程中添加助教</div>
+						<?php }else{ ?>
+							<select class="selecter_1" id="select_ta_add">
+								<volist name="ta_list" id="ta_vo" key="k" >
+									<option value="{$ta_vo.rid}">{$ta_vo.uname}</option>
+								</volist>
+							</select>
+							<include file="./Application/Home/View/control_btn.html" id="btn_ta_add" text="确定添加" style="margin:20px 0;" />
+						<?php } ?>
+					</div>
+				</div>
+			</div>
+
+
+
+					
+			
+		</div>
 
 	</div>
 </div>
+
+<script type="text/javascript">
+function cw_e_delete(elem,eid){
+	var url = '__ROOT__/Home/Bbs/cw_e_delete';
+	$(elem).text('正在删除……');
+	$(elem).attr('class', 'cw_deleting_btn');
+	$.ajax({
+		url:url,
+		dataType:'json',
+		type:'post',
+		data:{eid:eid},
+		success:function(t,s,r){
+			$(elem).text('删除');
+			$(elem).attr('class', 'cw_delete_btn');
+			if(t.result == 0){
+				cdialog.show_info('操作成功！',function(){
+					window.location.reload();
+				});
+			}else{
+				cdialog.show_alert('操作失败！错误信息：'+t.msg);
+			}
+		},
+		error:function(t){$(elem).text('删除');$(elem).attr('class', 'cw_delete_btn');eds_framework.error_handler(url,t);}
+	});
+}
+function pdelete(pid){
+	var url = '__ROOT__/Home/Bbs/cw_ta_delete';
+	$.ajax({
+		url:url,
+		dataType:'json',
+		type:'post',
+		data:{pid:pid},
+		success:function(t,s,r){
+			if(t.result == 0){
+				cdialog.show_info('操作成功！',function(){
+					window.location.reload();
+				});
+			}else{
+				cdialog.show_alert('操作失败！错误信息：'+t.msg);
+			}
+		},
+		error:function(t){eds_framework.error_handler(url,t);}
+	});
+}
+$(document).ready(function(){
+	var input_title_tip = "不填写默认使用上传的课件文件名(不包含扩展名，如“.ppt”,“.pdf”等)";
+	var btn_cw_upload_tip = "确定上传";
+
+	$('#div_cw_upload').css('display','none');
+	$('#btn_switch_div_cw_upload').click(function(){
+		if($('#div_cw_upload').css('display') == 'none'){
+			$('#div_cw_upload').css('display','block');
+		} else{
+			$('#div_cw_upload').css('display','none');
+		}
+	});
+
+	$('#input_cw_title').val(input_title_tip);
+	$('#input_cw_title').css('color','gray');
+	$('#input_cw_title').focus(function(){
+		if($('#input_cw_title').val() == input_title_tip){
+			$('#input_cw_title').val('');
+			$('#input_cw_title').css('color','black');
+		}
+	});
+	$('#input_cw_title').blur(function(){
+		if($('#input_cw_title').val() == ''){
+			$('#input_cw_title').val(input_title_tip);
+			$('#input_cw_title').css('color','gray');
+		}
+	});
+	$('#btn_cw_upload').text(btn_cw_upload_tip);
+	$('#btn_cw_upload').click(function(){
+		$('#btn_cw_upload').text('正在上传……');
+		$('#btn_cw_upload').attr('disabled',true);
+		var title = $('#input_cw_title').val();
+		title = title == input_title_tip?'':title;
+		$.ajaxFileUpload({
+			url:'__ROOT__/Home/Bbs/cw_upload',
+			secureuri:false,
+			fileElementId:'input_cw_file',
+			dataType: 'json',
+			data:{etitle:title,efid:$('#fid').val()},
+			success: function (data, status){
+				$('#btn_cw_upload').text(btn_cw_upload_tip);
+				if(data.result == 0){
+					$('#btn_cw_upload').attr('disabled',false);
+					cdialog.show_info('上传成功！',function(){
+						window.location.reload();
+					});
+				} else {
+					cdialog.show_alert('上传失败！错误信息：'+data.msg);
+					$('#btn_cw_upload').attr('disabled',false);
+					$('#input_cw_file').val(input_title_tip);
+				}
+			},
+			error: function (data, status, e){
+				cdialog.show_alert(e);
+				$('#btn_cw_upload').text(btn_cw_upload_tip);
+				$('#btn_cw_upload').attr('disabled',false);
+			}
+		});
+	});
+
+	$('#div_ta_select').css('display','none');
+	$('#btn_switch_div_ta_select').click(function(){
+		if($('#div_ta_select').css('display') == 'none'){
+			$('#div_ta_select').css('display','block');
+		} else{
+			$('#div_ta_select').css('display','none');
+		}
+	});
+
+	$('#btn_ta_add').click(function(){
+		var url = "__ROOT__/Home/Bbs/cw_ta_add";
+		$.ajax({
+			url:url,
+			dataType:'json',
+			type:'post',
+			data:{fid:$('#fid').val(),rid:$('#select_ta_add').val()},
+			success:function(t,s,r){
+				if(t.result == 0){
+					cdialog.show_info('操作成功！',function(){
+						window.location.reload();
+					});
+				}else{
+					cdialog.show_alert('操作失败！错误信息：'+t.msg);
+				}
+			},
+			error:function(t){eds_framework.error_handler(url,t);}
+		});
+	});
+});
+</script>

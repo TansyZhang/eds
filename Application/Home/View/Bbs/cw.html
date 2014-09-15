@@ -10,7 +10,7 @@
 }
 .center_title{
 	font-size: 14pt;
-	font-weight: blod;
+	font-weight: bold;
 	padding: 5px 10px;
 }
 .state{
@@ -21,8 +21,12 @@
 	font-size: 12pt;
 }
 .cw_item{
-	line-height: 30px;
+	line-height: 40px;
 	font-size: 14pt;
+}
+.cw-datetime{
+	font-size: 10pt;
+	color: gray;
 }
 </style>
 
@@ -46,7 +50,7 @@
 				<volist name="course_list" id="course_vo" key="k" >
 					<div class="cw_item">
 						<span class="op">
-							<span class="datetime">{$course_vo.fcreated_time}</span>&nbsp;
+							<span class="datetime cw-datetime">{$course_vo.fcreated_time}</span>&nbsp;
 							<?php if($course_vo['fstate'] == 10){ ?>
 							<span><a href="javascript:void(0)" onclick="cw_delete({$course_vo.fid},1)" 
 								title="关闭后学生将无法查看">关闭</a></span>&nbsp;

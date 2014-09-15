@@ -17,6 +17,8 @@ class BbsController extends EdsController {
         if($list2){
             $this->post_list = array_merge($this->post_list,$list2);
         }
+        //dump($list1);
+        //dump($list2);
         $this->display();
     }
 
@@ -703,7 +705,6 @@ class BbsController extends EdsController {
         $this->course_list = $m->where($lim)->select();
         $this->display();
     }
-
     public function cw_dtl($fid = -1){
         $fid = I('fid');
         if($fid == '' || $fid == -1){
@@ -718,14 +719,34 @@ class BbsController extends EdsController {
             return;
         }
         //dump($course);
+        $this->fid = $course['fid'];
         $this->fname = $course['fname'];
         $this->fgrade = $course['fgrade'];
         $this->faddr = $course['faddr'];
         $this->fteacher = $course['fteacher'];
         $this->fterm_name = $course['fterm_name'];
+
+
+        $m2 = M('Courseware');
+        $lim2['efid'] = $fid;
+        $lim2['estate'] = array('in','10,20');//10-审核中,20-审核通过
+        $this->cw_list = $m2->where($lim2)->order('estate asc,elast_edited_time asc')->select();
+
+        session('uid',1);
+        $m3 = M('CourseTaView');
+        $lim3['pfid'] = $fid;
+        //$lim3['uuid'] = session('uid');
+        $this->ta_c_list = $m3->where($lim3)->select();
+        //dump($this->ta_c_list);
+
+        $m4 = M('TaView');
+        $lim4['uuid'] = session('uid');
+        $lim4['rstate'] = array('in', '0');//0是正常
+        $this->ta_list = $m4->where($lim4)->select();
+
+
         $this->display();
     }
-
     public function cw_edit($fid=-1){
         $fid = I('fid');
 
@@ -756,8 +777,6 @@ class BbsController extends EdsController {
 
         $this->display();
     }
-
-
     public function cw_save($fid=-1,$fname='',$fteacher='',$fgrade='',$faddr='',$fterm='',$release=0){
         $fid = I('fid');
         $fname = I('fname');
@@ -803,6 +822,7 @@ class BbsController extends EdsController {
             }
         }
     }
+    //课程删除
     public function cw_delete($fid=-1,$close=0){
         $fid = I('fid');
         $close = I('close');
@@ -836,6 +856,266 @@ class BbsController extends EdsController {
             $this->show('{"result":1,"msg":"error.'.$m->getDbError().'"}', 'utf-8');
         }
     }
+    public function cw_upload($etitle='',$efid=-1){
+        $etitle = I('etitle');
+        $efid = I('efid');
+        if($efid == ''){
+            $this->show('{"result":1,"msg":"parameter `efid` error"}', 'utf-8');
+            return;
+        }
+        $upload = new \Think\Upload();// 实例化上传类
+        $upload->maxSize = 20*1024*1024;// 设置附件上传大小 20M
+        //$upload->exts = null;// 设置附件上传类型
+        $upload->rootPath = './Private/uploads'; // 设置附件上传目录    
+        $upload->savePath = '/cw/'; // 设置附件上传目录    
+        $upload->autoSub = false;//不使用子目录
+        $upload->saveName = date('Y_m_d_H_i_s', time()).'_'.mt_rand();
+        
+        $info = $upload->upload();// 上传文件
+        if($info){
+            $hint = '';
+            foreach ($info as $file) {
+                //$hint = ',"etitle":"'.$etitle.'"';
+                $hint.= ',"key":"'.$file['key'].'"';
+                $hint.= ',"savepath":"'.$file['savepath'].'"';
+                $hint.= ',"name":"'.$file['name'].'"';
+                $hint.= ',"savename":"'.$file['savename'].'"';
+                $hint.= ',"size":"'.$file['size'].'"';
+                $hint.= ',"ext":"'.$file['ext'].'"';
+                if($etitle == ''){
+                    $etitle = $file['name'];
+                    $index = strripos($etitle,".");
+                    $etitle = substr($etitle,0,$index);
+                }
+                if($etitle == ''){
+                    $this->show('{"result":1,"msg":"parameter `etitle` error"}', 'utf-8');
+                    return;
+                }
+                //插入数据库
+                $m = M("Courseware");
+                $data['eattr'] = 30;//30-内部课件
+                $data['etitle'] = $etitle;
+                $data['esummary'] = $file['name'];
+                $data['econtent'] = $file['name'];
+                $data['escan_count'] = 0;
+                $data['edownload_count'] = 0;
+                $data['epath'] = $file['savepath'].$file['savename'];
+                $data['efid'] = $efid;
+                $data['ecreated_time'] = date('Y-m-d H:i:s',time());
+                $data['elast_edited_time'] = $data['ecreated_time'];
+                $data['estate'] = 20;//20-（直接）审核通过
+                $result = $m->add($data);
+                if($result == false){
+                    $error = $m->getDbError();
+                    $error = str_replace('"', '&', $error);
+                    $this->show('{"result":1,"msg":"'.$error.'"}', 'utf-8');
+                }
+                break;
+            }
+            $this->show('{"result":0,"msg":"succeed."}', 'utf-8');
+            return;
+        } else {
+            $error = $upload->getError();
+            $error = str_replace('"', '&', $error);
+            $this->show('{"result":1,"msg":"'.$error.'"}', 'utf-8');
+            return;
+        }
+    }
+    //课件删除
+    public function cw_e_delete($eid=-1){
+        $eid = I('eid');
+        if($eid == '' || $eid == -1){
+            $this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
+            return;
+        }
+        $m = M('Courseware');
+        $data['eid'] = $eid;
+        $data['estate'] = 40;//40-已下架
+        $data['elast_edited_time'] = date('Y-m-d H:i:s', time());
+        if($m->save($data)){
+            $this->show('{"result":0,"msg":"deleting succeed.","eid":"'.$eid.'"}', 'utf-8');
+        } else {
+            $this->show('{"result":1,"msg":"error.'.$m->getDbError().'"}', 'utf-8');
+        }
+    }
+    public function cw_ta_delete($pid=-1){
+        $pid = I('pid');
+        if($pid == -1 || $pid == ''){
+            $this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
+            return;
+        }
+        $m = M('Teach');
+        if($m->delete($pid)){
+            $this->show('{"result":0,"msg":"deleting succeed.","pid":"'.$pid.'"}', 'utf-8');
+        } else {
+            $this->show('{"result":1,"msg":"error.'.$m->getDbError().'"}', 'utf-8');
+        }
+    }
+    public function cw_ta_add($fid=-1,$rid=-1){
+        $fid = I('fid');
+        $rid = I('rid');
+        if($fid == '' || $fid == -1 || $rid == '' || $rid == -1){
+            $this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
+            return;
+        }
+        $m = M('Teach');
+        $lim['prid'] = $rid;
+        $lim['pfid'] = $fid;
+        if($m->where($lim)->find()){
+            $this->show('{"result":0,"msg":"succeed."}', 'utf-8');
+            return;
+        }
+        $data['prid'] = $rid;
+        $data['pfid'] = $fid;
+        $data['pcreated_time'] = date('Y-m-d H:i:s',time());
+        $data['plast_edited_time'] = $data['pcreated_time'];
+        $data['prole'] = 1;//1-助教
+        if($m->add($data)){
+            $this->show('{"result":0,"msg":"succeed."}', 'utf-8');
+            return;
+        } else {
+            $this->show('{"result":1,"msg":"'.$m->getDbError().'"}', 'utf-8');
+            return;
+        }
+    }
+
+
+
+    public function ta_edit($rid=-1){
+        //session('uchar',80);
+        $rid = I('rid');
+        $mchar = M('Dic');
+        $limchar['dic_type'] = 'uchar';
+        $limchar['dic_key'] = array('lt',session('uchar'));
+        $this->uchar_list = $mchar->where($limchar)->order('dic_key desc')->select();
+        if($rid == -1 || $rid == ''){
+            $this->rid = -1;
+            $this->display();
+            return;
+        }
+        $m = M('TaView');
+        $lim['rid'] = $rid;
+        $record = $m->where($lim)->find();
+        if($record == false){
+            $this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
+            return;
+        }
+        $this->rid = $rid;
+        $this->uname = $record['uname'];
+        $this->uchar = $record['uchar'];
+        $this->utel = $record['utel'];
+        $this->uemail = $record['uemail'];
+        $this->uoffice_addr = $record['uoffice_addr'];
+        $this->uphoto = $record['uphoto'];
+
+        $this->display();
+    }
+    public function ta(){
+        session('uid',1);
+        $m = M('TaView');
+        $lim['uuid'] = session('uid');
+        $lim['rstate'] = array('in', '0');//0是正常
+        $this->ta_list = $m->where($lim)->select();
+        $this->display();
+    }
+
+    public function ta_save($rid='',$uname='',$utel='',$uoffice_addr='',$uemail='',$uchar=''){
+        $rid=I('rid');
+        $uname = I('uname');
+        $utel = I('utel');
+        $uoffice_addr = I('uoffice_addr');
+        $uemail = I('uemail');
+        $uchar = I('uchar');
+        if($uname == ''){
+            $this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
+            return;
+        }
+
+
+        $upload = new \Think\Upload();// 实例化上传类
+        $upload->maxSize = 1024*1024;// 设置附件上传大小 1M
+        //$upload->exts = null;// 设置附件上传类型
+        $upload->rootPath = './Public/uploads'; // 设置附件上传目录    
+        $upload->savePath = '/image/'; // 设置附件上传目录    
+        $upload->autoSub = false;//不使用子目录
+        $upload->saveName = date('Y_m_d_H_i_s', time()).'_'.mt_rand();
+        
+        $uphoto = '';
+        $info = $upload->upload();// 上传文件
+        if($info){
+            foreach ($info as $file) {
+                $uphoto .= $file['savepath'].$file['savename'];
+                break;
+            }
+        }
+        
+
+
+        $m = M('Register');
+        if($rid == '' || $rid == -1){//add
+            $data['raccount'] = 'TA'.date('YmdHis',time()).rand(10000,99999);//TODO
+            $data['rpassword'] = sha1(md5('000000'));//默认是6个0
+            $data['rnickname'] = $uname;
+            $data['rrole'] = 35;//
+            $data['rstate'] = 0;//0-正常
+            $data['rcreated_time'] = date('Y-m-d H:i:s',time());
+            $data['rlast_edited_time']  = $data['rcreated_time'];
+            $data['rhead_photo'] = '/assets/image/headphoto/default.png';
+            $rid = $m->add($data);
+            if($rid){
+                $data2['urid'] = $rid;
+                $data2['uchar'] = $uchar;
+                $data2['uno'] = $data['raccount'];
+                $data2['uname'] = $uname;
+                $data2['udisplay_name'] = $uname;
+                $data2['uemail'] = $uemail;
+                $data2['uphoto'] = $uphoto;
+                $data2['uoffice_addr'] = $uoffice_addr;
+                $data2['utel'] = $utel;
+                $data2['usender'] = 0;//0-未知
+                $data2['uuid'] = session('uid'); if(is_null($data2['uuid']))$data2['uuid'] = 0;
+                $data2['uhead_photo'] = '/assets/image/headphoto/default.png';
+                $data2['ucreate_post']=0;
+                $data2['ucreate_reply']=0;
+                $data2['ucreate_msg']=0;
+                $data2['ucreate_ex_note']=0;
+                $data2['ucreate_ex_trend']=0;
+                $data2['ucreate_ex_project']=0;
+                $data2['uupload_courseware']=1;
+                $data2['udownload_courseware']=1;
+                $data2['umanage_student']=0;
+                $data2['ulast_edited_time']= $data['rcreated_time'];
+                
+                $m2 = M('User');
+                if($m2->add($data2)){
+                    $this->show('{"result":0,"msg":"adding succeed."}', 'utf-8');
+                } else{
+                    $this->show('{"result":1,"msg":"error1."}', 'utf-8');
+                }
+            }else{
+                $this->show('{"result":1,"msg":"'.htmlspecialchars($m->_sql(),ENT_QUOTES).'"}', 'utf-8');
+            }
+        } else {
+
+            $m2 = M('User');
+            $data2['uid'] = $m2->where('`urid`='.$rid)->find()['uid'];
+            $data2['uname'] = $uname;
+            $data2['udisplay_name'] = $uname;
+            $data2['uemail'] = $uemail;
+            if($uphoto != ''){
+                $data2['uphoto'] = $uphoto;
+            }
+            $data2['uoffice_addr'] = $uoffice_addr;
+            $data2['utel'] = $utel;
+            $result = $m2->save($data2);
+            if($result){
+                $this->show('{"result":0,"msg":"saving succeed.","rid":"'.$rid.'"}', 'utf-8');
+            } else{
+                $this->show('{"result":1,"msg":"'.$m2->getDbError().'"}', 'utf-8');
+            }
+        }
+    }
+
 }
 
 ?>

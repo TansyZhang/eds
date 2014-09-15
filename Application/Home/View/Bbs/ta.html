@@ -10,7 +10,7 @@
 }
 .center_title{
 	font-size: 14pt;
-	font-weight: blod;
+	font-weight: bold;
 	padding: 5px 10px;
 }
 .state{
@@ -28,7 +28,7 @@
 }
 .ta_item li {
 	list-style-type: none;
-	line-height: 40px;
+	line-height: 30px;
 	color:rgb(2,183,230);
 	font-style: normal;
 	font-size:14pt;
@@ -56,52 +56,51 @@
 			<div class="center_title">助教列表</div>
 			<div class="separator"></div>
 			<div class="ta_list">
-				<div class="ta_item">
-					<img src="__PUBLIC__/assets/image/course_cw_teacher.png" style="float:left;margin:20px 40px;" />
-					<div class="info">
-						<ul>
-							<li>
-								<span><span>李XX</span>（<span>助教</span>）</span>
-							</li>
-							<li>
-								<span>电话：<span>025-89680000</span></span>
-							</li>
-							<li>
-								<span>邮箱：<span>li@nju.edu.cn</span></span>
-							</li>
-							<li>
-								<span>办公室：<span>仙林XX楼233</span></span>
-							</li>
-							<li>
-								<span>修改&nbsp;&nbsp;删除</span>
-							</li>
-						</ul>
+
+				<volist name="ta_list" id="ta_vo" key="k">
+					<div class="ta_item">
+						<img width="119px" height="135px"
+						<?php if($ta_vo['uphoto'] == ''){?>
+							src="__PUBLIC__/assets/image/course_cw_teacher.png" 
+						<?php } else { ?>
+							src="__PUBLIC__/uploads{$ta_vo.uphoto}"
+						<?php } ?>
+
+						style="float:left;margin:20px 40px;" />
+						<div class="info">
+							<ul>
+								<li>
+									<span>账号：<span title="登录账号">{$ta_vo.raccount}</span><span title="账号状态" style="font-size:10pt;color:gray;">({$ta_vo.rstate_name})</span></span>
+								</li>
+								<li>
+									<span><span title="姓名">{$ta_vo.uname}</span>（<span title="学位">{$ta_vo.uchar_name}</span>）</span>
+								</li>
+								<li>
+									<span>电话：<span title="电话">{$ta_vo.utel}</span></span>
+								</li>
+								<li>
+									<span>邮箱：<span title="邮箱">{$ta_vo.uemail}</span></span>
+								</li>
+								<li>
+									<span>办公室：<span title="办公地点">{$ta_vo.uoffice_addr}</span></span>
+								</li>
+								<li>
+									<span>
+										<a href="ta_edit?rid={$ta_vo.rid}#start" style="text-decoration:underline;" title="修改“{$ta_vo.uname}”的信息">修改</a>
+										&nbsp;&nbsp;
+										<span onclick="ta_delete(this,{$ta_vo.rid})" style="cursor:pointer;text-decoration:underline;" title="删除“{$ta_vo.uname}”的信息">删除</span>
+									</span>
+								</li>
+							</ul>
+						</div>
 					</div>
-				</div>
+				</volist>
+
+
 				<div class="ta_item">
-					<img src="__PUBLIC__/assets/image/course_cw_teacher.png" style="float:left;margin:20px 40px;" />
-					<div class="info">
-						<ul>
-							<li>
-								<span><span>李XX</span>（<span>助教</span>）</span>
-							</li>
-							<li>
-								<span>电话：<span>025-89680000</span></span>
-							</li>
-							<li>
-								<span>邮箱：<span>li@nju.edu.cn</span></span>
-							</li>
-							<li>
-								<span>办公室：<span>仙林XX楼233</span></span>
-							</li>
-							<li>
-								<span>修改&nbsp;&nbsp;删除</span>
-							</li>
-						</ul>
+					<div style="width:100px;">
+						<include file="./Application/Home/View/control_btn.html" text="添加" id="btn_ta_add"/>
 					</div>
-				</div>
-				<div class="ta_item">
-					<div><a href="#">添加</a></div>
 				</div>
 			</div>
 		</div>
@@ -109,3 +108,31 @@
 
 	</div>
 </div>
+<script type="text/javascript">
+function ta_delete(elem,rid){
+	var oldtext = $(elem).text();
+	$(elem).css('text-decoration','none').text('正在删除……');
+	var url = '__ROOT__/Home/Bbs/acc_delete';
+	$.ajax({
+		url:url,
+		data:{rid:rid},
+		dataType:'json',
+		success:function(t,s,r){
+			$(elem).text(oldtext);
+			if(t.result == 0){
+				cdialog.show_info('操作成功！',function(){
+					window.location.reload();
+				});
+			} else{
+				cdialog.show_alert('操作失败！错误信息：'+t.msg);
+			}
+		},
+		error:function(t){eds_framework.error_handler(url,t);}
+	});
+}
+$(document).ready(function(){
+	$('#btn_ta_add').click(function(){
+		window.location.href="ta_edit?rid=-1#start";
+	});
+});
+</script>

@@ -10,7 +10,7 @@
 }
 .center_title{
 	font-size: 14pt;
-	font-weight: blod;
+	font-weight: bold;
 	padding: 5px 10px;
 }
 .state{
@@ -83,7 +83,9 @@ width:100%;overflow:hidden;margin-right:20px;
 
 
 				<div class="acc_item">
-					<div><a href="acc_edit#start">添加</a></div>
+					<div style="width:100px;">
+						<include file="./Application/Home/View/control_btn.html" text="添加" id="btn_acc_add"/>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -116,4 +118,9 @@ function acc_delete(elem, rid){
 		error:function(t){eds_framework.error_handler(url,t);}
 	});
 }
+$(document).ready(function(){
+	$('#btn_acc_add').click(function(){
+		window.location.href="acc_edit#start";
+	});
+});
 </script>

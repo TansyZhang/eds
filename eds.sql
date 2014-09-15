@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50536
 File Encoding         : 65001
 
-Date: 2014-09-11 23:17:03
+Date: 2014-09-16 07:51:30
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -42,12 +42,12 @@ CREATE TABLE `t_bbs` (
 -- ----------------------------
 -- Records of t_bbs
 -- ----------------------------
-INSERT INTO `t_bbs` VALUES ('1', '太阳系边界现神秘“彩带” 粒子被困环形区域', '1', '【科技讯】8月29日消息，据媒体报道，在太阳系的边缘，科学家发现了一处神秘的边界层，是太阳系物质与银河系介质相互作用的地方，处于日光层的边缘，NASA星际边界探测器发现了一种奇怪的现象，太阳系内部粒子', '&lt;p&gt;\n	&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;【&lt;/span&gt;&lt;a href=&quot;http://www.kejixun.com/&quot; target=&quot;_blank&quot; class=&quot;keylink&quot;&gt;科技&lt;/a&gt;&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;讯】8月29日消息，据媒体报道，在太阳系的边缘，&lt;/span&gt;&lt;a href=&quot;http://www.kejixun.com/kexue/&quot; target=&quot;_blank&quot; class=&quot;keylink&quot;&gt;科学&lt;/a&gt;&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;家发现了一处神秘的边界层，是太阳系物质与银河系介质相互作用的地方，处于日光层的边缘，NASA星际边界探测器发现了一种奇怪的现象，太阳系内部粒子在这一区域中似乎碰到一层壁垒，使得太阳系外围出现类似“边界指纹”的结构，绘制太阳系边界图像体现了这处神秘的区域，但无法对其进行解释。&lt;/span&gt;\n&lt;/p&gt;\n&lt;p style=&quot;text-align:center;&quot;&gt;\n	&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;&lt;img src=&quot;/eds/Public/kindeditor-4.1.10/attached/image/20140830/20140830144420_14273.jpg&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;\n&lt;/span&gt;\n&lt;/p&gt;\n&lt;p&gt;\n	&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;\n	&lt;p style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;&quot;&gt;\n		&amp;nbsp;&amp;nbsp; &amp;nbsp; &amp;nbsp; 太阳系边界处神秘结构酷似巨大的“彩带”飘舞，产生更多高能中性原子，&lt;a href=&quot;http://www.kejixun.com/kexue/&quot; target=&quot;_blank&quot; class=&quot;keylink&quot;&gt;科学&lt;/a&gt;家不清楚是什么原因导致中性原子数量出现增加。科学家设计出相关模拟和理论试图解释彩带的存在原因，彩带存在于一个特殊的位置上，太阳的中性氢原子穿过银河系的磁场，中性原子不受磁场的影响，使得该过程中的运行方向仍然保持原有指向。\n	&lt;/p&gt;\n	&lt;p style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;&quot;&gt;\n		&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 科学家认为，新的理论嵌入了太阳系边缘波动以及磁场震动的因子，使得这些粒子被困于一个环形区域中。科学家认为其中还隐藏了太阳系磁场与银河系磁场的关系，如果这一理论是正确的，太阳系边界的环形色带将告诉我们星际介质与磁场的作用关系，以及这些磁场是如何影响我们的空间环境。\n	&lt;/p&gt;\n&lt;br /&gt;\n&lt;/span&gt;\n&lt;/p&gt;', '6', '20', null, '2014-08-30 20:44:26', null, null, null, '2014-09-10 23:26:52', null, '13', '0');
+INSERT INTO `t_bbs` VALUES ('1', '太阳系边界现神秘“彩带” 粒子被困环形区域', '1', '【科技讯】8月29日消息，据媒体报道，在太阳系的边缘，科学家发现了一处神秘的边界层，是太阳系物质与银河系介质相互作用的地方，处于日光层的边缘，NASA星际边界探测器发现了一种奇怪的现象，太阳系内部粒子', '&lt;p&gt;\n	&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;【&lt;/span&gt;&lt;a href=&quot;http://www.kejixun.com/&quot; target=&quot;_blank&quot; class=&quot;keylink&quot;&gt;科技&lt;/a&gt;&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;讯】8月29日消息，据媒体报道，在太阳系的边缘，&lt;/span&gt;&lt;a href=&quot;http://www.kejixun.com/kexue/&quot; target=&quot;_blank&quot; class=&quot;keylink&quot;&gt;科学&lt;/a&gt;&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;家发现了一处神秘的边界层，是太阳系物质与银河系介质相互作用的地方，处于日光层的边缘，NASA星际边界探测器发现了一种奇怪的现象，太阳系内部粒子在这一区域中似乎碰到一层壁垒，使得太阳系外围出现类似“边界指纹”的结构，绘制太阳系边界图像体现了这处神秘的区域，但无法对其进行解释。&lt;/span&gt;\n&lt;/p&gt;\n&lt;p style=&quot;text-align:center;&quot;&gt;\n	&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;&lt;img src=&quot;/eds/Public/kindeditor-4.1.10/attached/image/20140830/20140830144420_14273.jpg&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;\n&lt;/span&gt;\n&lt;/p&gt;\n&lt;p&gt;\n	&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;\n	&lt;p style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;&quot;&gt;\n		&amp;nbsp;&amp;nbsp; &amp;nbsp; &amp;nbsp; 太阳系边界处神秘结构酷似巨大的“彩带”飘舞，产生更多高能中性原子，&lt;a href=&quot;http://www.kejixun.com/kexue/&quot; target=&quot;_blank&quot; class=&quot;keylink&quot;&gt;科学&lt;/a&gt;家不清楚是什么原因导致中性原子数量出现增加。科学家设计出相关模拟和理论试图解释彩带的存在原因，彩带存在于一个特殊的位置上，太阳的中性氢原子穿过银河系的磁场，中性原子不受磁场的影响，使得该过程中的运行方向仍然保持原有指向。\n	&lt;/p&gt;\n	&lt;p style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;&quot;&gt;\n		&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 科学家认为，新的理论嵌入了太阳系边缘波动以及磁场震动的因子，使得这些粒子被困于一个环形区域中。科学家认为其中还隐藏了太阳系磁场与银河系磁场的关系，如果这一理论是正确的，太阳系边界的环形色带将告诉我们星际介质与磁场的作用关系，以及这些磁场是如何影响我们的空间环境。\n	&lt;/p&gt;\n&lt;br /&gt;\n&lt;/span&gt;\n&lt;/p&gt;', '6', '20', null, '2014-08-30 20:44:26', '2014-08-30 20:44:26', null, null, '2014-09-10 23:26:52', null, '13', '0');
 INSERT INTO `t_bbs` VALUES ('2', null, '1', '阿三，你又来胡思乱想了，药不能停啊！！！还挺有意思~', '&lt;pre&gt;阿三，你又来胡思乱想了，药不能停啊！！！还挺有意思~&lt;/pre&gt;', null, '0', null, '2014-08-30 20:46:03', null, null, null, null, '1', '0', '0');
 INSERT INTO `t_bbs` VALUES ('3', null, '1', '阿三，你又来胡思乱想了，药不能停啊！！！还挺有意思~', '&lt;pre&gt;阿三，你又来胡思乱想了，药不能停啊！！！还挺有意思~&lt;/pre&gt;', null, '20', null, '2014-08-30 21:12:49', null, null, null, null, '1', '0', '0');
 INSERT INTO `t_bbs` VALUES ('4', null, '1', '阿三，你又来胡思乱想了，药不能停啊！！！还挺有意思~', '&lt;strong&gt;&lt;span style=&quot;font-size:16px;&quot;&gt;阿三，你又来胡思乱想了，药不能停啊！！！还挺有意思~&lt;/span&gt;&lt;/strong&gt;', null, '0', null, '2014-08-30 21:16:48', null, null, null, null, '1', '0', '0');
 INSERT INTO `t_bbs` VALUES ('5', null, '1', '&lt;img src=&quot;/eds/Public/kindeditor-4.1.10/attached/image/20140830/20140830154027_16871.jpg&quot; alt=&quot;&quot; /&gt;', '&lt;div style=&quot;text-align:center;&quot;&gt;\n	&lt;span style=&quot;font-family:NSimSun;line-height:1.5;&quot;&gt;&lt;/span&gt;&lt;span style=&quot;font-family:NSimSun;font-size:24px;&quot;&gt;&lt;img src=&quot;/eds/Public/kindeditor-4.1.10/attached/image/20140830/20140830154027_16871.jpg&quot; alt=&quot;&quot; /&gt;&lt;/span&gt;\n&lt;/div&gt;', null, '10', null, '2014-08-30 21:40:33', null, null, null, null, '1', '0', '0');
-INSERT INTO `t_bbs` VALUES ('6', '罕见超长伽玛射线暴 或源于神秘大质量恒星', '1', '【科技讯】8月29日消息，据媒体报道，伽玛射线暴被认为是宇宙中最强大的爆炸之一，大部分的伽玛射线暴在一分钟左右，科学家提出的新型伽玛暴可持续几个小时。英国研究小组通过观测提出了一种新型伽玛射线暴理论，', '&lt;p&gt;\n	&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;&amp;nbsp;【&lt;/span&gt;&lt;a href=&quot;http://www.kejixun.com/&quot; target=&quot;_blank&quot; class=&quot;keylink&quot;&gt;科技&lt;/a&gt;&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;讯】8月29日消息，据媒体报道，伽玛射线暴被认为是宇宙中最强大的爆炸之一，大部分的伽玛射线暴在一分钟左右，&lt;/span&gt;&lt;a href=&quot;http://www.kejixun.com/kexue/&quot; target=&quot;_blank&quot; class=&quot;keylink&quot;&gt;科学&lt;/a&gt;&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;家提出的新型伽玛暴可持续几个小时。英国研究小组通过观测提出了一种新型伽玛射线暴理论，其形成于质量更大的超巨星。&lt;/span&gt;\n&lt;/p&gt;\n&lt;p style=&quot;text-align:center;&quot;&gt;\n	&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;&lt;img src=&quot;/eds/Public/kindeditor-4.1.10/attached/image/20140830/20140830155625_89689.jpg&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;\n&lt;/span&gt;\n&lt;/p&gt;\n&lt;p&gt;\n	&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;\n	&lt;p style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;&quot;&gt;\n		&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 宇宙中存在的大质量恒星，该型恒星的“燃烧”速度非常快，其寿命很短，可形成能量异常高的伽玛射线。&lt;a href=&quot;http://www.kejixun.com/kexue/&quot; target=&quot;_blank&quot; class=&quot;keylink&quot;&gt;科学&lt;/a&gt;家小组观测到不寻常的新型伽玛暴，超长伽玛暴的红移值达到0.847，大约在70亿光年左右，认为其爆炸产生于超巨星，一种质量达到太阳质量20倍以上的天体，爆发瞬间可变成宇宙中最大最亮的恒星之一，半径可达到太阳的1000倍左右。\n	&lt;/p&gt;\n	&lt;p style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;&quot;&gt;\n		&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 恒星演化的最后阶段，其自身会在引力作用下坍缩形成一个黑洞，当物质被吸入黑洞时，会在两个垂直方向上形成伽玛射线喷流，其速度可接近光速，一般情况下这个伽玛射线暴仅会持续数秒，发现的恒星质量较大，形成伽玛射线喷流的持续时间也较长。\n	&lt;/p&gt;\n&lt;br /&gt;\n&lt;/span&gt;\n&lt;/p&gt;', '2', '30', null, '2014-08-30 21:56:30', null, null, null, null, null, '0', '0');
+INSERT INTO `t_bbs` VALUES ('6', '罕见超长伽玛射线暴 或源于神秘大质量恒星', '1', '【科技讯】8月29日消息，据媒体报道，伽玛射线暴被认为是宇宙中最强大的爆炸之一，大部分的伽玛射线暴在一分钟左右，科学家提出的新型伽玛暴可持续几个小时。英国研究小组通过观测提出了一种新型伽玛射线暴理论，', '&lt;p&gt;\n	&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;&amp;nbsp;【&lt;/span&gt;&lt;a href=&quot;http://www.kejixun.com/&quot; target=&quot;_blank&quot; class=&quot;keylink&quot;&gt;科技&lt;/a&gt;&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;讯】8月29日消息，据媒体报道，伽玛射线暴被认为是宇宙中最强大的爆炸之一，大部分的伽玛射线暴在一分钟左右，&lt;/span&gt;&lt;a href=&quot;http://www.kejixun.com/kexue/&quot; target=&quot;_blank&quot; class=&quot;keylink&quot;&gt;科学&lt;/a&gt;&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;家提出的新型伽玛暴可持续几个小时。英国研究小组通过观测提出了一种新型伽玛射线暴理论，其形成于质量更大的超巨星。&lt;/span&gt;\n&lt;/p&gt;\n&lt;p style=&quot;text-align:center;&quot;&gt;\n	&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;&lt;img src=&quot;/eds/Public/kindeditor-4.1.10/attached/image/20140830/20140830155625_89689.jpg&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;\n&lt;/span&gt;\n&lt;/p&gt;\n&lt;p&gt;\n	&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;\n	&lt;p style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;&quot;&gt;\n		&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 宇宙中存在的大质量恒星，该型恒星的“燃烧”速度非常快，其寿命很短，可形成能量异常高的伽玛射线。&lt;a href=&quot;http://www.kejixun.com/kexue/&quot; target=&quot;_blank&quot; class=&quot;keylink&quot;&gt;科学&lt;/a&gt;家小组观测到不寻常的新型伽玛暴，超长伽玛暴的红移值达到0.847，大约在70亿光年左右，认为其爆炸产生于超巨星，一种质量达到太阳质量20倍以上的天体，爆发瞬间可变成宇宙中最大最亮的恒星之一，半径可达到太阳的1000倍左右。\n	&lt;/p&gt;\n	&lt;p style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;&quot;&gt;\n		&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 恒星演化的最后阶段，其自身会在引力作用下坍缩形成一个黑洞，当物质被吸入黑洞时，会在两个垂直方向上形成伽玛射线喷流，其速度可接近光速，一般情况下这个伽玛射线暴仅会持续数秒，发现的恒星质量较大，形成伽玛射线喷流的持续时间也较长。\n	&lt;/p&gt;\n&lt;br /&gt;\n&lt;/span&gt;\n&lt;/p&gt;', '2', '30', null, '2014-08-30 21:56:30', '2014-08-30 21:56:30', null, null, null, null, '0', '0');
 INSERT INTO `t_bbs` VALUES ('7', '试试看', '1', '好吧，我就试试看看而发生大法师打发斯蒂芬', '&lt;div style=&quot;text-align:center;&quot;&gt;\n	&lt;span style=&quot;line-height:1.5;&quot;&gt;好吧，我就试试&lt;/span&gt;&lt;span style=&quot;line-height:1.5;&quot;&gt;看看而发生大法师打发斯蒂芬&lt;/span&gt;\n&lt;/div&gt;', '1', '10', null, '2014-08-30 22:42:55', '2014-09-10 22:47:54', null, null, '2014-09-10 23:27:25', null, '0', '0');
 INSERT INTO `t_bbs` VALUES ('8', '按时打算', '1', '阿瑟大声道v24534', '阿瑟大声道v24534', '3', '30', null, '2014-09-10 22:01:23', '2014-09-10 22:40:32', null, null, null, null, '0', '0');
 INSERT INTO `t_bbs` VALUES ('9', '我就发个帖', '1', '好久没有发帖了 看看这个功能有木有受影响', '好久没有发帖了 看看这个功能有木有受影响', '1', '10', null, '2014-09-11 22:52:03', '2014-09-11 22:52:03', null, null, null, null, '0', '0');
@@ -123,14 +123,14 @@ CREATE TABLE `t_courseware` (
   `eauthor_photo` varchar(250) DEFAULT NULL,
   `escan_count` int(11) NOT NULL DEFAULT '0' COMMENT '被查看次数',
   `edownload_count` int(11) NOT NULL DEFAULT '0' COMMENT '被下载次数',
-  `epath` varchar(250) DEFAULT NULL,
+  `epath` varchar(250) DEFAULT NULL COMMENT '下载路径',
   `etype` int(11) DEFAULT NULL COMMENT '课件类别，公共课件有效，引用自字典表etype',
   `efid` int(11) DEFAULT NULL COMMENT '课件所属课程，仅用于非公共课件，引用自f表',
-  `ecreated_time` datetime DEFAULT NULL,
-  `elast_edited_time` datetime NOT NULL,
+  `ecreated_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `elast_edited_time` datetime NOT NULL COMMENT '最后编辑时间',
   `estate` int(11) NOT NULL COMMENT '课件状态：10-审核中，20-审核通过，30-退回，引用自字典表estate',
   PRIMARY KEY (`eid`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_courseware
@@ -140,6 +140,9 @@ INSERT INTO `t_courseware` VALUES ('2', '0', '标题', '据科学家估计，在
 INSERT INTO `t_courseware` VALUES ('3', '20', 'AjaxFileUploaderV2.1', null, 'AjaxFileUploaderV2.1AjaxFileUploaderV2.1AjaxFileUploaderV2.1AjaxFileUploaderV2.1AjaxFileUploaderV2.1AjaxFileUploaderV2.1AjaxFileUploaderV2.1AjaxFileUploaderV2.1', null, null, null, null, null, '0', '0', '/pi/2014_08_31_14_48_14_834946616.zip', null, null, '2014-08-31 14:50:09', '2014-08-31 15:01:22', '20');
 INSERT INTO `t_courseware` VALUES ('4', '20', '更新的图片', null, '这里面是更新的图片这里面是更新的图片', null, null, null, null, null, '0', '0', '/pi/2014_08_31_15_12_34_550220040.zip', null, null, '2014-08-31 15:12:48', '2014-08-31 15:13:17', '20');
 INSERT INTO `t_courseware` VALUES ('5', '20', '图标', null, '这里是一些图标', null, null, null, null, null, '0', '0', '/pi/2014_08_31_15_13_42_1661736225.zip', null, null, '2014-08-31 15:14:02', '2014-08-31 15:14:02', '20');
+INSERT INTO `t_courseware` VALUES ('6', '30', 'easyuichm', 'easyuichm.zip', 'easyuichm.zip', null, null, null, null, null, '0', '0', '/cw/2014_09_13_11_35_22_1868685495.zip', null, '1', '2014-09-13 11:35:23', '2014-09-13 12:34:45', '20');
+INSERT INTO `t_courseware` VALUES ('7', '30', 'database_03_2', 'database_03_2.ppt', 'database_03_2.ppt', null, null, null, null, null, '0', '0', '/cw/2014_09_13_12_01_23_885878773.ppt', null, '1', '2014-09-13 12:01:25', '2014-09-13 12:37:36', '20');
+INSERT INTO `t_courseware` VALUES ('8', '30', 'ExtJs2.0学习系列', 'ExtJs2.0学习系列.pdf', 'ExtJs2.0学习系列.pdf', null, null, null, null, null, '0', '0', '/cw/2014_09_13_12_03_05_753270438.pdf', null, '1', '2014-09-13 12:03:06', '2014-09-13 14:06:16', '20');
 
 -- ----------------------------
 -- Table structure for `t_dic`
@@ -206,6 +209,7 @@ INSERT INTO `t_dic` VALUES ('30', 'gstate', '发布', null);
 INSERT INTO `t_dic` VALUES ('30', 'rrole', '老师', null);
 INSERT INTO `t_dic` VALUES ('30', 'tstate', '被删除', null);
 INSERT INTO `t_dic` VALUES ('30', 'zstate', '已发布', null);
+INSERT INTO `t_dic` VALUES ('35', 'rrole', '助教', null);
 INSERT INTO `t_dic` VALUES ('40', 'estate', '已下架', null);
 INSERT INTO `t_dic` VALUES ('40', 'fstate', '已被管理员屏蔽', null);
 INSERT INTO `t_dic` VALUES ('40', 'gstate', '关闭', null);
@@ -396,7 +400,7 @@ CREATE TABLE `t_register` (
   `rcreated_time` datetime DEFAULT NULL,
   `rshielded_tick` int(11) DEFAULT NULL COMMENT '被禁止的时长，以秒为单位',
   PRIMARY KEY (`rid`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_register
@@ -408,6 +412,15 @@ INSERT INTO `t_register` VALUES ('22', 's123', '1f604490cbdd4ec35cfa681bcf3df8fa
 INSERT INTO `t_register` VALUES ('23', 'NJU123', '1f604490cbdd4ec35cfa681bcf3df8fac26e0cb5', '张三', '/assets/image/headphoto/default.png', '0', '0', '30', null, null, null, '2014-09-10 19:50:25', '2014-09-06 14:13:20', null);
 INSERT INTO `t_register` VALUES ('28', 'NJU100', '1f604490cbdd4ec35cfa681bcf3df8fac26e0cb5', '李四', '/assets/image/headphoto/default.png', '0', '0', '30', null, null, null, '2014-09-10 20:00:27', '2014-09-10 20:00:27', null);
 INSERT INTO `t_register` VALUES ('29', 'NJU10', '1f604490cbdd4ec35cfa681bcf3df8fac26e0cb5', '王五', '/assets/image/headphoto/default.png', '0', '10', '30', null, null, null, '2014-09-10 20:34:53', '2014-09-10 20:12:07', null);
+INSERT INTO `t_register` VALUES ('30', 'TA201409131608432747', '1f604490cbdd4ec35cfa681bcf3df8fac26e0cb5', '姓名', '/assets/image/headphoto/default.png', '0', '10', '35', null, null, null, '2014-09-13 16:08:43', '2014-09-13 16:08:43', null);
+INSERT INTO `t_register` VALUES ('31', 'TA201409131611124448', '1f604490cbdd4ec35cfa681bcf3df8fac26e0cb5', '姓名', '/assets/image/headphoto/default.png', '0', '0', '35', null, null, null, '2014-09-13 16:11:12', '2014-09-13 16:11:12', null);
+INSERT INTO `t_register` VALUES ('32', 'TA201409131613271921', '1f604490cbdd4ec35cfa681bcf3df8fac26e0cb5', '姓名', '/assets/image/headphoto/default.png', '0', '0', '35', null, null, null, '2014-09-13 16:13:27', '2014-09-13 16:13:27', null);
+INSERT INTO `t_register` VALUES ('33', 'TA201409131614036380', '1f604490cbdd4ec35cfa681bcf3df8fac26e0cb5', '姓名', '/assets/image/headphoto/default.png', '0', '20', '35', null, null, null, '2014-09-13 16:14:03', '2014-09-13 16:14:03', null);
+INSERT INTO `t_register` VALUES ('34', 'TA201409131618208587', '1f604490cbdd4ec35cfa681bcf3df8fac26e0cb5', '姓名', '/assets/image/headphoto/default.png', '0', '20', '35', null, null, null, '2014-09-13 16:18:20', '2014-09-13 16:18:20', null);
+INSERT INTO `t_register` VALUES ('35', 'TA201409131633387607', '1f604490cbdd4ec35cfa681bcf3df8fac26e0cb5', '姓名', '/assets/image/headphoto/default.png', '0', '20', '35', null, null, null, '2014-09-13 16:33:38', '2014-09-13 16:33:38', null);
+INSERT INTO `t_register` VALUES ('36', 'TA201409131636416765', '1f604490cbdd4ec35cfa681bcf3df8fac26e0cb5', '姓名', '/assets/image/headphoto/default.png', '0', '0', '35', null, null, null, '2014-09-13 16:36:41', '2014-09-13 16:36:41', null);
+INSERT INTO `t_register` VALUES ('37', 'TA201409131654548358', '1f604490cbdd4ec35cfa681bcf3df8fac26e0cb5', '张三', '/assets/image/headphoto/default.png', '0', '0', '35', null, null, null, '2014-09-13 16:54:54', '2014-09-13 16:54:54', null);
+INSERT INTO `t_register` VALUES ('38', 'TA201409131733395301', '1f604490cbdd4ec35cfa681bcf3df8fac26e0cb5', '姓名', '/assets/image/headphoto/default.png', '0', '0', '35', null, null, null, '2014-09-13 17:33:39', '2014-09-13 17:33:39', null);
 
 -- ----------------------------
 -- Table structure for `t_reply`
@@ -435,16 +448,19 @@ CREATE TABLE `t_reply` (
 -- ----------------------------
 DROP TABLE IF EXISTS `t_teach`;
 CREATE TABLE `t_teach` (
-  `pid` int(11) NOT NULL,
-  `puid` int(11) NOT NULL,
+  `pid` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `prid` int(11) NOT NULL,
   `pfid` int(11) NOT NULL,
   `prole` int(11) NOT NULL COMMENT '课程角色：0-主讲教师，1-“猪脚”，引用自字典表prole',
+  `pcreated_time` datetime NOT NULL,
+  `plast_edited_time` datetime NOT NULL,
   PRIMARY KEY (`pid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_teach
 -- ----------------------------
+INSERT INTO `t_teach` VALUES ('1', '37', '1', '1', '2014-09-13 18:01:11', '2014-09-13 18:01:11');
 
 -- ----------------------------
 -- Table structure for `t_topic`
@@ -494,6 +510,7 @@ CREATE TABLE `t_user` (
   `utel` varchar(16) DEFAULT NULL,
   `uqq` varchar(16) DEFAULT NULL,
   `uoffice_addr` varchar(100) DEFAULT NULL COMMENT '办公地址',
+  `uphoto` varchar(250) DEFAULT NULL COMMENT '照片',
   `uhead_photo` varchar(250) DEFAULT NULL COMMENT '头像路径',
   `uprofile` text COMMENT '个人说明',
   `uconstellation` int(11) DEFAULT NULL COMMENT '星座，引用自字典表uconstellation',
@@ -509,14 +526,20 @@ CREATE TABLE `t_user` (
   `udownload_courseware` int(2) NOT NULL DEFAULT '1' COMMENT '是否有权下载[登录才允许下载的]课件',
   `ulast_edited_time` datetime DEFAULT NULL COMMENT '最后修改时间',
   PRIMARY KEY (`uid`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_user
 -- ----------------------------
-INSERT INTO `t_user` VALUES ('1', '23', '100', '0', 'NJU123', '张三', null, '0', '0', null, '0', null, null, null, null, null, '/assets/image/headphoto/default.png', null, null, null, '1', '1', '1', '1', '1', '1', '1', '0', '0', '2014-09-10 19:50:25');
-INSERT INTO `t_user` VALUES ('2', '28', '100', '0', '100', '李四', null, '0', '0', null, '0', null, null, null, null, null, '/assets/image/headphoto/default.png', null, null, null, '1', '1', '1', '1', '1', '1', '1', '0', '1', '2014-09-10 20:00:27');
-INSERT INTO `t_user` VALUES ('3', '29', '70', '0', '10', '王五', null, '0', '0', null, '0', null, null, null, null, null, '/assets/image/headphoto/default.png', null, null, null, '1', '1', '1', '1', '1', '1', '1', '0', '0', '2014-09-10 20:34:53');
+INSERT INTO `t_user` VALUES ('1', '23', '100', '0', 'NJU123', '张三', null, '0', '0', null, '0', null, null, null, null, null, null, '/assets/image/headphoto/default.png', null, null, null, '1', '1', '1', '1', '1', '1', '1', '0', '0', '2014-09-10 19:50:25');
+INSERT INTO `t_user` VALUES ('2', '28', '100', '0', '100', '李四', null, '0', '0', null, '0', null, null, null, null, null, null, '/assets/image/headphoto/default.png', null, null, null, '1', '1', '1', '1', '1', '1', '1', '0', '1', '2014-09-10 20:00:27');
+INSERT INTO `t_user` VALUES ('3', '29', '70', '0', '10', '王五', null, '0', '0', null, '0', null, null, null, null, null, null, '/assets/image/headphoto/default.png', null, null, null, '1', '1', '1', '1', '1', '1', '1', '0', '0', '2014-09-10 20:34:53');
+INSERT INTO `t_user` VALUES ('4', '33', '70', '0', 'TA201409131614036380', '姓名', null, '0', '0', null, '1', null, null, null, null, null, null, '/assets/image/headphoto/default.png', null, null, null, '0', '0', '0', '0', '0', '0', '1', '0', '1', '2014-09-13 16:14:03');
+INSERT INTO `t_user` VALUES ('5', '34', '70', '0', 'TA201409131618208587', '姓名', null, '0', '0', null, '1', '邮箱', null, '联系电话', null, '办公室', null, '/assets/image/headphoto/default.png', null, null, null, '0', '0', '0', '0', '0', '0', '1', '0', '1', '2014-09-13 16:18:20');
+INSERT INTO `t_user` VALUES ('6', '35', '70', '0', 'TA201409131633387607', '姓名2', null, '0', '0', null, '1', '2343453@ww.com', null, '联系电话2', null, '办公室2', '/image/2014_09_13_17_31_05_1952154255.jpg', '/assets/image/headphoto/default.png', null, null, null, '0', '0', '0', '0', '0', '0', '1', '0', '1', '2014-09-13 16:33:38');
+INSERT INTO `t_user` VALUES ('7', '36', '70', '0', 'TA201409131636416765', '姓名', null, '0', '0', null, '1', '邮箱', null, '联系电话', null, '办公室', '', '/assets/image/headphoto/default.png', null, null, null, '0', '0', '0', '0', '0', '0', '1', '0', '1', '2014-09-13 16:36:41');
+INSERT INTO `t_user` VALUES ('8', '37', '60', '0', 'TA201409131654548358', '张三', null, '0', '0', null, '1', 'zhangsan@nju.edu.cn', null, '15900001234', null, '系楼233', '/image/2014_09_13_18_25_37_2122758271.png', '/assets/image/headphoto/default.png', null, null, null, '0', '0', '0', '0', '0', '0', '1', '0', '1', '2014-09-13 16:54:54');
+INSERT INTO `t_user` VALUES ('9', '38', '70', '0', 'TA201409131733395301', '姓名', null, '0', '0', null, '1', '邮箱', null, '联系电话', null, '办公室', '', '/assets/image/headphoto/default.png', null, null, null, '0', '0', '0', '0', '0', '0', '1', '0', '1', '2014-09-13 17:33:39');
 
 -- ----------------------------
 -- Table structure for `t_z`
@@ -557,6 +580,12 @@ INSERT INTO `t_z` VALUES ('9', '1', '0', '2014-08-30 15:59:07', '2014-08-30 15:5
 INSERT INTO `t_z` VALUES ('10', '1', '0', '2014-08-30 16:18:49', '2014-08-30 16:19:32', null, '2014-08-30 16:19:32', null, '“基础学科拔尖学生培养试验计划”阶段性总结交流会将在清华举行', '“基础学科拔尖学生培养试验计划”（以下简称“拔尖计划”）阶段性总结交流会在主楼接待厅举行。时间定在9月26号，欢迎参加拔尖计划的各校老师莅临指导。', '&lt;span style=&quot;color:#006600;font-size:24px;&quot;&gt;&amp;nbsp;&lt;span style=&quot;font-size:32px;&quot;&gt;“基础学科拔尖学生培养试验计划”（以下简称“拔尖计划”）阶段性总结交流会在主楼接待厅举行。时间定在9月26号，欢迎参加拔尖计划的各校老师莅临指导。&lt;/span&gt;&lt;/span&gt;', '30', '4', '0', null, null, '0');
 
 -- ----------------------------
+-- View structure for `t_course_ta_view`
+-- ----------------------------
+DROP VIEW IF EXISTS `t_course_ta_view`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `t_course_ta_view` AS select `t_teach`.`pid` AS `pid`,`t_teach`.`prid` AS `prid`,`t_teach`.`pfid` AS `pfid`,`t_teach`.`prole` AS `prole`,`t_teach`.`pcreated_time` AS `pcreated_time`,`t_teach`.`plast_edited_time` AS `plast_edited_time`,`t_ta_view`.`rid` AS `rid`,`t_ta_view`.`raccount` AS `raccount`,`t_ta_view`.`rpassword` AS `rpassword`,`t_ta_view`.`rnickname` AS `rnickname`,`t_ta_view`.`rhead_photo` AS `rhead_photo`,`t_ta_view`.`rlast_lgid` AS `rlast_lgid`,`t_ta_view`.`rstate` AS `rstate`,`t_ta_view`.`rrole` AS `rrole`,`t_ta_view`.`rshield_role` AS `rshield_role`,`t_ta_view`.`rshielded_time` AS `rshielded_time`,`t_ta_view`.`rshielded_type` AS `rshielded_type`,`t_ta_view`.`rlast_edited_time` AS `rlast_edited_time`,`t_ta_view`.`rcreated_time` AS `rcreated_time`,`t_ta_view`.`rshielded_tick` AS `rshielded_tick`,`t_ta_view`.`uid` AS `uid`,`t_ta_view`.`urid` AS `urid`,`t_ta_view`.`uchar` AS `uchar`,`t_ta_view`.`ugid` AS `ugid`,`t_ta_view`.`uno` AS `uno`,`t_ta_view`.`uname` AS `uname`,`t_ta_view`.`uen_name` AS `uen_name`,`t_ta_view`.`udisplay_name` AS `udisplay_name`,`t_ta_view`.`usender` AS `usender`,`t_ta_view`.`ubirthday` AS `ubirthday`,`t_ta_view`.`uuid` AS `uuid`,`t_ta_view`.`uemail` AS `uemail`,`t_ta_view`.`umobile_phone` AS `umobile_phone`,`t_ta_view`.`utel` AS `utel`,`t_ta_view`.`uqq` AS `uqq`,`t_ta_view`.`uoffice_addr` AS `uoffice_addr`,`t_ta_view`.`uphoto` AS `uphoto`,`t_ta_view`.`uhead_photo` AS `uhead_photo`,`t_ta_view`.`uprofile` AS `uprofile`,`t_ta_view`.`uconstellation` AS `uconstellation`,`t_ta_view`.`ugrade` AS `ugrade`,`t_ta_view`.`ucreate_post` AS `ucreate_post`,`t_ta_view`.`ucreate_reply` AS `ucreate_reply`,`t_ta_view`.`ucreate_msg` AS `ucreate_msg`,`t_ta_view`.`ucreate_ex_note` AS `ucreate_ex_note`,`t_ta_view`.`ucreate_ex_trend` AS `ucreate_ex_trend`,`t_ta_view`.`ucreate_ex_project` AS `ucreate_ex_project`,`t_ta_view`.`uupload_courseware` AS `uupload_courseware`,`t_ta_view`.`umanage_student` AS `umanage_student`,`t_ta_view`.`udownload_courseware` AS `udownload_courseware`,`t_ta_view`.`ulast_edited_time` AS `ulast_edited_time`,`t_ta_view`.`uchar_name` AS `uchar_name`,`t_ta_view`.`rstate_name` AS `rstate_name`,`t_course`.`fid` AS `fid`,`t_course`.`fname` AS `fname`,`t_course`.`fcollege` AS `fcollege`,`t_course`.`fgrade` AS `fgrade`,`t_course`.`fterm` AS `fterm`,`t_course`.`faddr` AS `faddr`,`t_course`.`fcreator` AS `fcreator`,`t_course`.`flast_edited_time` AS `flast_edited_time`,`t_course`.`fcreated_time` AS `fcreated_time`,`t_course`.`fstate` AS `fstate`,`t_course`.`fflag` AS `fflag`,`t_course`.`fteacher` AS `fteacher` from ((`t_teach` join `t_ta_view`) join `t_course`) where ((`t_teach`.`prid` = `t_ta_view`.`rid`) and (`t_teach`.`pfid` = `t_course`.`fid`) and (`t_ta_view`.`rstate` = 0)) ;
+
+-- ----------------------------
 -- View structure for `t_course_view`
 -- ----------------------------
 DROP VIEW IF EXISTS `t_course_view`;
@@ -572,13 +601,19 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- View structure for `t_post_list_view`
 -- ----------------------------
 DROP VIEW IF EXISTS `t_post_list_view`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `t_post_list_view` AS select `t_bbs`.`tid` AS `tid`,`t_bbs`.`ttitle` AS `ttitle`,`t_bbs`.`trid` AS `trid`,`t_bbs`.`tsummary` AS `tsummary`,`t_bbs`.`tcontent` AS `tcontent`,`t_bbs`.`ttopic` AS `ttopic`,`t_bbs`.`tstate` AS `tstate`,`t_bbs`.`tshielder` AS `tshielder`,`t_bbs`.`tcreated_time` AS `tcreated_time`,`t_bbs`.`treleased_time` AS `treleased_time`,`t_bbs`.`tshielded_time` AS `tshielded_time`,`t_bbs`.`ttop_time` AS `ttop_time`,`t_bbs`.`treply_id` AS `treply_id`,`t_bbs`.`tscan_count` AS `tscan_count`,`t_bbs`.`tfloor` AS `tfloor`,`t_register`.`rhead_photo` AS `rhead_photo`,`t_register`.`rnickname` AS `rnickname`,`t_topic`.`cname` AS `cname` from ((`t_bbs` join `t_register`) join `t_topic`) where ((`t_bbs`.`trid` = `t_register`.`rid`) and (`t_bbs`.`ttopic` = `t_topic`.`cid`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `t_post_list_view` AS select `t_bbs`.`tid` AS `tid`,`t_bbs`.`ttitle` AS `ttitle`,`t_bbs`.`trid` AS `trid`,`t_bbs`.`tsummary` AS `tsummary`,`t_bbs`.`tcontent` AS `tcontent`,`t_bbs`.`ttopic` AS `ttopic`,`t_bbs`.`tstate` AS `tstate`,`t_bbs`.`tshielder` AS `tshielder`,`t_bbs`.`tcreated_time` AS `tcreated_time`,`t_bbs`.`treleased_time` AS `treleased_time`,`t_bbs`.`tshielded_time` AS `tshielded_time`,`t_bbs`.`ttop_time` AS `ttop_time`,`t_bbs`.`treply_id` AS `treply_id`,`t_bbs`.`tscan_count` AS `tscan_count`,`t_bbs`.`tfloor` AS `tfloor`,`t_register`.`rhead_photo` AS `rhead_photo`,`t_register`.`rnickname` AS `rnickname`,`t_topic`.`cname` AS `cname`,`t_bbs`.`tlast_edited_time` AS `tlast_edited_time` from ((`t_bbs` join `t_register`) join `t_topic`) where ((`t_bbs`.`trid` = `t_register`.`rid`) and (`t_bbs`.`ttopic` = `t_topic`.`cid`)) ;
 
 -- ----------------------------
 -- View structure for `t_post_reply_view`
 -- ----------------------------
 DROP VIEW IF EXISTS `t_post_reply_view`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `t_post_reply_view` AS select `t_bbs`.`tid` AS `tid`,`t_bbs`.`ttitle` AS `ttitle`,`t_bbs`.`trid` AS `trid`,`t_bbs`.`tsummary` AS `tsummary`,`t_bbs`.`tcontent` AS `tcontent`,`t_bbs`.`ttopic` AS `ttopic`,`t_bbs`.`tstate` AS `tstate`,`t_bbs`.`tshielder` AS `tshielder`,`t_bbs`.`tcreated_time` AS `tcreated_time`,`t_bbs`.`treleased_time` AS `treleased_time`,`t_bbs`.`tshielded_time` AS `tshielded_time`,`t_bbs`.`ttop_time` AS `ttop_time`,`t_bbs`.`treply_id` AS `treply_id`,`t_bbs`.`tscan_count` AS `tscan_count`,`t_bbs`.`tfloor` AS `tfloor`,`t_register`.`raccount` AS `raccount`,`t_register`.`rnickname` AS `rnickname`,`t_register`.`rhead_photo` AS `rhead_photo`,`t_register`.`rrole` AS `rrole`,`t_register`.`rstate` AS `rstate` from (`t_bbs` join `t_register`) where ((`t_bbs`.`trid` = `t_register`.`rid`) and (`t_bbs`.`treply_id` is not null)) ;
+
+-- ----------------------------
+-- View structure for `t_ta_view`
+-- ----------------------------
+DROP VIEW IF EXISTS `t_ta_view`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `t_ta_view` AS select `t_register`.`rid` AS `rid`,`t_register`.`raccount` AS `raccount`,`t_register`.`rpassword` AS `rpassword`,`t_register`.`rnickname` AS `rnickname`,`t_register`.`rhead_photo` AS `rhead_photo`,`t_register`.`rlast_lgid` AS `rlast_lgid`,`t_register`.`rstate` AS `rstate`,`t_register`.`rrole` AS `rrole`,`t_register`.`rshield_role` AS `rshield_role`,`t_register`.`rshielded_time` AS `rshielded_time`,`t_register`.`rshielded_type` AS `rshielded_type`,`t_register`.`rlast_edited_time` AS `rlast_edited_time`,`t_register`.`rcreated_time` AS `rcreated_time`,`t_register`.`rshielded_tick` AS `rshielded_tick`,`t_user`.`uid` AS `uid`,`t_user`.`urid` AS `urid`,`t_user`.`uchar` AS `uchar`,`t_user`.`ugid` AS `ugid`,`t_user`.`uno` AS `uno`,`t_user`.`uname` AS `uname`,`t_user`.`uen_name` AS `uen_name`,`t_user`.`udisplay_name` AS `udisplay_name`,`t_user`.`usender` AS `usender`,`t_user`.`ubirthday` AS `ubirthday`,`t_user`.`uuid` AS `uuid`,`t_user`.`uemail` AS `uemail`,`t_user`.`umobile_phone` AS `umobile_phone`,`t_user`.`utel` AS `utel`,`t_user`.`uqq` AS `uqq`,`t_user`.`uoffice_addr` AS `uoffice_addr`,`t_user`.`uphoto` AS `uphoto`,`t_user`.`uhead_photo` AS `uhead_photo`,`t_user`.`uprofile` AS `uprofile`,`t_user`.`uconstellation` AS `uconstellation`,`t_user`.`ugrade` AS `ugrade`,`t_user`.`ucreate_post` AS `ucreate_post`,`t_user`.`ucreate_reply` AS `ucreate_reply`,`t_user`.`ucreate_msg` AS `ucreate_msg`,`t_user`.`ucreate_ex_note` AS `ucreate_ex_note`,`t_user`.`ucreate_ex_trend` AS `ucreate_ex_trend`,`t_user`.`ucreate_ex_project` AS `ucreate_ex_project`,`t_user`.`uupload_courseware` AS `uupload_courseware`,`t_user`.`umanage_student` AS `umanage_student`,`t_user`.`udownload_courseware` AS `udownload_courseware`,`t_user`.`ulast_edited_time` AS `ulast_edited_time`,`dic_uchar`.`dic_value` AS `uchar_name`,`dic_rstate`.`dic_value` AS `rstate_name` from (((`t_register` join `t_user`) join `t_dic` `dic_uchar`) join `t_dic` `dic_rstate`) where ((`t_register`.`rrole` = 35) and (`t_register`.`rid` = `t_user`.`urid`) and (`t_user`.`uchar` = `dic_uchar`.`dic_key`) and (`dic_uchar`.`dic_type` = 'uchar') and (`t_register`.`rstate` = `dic_rstate`.`dic_key`) and (`dic_rstate`.`dic_type` = 'rstate')) ;
 
 -- ----------------------------
 -- View structure for `t_user_view`
