@@ -33,84 +33,54 @@
 }
 .cw_vertical_sperator{
 border-right:rgb(2,183,230) 2px solid;height:340px;float:left;margin-left:50px;margin-right:40px;margin-top:100px;
+margin-bottom:50px;
 }
 </style>
 
-<div class="container" style="padding-left:0px;padding-right:0px;background-color:rgb(234,234,234);">
-	<include file="./Application/Home/View/layout_banner.html" bgcolor="2,183,230" display0="inline-block" display1="block" display2="block"
+<div class="container" style="padding-left:0px;padding-right:0px;background-color:rgb(234,234,234);font-style:normal;">
+	<include file="./Application/Home/View/layout_banner.html" bgcolor="2,183,230" display0="inline-block" display1="block" display2="none"
 	title0="虚拟学院" href0="__ROOT__/Home/Course" title1="课程课件" href1="__ROOT__/Home/Course/cw#start" title2="2014年秋季" href2="#start" />
 	<div style="margin:50px 25px;padding:0;">
 		<div style="width:426px;float:left;">
 			<div style="font-size:14pt;font-family:'Segoe UI';color:rgb(2,183,230);font-style:normal;margin-bottom:10px;">
-				<span class="">2014级</span><span></span>
+				<span class="">{$now_grade}</span><span></span>
 			</div>
 			<div style="border-bottom:rgb(2,183,230) 2px solid;width:400px;"></div>
 			<div class="cw_items">
-				<div class="cw_item">
-					<img src="__PUBLIC__/assets/image/course_cw_item.png"  class="cw_item_pic"/>
-					<span class="cw_item_title"><a href="__ROOT__/Home/Course/cw_dtl?id=1#start">物理力学</a></span>
-					<span class="cw_item_author">李教授</span>
-				</div>
-				<div class="cw_item">
-					<img src="__PUBLIC__/assets/image/course_cw_item.png"  class="cw_item_pic"/>
-					<span class="cw_item_title"><a href="__ROOT__/Home/Course/cw_dtl?id=1#start">物理力学</a></span>
-					<span class="cw_item_author">李教授</span>
-				</div>
-				<div class="cw_item">
-					<img src="__PUBLIC__/assets/image/course_cw_item.png"  class="cw_item_pic"/>
-					<span class="cw_item_title"><a href="__ROOT__/Home/Course/cw_dtl?id=1#start">物理力学</a></span>
-					<span class="cw_item_author">李教授</span>
-				</div>
-				<div class="cw_item">
-					<img src="__PUBLIC__/assets/image/course_cw_item.png"  class="cw_item_pic"/>
-					<span class="cw_item_title"><a href="__ROOT__/Home/Course/cw_dtl?id=1#start">物理力学</a></span>
-					<span class="cw_item_author">李教授</span>
-				</div>
-				<div class="cw_item">
-					<img src="__PUBLIC__/assets/image/course_cw_item.png"  class="cw_item_pic"/>
-					<span class="cw_item_title"><a href="__ROOT__/Home/Course/cw_dtl?id=1#start">物理力学</a></span>
-					<span class="cw_item_author">李教授</span>
-				</div>
-				<div class="cw_item">
-					<img src="__PUBLIC__/assets/image/course_cw_item.png"  class="cw_item_pic"/>
-					<span class="cw_item_title"><a href="__ROOT__/Home/Course/cw_dtl?id=1#start">物理力学</a></span>
-					<span class="cw_item_author">李教授</span>
-				</div>
-				<div class="cw_item">
-					<img src="__PUBLIC__/assets/image/course_cw_item.png"  class="cw_item_pic"/>
-					<span class="cw_item_title"><a href="__ROOT__/Home/Course/cw_dtl?id=1#start">物理力学</a></span>
-					<span class="cw_item_author">李教授</span>
-				</div>
-				<div class="cw_item">
-					<img src="__PUBLIC__/assets/image/course_cw_item.png"  class="cw_item_pic"/>
-					<span class="cw_item_title"><a href="__ROOT__/Home/Course/cw_dtl?id=1#start">物理力学</a></span>
-					<span class="cw_item_author">李教授</span>
-				</div>
+				<?php if(count($cw1_list) == 0){ ?>
+					<div class="cw_item">
+						暂无课程
+					</div>
+				<?php } ?>
+				<volist name="cw1_list" id="cw1_vo" key="k">
+					<div class="cw_item">
+						<img src="__PUBLIC__/assets/image/course_cw_item.png"  class="cw_item_pic"/>
+						<span class="cw_item_title"><a href="__ROOT__/Home/Course/cw_dtl?fid={$cw1_vo.fid}#start">{$cw1_vo.fname}</a></span>
+						<span class="cw_item_author">{$cw1_vo.fteacher}</span>
+					</div>
+				</volist>
 			</div>
 		</div>
 
 		<div class="cw_vertical_sperator"></div>
 		<div style="width:974px;padding-left:506px;">
 			<div style="font-size:14pt;font-family:'Segoe UI';color:rgb(2,183,230);font-style:normal;margin-bottom:10px;">
-				<span class="">2013级</span><span></span>
+				<span class="">{$last_grade}</span><span></span>
 			</div>
 			<div style="border-bottom:rgb(2,183,230) 2px solid;width:400px;"></div>
 			<div class="cw_items">
-				<div class="cw_item">
-					<img src="__PUBLIC__/assets/image/course_cw_item.png"  class="cw_item_pic"/>
-					<span class="cw_item_title"><a href="__ROOT__/Home/Course/cw_dtl?id=1#start">物理力学</a></span>
-					<span class="cw_item_author">李教授</span>
-				</div>
-				<div class="cw_item">
-					<img src="__PUBLIC__/assets/image/course_cw_item.png"  class="cw_item_pic"/>
-					<span class="cw_item_title"><a href="__ROOT__/Home/Course/cw_dtl?id=1#start">物理力学</a></span>
-					<span class="cw_item_author">李教授</span>
-				</div>
-				<div class="cw_item">
-					<img src="__PUBLIC__/assets/image/course_cw_item.png"  class="cw_item_pic"/>
-					<span class="cw_item_title"><a href="__ROOT__/Home/Course/cw_dtl?id=1#start">物理力学</a></span>
-					<span class="cw_item_author">李教授</span>
-				</div>
+				<?php if(count($cw2_list) == 0){ ?>
+					<div class="cw_item">
+						暂无课程
+					</div>
+				<?php } ?>
+				<volist name="cw2_list" id="cw2_vo" key="k">
+					<div class="cw_item">
+						<img src="__PUBLIC__/assets/image/course_cw_item.png"  class="cw_item_pic"/>
+						<span class="cw_item_title"><a href="__ROOT__/Home/Course/cw_dtl?fid={$cw2_vo.fid}#start">{$cw2_vo.fname}</a></span>
+						<span class="cw_item_author">{$cw2_vo.fteacher}</span>
+					</div>
+				</volist>
 			</div>
 		</div>
 
@@ -122,75 +92,44 @@ border-right:rgb(2,183,230) 2px solid;height:340px;float:left;margin-left:50px;m
 
 		<div style="width:426px;float:left;">
 			<div style="font-size:14pt;font-family:'Segoe UI';color:rgb(2,183,230);font-style:normal;margin-bottom:10px;">
-				<span class="">2012级</span><span></span>
+				<span class="">{$last2_grade}</span><span></span>
 			</div>
 			<div style="border-bottom:rgb(2,183,230) 2px solid;width:400px;"></div>
 			<div class="cw_items">
-				<div class="cw_item">
-					<img src="__PUBLIC__/assets/image/course_cw_item.png"  class="cw_item_pic"/>
-					<span class="cw_item_title"><a href="__ROOT__/Home/Course/cw_dtl?id=1#start">物理力学</a></span>
-					<span class="cw_item_author">李教授</span>
-				</div>
-				<div class="cw_item">
-					<img src="__PUBLIC__/assets/image/course_cw_item.png"  class="cw_item_pic"/>
-					<span class="cw_item_title"><a href="__ROOT__/Home/Course/cw_dtl?id=1#start">物理力学</a></span>
-					<span class="cw_item_author">李教授</span>
-				</div>
-				<div class="cw_item">
-					<img src="__PUBLIC__/assets/image/course_cw_item.png"  class="cw_item_pic"/>
-					<span class="cw_item_title"><a href="__ROOT__/Home/Course/cw_dtl?id=1#start">物理力学</a></span>
-					<span class="cw_item_author">李教授</span>
-				</div>
-				<div class="cw_item">
-					<img src="__PUBLIC__/assets/image/course_cw_item.png"  class="cw_item_pic"/>
-					<span class="cw_item_title"><a href="__ROOT__/Home/Course/cw_dtl?id=1#start">物理力学</a></span>
-					<span class="cw_item_author">李教授</span>
-				</div>
-				<div class="cw_item">
-					<img src="__PUBLIC__/assets/image/course_cw_item.png"  class="cw_item_pic"/>
-					<span class="cw_item_title"><a href="__ROOT__/Home/Course/cw_dtl?id=1#start">物理力学</a></span>
-					<span class="cw_item_author">李教授</span>
-				</div>
-				<div class="cw_item">
-					<img src="__PUBLIC__/assets/image/course_cw_item.png"  class="cw_item_pic"/>
-					<span class="cw_item_title"><a href="__ROOT__/Home/Course/cw_dtl?id=1#start">物理力学</a></span>
-					<span class="cw_item_author">李教授</span>
-				</div>
-				<div class="cw_item">
-					<img src="__PUBLIC__/assets/image/course_cw_item.png"  class="cw_item_pic"/>
-					<span class="cw_item_title"><a href="__ROOT__/Home/Course/cw_dtl?id=1#start">物理力学</a></span>
-					<span class="cw_item_author">李教授</span>
-				</div>
-				<div class="cw_item">
-					<img src="__PUBLIC__/assets/image/course_cw_item.png"  class="cw_item_pic"/>
-					<span class="cw_item_title"><a href="__ROOT__/Home/Course/cw_dtl?id=1#start">物理力学</a></span>
-					<span class="cw_item_author">李教授</span>
-				</div>
+				<?php if(count($cw3_list) == 0){ ?>
+					<div class="cw_item">
+						暂无课程
+					</div>
+				<?php } ?>
+				<volist name="cw3_list" id="cw3_vo" key="k">
+					<div class="cw_item">
+						<img src="__PUBLIC__/assets/image/course_cw_item.png"  class="cw_item_pic"/>
+						<span class="cw_item_title"><a href="__ROOT__/Home/Course/cw_dtl?fid={$cw3_vo.fid}#start">{$cw3_vo.fname}</a></span>
+						<span class="cw_item_author">{$cw3_vo.fteacher}</span>
+					</div>
+				</volist>
 			</div>
 		</div>
 
 		<div class="cw_vertical_sperator"></div>
 		<div style="width:974px;padding-left:496px;">
 			<div style="font-size:14pt;font-family:'Segoe UI';color:rgb(2,183,230);font-style:normal;margin-bottom:10px;">
-				<span class="">2011级</span><span></span>
+				<span class="">{$last3_grade}</span><span></span>
 			</div>
 			<div style="border-bottom:rgb(2,183,230) 2px solid;width:400px;"></div>
 			<div class="cw_items">
-				<div class="cw_item">
-					<img src="__PUBLIC__/assets/image/course_cw_item.png"  class="cw_item_pic"/>
-					<span class="cw_item_title"><a href="__ROOT__/Home/Course/cw_dtl?id=1#start">物理力学</a></span>
-					<span class="cw_item_author">李教授</span>
-				</div>
-				<div class="cw_item">
-					<img src="__PUBLIC__/assets/image/course_cw_item.png"  class="cw_item_pic"/>
-					<span class="cw_item_title"><a href="__ROOT__/Home/Course/cw_dtl?id=1#start">物理力学</a></span>
-					<span class="cw_item_author">李教授</span>
-				</div>
-				<div class="cw_item">
-					<img src="__PUBLIC__/assets/image/course_cw_item.png"  class="cw_item_pic"/>
-					<span class="cw_item_title"><a href="__ROOT__/Home/Course/cw_dtl?id=1#start">物理力学</a></span>
-					<span class="cw_item_author">李教授</span>
-				</div>
+				<?php if(count($cw4_list) == 0){ ?>
+					<div class="cw_item">
+						暂无课程
+					</div>
+				<?php } ?>
+				<volist name="cw4_list" id="cw4_vo" key="k">
+					<div class="cw_item">
+						<img src="__PUBLIC__/assets/image/course_cw_item.png"  class="cw_item_pic"/>
+						<span class="cw_item_title"><a href="__ROOT__/Home/Course/cw_dtl?fid={$cw4_vo.fid}#start">{$cw4_vo.fname}</a></span>
+						<span class="cw_item_author">{$cw4_vo.fteacher}</span>
+					</div>
+				</volist>
 			</div>
 		</div>
 	</div>

@@ -252,6 +252,69 @@ class CourseController extends Controller {
         }
         return;
     }
+
+
+
+    public function cw(){
+        $now_year = date('Y');
+        $now_month = date('m');
+        if($now_month >= 8){
+            $now_year += 1;
+        }echo $now_year;
+        $m = M('CourseView');
+        $lim['fstate'] = 10;//发布中
+        $lim['fgrade'] = $now_year;
+        $this->cw1_list = $m->where($lim)->select();
+
+        $lim['fgrade'] = $now_year-1;
+        $this->cw2_list = $m->where($lim)->select();
+        $lim['fgrade'] = $now_year-2;
+        $this->cw3_list = $m->where($lim)->select();
+        $lim['fgrade'] = $now_year-3;
+        $this->cw4_list = $m->where($lim)->select();
+
+
+        $mgrade = M('Dic');
+        $limgrade['dic_type'] = 'fgrade';
+        $limgrade['dic_key'] = $now_year;
+        $now_grade = $mgrade->where($limgrade)->find();
+        $this->now_grade = $now_grade['dic_value'];
+        $limgrade['dic_key'] = $now_year - 1;
+        $last_grade = $mgrade->where($limgrade)->find();
+        $this->last_grade = $last_grade['dic_value'];
+        $limgrade['dic_key'] = $now_year - 2;
+        $last2_grade = $mgrade->where($limgrade)->find();
+        $this->last2_grade = $last2_grade['dic_value'];
+        $limgrade['dic_key'] = $now_year - 3;
+        $last3_grade = $mgrade->where($limgrade)->find();
+        $this->last3_grade = $last3_grade['dic_value'];
+
+        $this->display();
+    }
+    public function cw_dtl($fid=-1){
+        $fid = I('fid');
+        if($fid == '' || $fid == -1){
+            $this->show('{"result":1,"msg":"parameters error."}', 'utf-8');return;
+        }
+        $m = M('CourseView');
+        $lim['fid'] = $fid;
+        $course = $m->where($lim)->find();
+        $this->fname = $course['fname'];
+        $this->faddr = $course['faddr'];
+        $this->fterm_name = $course['fterm_name'];
+
+        $m2 = M('Courseware');
+        $lim2['efid'] = $fid;
+        $this->cw_list = $m2->where($lim2)->order('elast_edited_time asc')->select();
+
+        $m3 = M('CourseTaView');
+        $lim3['pfid'] = $fid;
+        $this->ta_list = $m3->where($lim3)->select();
+
+        //dump($course);
+        $this->display();
+    }
+
 }
 
 ?>

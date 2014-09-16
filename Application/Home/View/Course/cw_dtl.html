@@ -23,6 +23,7 @@
 	color:rgb(2,183,230);
 	float:right;
 	margin: 5px 5px;
+	padding-right: 20px;
 }
 .cw_dtl_title{
 	font-size:14pt;font-family:'Segoe UI';color:rgb(2,183,230);font-style:normal;margin-bottom:10px;
@@ -46,8 +47,8 @@
 }
 </style>
 
-<div class="container" style="padding-left:0px;padding-right:0px;background-color:rgb(234,234,234);">
-	<include file="./Application/Home/View/layout_banner.html" bgcolor="2,183,230" display0="inline-block" display1="block" display2="block" display3="block"
+<div class="container" style="padding-left:0px;padding-right:0px;background-color:rgb(234,234,234);font-style:normal;">
+	<include file="./Application/Home/View/layout_banner.html" bgcolor="2,183,230" display0="inline-block" display1="block" display2="none" display3="block"
 	title0="虚拟学院" href0="__ROOT__/Home/Course" title1="课程课件" href1="__ROOT__/Home/Course/cw#start" title2="2014年秋季" href2="#start"
 	title3="物理力学" href3="__ROOT__/Home/Course/cw_dtl?id=1#start" />
 	<div style="margin:50px 25px;padding:0;">
@@ -57,31 +58,18 @@
 			</div>
 			<div style="border-bottom:rgb(2,183,230) 2px solid;width:480px;"></div>
 			<div class="cw_dtl_list">
-				<div class="cw_dtl_list_item">
-					<img src="__PUBLIC__/assets/image/course_cw_item.png"  class="cw_item_pic"/>
-					<span class="title"><a href="__ROOT__/Home/Course/download?eid=1">物理力学第一章1.1</a></span>
-					<span class="time">2014-07-25</span>
-				</div>
-				<div class="cw_dtl_list_item">
-					<img src="__PUBLIC__/assets/image/course_cw_item.png"  class="cw_item_pic"/>
-					<span class="title"><a href="__ROOT__/Home/Course/download?eid=1">物理力学第一章1.2</a></span>
-					<span class="time">2014-07-25</span>
-				</div>
-				<div class="cw_dtl_list_item">
-					<img src="__PUBLIC__/assets/image/course_cw_item.png"  class="cw_item_pic"/>
-					<span class="title"><a href="__ROOT__/Home/Course/download?eid=1">物理力学第一章1.3</a></span>
-					<span class="time">2014-07-25</span>
-				</div>
-				<div class="cw_dtl_list_item">
-					<img src="__PUBLIC__/assets/image/course_cw_item.png"  class="cw_item_pic"/>
-					<span class="title"><a href="__ROOT__/Home/Course/download?eid=1">物理力学第二章2.1</a></span>
-					<span class="time">2014-07-25</span>
-				</div>
-				<div class="cw_dtl_list_item">
-					<img src="__PUBLIC__/assets/image/course_cw_item.png"  class="cw_item_pic"/>
-					<span class="title"><a href="__ROOT__/Home/Course/download?eid=1">物理力学第二章2.2</a></span>
-					<span class="time">2014-07-25</span>
-				</div>
+				<?php if(count($cw_list) == 0){ ?>
+					<div class="cw_dtl_list_item">
+						暂无课件
+					</div>
+				<?php } ?>
+				<volist name="cw_list" id="cw_vo" key="k" >
+					<div class="cw_dtl_list_item">
+						<img src="__PUBLIC__/assets/image/course_cw_item.png"  class="cw_item_pic"/>
+						<span class="title"><a href="__ROOT__/Home/Course/download?eid={$cw_vo.eid}">{$cw_vo.etitle}</a></span>
+						<span class="time">{$cw_vo.elast_edited_time}</span>
+					</div>
+				</volist>
 			</div>
 		</div>
 
@@ -96,13 +84,13 @@
 				<div class="cw_dtl_courseinfo">
 					<ul>
 						<li>
-							<span>课程名称：<span>物理力学</span></span>
+							<span>课程名称：<span>{$fname}</span></span>
 						</li>
 						<li>
-							<span>课程时间：<span>2014年秋季</span></span>
+							<span>课程时间：<span>{$fterm_name}</span></span>
 						</li>
 						<li>
-							<span>上课地点：<span>仙二207</span></span>
+							<span>上课地点：<span>{$faddr}</span></span>
 						</li>
 					</ul>
 				</div>
@@ -113,44 +101,33 @@
 			</div>
 			<div style="border-bottom:rgb(2,183,230) 2px solid;"></div>
 			<div class="tah_items">
-				<div class="tah_item">
-					<img src="__PUBLIC__/assets/image/course_cw_teacher.png" style="float:left;" />
-					<div class="info">
-						<ul>
-							<li>
-								<span><span>李教授</span>（<span>主讲教师</span>）</span>
-							</li>
-							<li>
-								<span>电话：<span>025-89680000</span></span>
-							</li>
-							<li>
-								<span>邮箱：<span>li@nju.edu.cn</span></span>
-							</li>
-							<li>
-								<span>办公室：<span>仙林XX楼233</span></span>
-							</li>
-						</ul>
+				<volist name="ta_list" id="ta_vo" key="k">
+					<div class="tah_item">
+						<img width="119px" height="135px"
+						<?php if($ta_vo['uphoto'] == ''){?> 
+							src="__PUBLIC__/assets/image/course_cw_teacher.png" 
+						<?php } else { ?> 
+							src="__PUBLIC__/uploads{$ta_vo.uphoto}" 
+						<?php } ?>
+						 style="float:left;" />
+						<div class="info">
+							<ul>
+								<li>
+									<span><span>{$ta_vo.uname}</span>（<span>{$ta_vo.uchar_name}</span>）</span>
+								</li>
+								<li>
+									<span>电话：<span>{$ta_vo.utel}</span></span>
+								</li>
+								<li>
+									<span>邮箱：<span>{$ta_vo.uemail}</span></span>
+								</li>
+								<li>
+									<span>办公室：<span>{$ta_vo.uoffice_addr}</span></span>
+								</li>
+							</ul>
+						</div>
 					</div>
-				</div>
-				<div class="tah_item">
-					<img src="__PUBLIC__/assets/image/course_cw_teacher.png" style="float:left;" />
-					<div class="info">
-						<ul>
-							<li>
-								<span><span>XXX</span>（<span>助教</span>）</span>
-							</li>
-							<li>
-								<span>电话：<span>025-89680000</span></span>
-							</li>
-							<li>
-								<span>邮箱：<span>li@nju.edu.cn</span></span>
-							</li>
-							<li>
-								<span>办公室：<span>仙林XX楼233</span></span>
-							</li>
-						</ul>
-					</div>
-				</div>
+				</volist>
 			</div>
 		</div>
 
