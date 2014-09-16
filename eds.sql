@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50536
 File Encoding         : 65001
 
-Date: 2014-09-16 07:51:30
+Date: 2014-09-16 23:23:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -100,10 +100,10 @@ CREATE TABLE `t_course` (
 -- ----------------------------
 -- Records of t_course
 -- ----------------------------
-INSERT INTO `t_course` VALUES ('1', '物理力学', '1', '2014', '1', '仙一教学楼233', '1', '2014-09-11 23:02:26', '2014-09-11 20:17:19', '20', null, '吴教授');
+INSERT INTO `t_course` VALUES ('1', '物理力学', '1', '2014', '1', '仙一教学楼233', '1', '2014-09-16 23:03:43', '2014-09-11 20:17:19', '10', null, '吴教授');
 INSERT INTO `t_course` VALUES ('2', '物理力学2', '1', '2014', '2', '仙二教学楼207', '1', '2014-09-11 23:03:07', '2014-09-11 20:33:47', '20', null, '张教授');
-INSERT INTO `t_course` VALUES ('3', '高等数学', '0', '2014', '2', '系楼233', '1', '2014-09-11 23:11:09', '2014-09-11 22:18:00', '20', null, '张老师');
-INSERT INTO `t_course` VALUES ('4', '高等数学1', '0', '2015', '1', '仙二教学楼302', '1', '2014-09-11 22:25:07', '2014-09-11 22:25:07', '0', null, '李老师');
+INSERT INTO `t_course` VALUES ('3', '高等数学', '0', '2014', '2', '系楼233', '1', '2014-09-11 23:11:09', '2014-09-11 22:18:00', '10', null, '王老师');
+INSERT INTO `t_course` VALUES ('4', '高等数学1', '0', '2015', '1', '仙二教学楼302', '1', '2014-09-11 22:25:07', '2014-09-11 22:25:07', '10', null, '李老师');
 INSERT INTO `t_course` VALUES ('5', '课程三', '0', '2015', '2', '大法师打发', '1', '2014-09-11 22:50:53', '2014-09-11 22:33:16', '30', null, '老师');
 
 -- ----------------------------
@@ -130,7 +130,7 @@ CREATE TABLE `t_courseware` (
   `elast_edited_time` datetime NOT NULL COMMENT '最后编辑时间',
   `estate` int(11) NOT NULL COMMENT '课件状态：10-审核中，20-审核通过，30-退回，引用自字典表estate',
   PRIMARY KEY (`eid`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_courseware
@@ -142,7 +142,8 @@ INSERT INTO `t_courseware` VALUES ('4', '20', '更新的图片', null, '这里�
 INSERT INTO `t_courseware` VALUES ('5', '20', '图标', null, '这里是一些图标', null, null, null, null, null, '0', '0', '/pi/2014_08_31_15_13_42_1661736225.zip', null, null, '2014-08-31 15:14:02', '2014-08-31 15:14:02', '20');
 INSERT INTO `t_courseware` VALUES ('6', '30', 'easyuichm', 'easyuichm.zip', 'easyuichm.zip', null, null, null, null, null, '0', '0', '/cw/2014_09_13_11_35_22_1868685495.zip', null, '1', '2014-09-13 11:35:23', '2014-09-13 12:34:45', '20');
 INSERT INTO `t_courseware` VALUES ('7', '30', 'database_03_2', 'database_03_2.ppt', 'database_03_2.ppt', null, null, null, null, null, '0', '0', '/cw/2014_09_13_12_01_23_885878773.ppt', null, '1', '2014-09-13 12:01:25', '2014-09-13 12:37:36', '20');
-INSERT INTO `t_courseware` VALUES ('8', '30', 'ExtJs2.0学习系列', 'ExtJs2.0学习系列.pdf', 'ExtJs2.0学习系列.pdf', null, null, null, null, null, '0', '0', '/cw/2014_09_13_12_03_05_753270438.pdf', null, '1', '2014-09-13 12:03:06', '2014-09-13 14:06:16', '20');
+INSERT INTO `t_courseware` VALUES ('8', '30', 'ExtJs2.0学习系列', 'ExtJs2.0学习系列.pdf', 'ExtJs2.0学习系列.pdf', null, null, null, null, null, '0', '0', '/cw/2014_09_13_12_03_05_753270438.pdf', null, '1', '2014-09-13 12:03:06', '2014-09-16 23:04:26', '40');
+INSERT INTO `t_courseware` VALUES ('9', '30', '数据库第三章第2节', 'database_03_2.ppt', 'database_03_2.ppt', null, null, null, null, null, '0', '0', '/cw/2014_09_16_23_05_15_506659704.ppt', null, '1', '2014-09-16 23:05:16', '2014-09-16 23:05:16', '20');
 
 -- ----------------------------
 -- Table structure for `t_dic`
@@ -173,10 +174,10 @@ INSERT INTO `t_dic` VALUES ('0', 'ztype', '资讯', null);
 INSERT INTO `t_dic` VALUES ('1', 'dic_city', '南京市', '1');
 INSERT INTO `t_dic` VALUES ('1', 'dic_province', '江苏省', null);
 INSERT INTO `t_dic` VALUES ('1', 'etype', '物理力学', '1');
-INSERT INTO `t_dic` VALUES ('1', 'fterm', '2014-2015年秋季（第一）学期', null);
+INSERT INTO `t_dic` VALUES ('1', 'fterm', '2014-2015年秋季（第一）学期', '2014');
 INSERT INTO `t_dic` VALUES ('1', 'zsub_type', 'Science专区', '0');
 INSERT INTO `t_dic` VALUES ('1', 'ztype', '活动', null);
-INSERT INTO `t_dic` VALUES ('2', 'fterm', '2014-2015年春季（第二）学期', null);
+INSERT INTO `t_dic` VALUES ('2', 'fterm', '2014-2015年春季（第二）学期', '2014');
 INSERT INTO `t_dic` VALUES ('2', 'zsub_type', 'Nature专区', '0');
 INSERT INTO `t_dic` VALUES ('3', 'zsub_type', '拔尖计划专区', '0');
 INSERT INTO `t_dic` VALUES ('3', 'ztype', '成果', null);
@@ -225,6 +226,18 @@ INSERT INTO `t_dic` VALUES ('70', 'uchar', '博士', null);
 INSERT INTO `t_dic` VALUES ('80', 'uchar', '讲师', null);
 INSERT INTO `t_dic` VALUES ('90', 'uchar', '副教授', null);
 INSERT INTO `t_dic` VALUES ('100', 'uchar', '教授', null);
+INSERT INTO `t_dic` VALUES ('2009', 'fgrade', '2009级', null);
+INSERT INTO `t_dic` VALUES ('2010', 'fgrade', '2010级', null);
+INSERT INTO `t_dic` VALUES ('2011', 'fgrade', '2011级', null);
+INSERT INTO `t_dic` VALUES ('2012', 'fgrade', '2012级', null);
+INSERT INTO `t_dic` VALUES ('2013', 'fgrade', '2013级', null);
+INSERT INTO `t_dic` VALUES ('2014', 'fgrade', '2014级', null);
+INSERT INTO `t_dic` VALUES ('2015', 'fgrade', '2015级', null);
+INSERT INTO `t_dic` VALUES ('2016', 'fgrade', '2016级', null);
+INSERT INTO `t_dic` VALUES ('2017', 'fgrade', '2017级', null);
+INSERT INTO `t_dic` VALUES ('2018', 'fgrade', '2018级', null);
+INSERT INTO `t_dic` VALUES ('2019', 'fgrade', '2019级', null);
+INSERT INTO `t_dic` VALUES ('2020', 'fgrade', '2020级', null);
 
 -- ----------------------------
 -- Table structure for `t_download`
@@ -589,7 +602,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- View structure for `t_course_view`
 -- ----------------------------
 DROP VIEW IF EXISTS `t_course_view`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `t_course_view` AS select `t_course`.`fid` AS `fid`,`t_course`.`fname` AS `fname`,`t_course`.`fcollege` AS `fcollege`,`t_course`.`fgrade` AS `fgrade`,`t_course`.`fterm` AS `fterm`,`t_course`.`faddr` AS `faddr`,`t_course`.`fcreator` AS `fcreator`,`t_course`.`flast_edited_time` AS `flast_edited_time`,`t_course`.`fcreated_time` AS `fcreated_time`,`t_course`.`fstate` AS `fstate`,`t_course`.`fflag` AS `fflag`,`dic_a`.`dic_value` AS `fstate_name`,`dic_b`.`dic_value` AS `fterm_name`,`t_course`.`fteacher` AS `fteacher` from ((`t_course` join `t_dic` `dic_a`) join `t_dic` `dic_b`) where ((`t_course`.`fstate` = `dic_a`.`dic_key`) and (`dic_a`.`dic_type` = 'fstate') and (`t_course`.`fterm` = `dic_b`.`dic_key`) and (`dic_b`.`dic_type` = 'fterm')) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `t_course_view` AS select `t_course`.`fid` AS `fid`,`t_course`.`fname` AS `fname`,`t_course`.`fcollege` AS `fcollege`,`t_course`.`fgrade` AS `fgrade`,`t_course`.`fterm` AS `fterm`,`t_course`.`faddr` AS `faddr`,`t_course`.`fcreator` AS `fcreator`,`t_course`.`flast_edited_time` AS `flast_edited_time`,`t_course`.`fcreated_time` AS `fcreated_time`,`t_course`.`fstate` AS `fstate`,`t_course`.`fflag` AS `fflag`,`dic_a`.`dic_value` AS `fstate_name`,`dic_b`.`dic_value` AS `fterm_name`,`t_course`.`fteacher` AS `fteacher`,`dic_fgrade`.`dic_value` AS `fgrade_name` from (((`t_course` join `t_dic` `dic_a`) join `t_dic` `dic_b`) join `t_dic` `dic_fgrade`) where ((`t_course`.`fstate` = `dic_a`.`dic_key`) and (`dic_a`.`dic_type` = 'fstate') and (`t_course`.`fterm` = `dic_b`.`dic_key`) and (`dic_b`.`dic_type` = 'fterm') and (`t_course`.`fgrade` = `dic_fgrade`.`dic_key`) and (`dic_fgrade`.`dic_type` = 'fgrade')) ;
 
 -- ----------------------------
 -- View structure for `t_manager_view`
