@@ -1,5 +1,25 @@
 
 
+{
+	"result":0,
+	"msg":"succeed",
+	"data":[
+
+	<volist name="act_list" id="act_vo" key="k">
+	{
+		"title":"{$act_vo.acttitle}",
+		"college":"南京大学",
+		"by":"{$act_vo.actby}"
+	}
+	<?php if(count($act_list)!=$k){ ?>,<?php } ?>
+	</volist>
+	]
+}
+
+
+
+
+<?php /*
 <div class="index_item">
 	<div class="index_item_content">
 		<span>学生社区2014年师生线上交流大会将在3月28号举行</span>
@@ -30,3 +50,4 @@
 		</div>
 	</div>
 </div>
+*/ ?>

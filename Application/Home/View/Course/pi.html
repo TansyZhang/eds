@@ -63,16 +63,20 @@
 						{$pi_vo.econtent}
 					</div>
 					<div class="pi_item_by">
+						<?php if(session('rrole')==0||session('rrole')&&session('rrole')<25){ ?>
 						<span><a href="__ROOT__/Home/Course/pi_edit?eid={$pi_vo.eid}#start">修改</a>&nbsp;&nbsp;</span>
+						<?php } ?>
 						<span class="pi_item_college">{$pi_vo.euploader_college}&nbsp;{$pi_vo.euploader}</span>&nbsp;<span class="pi_item_time">{$pi_vo.elast_edited_time}</span>
 					</div>
 				</div>
 			</volist>
 		</div>
 		<div class="pi_pages"></div>
+		<?php if(session('rrole')==0||session('rrole')&&session('rrole')<25){ ?>
 		<div style="margin:20px 100px;">
 			<button type="button" class="btn btn-info btn-block" id="btn_add">添加</button>
 		</div>
+		<?php } ?>
 	</div>
 </div>
 

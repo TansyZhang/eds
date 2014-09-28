@@ -19,7 +19,9 @@
 			{$zcontent}
 		</div>
 		<div>
+			<?php if(session('rrole')==0||session('rrole')&&session('rrole')<25){ ?>
 			<button type="button" class="btn btn-info btn-block" id="btn_add" onclick="notice_modify({$zid})">修改</button>
+			<?php } ?>
 		</div>
 	</div>
 </div>

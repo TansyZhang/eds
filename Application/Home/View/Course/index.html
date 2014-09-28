@@ -93,42 +93,26 @@ width:140px;position:relative;float:right;top:30px;
 			<span>&nbsp;</span>
 		</div>
 		<div style="height:2px;background-color:#9A7016;">&nbsp;</div>
-		<div class="index_item">
-			<div class="recmd_course_content">
-				<img src="__PUBLIC__/assets/image/course_1.png" width="309px" height="195px" />
-				<div class="recmd_course_content_title">理解爱因斯坦：狭义相对论 Understanding Einstein: Understanding Einstein: The Special Theory of Relativity</div>
-			</div>
-			<div class="recmd_course_info">
-				<div class="recmd_course_info_text">
-					<div class="recmd_course_info_text1">斯坦福大学 </div>
-					<div class="recmd_course_info_text2">Stanford University</div>
-					<div class="recmd_course_info_text2">
-						教授：Larry Randles Larry Randles Randles
+		<volist name="netcourse_list" id="netcourse_vo">
+			<div class="index_item">
+				<div class="recmd_course_content">
+					<img src="__PUBLIC__/uploads{$netcourse_vo.eflag}" width="309px" height="195px" />
+					<div class="recmd_course_content_title">
+						<a href="__ROOT__/Home/Course/netcourse_dtl?eid={$netcourse_vo.eid}#start">{$netcourse_vo.etitle}</a>
 					</div>
 				</div>
-				<div class="recmd_course_info_img">
-					<img src="__PUBLIC__/assets/image/teacher_1.png" width="140px" />
-				</div>
-			</div>
-		</div>
-		<div class="index_item">
-			<div class="recmd_course_content">
-				<img src="__PUBLIC__/assets/image/course_1.png" width="309px" height="195px" />
-				<div class="recmd_course_content_title">理解爱因斯坦：狭义相对论 Understanding Einstein: Understanding Einstein: The Special Theory of Relativity</div>
-			</div>
-			<div class="recmd_course_info">
-				<div class="recmd_course_info_text">
-					<div class="recmd_course_info_text1">斯坦福大学 </div>
-					<div class="recmd_course_info_text2">Stanford University</div>
-					<div class="recmd_course_info_text2">
-						教授：Larry Randles Larry Randles Randles
+				<div class="recmd_course_info">
+					<div class="recmd_course_info_text">
+						<div class="recmd_course_info_text1">{$netcourse_vo.eauthor_college}</div>
+						<div class="recmd_course_info_text2">{$netcourse_vo.elevel}</div>
+						<div class="recmd_course_info_text2">{$netcourse_vo.eauthor_name}</div>
+					</div>
+					<div class="recmd_course_info_img">
+						<img src="__PUBLIC__/uploads{$netcourse_vo.eauthor_photo}" width="140px" />
 					</div>
 				</div>
-				<div class="recmd_course_info_img">
-					<img src="__PUBLIC__/assets/image/teacher_1.png" width="140px" />
-				</div>
 			</div>
-		</div>
+		</volist>
 	</div>
 
 
@@ -145,7 +129,9 @@ width:140px;position:relative;float:right;top:30px;
 			<div style="text-align:center">
 				<div class="p_l_title">《时间简史》</div>
 				<div class="p_l_author">作者：史蒂芬霍金</div>
-				<div class="p_l_detail">详情>></div>
+				<div class="p_l_detail">
+					<a href="__ROOT__/Home/Course/pl?page=0">详情>></a>
+				</div>
 			</div>
 		</div>
 		<div class="p_l_item">
@@ -153,7 +139,9 @@ width:140px;position:relative;float:right;top:30px;
 			<div style="text-align:center">
 				<div class="p_l_title">《时间简史》</div>
 				<div class="p_l_author">作者：史蒂芬霍金作者：史蒂芬霍金</div>
-				<div class="p_l_detail">详情>></div>
+				<div class="p_l_detail">
+					<a href="__ROOT__/Home/Course/pl?page=0">详情>></a>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -161,22 +149,26 @@ width:140px;position:relative;float:right;top:30px;
 
 	<div id="courseware_area" style="width:1024px;padding-left:643px;">
 		<div class="index_title">
-			<span><a href="__ROOT__/Home/Course/pi#start">公共资料</a></span>&nbsp;&nbsp;|&nbsp;&nbsp; 
-			<span><a href="__ROOT__/Home/Course/cw#start">课程课件</a></span>
-			<span style="float:right">更多>></span>
+			<span><a href="__ROOT__/Home/Course/pi#start" id="a_pi" style="color:gray;" title="点击查看更多公共资料">公共资料</a></span>&nbsp;&nbsp;|&nbsp;&nbsp; 
+			<span><a href="__ROOT__/Home/Course/cw#start" id="a_cw" style="color:black;" title="点击查看更多课程课件">课程课件</a></span>
+			<span style="float:right;display:none;">更多>></span>
 		</div>
 		<div style="height:2px;background-color:rgb(35,17,103);">&nbsp;</div>
-		<div class="courseware_item">
-			<div class="courseware_item_by">南京大学</div>
-			<div class="courseware_item_title">力学研究力学研究力学</div>
+		<div id="div_pi" >
+			<volist name="pi_list" id="pi_vo">	
+				<div class="courseware_item">
+					<div class="courseware_item_by">南京大学</div>
+					<div class="courseware_item_title">{$pi_vo.etitle}</div>
+				</div>
+			</volist>
 		</div>
-		<div class="courseware_item">
-			<div class="courseware_item_by">南京大学</div>
-			<div class="courseware_item_title">天体课外阅读</div>
-		</div>
-		<div class="courseware_item">
-			<div class="courseware_item_by">南京大学</div>
-			<div class="courseware_item_title">大学综合教程</div>
+		<div id="div_cw" style="display:none">
+			<volist name="cw_list" id="cw_vo">	
+				<div class="courseware_item">
+					<div class="courseware_item_by">{$cw_vo.fteacher}</div>
+					<div class="courseware_item_title">{$cw_vo.fname}</div>
+				</div>
+			</volist>
 		</div>
 	</div>
 
@@ -195,3 +187,20 @@ width:140px;position:relative;float:right;top:30px;
 	</div>
 
 </div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#a_pi').mouseenter(function(){
+		$('#a_pi').css('color','gray');
+		$('#a_cw').css('color','black');
+		$('#div_cw').hide();
+		$('#div_pi').show();
+	});
+	$('#a_cw').mouseenter(function(){
+		$('#a_pi').css('color','black');
+		$('#a_cw').css('color','gray');
+		$('#div_cw').show();
+		$('#div_pi').hide();
+	});
+});
+</script>

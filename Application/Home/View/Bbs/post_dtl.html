@@ -71,7 +71,7 @@
 				<div class="post-content-real" style="padding-top:10px">
 					{$tcontent}
 				</div>
-				<div style="text-align:right">
+				<div style="text-align:right;display:none;">
 					这里是回复区
 				</div>
 			</div>
@@ -90,7 +90,7 @@
 							<div class="post-content-real" style="padding-top:10px">
 								<?php echo htmlspecialchars_decode($reply_vo['tcontent'],ENT_QUOTES); ?>
 							</div>
-							<div style="text-align:right">
+							<div style="text-align:right;display:none;">
 								这里是回复区
 							</div>
 						</div>
@@ -98,7 +98,9 @@
 				</div>
 			</volist>
 		</div>
-		<div class="pages" style="margin:20px 0;text-align:center;">这里是分页</div>
+		<div class="pages" style="margin:20px 0;text-align:center;">
+			<span style="display:none;">这里是分页</span>
+		</div>
 
 		<div style="background-color:rgb(234,234,234);padding:15px;margin-right:15px;">
 			<div style="margin:10px;">回复帖子：{$ttitle}</div>

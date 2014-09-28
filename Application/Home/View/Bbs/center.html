@@ -27,6 +27,9 @@
 	padding:5px;
 	color:gray;
 }
+a{
+	color:black;!important;
+}
 </style>
 
 <div class="container" style="padding-left:0px;padding-right:0px;">
@@ -41,51 +44,31 @@
 	</div>
 	<div style="width:724px;padding:40px;">
 		<div class="reply_list_div">
-			<div class="center_title">帖子回复</div>
+			<div class="center_title">帖子动态</div>
 			<div class="separator"></div>
 			<div class="reply_list">
-				<div class="reply_item">
-					<span>
-						<span><span class="time">2014-08-28 16:31:22</span><a href="__ROOT__/Home/Bbs/center?uid=1#start" target="_blank">张三</a></span>在帖子“<a href="#">学生社区第二次线上交流大会……</a>”中回复了你<span></span>
-					</span>
-					<span class="op">
-						<span onclick="" class="clickable" title="不再显示此条消息">忽略</span>&nbsp;|&nbsp;<span onclick="" class="clickable">查看</span>
-					</span>
-				</div>
-				<div class="reply_item">
-					<span>
-						<span><span class="time">2014-08-28 16:31:22</span><a href="__ROOT__/Home/Bbs/center?uid=1#start" target="_blank">李四</a></span>在帖子“<a href="#">学生社区第二次……</a>”中回复了你<span></span>
-					</span>
-					<span class="op">
-						<span onclick="" class="clickable" title="不再显示此条消息">忽略</span>&nbsp;|&nbsp;<span onclick="" class="clickable">查看</span>
-					</span>
-				</div>
-				<div class="reply_item">
-					<span>
-						<span><span class="time">2014-08-28 16:31:22</span><a href="__ROOT__/Home/Bbs/center?uid=1#start" target="_blank">王五</a></span>在帖子“<a href="#">学生社区第二次……</a>”中回复了你<span></span>
-					</span>
-					<span class="op">
-						<span onclick="" class="clickable" title="不再显示此条消息">忽略</span>&nbsp;|&nbsp;<span onclick="" class="clickable">查看</span>
-					</span>
-				</div>
-				<div class="reply_item">
-					<span>
-						<span><span class="time">2014-08-28 16:31:22</span><a href="__ROOT__/Home/Bbs/center?uid=1#start" target="_blank">赵六</a></span>在帖子“<a href="#">学生社区第二次……</a>”中回复了你<span></span>
-					</span>
-					<span class="op">
-						<span onclick="" class="clickable" title="不再显示此条消息">忽略</span>&nbsp;|&nbsp;<span onclick="" class="clickable">查看</span>
-					</span>
-				</div>
-				<div class="reply_item">
-					<span>
-						<span><span class="time">2014-08-28 16:31:22</span><a href="__ROOT__/Home/Bbs/center?uid=1#start" target="_blank">周七</a></span>在帖子“<a href="#">学生社区第二次……</a>”中回复了你<span></span>
-					</span>
-					<span class="op">
-						<span onclick="" class="clickable" title="不再显示此条消息">忽略</span>&nbsp;|&nbsp;<span onclick="" class="clickable">查看</span>
-					</span>
-				</div>
+				<volist name="event_list" id="event_vo">
+					<div class="reply_item">
+						<span>
+							<span>
+								<span class="time">{$event_vo.vcreated_time}</span>
+								<a href="__ROOT__{$event_vo.vurl}" target="_blank">{$event_vo.rnickname}</a>
+							</span>
+							在帖子“<a href="__ROOT__{$event_vo.vurl}">{$event_vo.vtitle}</a>”中回复了你<span>
+						</span>
+						</span>
+						<span class="op">
+							<span onclick="ev_ignore({$event_vo.vid})" class="clickable" title="不再显示此条消息">
+								忽略
+							</span>&nbsp;|&nbsp;
+							<span onclick="ev_check('{$event_vo.vurl}');" class="clickable">
+								查看
+							</span>
+						</span>
+					</div>
+				</volist>
 			</div>
-			<div class="pages" style="margin:20px 0;text-align:center;">这里是分页</div>
+			<div class="pages" style="margin:20px 0;text-align:center;display:none;">这里是分页</div>
 		</div>
 
 
@@ -119,3 +102,31 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+function ev_ignore(vid){
+	var url = '__ROOT__/Home/Bbs/ev_ignore';
+	//alert($('#raccount1').val());return;
+	$.ajax({
+		url:url,
+		dataType:'json',
+		type:'post',
+		data:{vid:vid},
+		success:function(t,s,r){
+			if(t.result == 0){
+				cdialog.show_info('操作成功！',function(){
+					window.location.href="__ROOT__/Home/Bbs/center";
+				});
+			}else{
+				cdialog.show_alert('操作失败！错误信息：'+t.msg);
+			}
+		},
+		error:function(t){
+			eds_framework.error_handler(url,t);
+		}
+	});
+}
+function ev_check(url){
+	window.location.href="__ROOT__"+url;
+}
+</script>

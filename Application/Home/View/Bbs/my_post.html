@@ -50,10 +50,12 @@
 					<div class="post_item">
 						<span class="op">
 							<span class="datetime">{$post_vo.tcreated_time}</span>
+							<?php if(session('rrole')==0||session('rrole')&&session('rrole')<25){ ?>
 							<?php if($post_vo['tstate'] == 10/*只有发布中的才可以被置顶*/){ ?>
 							&nbsp;<span class="post_item_op post_item_2_top" onclick="post_2_top({$post_vo.tid},1)" id="post_top_text_{$post_vo.tid}" title="将该帖子置顶">置顶</span>
 							<?php } else if($post_vo['tstate'] == 20){ ?>
 							&nbsp;<span class="post_item_op post_item_2_top" onclick="post_2_top({$post_vo.tid},0)" id="post_top_c_text_{$post_vo.tid}"  title="取消该帖子置顶">取消置顶</span>
+							<?php } ?>
 							<?php } ?>
 							&nbsp;<span class="post_item_op post_item_delete" onclick="post_delete({$post_vo.tid},this)" title="删除“{$post_vo.ttitle}”">删除</span>
 						</span>

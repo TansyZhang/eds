@@ -1,5 +1,53 @@
 
 
+
+{
+	"result":0,
+	"msg":"succeed",
+	"data":[
+
+	<volist name="netcourse_list" id="netcourse_vo" key="k">
+	{
+		"flag":"{$netcourse_vo.eflag}",
+		"id":"{$netcourse_vo.eid}",
+		"title":"{$netcourse_vo.etitle}",
+		"author_college":"{$netcourse_vo.eauthor_college}",
+		"level":"{$netcourse_vo.elevel}",
+		"author_name":"{$netcourse_vo.eauthor_name}",
+		"author_photo":"{$netcourse_vo.eauthor_photo}"
+	}
+	<?php if(count($netcourse_list)!=$k){ ?>,<?php } ?>
+	</volist>
+	]
+}
+
+
+<?php /*
+
+
+
+<div class="index_item">
+	<div class="recmd_course_content">
+		<img src="__PUBLIC__/uploads{$netcourse_vo.eflag}" width="309px" height="195px" />
+		<div class="recmd_course_content_title">
+			<a href="__ROOT__/Home/Course/netcourse_dtl?eid={$netcourse_vo.eid}#start">{$netcourse_vo.etitle}</a>
+		</div>
+	</div>
+	<div class="recmd_course_info">
+		<div class="recmd_course_info_text">
+			<div class="recmd_course_info_text1">{$netcourse_vo.eauthor_college}</div>
+			<div class="recmd_course_info_text2">{$netcourse_vo.elevel}</div>
+			<div class="recmd_course_info_text2">{$netcourse_vo.eauthor_name}</div>
+		</div>
+		<div class="recmd_course_info_img">
+			<img src="__PUBLIC__/uploads{$netcourse_vo.eauthor_photo}" width="140px" />
+		</div>
+	</div>
+</div>
+
+
+
+
 <div class="index_item">
 	<div class="recmd_course_content">
 		<img src="__PUBLIC__/assets/image/course_1.png" width="309px" height="195px" />
@@ -18,21 +66,5 @@
 		</div>
 	</div>
 </div>
-<div class="index_item">
-	<div class="recmd_course_content">
-		<img src="__PUBLIC__/assets/image/course_1.png" width="309px" height="195px" />
-		<div class="recmd_course_content_title">理解爱因斯坦：狭义相对论 Understanding Einstein: Understanding Einstein: The Special Theory of Relativity</div>
-	</div>
-	<div class="recmd_course_info">
-		<div class="recmd_course_info_text">
-			<div class="recmd_course_info_text1">斯坦福大学 </div>
-			<div class="recmd_course_info_text2">Stanford University</div>
-			<div class="recmd_course_info_text2">
-				教授：Larry Randles Larry Randles Randles
-			</div>
-		</div>
-		<div class="recmd_course_info_img">
-			<img src="__PUBLIC__/assets/image/teacher_1.png" width="140px" />
-		</div>
-	</div>
-</div>
+
+*/?>

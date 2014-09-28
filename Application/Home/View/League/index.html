@@ -48,13 +48,14 @@ a{
 				<div class="league_item">
 					<div class="league_name">{$league_vo.gname}</div>
 					<div class="league_flag">
-						<img src="__PUBLIC__{$league_vo.gflag}" width="223px" height="265px" />
+						<img src="__PUBLIC__/uploads{$league_vo.gflag}" width="223px" height="265px" />
 					</div>
 					<div class="league_summary">{$league_vo.gsummary}</div>
 					<div class="league_op">
-						<span><a href="#">编辑</a>&nbsp;&nbsp;</span>
-						<span><a href="#">删除</a>&nbsp;&nbsp;</span>
-						<span><a href="#">阅读全文</a>&nbsp;&nbsp;</span>
+						<?php if(session('rrole')==0||session('rrole')&&session('rrole')<25){ ?>
+						<span><a href="League/edit?gid={$league_vo.gid}#start">编辑</a>&nbsp;&nbsp;</span>
+						<?php } ?>
+						<span><a href="League/dtl?gid={$league_vo.gid}#start">阅读全文</a>&nbsp;&nbsp;</span>
 					</div>
 					<div class="league_seperator"></div>
 				</div>

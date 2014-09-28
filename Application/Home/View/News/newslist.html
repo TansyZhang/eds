@@ -95,6 +95,9 @@ function news_delete(zid){
 		新闻动态 > {$main_title}
 	</div>
 	<div class="news_left">
+		<?php if(session('rrole')==0||session('rrole')&&session('rrole')<25){ ?>
+		<include file="./Application/Home/view/control_btn.html" text="添加" id="btn_newslist_add" />
+		<?php } ?>
 		<div class="news_item_top_bar"></div>
 		<volist name="news_list" id="news_vo" key="k" >
 			<div class="news_item">
@@ -104,8 +107,10 @@ function news_delete(zid){
 					<div class="news_item_content">{$news_vo.zsummary}
 					</div>
 					<div class="news_item_read_all">
+						<?php if(session('rrole')==0||session('rrole')&&session('rrole')<25){ ?>
 						<a href="__ROOT__/Home/News/edit?zid={$news_vo.zid}#start" />编辑</a>&nbsp;&nbsp;
 						<a href="javascript:void(0);"  onclick="news_delete({$news_vo.zid})"/>删除</a>&nbsp;&nbsp;
+						<?php } ?>
 						<a href="__ROOT__/Home/News/detail?zid={$news_vo.zid}#start" />阅读全文</a>
 					</div>
 				</div>
@@ -114,8 +119,7 @@ function news_delete(zid){
 			</div>
 		</volist>
 
-<div style="margin:35px 0 100px;text-align:center;"></div>
-
+		<div style="margin:35px 0 100px;text-align:center;"></div>
 	</div>
 	<div class="news_right">
 		<div class="news_area_title" style="margin-top:20px;">站内传送>></div>
@@ -142,3 +146,12 @@ function news_delete(zid){
 		<img class="news_type_item_out" src="__PUBLIC__/assets/image/news_type_cn_science.png" />
 	</div>
 </div>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#btn_newslist_add').click(function(){
+		window.location.href="__ROOT__/Home/News/edit?zid=-1";
+	});
+});
+</script>

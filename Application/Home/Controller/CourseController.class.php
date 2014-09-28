@@ -3,6 +3,22 @@ namespace Home\Controller;
 use Think\Controller;
 class CourseController extends Controller {
     public function index($subtype=0){
+
+        $m = M('Courseware');
+        $lim['eattr'] = 0;
+        $lim['estate'] = array('in','20,0');//审核通过/发布中
+        $this->netcourse_list = $m->where($lim)->field('econtent',true)->limit(5)->select();
+
+        $m2 = M('Courseware');
+        $lim2['eattr'] = 20;//公共课件
+        $lim2['estate'] = 20;//发布
+        $this->pi_list = $m2->where($lim2)->field('esummary,econtent',true)->limit(4)->select();
+
+
+        $m3 = M('CourseView');
+        $lim3['fstate'] = 10;//发布中
+        $this->cw_list = $m3->where($lim3)->field('fname,fteacher')->limit(4)->select();
+
         $this->display();
     }
 

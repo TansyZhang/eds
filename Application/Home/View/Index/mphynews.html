@@ -1,36 +1,23 @@
 
 
-<?php if(session('rnickname')) {?>
 
-<div class="index_item">
-	<div class="index_item_content">
-		<span>Opening Doors to Engineering</span>
-	</div>
-	<div class="index_item_info">
-		<div>
-			<span class="index_item_info_left">南京大学</span>
-			<span class="index_item_info_right">Nature杂志</span>
-		</div>
-	</div>
-</div>
-
-
-<?php } else { ?>
 
 
 {
 	"result":0,
 	"msg":"succeed",
-	"data":[{
-		"title":"Opening Doors to Engineering",
+	"data":[
+
+	<volist name="news_list" id="news_vo" key="k">
+	{
+		"title":"{$news_vo.ztitle}",
 		"college":"南京大学",
-		"by":"Nature杂志"
-	},{
-		"title":"Opening Doors to Engineering",
-		"college":"北京大学",
-		"by":"Nature杂志"
-	}]
+		"by":"{$news_vo.zsub_type_name}",
+		"id":"{$news_vo.zid}"
+	}
+	<?php if(count($news_list)!=$k){ ?>,<?php } ?>
+	</volist>
+	]
 }
 
-<?php } ?>
 

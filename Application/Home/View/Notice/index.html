@@ -39,8 +39,10 @@
 				<div class="notice_summary">
 					{$notice_vo.zsummary}&nbsp;&nbsp;&nbsp;&nbsp;
 					<span>
+						<?php if(session('rrole')==0||session('rrole')&&session('rrole')<25){ ?>
 						<a href="__ROOT__/Home/Notice/edit?zid={$notice_vo.zid}#start" />编辑</a>&nbsp;&nbsp;
 						<a href="javascript:void(0);"  onclick="notice_delete({$notice_vo.zid})"/>删除</a>&nbsp;&nbsp;
+						<?php } ?>
 						<a href="__ROOT__/Home/Notice/detail?zid={$notice_vo.zid}#start" />查看全文</a>
 					</span>
 				</div>
@@ -54,7 +56,9 @@
 		
 		<div style="text-align:center;font-style:normal;margin:20px;"></div>
 		<div style="font-style:normal;margin:20px;">
+			<?php if(session('rrole')==0||session('rrole')&&session('rrole')<25){ ?>
 			<button type="button" class="btn btn-info btn-block" id="btn_add" onclick="notice_add()">添加</button>
+			<?php } ?>
 		</div>
 	</div>
 </div>

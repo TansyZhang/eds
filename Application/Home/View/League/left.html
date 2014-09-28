@@ -18,7 +18,7 @@
 	width:100%;
 }
 .college_item{
-	margin: 10px;
+	margin: 10px auto 20px;
 	text-align: center;
 }
 .college_name{
@@ -29,20 +29,14 @@
 </style>
 
 <div class="league_left" style="width:210px;float:left;">
-	<div class="league_display">高校联盟</div>
+	<div class="league_display"><a href="League">高校联盟</a></div>
 	<div class="league_bar" style="margin:0 0 0 0px;"></div>
 	<div class="college_list">
-		<div class="college_item">
-			<img src="__PUBLIC__/assets/image/glogo_nju.png" width="90px" height="110px" />
-			<div class="college_name">南京大学</div>
-		</div>
-		<div class="college_item">
-			<img src="__PUBLIC__/assets/image/glogo_pku.png" width="90px" height="110px" />
-			<div class="college_name">北京大学</div>
-		</div>
-		<div class="college_item">
-			<img src="__PUBLIC__/assets/image/glogo_nju.png" width="90px" height="110px" />
-			<div class="college_name">南京大学</div>
-		</div>
+		<volist name="left_list" id="left_vo" key="k" >
+			<div class="college_item">
+				<a href="League/dtl?gid={$left_vo.gid}"><img src="__PUBLIC__/uploads{$left_vo.glogo}" width="90px" /></a>
+				<div class="college_name">{$left_vo.gname}</div>
+			</div>
+		</volist>
 	</div>
 </div>

@@ -23,12 +23,13 @@
 						<div class="plan_content"  style="margin:20px 30px;">
 							{$zcontent}
 						</div>
-
+<?php if(session('rrole')==0||session('rrole')&&session('rrole')<25){ ?>
 						<div>
 							<button type="button" class="btn btn-info btn-block" id="btn_edit" onclick="project_modify({$zid});">
 								修改
 							</button>
 						</div>
+<?php } ?>
 <script type="text/javascript">
 function project_modify(zid){
 	window.location.href="__ROOT__/Home/Plan/project_dtl?zid="+zid+"&op_edit=1";

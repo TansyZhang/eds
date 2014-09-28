@@ -1,0 +1,35 @@
+<layout name="layout" replace="{__REEPLACE__}" />
+
+
+<include file="./Application/Home/View/welcome_picmotto.html" pic1="league_right" pic2="league_star" />
+
+
+<style type="text/css">
+a {
+	color: black;!important;
+}
+</style>
+
+<div class="container" style="padding-left:0px;padding-right:0px;padding-bottom:50px;background-color:rgb(234,234,234);font-style: normal;">
+	<include file="./Application/Home/View/League/left.html" />
+
+	<div class="league_main" style="width:100%;padding:40px 90px 0px 300px;margin-top:20px;margin-bottom:10px;">
+		<div style="margin:5px;text-align:center;">
+			<h4>{$gname}</h4>
+		</div>
+		<div>
+			<?php echo htmlspecialchars_decode($gprofile,ENT_QUOTES); ?>
+		</div>
+		<?php if(session('rrole')==0||session('rrole')&&session('rrole')<25){ ?>
+		<include file="./Application/Home/View/control_btn.html" text="修改" id="btn_modify" style="margin:20px;"/>
+		<?php } ?>
+	</div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#btn_modify').click(function(){
+		window.location.href="edit?gid={$gid}";
+	});
+});
+</script>

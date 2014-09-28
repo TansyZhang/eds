@@ -3,6 +3,20 @@ namespace Home\Controller;
 use Think\Controller;
 class NewsController extends EdsController {
     public function index(){
+
+        $m = M('Z');
+        $lim['ztype'] = 0;//资讯
+        $lim['zstate'] = 30;//发布
+        $lim['zsub_type'] = 0;//中国科学网
+        $this->news_list1 = $m->where($lim)->field('zsummary,zcontent',true)->order('zreleased_time')->limit(2)->select();
+        $lim['zsub_type'] = 1;//science
+        $this->news_list2 = $m->where($lim)->field('zsummary,zcontent',true)->order('zreleased_time')->limit(2)->select();
+        $lim['zsub_type'] = 2;//nature
+        $this->news_list3 = $m->where($lim)->field('zsummary,zcontent',true)->order('zreleased_time')->limit(2)->select();
+        $lim['zsub_type'] = 3;//拔尖专区
+        $this->news_list4 = $m->where($lim)->field('zcontent',true)->order('zreleased_time')->limit(2)->select();
+        //echo $m->_sql();
+        //dump($this->news_list1);
         $this->display();
     }
 
@@ -16,6 +30,7 @@ class NewsController extends EdsController {
         $lim['zsub_type'] = $zsub_type;
         $list = $m->where($lim)->select();
         $this->news_list = $list;
+        //echo $m->_sql();
 
         //查找资讯子类名称
         $m2 = M('Dic');
@@ -59,6 +74,7 @@ class NewsController extends EdsController {
     public function edit($zid=-1){
         $zid = I('zid');
         if($zid == ''){
+            $this->zid = -1;
             $this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
             return;
         }
@@ -118,7 +134,7 @@ class NewsController extends EdsController {
             $this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
             return;
         }
-        if($zid == -1){//新建
+        if($zid == '' || $zid == -1){//新建
             if($this->_create($zid,$ztitle,$zsummary,$zcontent,$zflag,$zsub_type,true)){
                 $this->show('{"result":0,"msg":"creating succeed."}', 'utf-8');
             } else {
@@ -167,9 +183,12 @@ class NewsController extends EdsController {
             $record['zreleased_time'] = $record['zlast_edited_time'];
         }
         $t = $m->save($record);
-        if(!$t){
+        if($t==false){
             //$this->show('{"result":1,"msg":"'.$m->_sql().'"}', 'utf-8');return;
+            //echo $m->getDbError();
         }
+        //echo $m->_sql();
+        //echo '艹';
         return $t;
     }
     public function delete($zid=-1){

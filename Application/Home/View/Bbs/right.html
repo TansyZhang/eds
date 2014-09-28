@@ -25,7 +25,7 @@
 	<div style="text-align:center;">
 		<span style="width:120px;display:inline-block;margin:0;padding-top:10px;line-height:30px;padding:20px 0px;">
 			<div style="font-weight:bold;">{$Think.session.rnickname}</div>
-			<div style="font-size:10pt;">帖子(99+)站内信(99)</div>
+			<div style="font-size:10pt;display:none;">帖子(99+)站内信(99)</div>
 		</span>
 		<a href="__ROOT__/Home/Bbs/center?rid={$Think.session.rid}#start"><img src="__PUBLIC__{$Think.session.rhead_photo}" width="80px" height="80px" style="float:right;margin:20px 20px 20px 0;"/></a>
 	</div>
@@ -38,17 +38,22 @@
 	<li><a href="__ROOT__/Home/Bbs/center?uid=1#start">社区动态</a></li>
 	<li><a href="__ROOT__/Home/Bbs/info?uid=1#start">个人资料</a></li>
 	<li><a href="__ROOT__/Home/Bbs/my_post?pid=1#start">我的帖子</a></li>
-	<li><a href="__ROOT__/Home/Bbs/my_msg?sid=1#start">站内信箱</a></li>
-	<li><a href="__ROOT__/Home/Bbs/ex_note?zid=1#start">交流札记</a></li>
+	<li style="display:none;"><a href="__ROOT__/Home/Bbs/my_msg?sid=1#start">站内信箱</a></li>
+	<li style="display:none;"><a href="__ROOT__/Home/Bbs/ex_note?zid=1#start">交流札记</a></li>
+	<?php if(session('rrole')==0||session('rrole')&&session('rrole')<=20){ ?>
 	<li><a href="__ROOT__/Home/Bbs/cw?uid=1#start">课程课件</a></li>
 	<li><a href="__ROOT__/Home/Bbs/ta?uid=1#start">助教管理</a></li>
-
-	<li><span onclick="dontclickme()">【管理员】</span></li>
-	<li><a href="__ROOT__/Home/Bbs/tah?#start">教师管理</a></li>
-	<li><a href="__ROOT__/Home/Bbs/stu?#start">学生管理</a></li>
-	<li><a href="__ROOT__/Home/Bbs/xx?#start">敏感词管理</a></li>
-	<li><span onclick="dontclickme()">【超管】</span></li>
-	<li><a href="__ROOT__/Home/Bbs/acc?#start">账户管理</a></li>
+	<?php } ?>
+	<?php if(session('rrole')==0||session('rrole')&&session('rrole')<25){ ?>
+		<li><span onclick="dontclickme()">【管理员】</span></li>
+		<li><a href="__ROOT__/Home/Bbs/tah?#start">教师管理</a></li>
+		<li style="display:none;"><a href="__ROOT__/Home/Bbs/stu?#start">学生管理</a></li>
+		<li style="display:none;"><a href="__ROOT__/Home/Bbs/xx?#start">敏感词管理</a></li>
+		<?php if(session('rrole')==0||session('rrole')&&session('rrole')<=10){ ?>
+			<li><span onclick="dontclickme()">【超管】</span></li>
+			<li><a href="__ROOT__/Home/Bbs/acc?#start">账户管理</a></li>
+		<?php } ?>
+	<?php } ?>
 </ul>
 
 <script type="text/javascript">

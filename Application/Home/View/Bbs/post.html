@@ -41,12 +41,8 @@
 .post_item, .topn_item{
 	height: 110px;
 }
-.post_item .title{
-	padding-top: 20px;
-	padding-left: 100px;
-	margin-bottom: 20px;
-	font-size: 14pt;
-	font-weight: bold;
+.title{
+	margin:5px 0;
 }
 .post_item .by{
 	padding-left: 100px;
@@ -111,6 +107,22 @@
 				<input type="text" id="ttitle" class="form-control" placeholder="title input" value="{$ttitle}" />
 			</div>
 			<div class="title">
+				帖子图标<span style="color:gray;">（当帖子出现在首页时会显示该图标，建议宽高为203x169）</span>：
+			</div>
+			<div class="title" style="text-align:center;">
+				<img id="tflag_show" 
+				<?php if($tflag==''){ ?>
+					src="__PUBLIC__/assets/image/post_1.png"
+				<?php } else { ?>
+					id="tflag_show" src="__PUBLIC__/uploads{$tflag}"
+				<?php } ?> 
+				width="203px" height="169px" style="margin:10px 0;" />
+				<input type="hidden" id="tflag" name="tflag" value="{$tflag}" />
+				<form method="post" enctype="multipart/form-data">
+					<input type="file" id="tflag_input" name="tflag_input" onchange="upload_flag()" class="form-control" />
+				</form>
+			</div>
+			<div class="title">
 				<textarea name="tcontent" class="form-control" style="width:100%;height:200px;visibility:hidden;">{$tcontent}</textarea>
 			</div>
 			<div class="title">
@@ -128,6 +140,32 @@
 
 <script type="text/javascript">
 <include file="./Application/Home/View/control_editor.html" editor="editor" name="tcontent" />
+
+function upload_flag(){
+	//$('#tflag_input').attr('disabled',true);
+	alert('change');
+	$.ajaxFileUpload({
+		url:'__ROOT__/Home/Bbs/post_img_upload',
+		secureuri:false,
+		fileElementId:'tflag_input',
+		dataType: 'json',
+		data:{},
+		success: function (data, status){
+			if(data.result == 0){
+				$('#tflag_show').attr('src', '__PUBLIC__/uploads'+data.flag);
+				$('#tflag').val(data.flag);
+				$('#tflag_input').val('');
+			} else {
+				cdialog.show_alert('帖子图标上传失败！错误信息：'+data.msg);
+			}
+			//$('#tflag_input').attr('disabled',false);
+		},
+		error: function (data, status, e){
+			cdialog.show_alert(e);
+			//$('#tflag_input').attr('disabled',false);
+		}
+	});
+}
 $(document).ready(function(){
 	$('#btn_release').click(function(){
 		$('#btn_release').attr('disabled',true);
@@ -141,6 +179,7 @@ $(document).ready(function(){
 				zid:$('#tid').val(),
 				zsub_type:subtype,
 				ztitle:$('#ttitle').val(),
+				zflag:$('#tflag').val(),
 				zsummary:editor.text().substr(0,100),
 				zcontent:editor.html()
 			},
@@ -159,7 +198,6 @@ $(document).ready(function(){
 				$('#btn_release').attr('disabled',false);
 			}
 		});
-
 	});
 });
 $(document).ready(function(){
@@ -175,6 +213,7 @@ $(document).ready(function(){
 				zid:$('#tid').val(),
 				zsub_type:subtype,
 				ztitle:$('#ttitle').val(),
+				zflag:$('#tflag').val(),
 				zsummary:editor.text().substr(0,100),
 				zcontent:editor.html()
 			},

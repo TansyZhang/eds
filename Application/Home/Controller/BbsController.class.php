@@ -3,9 +3,18 @@ namespace Home\Controller;
 use Think\Controller;
 class BbsController extends EdsController {
 
+    public function __construct(){
+        parent::__construct();
+        $this->cond_logined = true;
+    }
 
     public function index($page=0){
+
         $this->post_list = array();
+        if(session('g_logined')!='logined'){//未登录
+            $this->display();
+            return;
+        }
     	$m = M('PostListView');
         $lim['tstate'] = array('eq', '20');//20-置顶
     	$list1 = $m->where($lim)->order('tlast_edited_time desc')->select();
@@ -23,6 +32,10 @@ class BbsController extends EdsController {
     }
 
     public function post_list($cid=-1){
+        if(session('g_logined')!='logined'){//未登录
+            $this->display();
+            return;
+        }
     	$cid = I('cid');
     	if($cid == ''){
     		$cid = 1;
@@ -51,6 +64,10 @@ class BbsController extends EdsController {
     }
 
     public function post_dtl($tid=-1){
+        if(session('g_logined')!='logined'){//未登录
+            $this->display();
+            return;
+        }
     	$tid = I('tid');
     	if($tid == ''){
     		$this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
@@ -84,6 +101,10 @@ class BbsController extends EdsController {
     	$this->display();
     }
     public function post_reply($tid=-1,$tsummary='',$tcontent=''){
+        if(session('g_logined')!='logined'){//未登录
+            $this->display();
+            return;
+        }
     	$tid = I('tid');
     	$tsummary = I('tsummary');
     	$tcontent = I('tcontent');
@@ -93,12 +114,27 @@ class BbsController extends EdsController {
     	}
     	$m = M('Bbs');
 		$data['treply_id'] = $tid;
-    	$data['trid'] = 1;//TODO
+    	$data['trid'] = session('rid');//TODO
 		$data['tsummary'] = $tsummary;
 		$data['tcontent'] = $tcontent;
     	$data['tstate'] = 10;//发布
     	$data['tcreated_time'] = date('Y-m-d H:i:s',time());
 		if($m->add($data)){
+            $postm = M('Bbs');
+            $postdata['tid'] = $tid;
+            $postrec = $postm->where($postdata)->find();
+            if($postrec){
+                $evm = M('Event');
+                $evdata['vrid'] = $postrec['trid'];
+                $evdata['vtitle'] = $postrec['ttitle'];
+                $evdata['vtype'] = 1;//帖子回复
+                $evdata['vurl'] = '/Home/Bbs/post_dtl?tid='.$postrec['trid'].'#start';
+                $evdata['vcreated_time'] = date('Y-m-d H:i:s',time());
+                $evdata['vstate'] = 0;//0-未查看
+                $evdata['vref'] = session('rid');
+                $evm->add($evdata);
+                //echo $evm->_sql();
+            }
 			$this->show('{"result":0,"msg":"adding succeed."}', 'utf-8');
 		}else{
 			$this->show('{"result":1,"msg":"'.($m->getDbError()).'"}', 'utf-8');
@@ -106,6 +142,10 @@ class BbsController extends EdsController {
     }
 
     public function post($tid=-1){
+        if(session('g_logined')!='logined'){//未登录
+            $this->display();
+            return;
+        }
     	$tid = I('tid');
     	if($tid == ''){
     		$tid = -1;
@@ -126,41 +166,85 @@ class BbsController extends EdsController {
     	$this->display();
     }
 
-    public function post_release($zid=-1,$zsub_type='',$ztitle='',$zsummary='',$zcontent=''){
+
+    public function post_img_upload(){
+        if(session('g_logined')!='logined'){//未登录
+            $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            //$this->display();
+            return;
+        }
+        $upload = new \Think\Upload();
+        $upload->maxSize = 1024*1024;
+        $upload->exts = array('png','gif','jpg','jpeg');
+        $upload->rootPath = './Public/uploads'; 
+        $upload->savePath = '/image/';
+        $upload->autoSub = false;
+        $upload->saveName = date('Y_m_d_H_i_s', time()).'_'.mt_rand();
+        
+        $info = $upload->upload();
+        if($info){
+            $flag = '';
+            foreach($info as $file){
+                $flag .= $file['savepath'].$file['savename'];
+                break;
+            }
+            $this->show('{"result":0,"msg":"succeed","flag":"'.$flag.'"}');
+        } else{
+            $error = $upload->getError();
+            $error = str_replace('"', '&', $error);
+            $this->show('{"result":1,"msg":"'.$error.'"}', 'utf-8');
+        }
+        return;
+    }
+
+    public function post_release($zid=-1,$zsub_type='',$ztitle='',$zflag='',$zsummary='',$zcontent=''){
+        if(session('g_logined')!='logined'){//未登录
+            $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            //$this->display();
+            return;
+        }
         $zid = I('zid');
         $zsub_type = I('zsub_type');
         $ztitle = I('ztitle');
+        $zflag = I('zflag');
         $zsummary = I('zsummary');
         $zcontent = I('zcontent');
         if($zsub_type==''||$ztitle==''||$zsummary==''||$zcontent==''){
             $this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
             return;
         }
-        $this->p_post_save($zid,$zsub_type,$ztitle,$zsummary,$zcontent,10);//10-发布
+        $this->p_post_save($zid,$zsub_type,$ztitle,$zflag,$zsummary,$zcontent,10);//10-发布
     }
-    public function post_save($zid=-1,$zsub_type='',$ztitle='',$zsummary='',$zcontent=''){
+    public function post_save($zid=-1,$zsub_type='',$ztitle='',$zflag='',$zsummary='',$zcontent=''){
+        if(session('g_logined')!='logined'){//未登录
+            $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            //$this->display();
+            return;
+        }
         $zid = I('zid');
         $zsub_type = I('zsub_type');
         $ztitle = I('ztitle');
+        $zflag = I('zflag');
         $zsummary = I('zsummary');
         $zcontent = I('zcontent');
         if($zsub_type==''||$ztitle==''||$zsummary==''||$zcontent==''){
             $this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
             return;
         }
-        $this->p_post_save($zid,$zsub_type,$ztitle,$zsummary,$zcontent,0);//0-编辑中
+        $this->p_post_save($zid,$zsub_type,$ztitle,$zflag,$zsummary,$zcontent,0);//0-编辑中
     }
-    private function p_post_save($zid,$zsub_type,$ztitle,$zsummary,$zcontent,$tstate){
+    private function p_post_save($zid,$zsub_type,$ztitle,$zflag,$zsummary,$zcontent,$tstate){
+        $data['ttopic'] = $zsub_type;
+        $data['ttitle'] = $ztitle;
+        $data['tflag'] = $zflag;
+        $data['tsummary'] = $zsummary;
+        $data['tcontent'] = $zcontent;
+        $data['tstate'] = $tstate;
+        $data['tlast_edited_time'] = date('Y-m-d H:i:s',time());
         if($zid == '' || $zid == -1){
             $m = M('Bbs');
-            $data['ttopic'] = $zsub_type;
             $data['trid'] = session('rid');
-            $data['ttitle'] = $ztitle;
-            $data['tsummary'] = $zsummary;
-            $data['tcontent'] = $zcontent;
-            $data['tstate'] = $tstate;//编辑中
-            $data['tcreated_time'] = date('Y-m-d H:i:s',time());
-            $data['tlast_edited_time'] = $data['tcreated_time'];
+            $data['tcreated_time'] = $data['tlast_edited_time'];
             if($m->add($data)){
                 $this->show('{"result":0,"msg":"adding succeed."}', 'utf-8');
                 return;
@@ -171,12 +255,6 @@ class BbsController extends EdsController {
         } else {
             $m = M('Bbs');
             $data['tid'] = $zid;
-            $data['ttopic'] = $zsub_type;
-            $data['ttitle'] = $ztitle;
-            $data['tsummary'] = $zsummary;
-            $data['tcontent'] = $zcontent;
-            $data['tstate'] = $tstate;//编辑中
-            $data['tlast_edited_time'] = date('Y-m-d H:i:s',time());
             if($m->save($data)){
                 $this->show('{"result":0,"msg":"adding succeed."}', 'utf-8');
                 return;
@@ -188,6 +266,11 @@ class BbsController extends EdsController {
     }
 
     public function post_top($tid=-1,$ttop=0){
+        if(session('g_logined')!='logined'){//未登录
+            $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            //$this->display();
+            return;
+        }
         $tid = I('tid');
         $ttop = I('ttop');
         if($tid != ''){
@@ -221,6 +304,11 @@ class BbsController extends EdsController {
         $this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
     }
     public function post_delete($tid = -1){
+        if(session('g_logined')!='logined'){//未登录
+            $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            //$this->display();
+            return;
+        }
         $tid = I('tid');
         if($tid == ''){
             $this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
@@ -236,7 +324,12 @@ class BbsController extends EdsController {
     }
 
     public function my_post(){
-        session('rid',1);
+        if(session('g_logined')!='logined'){//未登录
+            //$this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            $this->display();
+            return;
+        }
+        //
         $m = M('Bbs');
         $lim['tstate'] = array('in', '0,10,20');//0-编辑中,10-发布,20-置顶
         $lim['trid'] = session('rid');
@@ -244,11 +337,17 @@ class BbsController extends EdsController {
         $this->post_list = $m->where($lim)->order('tstate')->select();
         //echo $m->_sql();return;
         //dump($this->post_list);
+        //echo session('rid');
         $this->display();
     }
 
 
 	public function acc(){
+        if(session('g_logined')!='logined'){//未登录
+            //$this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            $this->display();
+            return;
+        }
 		$m = M('Register');
 		$lim['rstate'] = array('in', '(0,10)');
 		$lim['rrole'] = array('elt', 25);
@@ -274,6 +373,11 @@ class BbsController extends EdsController {
 		$mpmanager_user='',
 		$mpmanager_bbs=''
     	){
+        if(session('g_logined')!='logined'){//未登录
+            $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            //$this->display();
+            return;
+        }
     	$rid = I('rid');
     	$raccount = I('raccount');
     	$rpassword = I('rpassword');
@@ -363,6 +467,11 @@ class BbsController extends EdsController {
     }
 
     public function acc_dtl($rid=-1){
+        if(session('g_logined')!='logined'){//未登录
+            $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            //$this->display();
+            return;
+        }
     	$m = M('ManagerView');
     	$lim['rid'] = I('rid');
     	$register = $m->where($lim)->find();
@@ -399,6 +508,11 @@ class BbsController extends EdsController {
     	$this->display();
     }
     public function acc_edit($rid=-1){
+        if(session('g_logined')!='logined'){//未登录
+            $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            //$this->display();
+            return;
+        }
     	$m = M('ManagerView');
     	$lim['rid'] = I('rid');
     	$register = $m->where($lim)->find();
@@ -437,6 +551,11 @@ class BbsController extends EdsController {
 
     }
     public function acc_restrict($rid=-1,$state=0){
+        if(session('g_logined')!='logined'){//未登录
+            $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            //$this->display();
+            return;
+        }
     	$rid = I('rid');
     	$state = I('state');
     	if($rid == -1 || $rid == ''){
@@ -453,6 +572,11 @@ class BbsController extends EdsController {
     	}
     }
     public function acc_reset_password($rid=-1){
+        if(session('g_logined')!='logined'){//未登录
+            $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            //$this->display();
+            return;
+        }
     	if($rid == -1){
     		$this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
     		return;
@@ -468,6 +592,11 @@ class BbsController extends EdsController {
     	}
     }
     public function acc_delete($rid = -1){
+        if(session('g_logined')!='logined'){//未登录
+            $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            //$this->display();
+            return;
+        }
     	if($rid == -1){
     		$this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
     		return;
@@ -490,6 +619,11 @@ class BbsController extends EdsController {
 
 
 	public function tah(){
+        if(session('g_logined')!='logined'){//未登录
+            //$this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            $this->display();
+            return;
+        }
 		$m = M('Register');
 		$lim['rstate'] = array('in', '(0,10)');
 		$lim['rrole'] = array('gt', 25);//使用25作为分界线
@@ -499,6 +633,11 @@ class BbsController extends EdsController {
 	}
 
 	public function tah_dtl($rid = ''){
+        if(session('g_logined')!='logined'){//未登录
+            //$this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            $this->display();
+            return;
+        }
 		$rid = I('rid');
 		if($rid == ''){
     		$this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
@@ -541,6 +680,11 @@ class BbsController extends EdsController {
 	}
 
 	public function tah_edit($rid = -1){
+        if(session('g_logined')!='logined'){//未登录
+            //$this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            $this->display();
+            return;
+        }
 		$cm = M('College');
 		$this->college_list = $cm->select();
 		$dicm = M('Dic');
@@ -596,6 +740,11 @@ class BbsController extends EdsController {
 		$udownload_courseware='',
 		$umanage_student=''
     	){
+        if(session('g_logined')!='logined'){//未登录
+            $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            //$this->display();
+            return;
+        }
 		$rid = I('rid');
 		$ugid = I('ugid');
     	$raccount = I('raccount');
@@ -698,7 +847,12 @@ class BbsController extends EdsController {
 
 
     public function cw(){
-        session('rid',1);
+        if(session('g_logined')!='logined'){//未登录
+            //$this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            $this->display();
+            return;
+        }
+        //session('rid',1);
         $m = M('CourseView');
         $lim['fcreator'] = session('rid');
         $lim['fstate'] = array('in', '0,10,20');
@@ -706,6 +860,11 @@ class BbsController extends EdsController {
         $this->display();
     }
     public function cw_dtl($fid = -1){
+        if(session('g_logined')!='logined'){//未登录
+            //$this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            $this->display();
+            return;
+        }
         $fid = I('fid');
         if($fid == '' || $fid == -1){
             $this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
@@ -748,6 +907,11 @@ class BbsController extends EdsController {
         $this->display();
     }
     public function cw_edit($fid=-1){
+        if(session('g_logined')!='logined'){//未登录
+            //$this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            $this->display();
+            return;
+        }
         $fid = I('fid');
 
         $mterm = M('Dic');
@@ -778,6 +942,11 @@ class BbsController extends EdsController {
         $this->display();
     }
     public function cw_save($fid=-1,$fname='',$fteacher='',$fgrade='',$faddr='',$fterm='',$release=0){
+        if(session('g_logined')!='logined'){//未登录
+            $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            //$this->display();
+            return;
+        }
         $fid = I('fid');
         $fname = I('fname');
         $fteacher = I('fteacher');
@@ -824,6 +993,11 @@ class BbsController extends EdsController {
     }
     //课程删除
     public function cw_delete($fid=-1,$close=0){
+        if(session('g_logined')!='logined'){//未登录
+            $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            //$this->display();
+            return;
+        }
         $fid = I('fid');
         $close = I('close');
         if($fid == '' || $close == ''){
@@ -841,6 +1015,11 @@ class BbsController extends EdsController {
         }
     }
     public function cw_release($fid=-1){
+        if(session('g_logined')!='logined'){//未登录
+            $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            //$this->display();
+            return;
+        }
         $fid = I('fid');
         if($fid == ''){
             $this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
@@ -857,6 +1036,11 @@ class BbsController extends EdsController {
         }
     }
     public function cw_upload($etitle='',$efid=-1){
+        if(session('g_logined')!='logined'){//未登录
+            $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            //$this->display();
+            return;
+        }
         $etitle = I('etitle');
         $efid = I('efid');
         if($efid == ''){
@@ -923,6 +1107,11 @@ class BbsController extends EdsController {
     }
     //课件删除
     public function cw_e_delete($eid=-1){
+        if(session('g_logined')!='logined'){//未登录
+            $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            //$this->display();
+            return;
+        }
         $eid = I('eid');
         if($eid == '' || $eid == -1){
             $this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
@@ -939,6 +1128,11 @@ class BbsController extends EdsController {
         }
     }
     public function cw_ta_delete($pid=-1){
+        if(session('g_logined')!='logined'){//未登录
+            $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            //$this->display();
+            return;
+        }
         $pid = I('pid');
         if($pid == -1 || $pid == ''){
             $this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
@@ -952,6 +1146,11 @@ class BbsController extends EdsController {
         }
     }
     public function cw_ta_add($fid=-1,$rid=-1){
+        if(session('g_logined')!='logined'){//未登录
+            $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            //$this->display();
+            return;
+        }
         $fid = I('fid');
         $rid = I('rid');
         if($fid == '' || $fid == -1 || $rid == '' || $rid == -1){
@@ -982,6 +1181,11 @@ class BbsController extends EdsController {
 
 
     public function ta_edit($rid=-1){
+        if(session('g_logined')!='logined'){//未登录
+            //$this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            $this->display();
+            return;
+        }
         //session('uchar',80);
         $rid = I('rid');
         $mchar = M('Dic');
@@ -1011,6 +1215,11 @@ class BbsController extends EdsController {
         $this->display();
     }
     public function ta(){
+        if(session('g_logined')!='logined'){//未登录
+            //$this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            $this->display();
+            return;
+        }
         session('uid',1);
         $m = M('TaView');
         $lim['uuid'] = session('uid');
@@ -1020,6 +1229,11 @@ class BbsController extends EdsController {
     }
 
     public function ta_save($rid='',$uname='',$utel='',$uoffice_addr='',$uemail='',$uchar=''){
+        if(session('g_logined')!='logined'){//未登录
+            $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            //$this->display();
+            return;
+        }
         $rid=I('rid');
         $uname = I('uname');
         $utel = I('utel');
@@ -1114,6 +1328,47 @@ class BbsController extends EdsController {
                 $this->show('{"result":1,"msg":"'.$m2->getDbError().'"}', 'utf-8');
             }
         }
+    }
+
+    public function center(){
+        if(session('g_logined')!='logined'){//未登录
+            //$this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            $this->display();
+            return;
+        }
+        $this->cond_logined = false;
+        $event = M('EventView');
+        $lim['vrid'] = 1;//session('rid');
+        $lim['vstate'] = 0;//0-未查看
+        $lim['vtype'] = 1;//1-帖子回复
+        $this->event_list = $event->where($lim)->order('vcreated_time desc')->select();
+        //dump($this->event_list);
+        $this->display();
+    }
+
+    public function ev_ignore($vid=-1){
+        if(session('g_logined')!='logined'){//未登录
+            $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            //$this->display();
+            return;
+        }
+        $vid = I('vid');
+        if($vid==''||$vid==-1){
+            $this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
+            return;
+        }
+        $m = M('Event');
+        $data['vid'] = $vid;
+        $data['vstate'] = 10;//10-已忽略
+        if($m->save($data)){
+            $this->show('{"result":0,"msg":"adding succeed."}', 'utf-8');
+        }else{
+            $this->show('{"result":1,"msg":"'.($m->getDbError()).'"}', 'utf-8');
+        }
+    }
+
+    public function info(){
+        $this->display();
     }
 
 }

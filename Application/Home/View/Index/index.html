@@ -8,7 +8,7 @@
 	<div id="physics_news_area" style="float:left;margin-right:12px;width:308px;">
 		<div class="index_title">
 			<span>物理前沿</span>
-			<span style="float:right">{$more}</span>
+			<span style="float:right;display:none;">{$more}</span>
 		</div>
 		<div style="width:100%;height:7px;background-color:#007768;"></div>
 		<div id="physics_news_area_items"></div>
@@ -17,7 +17,7 @@
 	<div id="hot_act_area" style="float:left;width:308px;">
 		<div class="index_title">
 			<span>热门活动</span>
-			<span style="float:right">{$more}</span>
+			<span style="float:right;display:none;">{$more}</span>
 		</div>
 		<div style="width:308px;height:7px;background-color:#C51F00;"></div>
 		<div id="hot_act_area_items"></div>
@@ -25,7 +25,7 @@
 	<div id="recmd_course_area" style="clear:both;width:628px;display:block;">
 		<div class="index_title">
 			<span style="float:left">推荐课程</span>
-			<span style="float:right">{$more}</span>
+			<span style="float:right;">{$more}</span>
 			<span>&nbsp;</span>
 		</div>
 		<div style="width:628px;height:7px;background-color:#9A7016;">&nbsp;</div>
@@ -88,7 +88,7 @@ $(document).ready(function(){
 			"tpl":
 				'<div class="index_item">'+
 					'<div class="index_item_content">'+
-						'<span>{title}</span>'+
+						'<span><a href="__ROOT__/Home/News/detail?zid={id}#start">{title}</a></span>'+
 					'</div>'+
 					'<div class="index_item_info">'+
 						'<div>'+
@@ -97,7 +97,7 @@ $(document).ready(function(){
 						'</div>'+
 					'</div>'+
 				'</div>',
-			"tpl_args":["{title}","{college}","{by}"],/*使用mdl_args可以加快替换速度*/
+			"tpl_args":["{title}","{college}","{by}","{id}"],/*使用mdl_args可以加快替换速度*/
 			"error":"加载物理前沿列表失败！{status}:{statusText}",
 			"clear":true,
 			"parent":"#physics_news_area_items"
@@ -109,14 +109,87 @@ $(document).ready(function(){
 
 		},
 		"rmv":{
-			"parent":"#physics_news_area_items .index_item",
-			"type":"img",
-			"url":"__ROOT__/Home/Index/mphynews_rmv"
 		},
 		"shld":{
 
 		}
 	});
+	//热门活动
+	eds_framework.metadata.push({
+		load:{
+			"url":"__ROOT__/Home/Index/mhotact",
+			"action":"post",
+			"tpl":
+				'<div class="index_item">'+
+					'<div class="index_item_content">'+
+						'<span>{title}</span>'+
+					'</div>'+
+					'<div class="index_item_info">'+
+						'<div>'+
+							'<span class="index_item_info_right">{college}&nbsp;&nbsp;{by}</span>'+
+						'</div>'+
+					'</div>'+
+				'</div>',
+			"tpl_args":["{title}","{college}","{by}"],/*使用mdl_args可以加快替换速度*/
+			"error":"加载热门活动列表失败！{status}:{statusText}",
+			"clear":true,
+			"parent":"#hot_act_area_items"
+		}
+	});
+
+	eds_framework.metadata.push({
+		load:{
+			"url":"__ROOT__/Home/Index/mrecmdcourse",
+			"action":"post",
+			"tpl":
+				'<div class="index_item">'+
+					'<div class="recmd_course_content">'+
+						'<img src="__PUBLIC__/uploads{flag}" width="309px" height="195px" />'+
+						'<div class="recmd_course_content_title">{title}</div>'+
+					'</div>'+
+					'<div class="recmd_course_info">'+
+						'<div class="recmd_course_info_text">'+
+							'<div class="recmd_course_info_text1">{author_college}</div>'+
+							'<div class="recmd_course_info_text2">{level}</div>'+
+							'<div class="recmd_course_info_text2">{author_name}</div>'+
+						'</div>'+
+						'<div class="recmd_course_info_img">'+
+							'<img src="__PUBLIC__/uploads{author_photo}" width="140px" />'+
+						'</div>'+
+					'</div>'+
+				'</div>',
+			"tpl_args":["{flag}","{title}","{author_college}","{level}","{author_name}","{author_photo}"],/*使用mdl_args可以加快替换速度*/
+			"error":"加载推荐课程列表失败！{status}:{statusText}",
+			"clear":true,
+			"parent":"#recmd_course_area_items"
+		}
+	});
+
+	eds_framework.metadata.push({
+		load:{
+			"url":"__ROOT__/Home/Index/mhotpost",
+			"action":"post",
+			"tpl":
+				'<div class="index_item index_item_hot">'+
+					'<div class="flag">'+
+						'<span><img src="__PUBLIC__{flag}" width="169px" height="146px" /></span>'+
+					'</div>'+
+					'<div style="float:right;width:203px;height:169px;padding-top:27px;">'+
+						'<table width="100%" height="100%">'+
+							'<tr><td class="index_item_hot_content">'+
+								'<a href="__ROOT__/Home/Bbs/post_dtl?tid={id}#start">{title}</a>'+
+							'</td></tr>'+
+						'</table>'+
+					'</div>'+
+				'</div>',
+			"tpl_args":["{flag}","{title}","{id}"],/*使用mdl_args可以加快替换速度*/
+			"error":"加载学生社区热点列表失败！{status}:{statusText}",
+			"clear":true,
+			"parent":"#hot_post_area_items"
+		}
+	});
+
+	
 	/*
 	var t = new Array();
 	t[eds_framework.T_URL] = '__ROOT__/Home/Index/mphynews';

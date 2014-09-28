@@ -23,6 +23,10 @@
 	font-size: 12pt;
 	margin-left: 20px;
 }
+.basic_list_div li .value{
+	width:500px;
+
+}
 </style>
 
 <div class="container" style="padding-left:0px;padding-right:0px;">
@@ -42,18 +46,18 @@
 			<div class="separator"></div>
 			<div style="">
 				<ul>
-					<li><div class="name">姓名</div><div class="value">XXX</div></li>
-					<li><div class="name">性别</div><div class="value">男</div></li>
-					<li><div class="name">学校</div><div class="value">XXX</div></li>
-					<li><div class="name">学工号</div><div class="value">XXX</div></li>
-					<li><div class="name">账号</div><div class="value">XXX</div></li>
-					<li><div class="name">职称</div><div class="value">XXX</div></li>
-					<li><div class="name">办公地址/宿舍</div><div class="value">XXX</div></li>
-					<li><div class="name">入学年份</div><div class="value">XXX</div></li>
+					<li><div class="name">姓名</div><div class="value">&nbsp;{$Think.session.uname}</div></li>
+					<li><div class="name">性别</div><div class="value">&nbsp;{$Think.session.usender}</div></li>
+					<li><div class="name">学校</div><div class="value">&nbsp;{$Think.session.ucollege_name}</div></li>
+					<li><div class="name">学工号</div><div class="value">&nbsp;{$Think.session.uno}</div></li>
+					<li><div class="name">账号</div><div class="value">&nbsp;{$Think.session.raccount}</div></li>
+					<li><div class="name">职称</div><div class="value">&nbsp;{$Think.session.uchar_name}</div></li>
+					<li><div class="name">办公地址/宿舍</div><div class="value">&nbsp;{$Think.session.uoffice_addr}</div></li>
+					<li><div class="name">入学年份</div><div class="value">&nbsp;{$Think.session.ugrade}</div></li>
 				</ul>
 			</div>
 		</div>
-		<div class="personal_list_div">
+		<div class="personal_list_div" style="display:none;">
 			<div class="center_title">个性信息</div>
 			<div class="separator"></div>
 			<div style="">
@@ -69,14 +73,14 @@
 		</div>
 
 
-		<div class="perm_list_div">
+		<div class="perm_list_div" style="display:none;">
 			<div class="center_title">权限信息</div>
 			<div class="separator"></div>
 			<div style="">
 				<ul>
 					<li><div class="name">登录</div><div class="value">是</div></li>
 					<li><div class="name">发帖</div><div class="value">是</div></li>
-					<li><div class="name">回帖</div><div class="value">否(封禁时间：<span>2014-09-23 13:56:09</span>，封禁时长：<span>一周</span>)</div></li>
+					<li><div class="name">回帖</div><div class="value">否</div></li>
 					<li><div class="name">发送站内信</div><div class="value">是</div></li>
 					<li><div class="name">创建交流札记</div><div class="value">是</div></li>
 					<li><div class="name">创建留学动态</div><div class="value">是</div></li>

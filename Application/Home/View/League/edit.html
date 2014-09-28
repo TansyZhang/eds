@@ -1,0 +1,129 @@
+<layout name="layout" replace="{__REEPLACE__}" />
+
+
+<include file="./Application/Home/View/welcome_picmotto.html" pic1="league_right" pic2="league_star" />
+
+<link rel="stylesheet" href="__PUBLIC__/kindeditor-4.1.10/themes/default/default.css" />
+<script charset="utf-8" src="__PUBLIC__/kindeditor-4.1.10/kindeditor-min.js"></script>
+<script charset="utf-8" src="__PUBLIC__/kindeditor-4.1.10/lang/zh_CN.js"></script>
+
+<style type="text/css">
+a {
+	color: black;!important;
+}
+</style>
+
+<div class="container" style="padding-left:0px;padding-right:0px;padding-bottom:50px;background-color:rgb(234,234,234);font-style: normal;">
+	<include file="./Application/Home/View/League/left.html" />
+
+	<div class="league_main" style="width:100%;padding:40px 90px 0px 300px;margin-top:20px;margin-bottom:10px;text-align:center;">
+		<div style="margin:5px;">
+			<input type="hidden" id="gid" value="{$gid}" />
+			<input type="text" id="gname"  value="{$gname}" class="form-control" placeholder="name input" />
+		</div>
+		<div>
+
+		</div>
+			<form name="form" action="" method="POST" enctype="multipart/form-data">
+			<?php if($glogo != '') { ?>
+				<img id="glogo_show" src="__PUBLIC__/uploads{$glogo}"  width="100px"   style="margin:10px;" />
+			<?php }else{ ?>
+				<img id="glogo_show" src="__PUBLIC__/assets/image/glogo_default.png"  width="100px" style="margin:10px;" />
+			<?php } ?>
+				<input type="hidden" size="45"  id="glogo" name="glogo" value="{$glogo}" />
+				<input type="file" size="45"  id="glogo_input" name="glogo_input" class="form-control" />
+			<?php if($gflag != '') { ?>
+				<img id="gflag_show" src="__PUBLIC__/uploads/{$gflag}"  width="164px" style="margin:10px;" />
+			<?php } ?>
+				<input type="hidden" size="45"  id="gflag" name="gflag" value="{$gflag}" />
+				<input type="file" size="45"  id="gflag_input" name="gflag_input" class="form-control" />
+			</form>
+		<div>
+			<textarea name="gprofile" class="form-control" style="width:100%;height:200px;visibility:hidden;">{$gprofile}</textarea>
+		</div>
+		<include file="./Application/Home/View/control_btn.html" text="发布" id="btn_release" style="margin:20px;"/>
+	</div>
+</div>
+
+<script type="text/javascript">
+<include file="./Application/Home/View/control_editor.html" editor="editor" name="gprofile" />
+$(document).ready(function(){
+	$('#glogo_input').change(function(){
+		var url = "__ROOT__/Home/League/save_pic";
+		$.ajaxFileUpload({
+			url:url,
+			secureuri:false,
+			fileElementId:'glogo_input',
+			dataType: 'json',
+			data:{},
+			success: function (data, status){
+				if(data.result == 0){
+					$('#glogo').val(data.pathname);
+					$('#glogo_show').attr('src', '__PUBLIC__/uploads'+data.pathname);
+				} else {
+					cdialog.show_alert('图片上传失败！错误消息：'+data.msg);
+				}
+			},
+			error: function (data, status, e){
+				eds_framework.error_handler(url,data);
+				//cdialog.show_alert(e);
+			}
+		});
+	});
+	$('#gflag_input').change(function(){
+		var url = "__ROOT__/Home/League/save_pic";
+		$.ajaxFileUpload({
+			url:url,
+			secureuri:false,
+			fileElementId:'gflag_input',
+			dataType: 'json',
+			data:{},
+			success: function (data, status){
+				if(data.result == 0){
+					$('#gflag').val(data.pathname);
+					$('#gflag_show').attr('src', '__PUBLIC__/uploads'+data.pathname);
+				} else {
+					cdialog.show_alert('图片上传失败！错误消息：'+data.msg);
+				}
+			},
+			error: function (data, status, e){
+				eds_framework.error_handler(url,data);
+				//cdialog.show_alert(e);
+			}
+		});
+	});
+
+	$('#btn_release').click(function(){
+		$('#btn_release').attr('disabled',false);
+		var url = "__ROOT__/Home/League/save";
+		$.ajax({
+			url:url,
+			dataType: 'json',
+			type:'post',
+			data:{
+				gid:$('#gid').val(),
+				gname : $('#gname').val(),
+				glogo : $('#glogo').val(),
+				gflag : $('#gflag').val(),
+				gsummary:editor.text().substr(0,300),
+				gprofile:editor.html()
+			},
+			success: function (data, status){
+				if(data.result == 0){
+					cdialog.show_info('发布成功！',function(){
+						window.location.href="__ROOT__/Home/League/dtl?gid="+$('#gid').val();
+					});
+				} else {
+					cdialog.show_alert('发布失败！错误信息：'+data.msg);
+					$('#btn_release').attr('disabled',false);
+				}
+			},
+			error: function (data, status, e){
+				eds_framework.error_handler(url,data);
+				//cdialog.show_alert(e);
+				$('#btn_release').attr('disabled',false);
+			}
+		});
+	});
+});
+</script>

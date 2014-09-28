@@ -124,8 +124,10 @@ CEdsFramework.prototype.error_handler = function(url,response_object,error_hint)
 	} else { 
 		cdialog.show_alert('操作失败！错误信息：url="'+url+'", status='+response_object.status+',text="'+ response_object.statusText+'",respText='+response_object.responseText);
 	}
-	console.error("[EDS][loading(url=\""+url+"\") failed.]"); 
-	console.error(response_object); 
+	if(console&&console.error){
+		console.error("[EDS][loading(url=\""+url+"\") failed.]"); 
+		console.error(response_object); 
+	}
 }
 </script>
 <!--登录界面及登录类-->
@@ -158,9 +160,17 @@ CEdsFramework.prototype.error_handler = function(url,response_object,error_hint)
 <nav id="top_nav" class="navbar navbar-default navbar-custom" role="navigation" style="height:108px;background-color:black;position:inherit;margin-bottom:10px;">
 	<div class="container" style="width:1024px;">
 		<ul class="frame_top_info_ul">
-				<li><div style="display:none;cursor:pointer;float:right;">您好，<span id="btn_rnickname" >nickname</span>！</div></li>
-				<li><div id="btn_logoff" style="float:right;color:white;padding-left:10px;padding-right:10px;display:none;cursor:pointer;">注销</div></li>
-				<li><div id="btn_login" style="padding-right:10px;cursor:pointer;display:none">登录</div></li>
+				<li>
+					<div style="display:none;cursor:pointer;float:right;">您好，<span id="btn_rnickname" >nickname</span>！</div>
+				</li>
+				<li>
+					<div id="btn_logoff" style="float:right;color:white;padding-left:10px;padding-right:10px;display:none;cursor:pointer;">
+						注销
+					</div>
+				</li>
+				<li>
+					<div id="btn_login" style="padding-right:10px;cursor:pointer;">登录</div>
+				</li>
 		</ul>
 		<div class="navbar-header" height="108px;">
 			<div style="position:relative;top:15px;">
@@ -278,7 +288,9 @@ function CLogin(){
 			dataType:'json',
 			success:function(data,status,ajax_object){
 				if(data.result != 0){
-					cdialog.show_alert('登录失败！用户名或密码错误！');
+					cdialog.show_alert('登录失败！错误信息：'+data.msg);
+					clogin.btn_ok.attr('disabled', false);
+					clogin.btn_cancel.attr('disabled', false);
 					return;
 				}
 				clogin.close_login_window();
@@ -297,21 +309,24 @@ function CLogin(){
 	};
 	this.callback_func = function(){
 		var i = 0;
-		for(;i<clogin.callback_func_array.length;i++){
-			(clogin.callback_func_array[i])();
+		for(;i<this.callback_func_array.length;i++){
+			(this.callback_func_array[i])();
 		}
 	}
 	this.init = function(){
+		var curobj = this;
 		this.repair_nav();
-		this.raccount.keyup(function(){clogin.validate_account();});
-		this.rpassword.keyup(function(){clogin.validate_password();});//弹出框
-		this.btn_ok.click(this.login);
-		this.btn_cancel.click(this.close_login_window);
-		$('#btn_login').click(this.show_login_window);
+		this.raccount.keyup(function(){curobj.validate_account();});
+		this.rpassword.keyup(function(){curobj.validate_password();});//弹出框
+		this.btn_ok.click(function(){curobj.login();});
+		this.btn_cancel.click(function(){curobj.close_login_window();});
+		$('#btn_login').click(function(){curobj.show_login_window();});
 		$('#btn_logoff').click(function(){
 			$.ajax({
 				url:'__ROOT__/Home/Index/logoff',
-				success:clogin.callback_func,
+				success:function(){
+					window.location.reload(true);
+				},
 				error:function(t){eds_framework.error_handler('__ROOT__/Home/Index/logoff',t);}
 			});
 		});
@@ -345,7 +360,7 @@ var clogin = new CLogin();
 		<div style="float:left;width:490px">
 			<div style="font-size:24pt;margin-top:50px">全国物理学科拔尖人才培养计划</div>
 			<div style="font-size:16pt;">Training Plan Of Physics Subject Top-notch Talent</div>
-			<div id="frame_bottom_menu" style="">
+			<div id="frame_bottom_menu" style="display:none">
 				<ul>
 					<li>关于我们</li>
 					<li>联系方式</li>
@@ -394,10 +409,10 @@ CEdsFramework.prototype.load = function(){
 								}
 							}
 						} else {
-							cdialog.show_alert('error:'+t.msg);
+							cdialog.show_alert('错误：'+t.msg);
 						}
 					},
-					error:function(t){error_handler(item.load.url,t,item.load.error);}
+					error:function(t){eds_framework.error_handler(item.load.url,t,item.load.error);}
 				});
 			})(this,this.metadata[i]);
 		}
@@ -418,19 +433,21 @@ $(document).ready(function(){
 		return false;
 	});
 	eds_framework.push({
-		"load":{
-			"url":"__ROOT__/Home/Index/user_conscise_info",
-			"action":"post",
-			"data":{},
-			"error":'加载用户信息失败！{status}:{statusText}',
-			"handler":function(data){clogin.updateUi(data.mode,data.rnickname);}
+		load:{
+			url:"__ROOT__/Home/Index/user_conscise_info",
+			action:"post",
+			data:{},
+			error:'加载用户信息失败！{status}:{statusText}',
+			handler:function(data){clogin.updateUi(data.mode,data.rnickname);}
 		}
 	});
 	eds_framework.load();
+	<?php if(isset($cond_logined) && $cond_logined && session('g_logined')!='logined'){ ?>
+		$('#btn_login').click();
+	<?php } ?>
 });
 
 
-//以下全局函数列表
 </script>
 
   </html>

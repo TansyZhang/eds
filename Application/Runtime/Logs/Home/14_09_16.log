@@ -3807,3 +3807,63 @@ INFO: [ app_end ] --START--
 INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.004000s ]
 INFO: [ app_end ] --END-- [ RunTime:0.041002s ]
 
+[ 2014-09-16T23:24:06+08:00 ] ::1 /eds/Home/Index/user_conscise_info
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.004000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.004000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.006000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() D:\Xampp\htdocs\eds\ThinkPHP\Common\functions.php 第 1191 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.002001s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.039002s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.039002s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.004000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.003000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.003000s ]
+
+[ 2014-09-16T23:24:34+08:00 ] ::1 /eds/Home/News
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.003000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.005000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.003000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.007000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() D:\Xampp\htdocs\eds\ThinkPHP\Common\functions.php 第 1191 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.003000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.087005s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.089005s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.004000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.006000s ]
+
+[ 2014-09-16T23:24:34+08:00 ] ::1 /eds/Home/Index/user_conscise_info
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.004000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.003000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.005000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() D:\Xampp\htdocs\eds\ThinkPHP\Common\functions.php 第 1191 行.
+INFO: [ view_parse ] --START--
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.005000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.003000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.003000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.004000s ]
+
