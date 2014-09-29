@@ -28,6 +28,11 @@ class BbsController extends EdsController {
         }
         //dump($list1);
         //dump($list2);
+
+        //$this->topN_list = array();
+        $mtopN = M('BbsTopView');
+        $this->topN_list = $mtopN->limit(10)->select();
+
         $this->display();
     }
 
@@ -77,6 +82,12 @@ class BbsController extends EdsController {
     	$lim['tid'] = $tid;
     	$record = $m->where($lim)->find();
     	if($record){
+            if(session('tscan_count'.$record['tid'])==null){
+                session('tscan_count'.$record['tid'], true);
+                $record['tscan_count'] += 1;
+                $m->where('tid='.$record['tid'])->setInc('tscan_count');
+            }
+
     		$this->tid = $tid;
     		$this->ttopic = $record['ttopic'];
     		$this->ttitle = $record['ttitle'];
@@ -92,8 +103,8 @@ class BbsController extends EdsController {
     		$lim2['treply_id'] = $tid;
     		$this->reply_list = $replym->where($lim2)->select();
     		$this->treply_count = count($this->reply_list);
-    		session('rnickname', '系统管理员');//RM
-    		session('rhead_photo', '/assets/image/headphoto/default.png');
+    		//session('rnickname', '系统管理员');//RM
+    		//session('rhead_photo', '/assets/image/headphoto/default.png');
     	} else {
     		$this->show('{"result":1,"msg":"unknown id."}', 'utf-8');
             return;

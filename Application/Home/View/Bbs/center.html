@@ -52,16 +52,32 @@ a{
 						<span>
 							<span>
 								<span class="time">{$event_vo.vcreated_time}</span>
-								<a href="__ROOT__{$event_vo.vurl}" target="_blank">{$event_vo.rnickname}</a>
+								<a href="__ROOT__{$event_vo.vurl}" target="_blank" title="{$event_vo.rnickname}">
+								<?php
+									if(mb_strlen($event_vo['rnickname'],'utf8') <= 6){
+										echo $event_vo['rnickname'];
+									} else {
+										echo mb_substr($event_vo['rnickname'],0,4,'utf8')."……";
+									}
+								?>
+								</a>
 							</span>
-							在帖子“<a href="__ROOT__{$event_vo.vurl}">{$event_vo.vtitle}</a>”中回复了你<span>
+							在帖子“<a title="{$event_vo.vtitle}" href="__ROOT__{$event_vo.vurl}">
+								<?php
+									if(mb_strlen($event_vo['vtitle']) < 10){
+										echo $event_vo['vtitle'];
+									} else {
+										echo mb_substr($event_vo['vtitle'],0,10,'utf8')."……";
+									}
+								?>
+							</a>”中回复了你<span>
 						</span>
 						</span>
 						<span class="op">
 							<span onclick="ev_ignore({$event_vo.vid})" class="clickable" title="不再显示此条消息">
 								忽略
 							</span>&nbsp;|&nbsp;
-							<span onclick="ev_check('{$event_vo.vurl}');" class="clickable">
+							<span onclick="ev_check('{$event_vo.vurl}',{$event_vo.vid},'{$event_vo.vkey}');" class="clickable">
 								查看
 							</span>
 						</span>
@@ -126,7 +142,14 @@ function ev_ignore(vid){
 		}
 	});
 }
-function ev_check(url){
-	window.location.href="__ROOT__"+url;
+function ev_check(url,vid,vkey){
+	var index = url.indexOf('#');
+	var baseurl = url;
+	var a = '';
+	if(index > 0){
+		baseurl = url.substr(0,index);
+		a = url.substr(index);
+	}
+	window.location.href="__ROOT__"+baseurl+"&vid="+vid+"&vkey="+vkey+a;
 }
 </script>

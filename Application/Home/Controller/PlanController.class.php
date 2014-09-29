@@ -48,6 +48,11 @@ class PlanController extends EdsController {
         $lim['zid'] = $zid;
         $record = $m->where($lim)->find();
         if($record){
+            if(session('zscan_count'.$record['zid'])==null){
+                session('zscan_count'.$record['zid'], true);
+                $record['zscan_count'] += 1;
+                $m->where('zid='.$record['zid'])->setInc('zscan_count');
+            }
             $this->zid = $zid;
             $this->ztitle = $record['ztitle'];
             $this->zflag = $record['zflag'];

@@ -71,9 +71,7 @@
 				<div class="post-content-real" style="padding-top:10px">
 					{$tcontent}
 				</div>
-				<div style="text-align:right;display:none;">
-					这里是回复区
-				</div>
+				<!--<div style="text-align:right;display:none;">这里是回复区</div>-->
 			</div>
 		</div>
 		<div class="post-push" style="clear:both;float:left;width:1024px;background-color: rgb(234,234,234);">
@@ -90,16 +88,16 @@
 							<div class="post-content-real" style="padding-top:10px">
 								<?php echo htmlspecialchars_decode($reply_vo['tcontent'],ENT_QUOTES); ?>
 							</div>
-							<div style="text-align:right;display:none;">
+							<!--<div style="text-align:right;display:none;">
 								这里是回复区
-							</div>
+							</div>-->
 						</div>
 					</div>
 				</div>
 			</volist>
 		</div>
 		<div class="pages" style="margin:20px 0;text-align:center;">
-			<span style="display:none;">这里是分页</span>
+			&nbsp;<span style="display:none;">这里是分页</span>
 		</div>
 
 		<div style="background-color:rgb(234,234,234);padding:15px;margin-right:15px;">
@@ -114,7 +112,9 @@
 
 
 	<div style="padding-left:800px;">
-		<include file="./Application/Home/View/Bbs/master_info.html" op="none" rnickname="{$Think.session.rnickname}" rhead_photo="{$Think.session.rhead_photo}" />
+		<include file="./Application/Home/View/Bbs/master_info.html" 
+			op="none" 
+			rnickname="{$Think.session.rnickname}" rhead_photo="{$Think.session.rhead_photo}" />
 	</div>
 </div>
 
