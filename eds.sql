@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : localhost
-Source Server Version : 50536
+Source Server Version : 50620
 Source Host           : localhost:3306
 Source Database       : eds
 
 Target Server Type    : MYSQL
-Target Server Version : 50536
+Target Server Version : 50620
 File Encoding         : 65001
 
-Date: 2014-10-06 09:53:39
+Date: 2014-10-06 16:02:17
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -43,7 +43,7 @@ CREATE TABLE `t_bbs` (
 -- ----------------------------
 -- Records of t_bbs
 -- ----------------------------
-INSERT INTO `t_bbs` VALUES ('1', null, '太阳系边界现神秘“彩带” 粒子被困环形区域', '1', '【科技讯】8月29日消息，据媒体报道，在太阳系的边缘，科学家发现了一处神秘的边界层，是太阳系物质与银河系介质相互作用的地方，处于日光层的边缘，NASA星际边界探测器发现了一种奇怪的现象，太阳系内部粒子', '&lt;p&gt;\n	&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;【&lt;/span&gt;&lt;a href=&quot;http://www.kejixun.com/&quot; target=&quot;_blank&quot; class=&quot;keylink&quot;&gt;科技&lt;/a&gt;&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;讯】8月29日消息，据媒体报道，在太阳系的边缘，&lt;/span&gt;&lt;a href=&quot;http://www.kejixun.com/kexue/&quot; target=&quot;_blank&quot; class=&quot;keylink&quot;&gt;科学&lt;/a&gt;&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;家发现了一处神秘的边界层，是太阳系物质与银河系介质相互作用的地方，处于日光层的边缘，NASA星际边界探测器发现了一种奇怪的现象，太阳系内部粒子在这一区域中似乎碰到一层壁垒，使得太阳系外围出现类似“边界指纹”的结构，绘制太阳系边界图像体现了这处神秘的区域，但无法对其进行解释。&lt;/span&gt;\n&lt;/p&gt;\n&lt;p style=&quot;text-align:center;&quot;&gt;\n	&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;&lt;img src=&quot;/eds/Public/kindeditor-4.1.10/attached/image/20140830/20140830144420_14273.jpg&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;\n&lt;/span&gt;\n&lt;/p&gt;\n&lt;p&gt;\n	&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;\n	&lt;p style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;&quot;&gt;\n		&amp;nbsp;&amp;nbsp; &amp;nbsp; &amp;nbsp; 太阳系边界处神秘结构酷似巨大的“彩带”飘舞，产生更多高能中性原子，&lt;a href=&quot;http://www.kejixun.com/kexue/&quot; target=&quot;_blank&quot; class=&quot;keylink&quot;&gt;科学&lt;/a&gt;家不清楚是什么原因导致中性原子数量出现增加。科学家设计出相关模拟和理论试图解释彩带的存在原因，彩带存在于一个特殊的位置上，太阳的中性氢原子穿过银河系的磁场，中性原子不受磁场的影响，使得该过程中的运行方向仍然保持原有指向。\n	&lt;/p&gt;\n	&lt;p style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;&quot;&gt;\n		&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 科学家认为，新的理论嵌入了太阳系边缘波动以及磁场震动的因子，使得这些粒子被困于一个环形区域中。科学家认为其中还隐藏了太阳系磁场与银河系磁场的关系，如果这一理论是正确的，太阳系边界的环形色带将告诉我们星际介质与磁场的作用关系，以及这些磁场是如何影响我们的空间环境。\n	&lt;/p&gt;\n&lt;br /&gt;\n&lt;/span&gt;\n&lt;/p&gt;', '6', '20', null, '2014-08-30 20:44:26', '2014-08-30 20:44:26', null, null, '2014-09-10 23:26:52', null, '14', '0');
+INSERT INTO `t_bbs` VALUES ('1', null, '太阳系边界现神秘“彩带” 粒子被困环形区域', '1', '【科技讯】8月29日消息，据媒体报道，在太阳系的边缘，科学家发现了一处神秘的边界层，是太阳系物质与银河系介质相互作用的地方，处于日光层的边缘，NASA星际边界探测器发现了一种奇怪的现象，太阳系内部粒子', '&lt;p&gt;\n	&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;【&lt;/span&gt;&lt;a href=&quot;http://www.kejixun.com/&quot; target=&quot;_blank&quot; class=&quot;keylink&quot;&gt;科技&lt;/a&gt;&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;讯】8月29日消息，据媒体报道，在太阳系的边缘，&lt;/span&gt;&lt;a href=&quot;http://www.kejixun.com/kexue/&quot; target=&quot;_blank&quot; class=&quot;keylink&quot;&gt;科学&lt;/a&gt;&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;家发现了一处神秘的边界层，是太阳系物质与银河系介质相互作用的地方，处于日光层的边缘，NASA星际边界探测器发现了一种奇怪的现象，太阳系内部粒子在这一区域中似乎碰到一层壁垒，使得太阳系外围出现类似“边界指纹”的结构，绘制太阳系边界图像体现了这处神秘的区域，但无法对其进行解释。&lt;/span&gt;\n&lt;/p&gt;\n&lt;p style=&quot;text-align:center;&quot;&gt;\n	&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;&lt;img src=&quot;/eds/Public/kindeditor-4.1.10/attached/image/20140830/20140830144420_14273.jpg&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;\n&lt;/span&gt;\n&lt;/p&gt;\n&lt;p&gt;\n	&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;\n	&lt;p style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;&quot;&gt;\n		&amp;nbsp;&amp;nbsp; &amp;nbsp; &amp;nbsp; 太阳系边界处神秘结构酷似巨大的“彩带”飘舞，产生更多高能中性原子，&lt;a href=&quot;http://www.kejixun.com/kexue/&quot; target=&quot;_blank&quot; class=&quot;keylink&quot;&gt;科学&lt;/a&gt;家不清楚是什么原因导致中性原子数量出现增加。科学家设计出相关模拟和理论试图解释彩带的存在原因，彩带存在于一个特殊的位置上，太阳的中性氢原子穿过银河系的磁场，中性原子不受磁场的影响，使得该过程中的运行方向仍然保持原有指向。\n	&lt;/p&gt;\n	&lt;p style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;&quot;&gt;\n		&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 科学家认为，新的理论嵌入了太阳系边缘波动以及磁场震动的因子，使得这些粒子被困于一个环形区域中。科学家认为其中还隐藏了太阳系磁场与银河系磁场的关系，如果这一理论是正确的，太阳系边界的环形色带将告诉我们星际介质与磁场的作用关系，以及这些磁场是如何影响我们的空间环境。\n	&lt;/p&gt;\n&lt;br /&gt;\n&lt;/span&gt;\n&lt;/p&gt;', '6', '20', null, '2014-08-30 20:44:26', '2014-08-30 20:44:26', null, null, '2014-09-10 23:26:52', null, '15', '0');
 INSERT INTO `t_bbs` VALUES ('2', null, null, '1', '阿三，你又来胡思乱想了，药不能停啊！！！还挺有意思~', '&lt;pre&gt;阿三，你又来胡思乱想了，药不能停啊！！！还挺有意思~&lt;/pre&gt;', null, '0', null, '2014-08-30 20:46:03', null, null, null, null, '1', '0', '0');
 INSERT INTO `t_bbs` VALUES ('3', null, null, '1', '阿三，你又来胡思乱想了，药不能停啊！！！还挺有意思~', '&lt;pre&gt;阿三，你又来胡思乱想了，药不能停啊！！！还挺有意思~&lt;/pre&gt;', null, '20', null, '2014-08-30 21:12:49', null, null, null, null, '1', '0', '0');
 INSERT INTO `t_bbs` VALUES ('4', null, null, '1', '阿三，你又来胡思乱想了，药不能停啊！！！还挺有意思~', '&lt;strong&gt;&lt;span style=&quot;font-size:16px;&quot;&gt;阿三，你又来胡思乱想了，药不能停啊！！！还挺有意思~&lt;/span&gt;&lt;/strong&gt;', null, '0', null, '2014-08-30 21:16:48', null, null, null, null, '1', '0', '0');
@@ -51,10 +51,10 @@ INSERT INTO `t_bbs` VALUES ('5', null, null, '1', '&lt;img src=&quot;/eds/Public
 INSERT INTO `t_bbs` VALUES ('6', null, '罕见超长伽玛射线暴 或源于神秘大质量恒星', '1', '【科技讯】8月29日消息，据媒体报道，伽玛射线暴被认为是宇宙中最强大的爆炸之一，大部分的伽玛射线暴在一分钟左右，科学家提出的新型伽玛暴可持续几个小时。英国研究小组通过观测提出了一种新型伽玛射线暴理论，', '&lt;p&gt;\n	&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;&amp;nbsp;【&lt;/span&gt;&lt;a href=&quot;http://www.kejixun.com/&quot; target=&quot;_blank&quot; class=&quot;keylink&quot;&gt;科技&lt;/a&gt;&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;讯】8月29日消息，据媒体报道，伽玛射线暴被认为是宇宙中最强大的爆炸之一，大部分的伽玛射线暴在一分钟左右，&lt;/span&gt;&lt;a href=&quot;http://www.kejixun.com/kexue/&quot; target=&quot;_blank&quot; class=&quot;keylink&quot;&gt;科学&lt;/a&gt;&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;家提出的新型伽玛暴可持续几个小时。英国研究小组通过观测提出了一种新型伽玛射线暴理论，其形成于质量更大的超巨星。&lt;/span&gt;\n&lt;/p&gt;\n&lt;p style=&quot;text-align:center;&quot;&gt;\n	&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;&lt;img src=&quot;/eds/Public/kindeditor-4.1.10/attached/image/20140830/20140830155625_89689.jpg&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;\n&lt;/span&gt;\n&lt;/p&gt;\n&lt;p&gt;\n	&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;\n	&lt;p style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;&quot;&gt;\n		&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 宇宙中存在的大质量恒星，该型恒星的“燃烧”速度非常快，其寿命很短，可形成能量异常高的伽玛射线。&lt;a href=&quot;http://www.kejixun.com/kexue/&quot; target=&quot;_blank&quot; class=&quot;keylink&quot;&gt;科学&lt;/a&gt;家小组观测到不寻常的新型伽玛暴，超长伽玛暴的红移值达到0.847，大约在70亿光年左右，认为其爆炸产生于超巨星，一种质量达到太阳质量20倍以上的天体，爆发瞬间可变成宇宙中最大最亮的恒星之一，半径可达到太阳的1000倍左右。\n	&lt;/p&gt;\n	&lt;p style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;&quot;&gt;\n		&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 恒星演化的最后阶段，其自身会在引力作用下坍缩形成一个黑洞，当物质被吸入黑洞时，会在两个垂直方向上形成伽玛射线喷流，其速度可接近光速，一般情况下这个伽玛射线暴仅会持续数秒，发现的恒星质量较大，形成伽玛射线喷流的持续时间也较长。\n	&lt;/p&gt;\n&lt;br /&gt;\n&lt;/span&gt;\n&lt;/p&gt;', '2', '30', null, '2014-08-30 21:56:30', '2014-08-30 21:56:30', null, null, null, null, '1', '0');
 INSERT INTO `t_bbs` VALUES ('7', null, '试试看', '1', '好吧，我就试试看看而发生大法师打发斯蒂芬', '&lt;div style=&quot;text-align:center;&quot;&gt;\n	&lt;span style=&quot;line-height:1.5;&quot;&gt;好吧，我就试试&lt;/span&gt;&lt;span style=&quot;line-height:1.5;&quot;&gt;看看而发生大法师打发斯蒂芬&lt;/span&gt;\n&lt;/div&gt;', '1', '10', null, '2014-08-30 22:42:55', '2014-09-10 22:47:54', null, null, '2014-09-10 23:27:25', null, '1', '0');
 INSERT INTO `t_bbs` VALUES ('8', null, '按时打算', '1', '阿瑟大声道v24534', '阿瑟大声道v24534', '3', '30', null, '2014-09-10 22:01:23', '2014-09-10 22:40:32', null, null, null, null, '0', '0');
-INSERT INTO `t_bbs` VALUES ('9', null, '我就发个帖', '1', '好久没有发帖了 看看这个功能有木有受影响', '好久没有发帖了 看看这个功能有木有受影响', '1', '10', null, '2014-09-11 22:52:03', '2014-09-11 22:52:03', null, null, null, null, '1', '0');
+INSERT INTO `t_bbs` VALUES ('9', null, '我就发个帖', '1', '好久没有发帖了 看看这个功能有木有受影响', '好久没有发帖了 看看这个功能有木有受影响', '1', '10', null, '2014-09-11 22:52:03', '2014-09-11 22:52:03', null, null, null, null, '3', '0');
 INSERT INTO `t_bbs` VALUES ('10', null, null, '1', '看来是没有咦', '看来是没有咦', null, '10', null, '2014-09-11 22:54:30', null, null, null, null, '9', '0', '0');
 INSERT INTO `t_bbs` VALUES ('11', null, null, '1', '这楼层怎么算', '这楼层怎么算', null, '10', null, '2014-09-11 22:54:45', null, null, null, null, '9', '0', '0');
-INSERT INTO `t_bbs` VALUES ('12', '/image/2014_09_21_09_46_19_569334634.png', '测试帖子图标', '1', '只是测试一下帖子图标', '只是测试一下帖子图标', '1', '10', null, '2014-09-21 09:47:00', '2014-09-21 09:47:00', null, null, null, null, '2', '0');
+INSERT INTO `t_bbs` VALUES ('12', '/image/2014_09_21_09_46_19_569334634.png', '测试帖子图标', '1', '只是测试一下帖子图标', '只是测试一下帖子图标', '1', '10', null, '2014-09-21 09:47:00', '2014-09-21 09:47:00', null, null, null, null, '3', '0');
 INSERT INTO `t_bbs` VALUES ('13', null, null, '1', '回复一下', '回复一下', null, '10', null, '2014-09-21 09:47:46', null, null, null, null, '12', '0', '0');
 INSERT INTO `t_bbs` VALUES ('19', null, null, '1', 'werwerwrweeere', 'werwerwrweeere', null, '10', null, '2014-09-21 12:35:26', null, null, null, null, '7', '0', '0');
 INSERT INTO `t_bbs` VALUES ('20', null, null, '1', 'afasdfasdf', 'afasdfasdf', null, '10', null, '2014-09-21 12:36:00', null, null, null, null, '7', '0', '0');
@@ -239,11 +239,9 @@ INSERT INTO `t_dic` VALUES ('40', 'rrole', '学生', null);
 INSERT INTO `t_dic` VALUES ('40', 'tstate', '被屏蔽', null);
 INSERT INTO `t_dic` VALUES ('40', 'zstate', '置顶', null);
 INSERT INTO `t_dic` VALUES ('50', 'tstate', '被管理员删除', null);
-INSERT INTO `t_dic` VALUES ('50', 'uchar', '学士', null);
 INSERT INTO `t_dic` VALUES ('50', 'zstate', '已屏蔽', null);
-INSERT INTO `t_dic` VALUES ('60', 'uchar', '硕士', null);
 INSERT INTO `t_dic` VALUES ('60', 'zstate', '已删除', null);
-INSERT INTO `t_dic` VALUES ('70', 'uchar', '博士', null);
+INSERT INTO `t_dic` VALUES ('70', 'uchar', '助教', null);
 INSERT INTO `t_dic` VALUES ('80', 'uchar', '讲师', null);
 INSERT INTO `t_dic` VALUES ('90', 'uchar', '副教授', null);
 INSERT INTO `t_dic` VALUES ('100', 'uchar', '教授', null);
@@ -319,7 +317,7 @@ CREATE TABLE `t_login` (
   `lgresult` int(2) NOT NULL COMMENT '登录结果：0-失败，1-成功，引用字典表lgresult',
   PRIMARY KEY (`lgid`),
   KEY `ilgrid` (`lgrid`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_login
@@ -335,6 +333,15 @@ INSERT INTO `t_login` VALUES ('8', '1', null, '2014-10-05 10:49:03', '0.0.0.0', 
 INSERT INTO `t_login` VALUES ('9', '1', null, '2014-10-05 10:52:39', '0.0.0.0', null, 'Chrome 29.', 'Windows 7', '0');
 INSERT INTO `t_login` VALUES ('10', '1', null, '2014-10-05 10:53:03', '0.0.0.0', null, 'Chrome 29.', 'Windows 7', '0');
 INSERT INTO `t_login` VALUES ('11', '39', null, '2014-10-05 11:28:41', '0.0.0.0', null, 'Chrome 29.', 'Windows 7', '0');
+INSERT INTO `t_login` VALUES ('12', '1', null, '2014-10-06 11:15:57', '0.0.0.0', null, 'Chrome 34.', 'Windows 7', '0');
+INSERT INTO `t_login` VALUES ('13', '1', null, '2014-10-06 11:17:32', '0.0.0.0', null, 'Chrome 34.', 'Windows 7', '0');
+INSERT INTO `t_login` VALUES ('14', '1', null, '2014-10-06 11:17:54', '0.0.0.0', null, 'Chrome 34.', 'Windows 7', '0');
+INSERT INTO `t_login` VALUES ('15', '1', null, '2014-10-06 11:19:23', '0.0.0.0', null, 'Chrome 34.', 'Windows 7', '0');
+INSERT INTO `t_login` VALUES ('16', '1', null, '2014-10-06 11:27:03', '0.0.0.0', null, 'Chrome 34.', 'Windows 7', '0');
+INSERT INTO `t_login` VALUES ('17', '1', null, '2014-10-06 11:31:53', '0.0.0.0', null, 'Chrome 34.', 'Windows 7', '0');
+INSERT INTO `t_login` VALUES ('18', '1', null, '2014-10-06 11:32:25', '0.0.0.0', null, 'Chrome 34.', 'Windows 7', '0');
+INSERT INTO `t_login` VALUES ('19', '1', null, '2014-10-06 11:32:51', '0.0.0.0', null, 'Chrome 34.', 'Windows 7', '0');
+INSERT INTO `t_login` VALUES ('20', '1', null, '2014-10-06 11:32:59', '0.0.0.0', null, 'Chrome 34.', 'Windows 7', '0');
 
 -- ----------------------------
 -- Table structure for `t_manager`
@@ -456,7 +463,7 @@ CREATE TABLE `t_register` (
   `rcreated_time` datetime DEFAULT NULL,
   `rshielded_tick` int(11) DEFAULT NULL COMMENT '被禁止的时长，以秒为单位',
   PRIMARY KEY (`rid`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_register
@@ -465,17 +472,19 @@ INSERT INTO `t_register` VALUES ('1', 'system', '1f604490cbdd4ec35cfa681bcf3df8f
 INSERT INTO `t_register` VALUES ('20', 's3423423434234', '1f604490cbdd4ec35cfa681bcf3df8fac26e0cb5', 'nick', '/assets/image/headphoto/default.png', '0', '0', '20', null, null, null, '2014-10-05 11:21:08', '2014-08-31 20:11:06', null);
 INSERT INTO `t_register` VALUES ('23', 'NJU123', '1f604490cbdd4ec35cfa681bcf3df8fac26e0cb5', '张三', '/assets/image/headphoto/default.png', '0', '0', '30', null, null, null, '2014-10-03 12:23:55', '2014-09-06 14:13:20', null);
 INSERT INTO `t_register` VALUES ('28', 'NJU100', '1f604490cbdd4ec35cfa681bcf3df8fac26e0cb5', '李四', '/assets/image/headphoto/default.png', '0', '0', '30', null, null, null, '2014-09-10 20:00:27', '2014-09-10 20:00:27', null);
-INSERT INTO `t_register` VALUES ('29', 'NJU10', '1f604490cbdd4ec35cfa681bcf3df8fac26e0cb5', '王五', '/assets/image/headphoto/default.png', '0', '10', '30', null, null, null, '2014-09-10 20:34:53', '2014-09-10 20:12:07', null);
+INSERT INTO `t_register` VALUES ('29', 'NJU10', '1f604490cbdd4ec35cfa681bcf3df8fac26e0cb5', '王五', '/assets/image/headphoto/default.png', '0', '0', '30', null, null, null, '2014-10-06 14:17:25', '2014-09-10 20:12:07', null);
 INSERT INTO `t_register` VALUES ('30', 'TA201409131608432747', '1f604490cbdd4ec35cfa681bcf3df8fac26e0cb5', '姓名1', '/assets/image/headphoto/default.png', '0', '10', '35', null, null, null, '2014-09-13 16:08:43', '2014-09-13 16:08:43', null);
 INSERT INTO `t_register` VALUES ('31', 'TA201409131611124448', '1f604490cbdd4ec35cfa681bcf3df8fac26e0cb5', '姓名2', '/assets/image/headphoto/default.png', '0', '0', '35', null, null, null, '2014-09-13 16:11:12', '2014-09-13 16:11:12', null);
 INSERT INTO `t_register` VALUES ('32', 'TA201409131613271921', '1f604490cbdd4ec35cfa681bcf3df8fac26e0cb5', '姓名3', '/assets/image/headphoto/default.png', '0', '0', '35', null, null, null, '2014-09-13 16:13:27', '2014-09-13 16:13:27', null);
 INSERT INTO `t_register` VALUES ('33', 'TA201409131614036380', '1f604490cbdd4ec35cfa681bcf3df8fac26e0cb5', '姓名4', '/assets/image/headphoto/default.png', '0', '20', '35', null, null, null, '2014-09-13 16:14:03', '2014-09-13 16:14:03', null);
 INSERT INTO `t_register` VALUES ('34', 'TA201409131618208587', '1f604490cbdd4ec35cfa681bcf3df8fac26e0cb5', '姓名5', '/assets/image/headphoto/default.png', '0', '20', '35', null, null, null, '2014-09-13 16:18:20', '2014-09-13 16:18:20', null);
 INSERT INTO `t_register` VALUES ('35', 'TA201409131633387607', '1f604490cbdd4ec35cfa681bcf3df8fac26e0cb5', '姓名6', '/assets/image/headphoto/default.png', '0', '20', '35', null, null, null, '2014-09-13 16:33:38', '2014-09-13 16:33:38', null);
-INSERT INTO `t_register` VALUES ('36', 'TA201409131636416765', '1f604490cbdd4ec35cfa681bcf3df8fac26e0cb5', '姓名7', '/assets/image/headphoto/default.png', '0', '0', '35', null, null, null, '2014-09-13 16:36:41', '2014-09-13 16:36:41', null);
+INSERT INTO `t_register` VALUES ('36', 'TA201409131636416765', '1f604490cbdd4ec35cfa681bcf3df8fac26e0cb5', '姓名7', '/assets/image/headphoto/default.png', '0', '20', '35', null, null, null, '2014-10-06 14:19:11', '2014-09-13 16:36:41', null);
 INSERT INTO `t_register` VALUES ('37', 'TA201409131654548358', '1f604490cbdd4ec35cfa681bcf3df8fac26e0cb5', '张三', '/assets/image/headphoto/default.png', '0', '0', '35', null, null, null, '2014-09-13 16:54:54', '2014-09-13 16:54:54', null);
 INSERT INTO `t_register` VALUES ('38', 'TA201409131733395301', '1f604490cbdd4ec35cfa681bcf3df8fac26e0cb5', '姓名8', '/assets/image/headphoto/default.png', '0', '0', '35', null, null, null, '2014-09-13 17:33:39', '2014-09-13 17:33:39', null);
 INSERT INTO `t_register` VALUES ('39', 's00001', '1f604490cbdd4ec35cfa681bcf3df8fac26e0cb5', '管理员①', '/assets/image/headphoto/default.png', '0', '0', '20', null, null, null, '2014-10-03 19:20:23', '2014-10-03 12:29:25', null);
+INSERT INTO `t_register` VALUES ('40', 'NJU141090105', '1f604490cbdd4ec35cfa681bcf3df8fac26e0cb5', '张三同学', '/assets/image/headphoto/default.png', '0', '0', '40', null, null, null, '2014-10-06 14:25:48', '2014-10-06 14:21:00', null);
+INSERT INTO `t_register` VALUES ('41', 'NJU141090106', '1f604490cbdd4ec35cfa681bcf3df8fac26e0cb5', '张三同学', '/assets/image/headphoto/default.png', '0', '0', '40', null, null, null, '2014-10-06 15:38:34', '2014-10-06 14:36:27', null);
 
 -- ----------------------------
 -- Table structure for `t_reply`
@@ -581,7 +590,7 @@ CREATE TABLE `t_user` (
   `udownload_courseware` int(2) NOT NULL DEFAULT '1' COMMENT '是否有权下载[登录才允许下载的]课件',
   `ulast_edited_time` datetime DEFAULT NULL COMMENT '最后修改时间',
   PRIMARY KEY (`uid`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_user
@@ -592,9 +601,11 @@ INSERT INTO `t_user` VALUES ('3', '29', '70', '0', '10', '王五', null, '0', '0
 INSERT INTO `t_user` VALUES ('4', '33', '70', '0', 'TA201409131614036380', '姓名1', null, '0', '0', null, '1', null, null, null, null, null, null, '/assets/image/headphoto/default.png', null, null, null, '0', '0', '0', '0', '0', '0', '1', '0', '1', '2014-09-13 16:14:03');
 INSERT INTO `t_user` VALUES ('5', '34', '70', '0', 'TA201409131618208587', '姓名9', null, '0', '0', null, '1', '邮箱', null, '联系电话', null, '办公室', null, '/assets/image/headphoto/default.png', null, null, null, '0', '0', '0', '0', '0', '0', '1', '0', '1', '2014-09-13 16:18:20');
 INSERT INTO `t_user` VALUES ('6', '35', '70', '0', 'TA201409131633387607', '姓名2', null, '0', '0', null, '1', '2343453@ww.com', null, '联系电话2', null, '办公室2', '/image/2014_09_13_17_31_05_1952154255.jpg', '/assets/image/headphoto/default.png', null, null, null, '0', '0', '0', '0', '0', '0', '1', '0', '1', '2014-09-13 16:33:38');
-INSERT INTO `t_user` VALUES ('7', '36', '70', '0', 'TA201409131636416765', '姓名10', null, '0', '0', null, '1', '邮箱', null, '联系电话', null, '办公室', '', '/assets/image/headphoto/default.png', null, null, null, '0', '0', '0', '0', '0', '0', '1', '0', '1', '2014-09-13 16:36:41');
-INSERT INTO `t_user` VALUES ('8', '37', '60', '0', 'TA201409131654548358', '张三', null, '0', '0', null, '1', 'zhangsan@nju.edu.cn', null, '15900001234', null, '系楼233', '/image/2014_09_13_18_25_37_2122758271.png', '/assets/image/headphoto/default.png', null, null, null, '0', '0', '0', '0', '0', '0', '1', '0', '1', '2014-09-13 16:54:54');
+INSERT INTO `t_user` VALUES ('7', '36', '70', '0', 'TA201409131636416765', '张XX', null, '0', '0', null, '1', '123456@nju.com', null, '联系电话', null, '办公室', '', '/assets/image/headphoto/default.png', null, null, null, '0', '0', '0', '0', '0', '0', '1', '0', '1', '2014-10-06 14:18:52');
+INSERT INTO `t_user` VALUES ('8', '37', '70', '0', 'TA201409131654548358', '张三', null, '0', '0', null, '1', 'zhangsan@nju.edu.cn', null, '15900001236', null, '系楼233', '/image/2014_09_13_18_25_37_2122758271.png', '/assets/image/headphoto/default.png', null, null, null, '0', '0', '0', '0', '0', '0', '1', '0', '1', '2014-10-06 14:15:00');
 INSERT INTO `t_user` VALUES ('9', '38', '70', '0', 'TA201409131733395301', '姓名11', null, '0', '0', null, '1', '邮箱', null, '联系电话', null, '办公室', '', '/assets/image/headphoto/default.png', null, null, null, '0', '0', '0', '0', '0', '0', '1', '0', '1', '2014-09-13 17:33:39');
+INSERT INTO `t_user` VALUES ('10', '40', '0', '0', '141090105', '张三同学', null, '0', '0', null, '1', null, null, null, null, null, null, '/assets/image/headphoto/default.png', null, null, null, '1', '1', '1', '1', '1', '1', '1', '1', '1', '2014-10-06 14:21:00');
+INSERT INTO `t_user` VALUES ('11', '41', '0', '0', '141090106', '张三同学', null, '0', '0', null, '1', null, null, null, null, null, null, '/assets/image/headphoto/default.png', null, null, null, '1', '1', '1', '1', '0', '0', '0', '0', '1', '2014-10-06 14:36:27');
 
 -- ----------------------------
 -- Table structure for `t_z`

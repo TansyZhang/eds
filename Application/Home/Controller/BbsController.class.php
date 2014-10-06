@@ -70,6 +70,7 @@ class BbsController extends EdsController {
 
     public function post_dtl($tid=-1){
         if(session('g_logined')!='logined'){//未登录
+            $this->redirect('/Home/Bbs?url=/Home/Bbs/post_dtl',0,0,'');
             $this->display();
             return;
         }
@@ -644,7 +645,7 @@ class BbsController extends EdsController {
     		return;
     	}
     	//<!--在此插入权限检查-->
-    	if($rid == 1){//系统管理员不能删除
+    	if($rid == 1){//系统管理员不能被删除
     		$this->show('{"result":1,"msg":"permission error."}', 'utf-8');
     		return;
     	}
@@ -1237,7 +1238,9 @@ class BbsController extends EdsController {
         $rid = I('rid');
         $mchar = M('Dic');
         $limchar['dic_type'] = 'uchar';
-        $limchar['dic_key'] = array('lt',session('uchar'));
+        if(!is_null(session('uchar'))){
+            $limchar['dic_key'] = array('lt',session('uchar'));
+        }
         $this->uchar_list = $mchar->where($limchar)->order('dic_key desc')->select();
         if($rid == -1 || $rid == ''){
             $this->rid = -1;
@@ -1363,6 +1366,8 @@ class BbsController extends EdsController {
             $data2['uname'] = $uname;
             $data2['udisplay_name'] = $uname;
             $data2['uemail'] = $uemail;
+            $data2['uchar'] = $uchar;
+            $data2['ulast_edited_time'] = date('Y-m-d H:i:s',time());
             if($uphoto != ''){
                 $data2['uphoto'] = $uphoto;
             }
@@ -1373,6 +1378,183 @@ class BbsController extends EdsController {
                 $this->show('{"result":0,"msg":"saving succeed.","rid":"'.$rid.'"}', 'utf-8');
             } else{
                 $this->show('{"result":1,"msg":"'.$m2->getDbError().'"}', 'utf-8');
+            }
+        }
+    }
+
+    public function stu(){
+        if(session('g_logined')!='logined'){//未登录
+            //$this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            $this->redirect('/Home/Bbs',0,0,'');
+            $this->display();
+            return;
+        }
+        $m = M('RegisterUserView');
+        $lim['rstate'] = array('in', '0,10');
+        $lim['rrole'] = 40;//
+        $this->stu_list = $m->where($lim)->field(true)->select();
+        //echo $m->_sql();
+        //dump($this->stu_list);
+        $this->display();
+    }
+
+    public function stu_edit(){
+        if(session('g_logined')!='logined'){//未登录
+            //$this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            $this->display();
+            return;
+        }
+        $cm = M('College');
+        $this->college_list = $cm->select();
+        $dicm = M('Dic');
+        $limuchar['dic_type'] = 'uchar';
+        $this->uchar_list = $dicm->where($limuchar)->order('dic_key desc')->select();
+        $rid = I('rid');
+        if($rid == '' || $rid == -1){
+            $this->rid = -1;
+            $this->display();
+            return;
+        }
+
+        $m = M('UserView');
+        $lim['rid'] = $rid;
+        $register = $m->where($lim)->find();
+        if($register == false){
+            $this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
+            return;
+        }
+        $this->rid = $register['rid'];
+        $this->raccount = $register['raccount'];
+        $this->rnickname = $register['rnickname'];
+        $this->rcreated_time = $register['rcreated_time'];
+        $this->rlast_edited_time = $register['rlast_edited_time'];
+        $this->rstate = $register['rstate'];
+        $this->rstate_name = $register['rstate_name'];
+
+        $this->uchar = $register['uchar'];
+
+        $this->rstate = $register['rstate'];
+        $this->ucreate_post = $register['ucreate_post'];
+        $this->ucreate_reply = $register['ucreate_reply'];
+        $this->ucreate_msg = $register['ucreate_msg'];
+        $this->ucreate_ex_note = $register['ucreate_ex_note'];
+        $this->ucreate_ex_trend = $register['ucreate_ex_trend'];
+        $this->ucreate_ex_project = $register['ucreate_ex_project'];
+        $this->uupload_courseware = $register['uupload_courseware'];
+        $this->udownload_courseware = $register['udownload_courseware'];
+        $this->display();
+    }
+    public function stu_save($rid = -1,$ugid=-1,$uchar=-1,$raccount='',$rpassword='',$rnickname='',
+        $rstate='',
+        $ucreate_post='',
+        $ucreate_reply='',
+        $ucreate_msg='',
+        $ucreate_ex_note='',
+        //$ucreate_ex_trend='',
+        //$ucreate_ex_project='',
+        //$uupload_courseware='',
+        $udownload_courseware=''//,$umanage_student=''
+        ){
+        if(session('g_logined')!='logined'){//未登录
+            $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            //$this->display();
+            return;
+        }
+        $rid = I('rid');
+        $ugid = I('ugid');
+        $raccount = I('raccount');
+        $rpassword = I('rpassword');
+        $rnickname = I('rnickname');
+        if($ugid == '' || $raccount == ''){
+            $this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
+            return;
+        }
+
+        $m = M('Register');
+        $lim['raccount'] = $ugid.$raccount;
+        if($m->where($lim)->find()){
+            if($m->data()['rid'] != $rid){
+                $this->show('{"result":1,"msg":"account(\''.$lim['raccount'].'\') error."}', 'utf-8');return;
+            }
+        }
+        if($rid == -1 || $rid == ''){
+            $data['raccount'] = $ugid.$raccount;
+            $data['rpassword'] = sha1(md5($rpassword));
+            $data['rnickname'] = $rnickname;
+            $data['rrole'] = 40;//学生级别
+            $data['rstate'] = $rstate=='true'?0:10;//0-正常
+            $data['rcreated_time'] = date('Y-m-d H:i:s',time());
+            $data['rlast_edited_time']  = $data['rcreated_time'];
+            $data['rhead_photo'] = '/assets/image/headphoto/default.png';
+            $rid = $m->add($data);
+            if($rid){
+                $data2['urid'] = $rid;
+                $data2['uchar'] = $uchar;
+                $data2['uno'] = $raccount;
+                $data2['uname'] = $rnickname;
+                $data2['udisplay_name'] = $rnickname;
+                $data2['usender'] = 0;//0-未知
+                $data2['uuid'] = session('uid'); if(is_null($data2['uuid']))$data2['uuid'] = 0;
+                $data2['uhead_photo'] = '/assets/image/headphoto/default.png';
+                $data2['ucreate_post']=$ucreate_post=='true'?1:0;
+                $data2['ucreate_reply']=$ucreate_reply=='true'?1:0;
+                $data2['ucreate_msg']=$ucreate_msg=='true'?1:0;
+                $data2['ucreate_ex_note']=$ucreate_ex_note=='true'?1:0;
+                $data2['ucreate_ex_trend']=0;
+                $data2['ucreate_ex_project']=0;
+                $data2['uupload_courseware']=0;
+                $data2['udownload_courseware']=$udownload_courseware=='true'?1:0;
+                $data2['umanage_student']=0;
+                $data2['ulast_edited_time']=date('Y-m-d H:i:s',time());
+                $m2 = M('User');
+                if($m2->add($data2)){
+                    $this->show('{"result":0,"msg":"adding succeed.","rid":"'.$rid.'"}', 'utf-8');
+                } else{
+                    $this->show('{"result":1,"msg":"error1.'.$m2->getDbError().'"}', 'utf-8');
+                }
+            }else{
+                $this->show('{"result":1,"msg":"'.$m->getDbError().'"}', 'utf-8');
+            }
+        } else {
+            $data['rid'] = $rid;
+            $data['raccount'] = $ugid.$raccount;
+            //$data['rpassword'] = sha1(md5($rpassword));
+            $data['rnickname'] = $rnickname;
+            //$data['rrole'] = 40;//学生级别
+            $data['rstate'] = $rstate=='true'?0:10;//0-正常
+            //$data['rcreated_time'] = date('Y-m-d H:i:s',time());
+            $data['rlast_edited_time']  = date('Y-m-d H:i:s',time());
+            $data['rhead_photo'] = '/assets/image/headphoto/default.png';
+            if($m->save($data)){
+                $data2['urid'] = $rid;
+                $data2['uchar'] = $uchar;
+                $data2['uno'] = $raccount;
+                $data2['uname'] = $rnickname;
+                $data2['udisplay_name'] = $rnickname;
+                //$data2['usender'] = 0;//0-未知
+                //$data2['uuid'] = session('uid');
+                $data2['uhead_photo'] = '/assets/image/headphoto/default.png';
+                $data2['ucreate_post']=$ucreate_post=='true'?1:0;
+                $data2['ucreate_reply']=$ucreate_reply=='true'?1:0;
+                $data2['ucreate_msg']=$ucreate_msg=='true'?1:0;
+                $data2['ucreate_ex_note']=$ucreate_ex_note=='true'?1:0;
+                $data2['ucreate_ex_trend']=0;
+                $data2['ucreate_ex_project']=0;
+                $data2['uupload_courseware']=0;
+                $data2['udownload_courseware']=$udownload_courseware=='true'?1:0;
+                $data2['umanage_student']=0;
+                $data2['ulast_edited_time']=date('Y-m-d H:i:s',time());
+                $m2 = M('User');
+                $data2['uid'] = $m2->where('`urid`='.$rid)->find()['uid'];
+                $result = $m2->save($data2);
+                //echo $m2->_sql();
+                if($result){
+                    $this->show('{"result":0,"msg":"saving succeed.","rid":"'.$rid.'"}', 'utf-8');
+                } else{
+                    $this->show('{"result":1,"msg":"'.$m2->getDbError().'"}', 'utf-8');
+                }
+            }else{
+                $this->show('{"result":1,"msg":"'.htmlspecialchars($m->getDbError(),ENT_QUOTES).'"}', 'utf-8');
             }
         }
     }

@@ -53,7 +53,13 @@
 	</div>
 	<div style="width:724px;padding:40px;">
 		<div class="post_list_div">
-			<div class="center_title">助教添加</div>
+			<div class="center_title">
+			<?php if($rid==-1){?>
+				助教添加
+			<?php } else {?>
+				助教编辑
+			<?php }?>
+			</div>
 			<div class="separator"></div>
 			<div class="ta_list">
 				<div class="ta_item">

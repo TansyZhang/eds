@@ -328,7 +328,12 @@ function CLogin(){
 			$.ajax({
 				url:'__ROOT__/Home/Index/logoff',
 				success:function(){
-					window.location.reload(true);
+					var ctrl_name = '__CONTROLLER__';
+					if( ctrl_name.indexOf('Bbs') == ctrl_name.length-3){
+						window.location.href = '__ROOT__/Home/Bbs';
+					} else{
+						window.location.reload(true);
+					}
 				},
 				error:function(t){eds_framework.error_handler('__ROOT__/Home/Index/logoff',t);}
 			});

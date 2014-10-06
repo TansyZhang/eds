@@ -46,6 +46,39 @@ width:100%;overflow:hidden;margin-right:20px;
 	font-size:11pt;
 	color:gray;
 }
+
+table.altrowstable {
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #a9c6c9;
+	border-collapse: collapse;
+	width:100%;
+}
+table.altrowstable th {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #a9c6c9;
+	text-align: center;
+}
+table.altrowstable td {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #a9c6c9;
+}
+.oddrowcolor{
+	background-color:#d4e3e5;
+}
+.evenrowcolor{
+	background-color:#c3dde0;
+}
+a{
+	color:black !important;
+}
+
 </style>
 
 <div class="container" style="padding-left:0px;padding-right:0px;">
@@ -65,25 +98,37 @@ width:100%;overflow:hidden;margin-right:20px;
 			<div class="separator"></div>
 			<div class="tah_list">
 
+			<table class="altrowstable">
+				<tr class="evenrowcolor">
+					<th>账号</th>
+					<th>姓名</th>
+					<th>昵称</th>
+					<th>年级</th>
+					<th>学校</th>
+					<th title="账号状态">状态</th>
+					<th>操作</th>
+				</tr>
 				<volist name="stu_list" id="stu_vo" key="k" >
-					<div class="tah_item">
-						<div class="tah_raccount">{$stu_vo.raccount}</div>
-						<div class="tah_item_info">
-							创建于{$stu_vo.rcreated_time}&nbsp;&nbsp;最后登录{$stu_vo.lgtime}
-							&nbsp;&nbsp;
-							<a href="stu_dtl?rid={$stu_vo.rid}#start" style="color:gray;text-decoration:underline;">查看</a>
-							&nbsp;&nbsp;
-							<a href="stu_edit?rid={$stu_vo.rid}#start" style="color:gray;text-decoration:underline;">修改</a>
-							&nbsp;&nbsp;
-							<a href="javascript:void(0);" onclick="tah_delete(this,{$stu_vo.rid})" style="color:gray;text-decoration:underline;">删除</a>
-						</div>
-					</div>
-
+					<tr class="<?php if(k%2==0) echo 'evenrowcolor';else echo 'oddrowcolor'; ?>">
+						<td>{$stu_vo.raccount}</td>
+						<td>{$stu_vo.uname}</td>
+						<td>{$stu_vo.rnickname}</td>
+						<td>{$stu_vo.ugrade}</td>
+						<td>南京大学</td>
+						<td>{$stu_vo.rstate_name}</td>
+						<td>&nbsp;查看&nbsp;|&nbsp;<a href="__ROOT__/Home/Bbs/stu_edit?rid={$stu_vo.rid}#start">修改</a>&nbsp;|&nbsp;取消限制&nbsp;|&nbsp;<span title="删除“{$stu_vo.rname}”" onclick="stu_delete(this,{$stu_vo.rid},'{$stu_vo.uname}')" style="cursor:pointer;">删除</span>&nbsp;</td>
+					</tr>
 				</volist>
 
+			</table>
 
-				<div class="tah_item">
-					<div><a href="stu_edit#start">添加</a></div>
+
+				
+
+
+				<div class="tah_item" style="margin:20px;">
+					<include file="./Application/Home/View/control_btn.html" id="btn_add" text="添加" />
+
 				</div>
 			</div>
 		</div>
@@ -93,8 +138,11 @@ width:100%;overflow:hidden;margin-right:20px;
 </div>
 
 <script type="text/javascript">
-function tah_delete(elem, rid){
-	var url = '__ROOT__/Home/Bbs/stu_delete';
+function stu_delete(elem, rid,uname){
+	if(!eds_framework.confirm('','您确定要删除姓名为“'+uname+'”的学生吗？')){
+		return;
+	}
+	var url = '__ROOT__/Home/Bbs/acc_delete';
 	//console.log(this);
 	//var elem = this;
 	var oldtext = $(elem).text();
@@ -116,4 +164,9 @@ function tah_delete(elem, rid){
 		error:function(t){eds_framework.error_handler(url,t);}
 	});
 }
+$(document).ready(function(){
+	$('#btn_add').click(function(){
+		window.location.href="__ROOT__/Home/Bbs/stu_edit#start";
+	});
+});
 </script>

@@ -78,7 +78,7 @@ class IndexController extends EdsController {
 
     public function logoff(){
         session(null);
-        $this->show('{"result":"0","msg":"succeed."}','utf-8');
+        $this->show('{"result":"0","msg":"succeed'.__CONTROLLER__.'."}','utf-8');
         return;
     }
 
