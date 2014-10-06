@@ -55,7 +55,11 @@
 						<div>账号：{$raccount}</div>
 					</li>
 					<li>
-						<div>密码：******&nbsp;&nbsp;&nbsp;<span id="btn_reset_password" class="op">重置密码为000000</span></div>
+						<div>密码：******
+						<?php if(session('rid')==1 || session('rid')==$rid){ ?>
+						&nbsp;&nbsp;&nbsp;<span id="btn_reset_password" class="op">重置密码为000000</span>
+						<?php } ?>
+						</div>
 					</li>
 					<li>
 						<div>昵称：{$rnickname}</div>
@@ -71,11 +75,11 @@
 					</li>
 					<li>
 						<div><span>账号状态：{$rstate_name}<span>
-							<?php if($rstate == 0){ ?>
+							<?php if(session('?rid')&&session('rid')<=10){if($rstate == 0){ ?>
 							<span>&nbsp;&nbsp;<span class="op" onclick="set_restrict(0,{$rid});">限制登录</span></span>
 							<?php } else if($rstate == 10) { ?>
 							<span>&nbsp;&nbsp;<span class="op" onclick="set_restrict(1,{$rid});">解除限制</span></span>
-							<?php } ?>
+							<?php }} ?>
 						</div>
 					</li>
 				</ul>

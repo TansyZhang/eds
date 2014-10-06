@@ -49,9 +49,13 @@ class IndexController extends EdsController {
     public function mhotpost(){
         $this->post_list = array();
         if(session('g_logined')!='logined'){
+            $this->result = 1;
+            $this->msg = "请先登录！";
             $this->display();
             return;
         }
+        $this->result = 0;
+        $this->msg = "succeed";
         $m = M('PostListView');
         $lim['tstate'] = array('eq', '20');//20-置顶
         $list1 = $m->where($lim)->field('tsummary,tcontent',true)->order('tlast_edited_time desc')->limit(4)->select();
@@ -67,6 +71,8 @@ class IndexController extends EdsController {
             }
             //dump($list2);
         }
+        //echo 'asdfas';return;
+        //dump($this->post_list);
         $this->display();
     }
 
@@ -105,6 +111,15 @@ class IndexController extends EdsController {
         }
         $this->show('{"result":"0","msg":"succeed."}','utf-8');
 
+        $mlogin = M('Login');
+        $datalogin['lgrid'] = $resultset['rid'];
+        $datalogin['lgtime'] = date('Y-m-d H:i:s',time());
+        $datalogin['lgip'] = get_client_ip();
+        $datalogin['lgbrowser'] = $this->determine_browser($_SERVER['HTTP_USER_AGENT']);
+        $datalogin['lgos'] = $this->determine_platform($_SERVER['HTTP_USER_AGENT']);
+        $datalogin['lgresult'] = 0;//succeed
+        $mlogin->add($datalogin);
+
     	//以下设置session
         session('g_logined', 'logined');
         session('rrole', $resultset['rrole']);
@@ -113,6 +128,7 @@ class IndexController extends EdsController {
         if($resultset['rrole'] < 25){//小于25为管理员
         	$mv = M('RegisterManagerView');
         	$resultset = $mv->where($cond)->field(true)->find();
+            
             session('raccount',$resultset['raccount']);
             session('rnickname',$resultset['rnickname']);
         	session('rhead_photo', $resultset['rhead_photo']);
@@ -168,6 +184,81 @@ class IndexController extends EdsController {
         }
         //dump($resultset);
     }
+
+    //private 
+    private function determine_browser ($agent) {
+        $browseragent="Unknown";   //浏览器
+        $browserversion=""; //浏览器的版本
+        if(ereg('MSIE ([0-9].[0-9]{1,2})',$agent,$version)) {
+            $browserversion=$version[1];
+            $browseragent="Internet Explorer";
+        } else if (ereg( 'Opera/([0-9]{1,2}.[0-9]{1,2})',$agent,$version)) {
+            $browserversion=$version[1];
+            $browseragent="Opera";
+        } else if (ereg( 'Firefox/([0-9.]{1,5})',$agent,$version)) {
+            $browserversion=$version[1];
+            $browseragent="Firefox";
+        } else if (ereg( 'Chrome/([0-9.]{1,3})',$agent,$version)) {
+            $browserversion=$version[1];
+            $browseragent="Chrome";
+        } else if (ereg( 'Safari/([0-9.]{1,3})',$agent,$version)) {
+            $browseragent="Safari";
+            $browserversion="";
+        }
+        return $browseragent." ".$browserversion;
+    }
+    private function determine_platform ($Agent) {
+        $browserplatform = "Unknown";
+        if (eregi('win',$Agent) && strpos($Agent, '95')) {
+            $browserplatform="Windows 95";
+        } else if (eregi('win 9x',$Agent) && strpos($Agent, '4.90')) {
+            $browserplatform="Windows ME";
+        } elseif (eregi('win',$Agent) && ereg('98',$Agent)) {
+            $browserplatform="Windows 98";
+        } elseif (eregi('win',$Agent) && eregi('nt 5.0',$Agent)) {
+            $browserplatform="Windows 2000";
+        } elseif (eregi('win',$Agent) && eregi('nt 5.1',$Agent)) {
+            $browserplatform="Windows XP";
+        } elseif (eregi('win',$Agent) && eregi('nt 6.0',$Agent)) {
+            $browserplatform="Windows Vista";
+        } elseif (eregi('win',$Agent) && eregi('nt 6.1',$Agent)) {
+            $browserplatform="Windows 7";
+        } elseif (eregi('win',$Agent) && ereg('32',$Agent)) {
+            $browserplatform="Windows 32";
+        } elseif (eregi('win',$Agent) && eregi('nt',$Agent)) {
+            $browserplatform="Windows NT";
+        } elseif (eregi('Mac OS',$Agent)) {
+            $browserplatform="Mac OS";
+        } elseif (eregi('linux',$Agent)) {
+            $browserplatform="Linux";
+        } elseif (eregi('unix',$Agent)) {
+            $browserplatform="Unix";
+        } elseif (eregi('sun',$Agent) && eregi('os',$Agent)) {
+            $browserplatform="SunOS";
+        } elseif (eregi('ibm',$Agent) && eregi('os',$Agent)) {
+            $browserplatform="IBM OS/2";
+        } elseif (eregi('Mac',$Agent) && eregi('PC',$Agent)) {
+            $browserplatform="Macintosh";
+        } elseif (eregi('PowerPC',$Agent)) {
+            $browserplatform="PowerPC";
+        } elseif (eregi('AIX',$Agent)) {
+            $browserplatform="AIX";
+        } elseif (eregi('HPUX',$Agent)) {
+            $browserplatform="HPUX";
+        } elseif (eregi('NetBSD',$Agent)) {
+            $browserplatform="NetBSD";
+        } elseif (eregi('BSD',$Agent)) {
+            $browserplatform="BSD";
+        } elseif (ereg('OSF1',$Agent)) {
+            $browserplatform="OSF1";
+        } elseif (ereg('IRIX',$Agent)) {
+            $browserplatform="IRIX";
+        } elseif (eregi('FreeBSD',$Agent)) {
+            $browserplatform="FreeBSD";
+        }
+        return $browserplatform;
+    }
+
 }
 
 ?>

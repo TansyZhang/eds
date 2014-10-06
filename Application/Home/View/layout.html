@@ -129,6 +129,9 @@ CEdsFramework.prototype.error_handler = function(url,response_object,error_hint)
 		console.error(response_object); 
 	}
 }
+CEdsFramework.prototype.confirm = function(title,hint){
+	return confirm(hint);
+}
 </script>
 <!--登录界面及登录类-->
 <div id="login_form" style="display:none;position:absolute;margin:0 auto;width:400px;top:200px;z-index:10001;text-align:center;">
@@ -397,19 +400,26 @@ CEdsFramework.prototype.load = function(){
 							if(item.load.handler){
 								item.load.handler(t.data);
 							} else {
-								$.each(t.data,function(n,value){
-									var e = item.load.tpl;
-									if(item.load.tpl_args){
-										$.each(item.load.tpl_args,function(k,v){ e = e.replace(v, value[v.substring(1,v.length-1)]); });
-									} else { e = e.replace(/{([^}]*)}/g, function(m){return value[RegExp.$1];}); }
-									$(item.load.parent).append(e);
-								});
-								if(item.rmv){
-									$(item.rmv.parent).prepend('<div style="float:right;position:relative;margin-top:8px;margin-right:0px;font-size:26px;color:red;font-weight:700;cursor:pointer;z-index:10;" onclick="remove_phynews_item(3)" title="删除此项">&nbsp;X&nbsp;</div>');
+								if(t.data.length == 0){
+									var msg = "暂无数据";
+									$(item.load.parent).append('<div style="height:108px;width:100%;color:black;font-size:10pt;text-align:center;background-color:rgb(234,234,234);">'+msg+'</div>');
+								} else {
+									$.each(t.data,function(n,value){
+										var e = item.load.tpl;
+										if(item.load.tpl_args){/*use 'replace' if tpl_args,ptherwise 'regexp' */
+											$.each(item.load.tpl_args,function(k,v){ e = e.replace(v, value[v.substring(1,v.length-1)]); });
+										} else { e = e.replace(/{([^}]*)}/g, function(m){return value[RegExp.$1];}); }
+										$(item.load.parent).append(e);
+									});
+									if(item.rmv){
+										$(item.rmv.parent).prepend('<div style="float:right;position:relative;margin-top:8px;margin-right:0px;font-size:26px;color:red;font-weight:700;cursor:pointer;z-index:10;" onclick="remove_phynews_item(3)" title="删除此项">&nbsp;X&nbsp;</div>');
+									}
 								}
 							}
 						} else {
-							cdialog.show_alert('错误：'+t.msg);
+							//cdialog.show_alert('错误：'+t.msg);
+							var msg = item.load.error.replace("{msg}",t.msg);
+							$(item.load.parent).append('<div style="height:108px;width:100%;color:black;font-size:10pt;text-align:center;background-color:rgb(234,234,234);">'+msg+'</div>');
 						}
 					},
 					error:function(t){eds_framework.error_handler(item.load.url,t,item.load.error);}

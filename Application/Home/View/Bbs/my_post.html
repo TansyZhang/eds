@@ -46,11 +46,14 @@
 			<div class="separator"></div>
 			<div class="post_list">
 
+				<?php if(count($post_list) == 0){ ?>
+					<div style="text-align:center">你还没有发布过帖子哦！</div>
+				<?php } ?>
 				<volist name="post_list" id="post_vo" key="k">
 					<div class="post_item">
 						<span class="op">
 							<span class="datetime">{$post_vo.tcreated_time}</span>
-							<?php if(session('rrole')==0||session('rrole')&&session('rrole')<25){ ?>
+							<?php if(session('?rrole')&&(session('rrole')==0||session('rrole')<25)){ ?>
 							<?php if($post_vo['tstate'] == 10/*只有发布中的才可以被置顶*/){ ?>
 							&nbsp;<span class="post_item_op post_item_2_top" onclick="post_2_top({$post_vo.tid},1)" id="post_top_text_{$post_vo.tid}" title="将该帖子置顶">置顶</span>
 							<?php } else if($post_vo['tstate'] == 20){ ?>

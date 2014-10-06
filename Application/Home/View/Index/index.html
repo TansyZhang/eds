@@ -82,10 +82,10 @@
 
 $(document).ready(function(){
 	eds_framework.metadata.push({
-		"load":{
-			"url":"__ROOT__/Home/Index/mphynews",
-			"action":"post",
-			"tpl":
+		load:{
+			url:"__ROOT__/Home/Index/mphynews",
+			action:"post",
+			tpl:
 				'<div class="index_item">'+
 					'<div class="index_item_content">'+
 						'<span><a href="__ROOT__/Home/News/detail?zid={id}#start">{title}</a></span>'+
@@ -97,29 +97,29 @@ $(document).ready(function(){
 						'</div>'+
 					'</div>'+
 				'</div>',
-			"tpl_args":["{title}","{college}","{by}","{id}"],/*使用mdl_args可以加快替换速度*/
-			"error":"加载物理前沿列表失败！{status}:{statusText}",
-			"clear":true,
-			"parent":"#physics_news_area_items"
+			tpl_args:["{title}","{college}","{by}","{id}"],/*使用mdl_args可以加快替换速度*/
+			error:"加载物理前沿列表失败！{status}:{statusText}",
+			clear:true,
+			parent:"#physics_news_area_items"
 		},
-		"add":{
+		add:{
 
 		},
-		"mdf":{
+		mdf:{
 
 		},
-		"rmv":{
+		rmv:{
 		},
-		"shld":{
+		shld:{
 
 		}
 	});
 	//热门活动
 	eds_framework.metadata.push({
 		load:{
-			"url":"__ROOT__/Home/Index/mhotact",
-			"action":"post",
-			"tpl":
+			url:"__ROOT__/Home/Index/mhotact",
+			action:"post",
+			tpl:
 				'<div class="index_item">'+
 					'<div class="index_item_content">'+
 						'<span>{title}</span>'+
@@ -130,18 +130,18 @@ $(document).ready(function(){
 						'</div>'+
 					'</div>'+
 				'</div>',
-			"tpl_args":["{title}","{college}","{by}"],/*使用mdl_args可以加快替换速度*/
-			"error":"加载热门活动列表失败！{status}:{statusText}",
-			"clear":true,
-			"parent":"#hot_act_area_items"
+			tpl_args:["{title}","{college}","{by}"],/*使用mdl_args可以加快替换速度*/
+			error:"加载热门活动列表失败！{status}:{statusText}",
+			clear:true,
+			parent:"#hot_act_area_items"
 		}
 	});
 
 	eds_framework.metadata.push({
 		load:{
-			"url":"__ROOT__/Home/Index/mrecmdcourse",
-			"action":"post",
-			"tpl":
+			url:"__ROOT__/Home/Index/mrecmdcourse",
+			action:"post",
+			tpl:
 				'<div class="index_item">'+
 					'<div class="recmd_course_content">'+
 						'<img src="__PUBLIC__/uploads{flag}" width="309px" height="195px" />'+
@@ -158,18 +158,18 @@ $(document).ready(function(){
 						'</div>'+
 					'</div>'+
 				'</div>',
-			"tpl_args":["{flag}","{title}","{author_college}","{level}","{author_name}","{author_photo}"],/*使用mdl_args可以加快替换速度*/
-			"error":"加载推荐课程列表失败！{status}:{statusText}",
-			"clear":true,
-			"parent":"#recmd_course_area_items"
+			tpl_args:["{flag}","{title}","{author_college}","{level}","{author_name}","{author_photo}"],/*使用mdl_args可以加快替换速度*/
+			error:"加载推荐课程列表失败！{status}:{statusText}",
+			clear:true,
+			parent:"#recmd_course_area_items"
 		}
 	});
 
 	eds_framework.metadata.push({
 		load:{
-			"url":"__ROOT__/Home/Index/mhotpost",
-			"action":"post",
-			"tpl":
+			url:"__ROOT__/Home/Index/mhotpost",
+			action:"post",
+			tpl:
 				'<div class="index_item index_item_hot">'+
 					'<div class="flag">'+
 						'<span><img src="__PUBLIC__{flag}" width="169px" height="146px" /></span>'+
@@ -182,10 +182,10 @@ $(document).ready(function(){
 						'</table>'+
 					'</div>'+
 				'</div>',
-			"tpl_args":["{flag}","{title}","{id}"],/*使用mdl_args可以加快替换速度*/
-			"error":"加载学生社区热点列表失败！{status}:{statusText}",
-			"clear":true,
-			"parent":"#hot_post_area_items"
+			tpl_args:["{flag}","{title}","{id}"],/*使用mdl_args可以加快替换速度*/
+			error:"加载学生社区热点列表失败！错误信息：{msg}",
+			clear:true,
+			parent:"#hot_post_area_items"
 		}
 	});
 

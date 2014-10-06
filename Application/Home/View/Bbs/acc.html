@@ -67,15 +67,18 @@ width:100%;overflow:hidden;margin-right:20px;
 
 				<volist name="acc_list" id="acc_vo" key="k" >
 					<div class="acc_item">
-						<div class="acc_raccount">{$acc_vo.raccount}</div>
+						<div class="acc_raccount">{$acc_vo.raccount}({$acc_vo.rnickname})</div>
 						<div class="acc_item_info">
 							创建于{$acc_vo.rcreated_time}&nbsp;&nbsp;最后登录{$acc_vo.lgtime}
 							&nbsp;&nbsp;
 							<a href="acc_dtl?rid={$acc_vo.rid}#start" style="color:gray;text-decoration:underline;">查看</a>
 							&nbsp;&nbsp;
+							
 							<a href="acc_edit?rid={$acc_vo.rid}#start" style="color:gray;text-decoration:underline;">修改</a>
+							<?php if($acc_vo['rid']!=1){ ?>
 							&nbsp;&nbsp;
-							<a href="javascript:void(0);" onclick="acc_delete(this,{$acc_vo.rid})" style="color:gray;text-decoration:underline;">删除</a>
+							<a href="javascript:void(0);" onclick="acc_delete(this,{$acc_vo.rid},'{$acc_vo.raccount}','{$acc_vo.rnickname}')" style="color:gray;text-decoration:underline;">删除</a>
+							<?php } ?>
 						</div>
 					</div>
 
@@ -95,7 +98,9 @@ width:100%;overflow:hidden;margin-right:20px;
 </div>
 
 <script type="text/javascript">
-function acc_delete(elem, rid){
+function acc_delete(elem, rid,raccount,rnickname){
+	if(!eds_framework.confirm('删除确认','您确定要删除账户为“'+raccount+'”，昵称为“'+rnickname+'”的用户吗？'))
+		return;
 	var url = '__ROOT__/Home/Bbs/acc_delete';
 	//console.log(this);
 	//var elem = this;

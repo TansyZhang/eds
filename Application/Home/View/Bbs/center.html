@@ -47,6 +47,9 @@ a{
 			<div class="center_title">帖子动态</div>
 			<div class="separator"></div>
 			<div class="reply_list">
+				<?php if(count($event_list) == 0){ ?>
+					<div style="text-align:center">你暂时还没有帖子动态哦！</div>
+				<?php } ?>
 				<volist name="event_list" id="event_vo">
 					<div class="reply_item">
 						<span>

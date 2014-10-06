@@ -22,6 +22,7 @@ class PlanController extends EdsController {
     }
     //改革
     public function reform(){
+        $this->qianxuesheng = true;
     	$this->display();
     }
     //成果

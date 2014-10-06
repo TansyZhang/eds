@@ -6,7 +6,7 @@
 <style>
 </style>
 
-<div class="container" style="padding-left:0px;padding-right:0px;background-color:rgb(234,234,234);">
+<div class="container" style="padding-left:0px;padding-right:0px;background-color:rgb(234,234,234);width:1024px;">
 	<div id="start" style="height:56px;background-color:rgb(201,48,59);color:white;font-size:16pt;font-family:'Segoe UI';padding:10px 15px;">
 		新闻动态 > {$zsub_type}
 	</div>
@@ -17,7 +17,7 @@
 		</div>
 		<div class="news_by">{$zcontent}</div>
 		<div>
-			<?php if(session('rrole')==0||session('rrole')&&session('rrole')<25){ ?>
+			<?php if(session('?rrole')&&(session('rrole')==0||session('rrole')<25)){ ?>
 			<button type="button" class="btn btn-info btn-block" id="btn_add" onclick="modify({$zid})">修改</button>
 			<?php } ?>
 		</div>

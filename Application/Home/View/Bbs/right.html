@@ -44,12 +44,12 @@
 	<li><a href="__ROOT__/Home/Bbs/cw?uid=1#start">课程课件</a></li>
 	<li><a href="__ROOT__/Home/Bbs/ta?uid=1#start">助教管理</a></li>
 	<?php } ?>
-	<?php if(session('rrole')==0||session('rrole')&&session('rrole')<25){ ?>
+	<?php if(session('?rrole')&&(session('rrole')==0||session('rrole')<25)){ ?>
 		<li><span onclick="dontclickme()">【管理员】</span></li>
 		<li><a href="__ROOT__/Home/Bbs/tah?#start">教师管理</a></li>
-		<li style="display:none;"><a href="__ROOT__/Home/Bbs/stu?#start">学生管理</a></li>
+		<li><a href="__ROOT__/Home/Bbs/stu?#start">学生管理</a></li>
 		<li style="display:none;"><a href="__ROOT__/Home/Bbs/xx?#start">敏感词管理</a></li>
-		<?php if(session('rrole')==0||session('rrole')&&session('rrole')<=10){ ?>
+		<?php if(session('rrole')<=10){ ?>
 			<li><span onclick="dontclickme()">【超管】</span></li>
 			<li><a href="__ROOT__/Home/Bbs/acc?#start">账户管理</a></li>
 		<?php } ?>

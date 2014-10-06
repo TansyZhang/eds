@@ -359,7 +359,11 @@ class BbsController extends EdsController {
             $this->display();
             return;
         }
-		$m = M('Register');
+        if(session('rid') > 10){//非系统管理员不能查看
+            $this->show('{"result":1,"msg":"permission error."}', 'utf-8');
+            return;
+        }
+		$m = M('RegisterManagerView');
 		$lim['rstate'] = array('in', '(0,10)');
 		$lim['rrole'] = array('elt', 25);
 		$this->acc_list = $m->where($lim)->field(true)->select();
@@ -387,6 +391,14 @@ class BbsController extends EdsController {
         if(session('g_logined')!='logined'){//未登录
             $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
             //$this->display();
+            return;
+        }
+        if(strlen($raccount)<6 || strpos($raccount, 's',0)!==0){
+            $this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
+            return;
+        }
+        if(session('rrole')>10){//只有角色<=10才能创建/修改账户信息
+            $this->show('{"result":1,"msg":"permission error."}', 'utf-8');
             return;
         }
     	$rid = I('rid');
@@ -430,6 +442,7 @@ class BbsController extends EdsController {
 				$data2['mpcreate_msg']=$mpcreate_msg=='true'?1:0;
 				$data2['mpmanager_user']=$mpmanager_user=='true'?1:0;
 				$data2['mpmanager_bbs']=$mpmanager_bbs=='true'?1:0;
+                $data2['mlast_edited_time']  = $data['rlast_edited_time'];
     			
     			$m2 = M('Manager');
     			if($m2->add($data2)){
@@ -445,7 +458,7 @@ class BbsController extends EdsController {
     		$data['raccount'] = $raccount;
     		//$data['rpassword'] = sha1(md5($rpassword));
     		$data['rnickname'] = $rnickname;
-    		$data['rrole'] = 20;//普管
+    		//$data['rrole'] = 20;//普管
     		$data['rstate'] = $rstate=='true'?0:10;//0-正常
     		$data['rlast_edited_time']  = date('Y-m-d H:i:s',time());
     		if($m->save($data)){
@@ -465,6 +478,7 @@ class BbsController extends EdsController {
 				$data2['mpcreate_msg']=$mpcreate_msg=='true'?1:0;
 				$data2['mpmanager_user']=$mpmanager_user=='true'?1:0;
 				$data2['mpmanager_bbs']=$mpmanager_bbs=='true'?1:0;
+                $data2['mlast_edited_time']  = $data['rlast_edited_time'];
 				$m2 = M('Manager');
 				if($m2->where(" `mrid`=$rid")->save($data2)){
 					$this->show('{"result":0,"msg":"succeed."}', 'utf-8');
@@ -481,6 +495,10 @@ class BbsController extends EdsController {
         if(session('g_logined')!='logined'){//未登录
             $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
             //$this->display();
+            return;
+        }
+        if(session('rid') > 10){//非系统管理员不能查看
+            $this->show('{"result":1,"msg":"permission error."}', 'utf-8');
             return;
         }
     	$m = M('ManagerView');
@@ -522,6 +540,10 @@ class BbsController extends EdsController {
         if(session('g_logined')!='logined'){//未登录
             $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
             //$this->display();
+            return;
+        }
+        if(session('rid') > 10){//非系统管理员不能查看
+            $this->show('{"result":1,"msg":"permission error."}', 'utf-8');
             return;
         }
     	$m = M('ManagerView');
@@ -573,9 +595,14 @@ class BbsController extends EdsController {
     		$this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
     		return;
     	}
+        if($rid == 1 || session('rid') > 10){//系统管理员账号不能被禁止登录，非系统管理员不能操作
+            $this->show('{"result":1,"msg":"permission error."}', 'utf-8');
+            return;
+        }
     	$m = M('Register');
     	$data['rid'] = $rid;
     	$data['rstate'] = $state == 1?0:10;
+        $data['rlast_edited_time'] = date('Y-m-d H:i:s',time());
     	if($m->save($data)){
     		$this->show('{"result":0,"msg":"succeed."}', 'utf-8');
     	} else{
@@ -592,6 +619,10 @@ class BbsController extends EdsController {
     		$this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
     		return;
     	}
+        if(session('rid') != 1 && session('rid') != $rid){//只有系统才能重置
+            $this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
+            return;
+        }
     	$m = M('Register');
     	$data['rid'] = $rid;
     	$data['rpassword'] = sha1(md5('000000'));
@@ -613,14 +644,19 @@ class BbsController extends EdsController {
     		return;
     	}
     	//<!--在此插入权限检查-->
-    	if($rid == 1){//系统管理员
-    		$this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
+    	if($rid == 1){//系统管理员不能删除
+    		$this->show('{"result":1,"msg":"permission error."}', 'utf-8');
     		return;
     	}
+        if($rid == 1 || session('rid') > 10){//系统管理员账号不能被删除，非系统管理员不能操作
+            $this->show('{"result":1,"msg":"permission error."}', 'utf-8');
+            return;
+        }
 
     	$m = M('Register');
     	$data['rid'] = $rid;
     	$data['rstate'] = 20;//删除
+        $data['rlast_edited_time'] = date('Y-m-d H:i:s',time());
     	if($m->save($data)){
 			$this->show('{"result":0,"msg":"succeed."}', 'utf-8');
     	} else {
@@ -635,9 +671,9 @@ class BbsController extends EdsController {
             $this->display();
             return;
         }
-		$m = M('Register');
-		$lim['rstate'] = array('in', '(0,10)');
-		$lim['rrole'] = array('gt', 25);//使用25作为分界线
+		$m = M('RegisterUserView');
+		$lim['rstate'] = array('in', '0,10');
+		$lim['rrole'] = array(array('gt', 25),array('neq', '35'));//使用25作为分界线
 		$this->tah_list = $m->where($lim)->field(true)->select();
 		//echo $m->_sql();
 		$this->display();

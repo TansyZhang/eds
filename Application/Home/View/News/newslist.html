@@ -90,12 +90,12 @@ function news_delete(zid){
 }
 </script>
 
-<div class="container" style="padding-left:0px;padding-right:0px;background-color:rgb(234,234,234);">
+<div class="container" style="padding-left:0px;padding-right:0px;background-color:rgb(234,234,234);width:1024px;">
 	<div id="start" style="height:56px;background-color:rgb(201,48,59);color:white;font-size:16pt;font-family:'Segoe UI';padding:10px 15px;">
 		新闻动态 > {$main_title}
 	</div>
 	<div class="news_left">
-		<?php if(session('rrole')==0||session('rrole')&&session('rrole')<25){ ?>
+		<?php if(session('?rrole')&&(session('rrole')==0||session('rrole')<25)){ ?>
 		<include file="./Application/Home/view/control_btn.html" text="添加" id="btn_newslist_add" />
 		<?php } ?>
 		<div class="news_item_top_bar"></div>
@@ -107,7 +107,7 @@ function news_delete(zid){
 					<div class="news_item_content">{$news_vo.zsummary}
 					</div>
 					<div class="news_item_read_all">
-						<?php if(session('rrole')==0||session('rrole')&&session('rrole')<25){ ?>
+						<?php if(session('?rrole')&&(session('rrole')==0||session('rrole')<25)){ ?>
 						<a href="__ROOT__/Home/News/edit?zid={$news_vo.zid}#start" />编辑</a>&nbsp;&nbsp;
 						<a href="javascript:void(0);"  onclick="news_delete({$news_vo.zid})"/>删除</a>&nbsp;&nbsp;
 						<?php } ?>

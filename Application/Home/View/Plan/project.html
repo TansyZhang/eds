@@ -22,7 +22,7 @@
 }
 </style>
 
-<div class="container" style="padding-left:0px;padding-right:0px;background-color:rgb(234,234,234)">
+<div class="container" style="padding-left:0px;padding-right:0px;background-color:rgb(234,234,234);width:1024px;">
 	<include file="./Application/Home/View/Plan/menu.html"  />
 
 	<div style="width:1024px;padding-left:219px;font-style:normal">
@@ -41,7 +41,7 @@
 		<?php echo htmlspecialchars_decode($project_vo['zsummary'],ENT_QUOTES); ?>
 	</div>
 	<div class="plan_item_read_all">
-		<?php if(session('rrole')==0||session('rrole')&&session('rrole')<25){ ?>
+		<?php if(session('?rrole')&&(session('rrole')==0||session('rrole')<25)){ ?>
 		<a href="__ROOT__/Home/Plan/project_dtl?op_edit=1&zid={$project_vo.zid}#plan_title_span">编辑</a>&nbsp;&nbsp;
 		<a href="javascript:void(0);" onclick="project_delete({$project_vo.zid})">删除</a>&nbsp;&nbsp;
 		<?php } ?>
@@ -58,7 +58,7 @@
 <div style="text-align:left;margin:30px;">
 <!--这里是翻页-->
 </div>
-<?php if(session('rrole')==0||session('rrole')&&session('rrole')<25){ ?>
+<?php if(session('?rrole')&&(session('rrole')==0||session('rrole')<25)){ ?>
 <div style="text-align:left">
 <button type="button" class="btn btn-info btn-block" id="btn_add" onclick="project_add()">添加</button>
 </div>

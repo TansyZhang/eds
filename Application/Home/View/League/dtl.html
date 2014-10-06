@@ -20,7 +20,7 @@ a {
 		<div>
 			<?php echo htmlspecialchars_decode($gprofile,ENT_QUOTES); ?>
 		</div>
-		<?php if(session('rrole')==0||session('rrole')&&session('rrole')<25){ ?>
+		<?php if(session('?rrole')&&(session('rrole')==0||session('rrole')<25)){ ?>
 		<include file="./Application/Home/View/control_btn.html" text="修改" id="btn_modify" style="margin:20px;"/>
 		<?php } ?>
 	</div>

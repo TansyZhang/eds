@@ -5,7 +5,7 @@
 
 
 
-<div class="container" style="padding-left:0px;padding-right:0px;background-color:rgb(234,234,234)">
+<div class="container" style="padding-left:0px;padding-right:0px;background-color:rgb(234,234,234);width:1024px;">
 	<include file="./Application/Home/View/Plan/menu.html"  />
 
 	<div style="width:1024px;padding-left:219px;font-style:normal">
@@ -23,7 +23,7 @@
 						<div class="plan_content"  style="margin:20px 30px;">
 							{$zcontent}
 						</div>
-<?php if(session('rrole')==0||session('rrole')&&session('rrole')<25){ ?>
+<?php if(session('?rrole')&&(session('rrole')==0||session('rrole')<25)){ ?>
 						<div>
 							<button type="button" class="btn btn-info btn-block" id="btn_edit" onclick="project_modify({$zid});">
 								修改
