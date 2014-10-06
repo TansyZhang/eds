@@ -1,0 +1,176 @@
+<layout name="layout" replace="{__REEPLACE__}" />
+
+
+<include file="./Application/Home/View/welcome_bbs.html" />
+
+<style>
+.separator{
+	border-bottom:rgb(139,60,126) 2px solid;
+	margin-bottom: 10px;
+}
+.center_title{
+	font-size: 14pt;
+	font-weight: bold;
+	padding: 5px 10px;
+}
+
+.tah_info li{
+	list-style-type:none;
+	line-height:30px;
+	font-size:14pt;
+
+}
+.op{
+	color:gray;
+	font-size:11pt;
+	cursor:pointer;
+}
+.perm_title{
+	float:left;
+	width:350px;
+	margin-right:20px;
+}
+
+</style>
+
+<div class="container" style="padding-left:0px;padding-right:0px;">
+	<include file="./Application/Home/View/layout_banner.html" bgcolor="139,60,126" display0="inline-block" display1="block" display2="block"
+	title0="师生社区" href0="__ROOT__/Home/Bbs" title1="个人中心" href1="__ROOT__/Home/Bbs/center?uid=1#start" 
+	title2="学生管理" href2="stu#start" />
+</div>
+
+
+<div class="container" style="padding-left:0px;padding-right:0px;background-color:rgb(234,234,234);">
+	<div style="width:300px;float:right;">
+		<include file="./Application/Home/View/Bbs/right.html" />
+	</div>
+	<div style="width:724px;padding:40px;">
+		<div class="tah_list_div">
+			<div class="center_title">基本信息</div>
+			<div class="separator"></div>
+			<input type="hidden" value="{$rid}" id="rid1" />
+			<div class="tah_info">
+				<ul>
+					<li>
+						<div>学校：{$gname}</div>
+					</li>
+					<li>
+						<div>姓名：{$uname}</div>
+					</li>
+					<li>
+						<div>账号：{$raccount}</div>
+					</li>
+					<li>
+						<div>密码：******&nbsp;&nbsp;&nbsp;<span id="btn_reset_password" class="op">重置密码为000000</span></div>
+					</li>
+					<li>
+						<div>昵称：{$rnickname}</div>
+					</li>
+					<li>
+						<div>职称：{$uchar_name}</div>
+					</li>
+					<li>
+						<div>创建时间：{$rcreated_time}</div>
+					</li>
+					<li>
+						<div>最后登录：{$lgtime}</div>
+					</li>
+					<li>
+						<div>登录次数：{$login_count}</div>
+					</li>
+					<li>
+						<div><span>账号状态：{$rstate_name}<span>
+							<?php if($rstate == 0){ ?>
+							<span>&nbsp;&nbsp;<span class="op" onclick="set_restrict(0,{$rid});">限制登录</span></span>
+							<?php } else if($rstate == 10) { ?>
+							<span>&nbsp;&nbsp;<span class="op" onclick="set_restrict(1,{$rid});">解除限制</span></span>
+							<?php } ?>
+						</div>
+					</li>
+				</ul>
+			</div>
+
+
+
+			<?php 
+
+				$perm_array = array(
+					array('是否允许登录','rstate',$rstate)
+					,array('是否允许发布帖子','ucreate_post',$ucreate_post)
+					,array('是否允许回复帖子','ucreate_reply',$ucreate_reply)
+					,array('是否允许发送站内信','ucreate_msg',$ucreate_msg)
+					,array('是否允许创建交流札记','ucreate_ex_note',$ucreate_ex_note)
+					//,array('是否允许创建留学动态','ucreate_ex_trend',$ucreate_ex_trend)
+					//,array('是否允许创建交换项目信息','ucreate_ex_project',$ucreate_ex_project)
+					//,array('是否允许上传课件','uupload_courseware',$uupload_courseware)
+					,array('是否允许下载课件','udownload_courseware',$udownload_courseware)
+					//,array('是否允许管理学生','umanage_student',$umanage_student)
+				);
+			 ?>
+			<div class="center_title">权限信息</div>
+			<div class="separator"></div>
+			<div class="tah_info">
+				<ul>
+					<?php $fori=0;foreach ($perm_array as $key) { $fori+=1; ?>
+					<li>
+						<div class="perm_title">{$key[0]}</div>
+						<div><?php echo (($fori==1&&$key[2]==0||$fori!=1&&$key[2]==1)?"是":"否") ?></div>
+					</li>
+					<?php } ?>
+				</ul>
+			</div>
+		</div>
+
+		<include file="./Application/Home/View/control_btn.html" id="btn_modify" text="修改" />
+	</div>
+</div>
+
+<script type="text/javascript">
+function set_restrict(state,rid){
+	var url = '__ROOT__/Home/Bbs/acc_restrict';
+	$.ajax({
+		url:url,
+		data:{state:state,rid:rid},
+		dataType:'json',
+		success:function(t,s,r){
+			if(t.result == 0){
+				cdialog.show_info('操作成功！',function(){
+					window.location.reload();
+				});
+			} else{
+				cdialog.show_alert('操作失败！错误信息：'+t.msg);
+			}
+		},
+		error:function(t){eds_framework.error_handler(url,t);}
+	});
+}
+$(document).ready(function(){
+	var t  =function(){
+		var url = '__ROOT__/Home/Bbs/acc_reset_password';
+		var oldtext = $('#btn_reset_password').text();
+		$('#btn_reset_password').text('正在重置密码……');
+		$.ajax({
+			url:url,
+			data:{rid:$('#rid1').val()},
+			dataType:'json',
+			success:function(t,s,r){
+				$('#btn_reset_password').text(oldtext);
+				if(t.result == 0){
+					cdialog.show_info('操作成功！',function(){
+						//window.location.reload();
+						$('#btn_reset_password').text('密码已重置！').
+						css('cursor','default').unbind();
+					});
+				} else{
+					cdialog.show_alert('操作失败！错误信息：'+t.msg);
+				}
+			},
+			error:function(t){eds_framework.error_handler(url,t);}
+		});
+	}
+	$('#btn_reset_password').bind('click',t);
+	$('#btn_modify').click(function(){
+		window.location.href="tah_edit?rid={$rid}#start";
+	});
+});
+</script>

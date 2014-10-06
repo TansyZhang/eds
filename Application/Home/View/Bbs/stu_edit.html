@@ -103,8 +103,18 @@
 						</div>
 					</li>
 					<li>
+						<div>姓名：
+							<input type="text" class="form-control" placeholder="name input" value="{$uname}" id="uname" name="uname" />
+						</div>
+					</li>
+					<li>
 						<div>昵称：
-							<input type="text" class="form-control" placeholder="nickname input" value="{$rnickname}" id="rnickname" name="rnickname" />
+							<input type="text" class="form-control" placeholder="name input" value="{$rnickname}" id="rnickname" name="rnickname" />
+						</div>
+					</li>
+					<li>
+						<div>入学年份：<span class="input_hint">如：2014</span>
+							<input type="text" class="form-control" placeholder="grade input" value="{$ugrade}" id="ugrade" name="ugrade" />
 						</div>
 					</li>
 				</ul>
@@ -176,8 +186,9 @@ $(document).ready(function(){
 				ugid:$('#ugid').val(),
 				raccount:$('#raccount1').val(),
 				rpassword:$('#rpassword1').val(),
-				rnickname:$('#rnickname').val()
-
+				rnickname:$('#rnickname').val(),
+				uname:$('#uname').val(),
+				ugrade:$('#ugrade').val()
 			},
 			success:function(t,s,r){
 				if(t.result == 0){

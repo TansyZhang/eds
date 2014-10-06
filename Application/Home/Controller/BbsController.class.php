@@ -700,6 +700,7 @@ class BbsController extends EdsController {
     	}
         $this->rid = $register['rid'];
         $this->raccount = $register['raccount'];
+        $this->rrole = $register['rrole'];
         $this->rnickname = $register['rnickname'];
         $this->rcreated_time = $register['rcreated_time'];
         $this->rlast_edited_time = $register['rlast_edited_time'];
@@ -724,7 +725,11 @@ class BbsController extends EdsController {
 
         //$this->mpcreate_teacher=$register['mpcreate_teacher'];
         //dump($register);
-        $this->display();
+        if($this->rrole == 40){
+            $this->display('stu_dtl');
+        } else {
+            $this->display();
+        }
 	}
 
 	public function tah_edit($rid = -1){
@@ -1426,6 +1431,7 @@ class BbsController extends EdsController {
         $this->rid = $register['rid'];
         $this->raccount = $register['raccount'];
         $this->rnickname = $register['rnickname'];
+        $this->uname = $register['uname'];
         $this->rcreated_time = $register['rcreated_time'];
         $this->rlast_edited_time = $register['rlast_edited_time'];
         $this->rstate = $register['rstate'];
@@ -1444,7 +1450,7 @@ class BbsController extends EdsController {
         $this->udownload_courseware = $register['udownload_courseware'];
         $this->display();
     }
-    public function stu_save($rid = -1,$ugid=-1,$uchar=-1,$raccount='',$rpassword='',$rnickname='',
+    public function stu_save($rid = -1,$ugid=-1,$uchar=-1,$raccount='',$rpassword='',$rnickname='',$ugrade='',$uname='',
         $rstate='',
         $ucreate_post='',
         $ucreate_reply='',
@@ -1465,7 +1471,9 @@ class BbsController extends EdsController {
         $raccount = I('raccount');
         $rpassword = I('rpassword');
         $rnickname = I('rnickname');
-        if($ugid == '' || $raccount == ''){
+        $uname = I('uname');
+        $ugrade = I('ugrade');
+        if($ugid == '' || $raccount == '' || $ugrade == '' || $uname == ''){
             $this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
             return;
         }
@@ -1491,8 +1499,9 @@ class BbsController extends EdsController {
                 $data2['urid'] = $rid;
                 $data2['uchar'] = $uchar;
                 $data2['uno'] = $raccount;
-                $data2['uname'] = $rnickname;
+                $data2['uname'] = $uname;
                 $data2['udisplay_name'] = $rnickname;
+                $data2['ugrade'] = $ugrade;
                 $data2['usender'] = 0;//0-未知
                 $data2['uuid'] = session('uid'); if(is_null($data2['uuid']))$data2['uuid'] = 0;
                 $data2['uhead_photo'] = '/assets/image/headphoto/default.png';
@@ -1529,8 +1538,9 @@ class BbsController extends EdsController {
                 $data2['urid'] = $rid;
                 $data2['uchar'] = $uchar;
                 $data2['uno'] = $raccount;
-                $data2['uname'] = $rnickname;
+                $data2['uname'] = $uname;
                 $data2['udisplay_name'] = $rnickname;
+                $data2['ugrade'] = $ugrade;
                 //$data2['usender'] = 0;//0-未知
                 //$data2['uuid'] = session('uid');
                 $data2['uhead_photo'] = '/assets/image/headphoto/default.png';

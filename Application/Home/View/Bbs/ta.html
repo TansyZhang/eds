@@ -88,7 +88,7 @@
 									<span>
 										<a href="ta_edit?rid={$ta_vo.rid}#start" style="text-decoration:underline;" title="修改“{$ta_vo.uname}”的信息">修改</a>
 										&nbsp;&nbsp;
-										<span onclick="ta_delete(this,{$ta_vo.rid})" style="cursor:pointer;text-decoration:underline;" title="删除“{$ta_vo.uname}”的信息">删除</span>
+										<span onclick="ta_delete(this,{$ta_vo.rid},'{$ta_vo.uname}')" style="cursor:pointer;text-decoration:underline;" title="删除“{$ta_vo.uname}”的信息">删除</span>
 									</span>
 								</li>
 							</ul>
@@ -109,7 +109,10 @@
 	</div>
 </div>
 <script type="text/javascript">
-function ta_delete(elem,rid){
+function ta_delete(elem,rid,uname){
+	if(!eds_framework.confirm('','您确定要删除姓名为“'+uname+'”的助教信息吗？')){
+		return;
+	}
 	var oldtext = $(elem).text();
 	$(elem).css('text-decoration','none').text('正在删除……');
 	var url = '__ROOT__/Home/Bbs/acc_delete';

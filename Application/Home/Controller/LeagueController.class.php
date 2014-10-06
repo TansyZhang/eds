@@ -1,7 +1,7 @@
 <?php
 namespace Home\Controller;
 use Think\Controller;
-class LeagueController extends Controller {
+class LeagueController extends EdsController {
 
     public function index(){
     	$m = M('College');

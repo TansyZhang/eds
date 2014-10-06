@@ -1,7 +1,7 @@
 <?php
 namespace Home\Controller;
 use Think\Controller;
-class CourseController extends Controller {
+class CourseController extends EdsController {
     public function index($subtype=0){
 
         $m = M('Courseware');
@@ -272,6 +272,12 @@ class CourseController extends Controller {
 
 
     public function cw(){
+        if(session('g_logined')!='logined'){//未登录
+            //$this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            $this->cond_logined = true;
+            $this->display();
+            return;
+        }
         $now_year = date('Y');
         $now_month = date('m');
         if($now_month >= 8){
@@ -308,6 +314,12 @@ class CourseController extends Controller {
         $this->display();
     }
     public function cw_dtl($fid=-1){
+        if(session('g_logined')!='logined'){//未登录
+            //$this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            $this->cond_logined = true;
+            $this->display();
+            return;
+        }
         $fid = I('fid');
         if($fid == '' || $fid == -1){
             $this->show('{"result":1,"msg":"parameters error."}', 'utf-8');return;
@@ -315,6 +327,7 @@ class CourseController extends Controller {
         $m = M('CourseView');
         $lim['fid'] = $fid;
         $course = $m->where($lim)->find();
+        $this->fid = $fid;
         $this->fname = $course['fname'];
         $this->faddr = $course['faddr'];
         $this->fterm_name = $course['fterm_name'];

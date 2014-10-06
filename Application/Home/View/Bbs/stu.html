@@ -75,9 +75,6 @@ table.altrowstable td {
 .evenrowcolor{
 	background-color:#c3dde0;
 }
-a{
-	color:black !important;
-}
 
 </style>
 
@@ -109,14 +106,14 @@ a{
 					<th>操作</th>
 				</tr>
 				<volist name="stu_list" id="stu_vo" key="k" >
-					<tr class="<?php if(k%2==0) echo 'evenrowcolor';else echo 'oddrowcolor'; ?>">
+					<tr class="<?php if($k%2==0) echo 'evenrowcolor';else echo 'oddrowcolor'; ?>">
 						<td>{$stu_vo.raccount}</td>
 						<td>{$stu_vo.uname}</td>
 						<td>{$stu_vo.rnickname}</td>
 						<td>{$stu_vo.ugrade}</td>
 						<td>南京大学</td>
 						<td>{$stu_vo.rstate_name}</td>
-						<td>&nbsp;查看&nbsp;|&nbsp;<a href="__ROOT__/Home/Bbs/stu_edit?rid={$stu_vo.rid}#start">修改</a>&nbsp;|&nbsp;取消限制&nbsp;|&nbsp;<span title="删除“{$stu_vo.rname}”" onclick="stu_delete(this,{$stu_vo.rid},'{$stu_vo.uname}')" style="cursor:pointer;">删除</span>&nbsp;</td>
+						<td>&nbsp;<a href="__ROOT__/Home/Bbs/tah_dtl?rid={$stu_vo.rid}#start" style="color:black!important;">查看</a>&nbsp;|&nbsp;<a href="__ROOT__/Home/Bbs/stu_edit?rid={$stu_vo.rid}#start" style="color:black!important;">修改</a>&nbsp;|&nbsp;<span title="删除“{$stu_vo.rname}”" onclick="stu_delete(this,{$stu_vo.rid},'{$stu_vo.uname}')" style="cursor:pointer;">删除</span>&nbsp;</td>
 					</tr>
 				</volist>
 

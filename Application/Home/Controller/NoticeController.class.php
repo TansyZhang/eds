@@ -1,7 +1,7 @@
 <?php
 namespace Home\Controller;
 use Think\Controller;
-class NoticeController extends Controller {
+class NoticeController extends EdsController {
 
 	//列表
     public function index($page=0){
