@@ -77,7 +77,7 @@ a{
 						</span>
 						</span>
 						<span class="op">
-							<span onclick="ev_ignore({$event_vo.vid})" class="clickable" title="不再显示此条消息">
+							<span onclick="ev_ignore({$event_vo.vid},'{$event_vo.vkey}')" class="clickable" title="不再显示此条消息">
 								忽略
 							</span>&nbsp;|&nbsp;
 							<span onclick="ev_check('{$event_vo.vurl}',{$event_vo.vid},'{$event_vo.vkey}');" class="clickable">
@@ -123,14 +123,14 @@ a{
 </div>
 
 <script type="text/javascript">
-function ev_ignore(vid){
+function ev_ignore(vid,vkey){
 	var url = '__ROOT__/Home/Bbs/ev_ignore';
 	//alert($('#raccount1').val());return;
 	$.ajax({
 		url:url,
 		dataType:'json',
 		type:'post',
-		data:{vid:vid},
+		data:{vid:vid,vkey:vkey},
 		success:function(t,s,r){
 			if(t.result == 0){
 				cdialog.show_info('操作成功！',function(){

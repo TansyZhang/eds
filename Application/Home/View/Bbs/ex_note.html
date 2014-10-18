@@ -24,31 +24,81 @@
 	line-height: 30px;
 	font-size: 14pt;
 }
+.time{
+	font-size: 10pt;
+	color: gray;
+}
 </style>
 
-<div class="container" style="padding-left:0px;padding-right:0px;">
+<div class="container" style="padding-left:0px;padding-right:0px;background-color:rgb(234,234,234);width:1024px;">
 	<include file="./Application/Home/View/layout_banner.html" bgcolor="139,60,126" display0="inline-block" display1="block" display2="block"
 	title0="师生社区" href0="__ROOT__/Home/Bbs" title1="个人中心" href1="__ROOT__/Home/Bbs/center?uid=1#start" 
-	title2="交流札记" href2="#start" />
-</div>
+	title2="交流札记" href2="__ROOT__/Home/Bbs/ex_note#start" />
 
-
-<div class="container" style="padding-left:0px;padding-right:0px;background-color:rgb(234,234,234);">
 	<div style="width:300px;float:right;">
 		<include file="./Application/Home/View/Bbs/right.html" />
 	</div>
-	<div style="width:724px;padding:40px;"><!--
+	<div style="width:724px;padding:40px;">
 		<div class="post_list_div">
 			<div class="center_title">交流札记</div>
 			<div class="separator"></div>
 			<div class="ex_note_list">
-				<div class="post_item">
-					<span class="op"><span>2014-08-08 15:45:29</span>&nbsp;<span>修改</span>&nbsp;<span>查看</span>&nbsp;<span>删除</span></span>
-					<div><a href="#">交流札记标题</a><span class="state">(编辑中)</span></div>
-				</div>
+				<volist name="ex_note_list" id="ex_note_vo" key="k">
+					<div class="post_item">
+						<span class="op">
+							<span class="time">{$ex_note_vo.zcreated_time}</span>&nbsp;
+							<span><a href="__ROOT__/Home/Bbs/ex_note_edit?zid={$ex_note_vo['zid']}#start" style="color:black;" title="修改“{$ex_note_vo['ztitle']}”">修改</a></span>&nbsp;
+							<span><a href="__ROOT__/Home/Ex/ex_note_dtl?zid={$ex_note_vo['zid']}#start" style="color:black;" title="查看“{$ex_note_vo['ztitle']}”">查看</a></span>&nbsp;
+							<span onclick="ex_note_delete(this,{$ex_note_vo['zid']},'{$ex_note_vo['ztitle']}')" style="cursor:pointer;" title="删除“{$ex_note_vo['ztitle']}”">删除</span>
+						</span>
+						<div>
+							<span title="{$ex_note_vo['ztitle']}">
+								<?php if(mb_strlen($ex_note_vo['ztitle'])>18){ 
+									echo mb_substr($ex_note_vo['ztitle'], 0,17,'utf8')."……";
+								}else{
+									echo $ex_note_vo['ztitle'];
+								} ?>
+							</span>
+							<span class="state">({$ex_note_vo['zstate_name']})</span>
+						</div>
+					</div>
+				</volist>
 			</div>
 		</div>
-		-->
-		<include file="./Application/Home/View/waiting.html" />
+		<div style="margin:50px;">
+			<include file="./Application/Home/View/control_btn.html" text="添加" id="btn_add" />
+		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+function ex_note_delete(elem,zid,ztitle){
+	if(!eds_framework.confirm('','您确定要删除“'+ztitle+'”吗？')){
+		return;
+	}
+	var url = '__ROOT__/Home/Bbs/ex_note_del';
+	$.ajax({
+		url:url,
+		dataType:'json',
+		type:'post',
+		data:{
+			zid:zid
+		},
+		success:function(t,s,r){
+			if(t.result == 0){
+				cdialog.show_info('操作成功！',function(){
+					$(elem).parent().parent().hide();
+				});
+			}else{
+				cdialog.show_alert('操作失败！错误信息：'+t.msg);
+			}
+		},
+		error:function(t){eds_framework.error_handler(url,t);}
+	});
+}
+$(document).ready(function(){
+	$('#btn_add').click(function(){
+		window.location.href="__ROOT__/Home/Bbs/ex_note_edit?zid=-1#start";
+	});
+});
+</script>

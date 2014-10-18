@@ -46,8 +46,16 @@
 			<div class="separator"></div>
 			<div style="">
 				<ul>
+					<li>
+						<div class="name">头像</div>
+						<div class="value">
+							<img src="__PUBLIC__{$Think.session.rhead_photo}" width="80px" height="80px" />
+						</div>
+					</li>
+
 					<li><div class="name">姓名</div><div class="value">&nbsp;{$Think.session.uname}</div></li>
-					<li><div class="name">性别</div><div class="value">&nbsp;{$Think.session.usender}</div></li>
+					<li><div class="name">昵称</div><div class="value">&nbsp;{$Think.session.rnickname}</div></li>
+					<li><div class="name">性别</div><div class="value">&nbsp;{$Think.session.usender_name}</div></li>
 					<li><div class="name">学校</div><div class="value">&nbsp;{$Think.session.ucollege_name}</div></li>
 					<li><div class="name">学工号</div><div class="value">&nbsp;{$Think.session.uno}</div></li>
 					<li><div class="name">账号</div><div class="value">&nbsp;{$Think.session.raccount}</div></li>

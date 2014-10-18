@@ -344,6 +344,63 @@ class CourseController extends EdsController {
         $this->display();
     }
 
+    public function ex_note(){
+        $this->display();
+    }
+
+    public function ex_note_edit($zid = ''){
+        $zid = I('zid');
+        if($zid == '' || $zid == -1){
+            $zid = -1;
+            $this->display();
+            return;
+        }
+        $m = M('Z');
+        $lim['ztype'] = 5;//交流札记
+        $lim['zid'] = $zid;
+        $rec = $m->where($lim)->find();
+        if($rec){
+            $this->zid = $zid;
+            $this->ztitle = $rec['ztitle'];
+            $this->zcontent = $rec['zcontent'];
+            $this->display();
+            return;
+        }
+        $this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
+        return;
+    }
+
+    public function ex_note_save($zid=-1,$ztitle='',$zsummary='',$zcontent='',$zsubmit=''){
+        $zid = I('zid');
+        $ztitle = I('ztitle');
+        $zsummary = I('zsummary');
+        $zcontent = I('zcontent');
+        $zsubmit = I('zsubmit');
+
+        $data['ztitle'] = $ztitle;
+        $data['zsummary'] = $zsummary;
+        $data['zcontent'] = $zcontent;
+        $data['zstate'] = $zsubmit==1?10:0;
+        $m = M('Z');
+        if($zid == -1 || $zid == ''){
+            $data['ztype'] = 5;//交流札记
+            $data['zscan_count'] = 0;
+            $data['zlast_edited_time'] = $data['zcreated_time'] = date('Y-m-d H:i:s',time());
+            if($m->add($data)){
+                $this->show('{"result":0,"msg":"saving succeed."}', 'utf-8');return;
+            } else{
+                $this->show('{"result":1,"msg":"error."}', 'utf-8');return;
+            }
+        } else {
+            $data['zlast_edited_time'] = date('Y-m-d H:i:s',time());
+            $data['zid'] = $zid;
+            if($m->save($data)){
+                $this->show('{"result":0,"msg":"saving succeed."}', 'utf-8');return;
+            } else{
+                $this->show('{"result":1,"msg":"error."}', 'utf-8');return;
+            }
+        }
+    }
 }
 
 ?>

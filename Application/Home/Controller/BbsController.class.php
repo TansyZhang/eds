@@ -68,9 +68,9 @@ class BbsController extends EdsController {
     	$this->display();
     }
 
-    public function post_dtl($tid=-1){
+    public function post_dtl($tid=-1,$vid='',$vkey=''){
         if(session('g_logined')!='logined'){//未登录
-            $this->redirect('/Home/Bbs?url=/Home/Bbs/post_dtl',0,0,'');
+            $this->redirect('/Home/Bbs?url=/Home/Bbs/post_dtl?tid='.$tid,0,0,'');
             $this->display();
             return;
         }
@@ -79,6 +79,18 @@ class BbsController extends EdsController {
     		$this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
             return;
     	}
+        $vid= I('vid');
+        $vkey = I('vkey');
+        //echo '$vid='.$vid.'<br />';
+        //echo '$vkey='.$vkey.'<br />';
+        if($vid != '' && $vkey != ''){
+            $lim_event['vid'] = $vid;
+            $lim_event['vkey'] = $vkey;
+            $lim_event['vstate'] = 20;//已查看
+            $m_ev = M('Event');
+            $m_ev->save($lim_event);//ignore error
+            //echo $m_ev->_sql();
+        }
     	$m = M('Bbs');
     	$lim['tid'] = $tid;
     	$record = $m->where($lim)->find();
@@ -90,6 +102,7 @@ class BbsController extends EdsController {
             }
 
     		$this->tid = $tid;
+            $this->trid = $record['trid'];
     		$this->ttopic = $record['ttopic'];
     		$this->ttitle = $record['ttitle'];
     		$this->tsummary = $record['tsummary'];
@@ -97,15 +110,21 @@ class BbsController extends EdsController {
     		$this->tcreated_time = $record['tcreated_time'];
     		$this->tstate = $record['tstate'];
     		$this->tscan_count = $record['tscan_count'];
-    		$this->treply_count = 17;//TODO
     		$this->cid = $record['ttopic'];
+
+            $regm = M('Register');
+            $reg_lim['rid'] = $record['trid'];
+            $reg_rec = $regm->where($reg_lim)->field('rnickname,rhead_photo')->find();
+            if($reg_rec){
+                $this->rid = $record['trid'];
+                $this->rnickname = $reg_rec['rnickname'];
+                $this->rhead_photo = $reg_rec['rhead_photo'];
+            }
 
     		$replym = M('PostReplyView');
     		$lim2['treply_id'] = $tid;
     		$this->reply_list = $replym->where($lim2)->select();
     		$this->treply_count = count($this->reply_list);
-    		//session('rnickname', '系统管理员');//RM
-    		//session('rhead_photo', '/assets/image/headphoto/default.png');
     	} else {
     		$this->show('{"result":1,"msg":"unknown id."}', 'utf-8');
             return;
@@ -140,10 +159,11 @@ class BbsController extends EdsController {
                 $evdata['vrid'] = $postrec['trid'];
                 $evdata['vtitle'] = $postrec['ttitle'];
                 $evdata['vtype'] = 1;//帖子回复
-                $evdata['vurl'] = '/Home/Bbs/post_dtl?tid='.$postrec['trid'].'#start';
+                $evdata['vurl'] = '/Home/Bbs/post_dtl?tid='.$postrec['treply_id'].'#start';
                 $evdata['vcreated_time'] = date('Y-m-d H:i:s',time());
                 $evdata['vstate'] = 0;//0-未查看
                 $evdata['vref'] = session('rid');
+                $evdata['vkey'] = $this->get_rand_str(20);
                 $evm->add($evdata);
                 //echo $evm->_sql();
             }
@@ -152,6 +172,16 @@ class BbsController extends EdsController {
 			$this->show('{"result":1,"msg":"'.($m->getDbError()).'"}', 'utf-8');
 		}
     }
+    private function get_rand_str($length){
+        $str = '';
+        $strPol = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz";
+        $max = strlen($strPol)-1;
+        for($i=0;$i<$length;$i++){
+            $str.=$strPol[rand(0,$max)];//rand($min,$max)生成介于min和max两个数之间的一个随机整数
+        }
+        return $str;
+    }
+
 
     public function post($tid=-1){
         if(session('g_logined')!='logined'){//未登录
@@ -905,7 +935,6 @@ class BbsController extends EdsController {
             $this->display();
             return;
         }
-        //session('rid',1);
         $m = M('CourseView');
         $lim['fcreator'] = session('rid');
         $lim['fstate'] = array('in', '0,10,20');
@@ -944,7 +973,7 @@ class BbsController extends EdsController {
         $lim2['estate'] = array('in','10,20');//10-审核中,20-审核通过
         $this->cw_list = $m2->where($lim2)->order('estate asc,elast_edited_time asc')->select();
 
-        session('uid',1);
+        //session('uid',1);
         $m3 = M('CourseTaView');
         $lim3['pfid'] = $fid;
         //$lim3['uuid'] = session('uid');
@@ -1575,9 +1604,10 @@ class BbsController extends EdsController {
             $this->display();
             return;
         }
+        echo session('rid');
         $this->cond_logined = false;
         $event = M('EventView');
-        $lim['vrid'] = 1;//session('rid');
+        $lim['vrid'] = session('rid');
         $lim['vstate'] = 0;//0-未查看
         $lim['vtype'] = 1;//1-帖子回复
         $this->event_list = $event->where($lim)->order('vcreated_time desc')->select();
@@ -1585,19 +1615,21 @@ class BbsController extends EdsController {
         $this->display();
     }
 
-    public function ev_ignore($vid=-1){
+    public function ev_ignore($vid=-1,$vkey=''){
         if(session('g_logined')!='logined'){//未登录
             $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
             //$this->display();
             return;
         }
         $vid = I('vid');
-        if($vid==''||$vid==-1){
+        $vkey = I('vkey');
+        if($vid==''||$vid==-1 || $vkey=''){
             $this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
             return;
         }
         $m = M('Event');
         $data['vid'] = $vid;
+        $data['vkey'] = $vkey;
         $data['vstate'] = 10;//10-已忽略
         if($m->save($data)){
             $this->show('{"result":0,"msg":"adding succeed."}', 'utf-8');
@@ -1608,6 +1640,124 @@ class BbsController extends EdsController {
 
     public function info(){
         $this->display();
+    }
+
+
+    public function ex_note(){
+        if(session('g_logined')!='logined'){//未登录
+            $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            return;
+        }
+        $m = M('ExNoteView');
+        $lim['zcreator'] = session('rid');
+        $lim['zstate'] = array('in','0,10,20,30,40');
+        $this->ex_note_list = $m->where($lim)->select();
+        $this->display();
+    }
+    public function ex_note_edit($zid=-1){
+        $zid = I('zid');
+        if($zid == -1 || $zid == ''){//new
+            $this->zid = -1;
+            $this->display();
+            return;
+        }
+        $m = M('Z');
+        $lim['zid'] = $zid;
+        $lim['zcreator'] = session('rid');
+        $lim['ztype'] = 5;//5-交流札记
+        $rec = $m->where($lim)->find();
+        if($rec){
+            $this->zid = $zid;
+            $this->ztitle = $rec['ztitle'];
+            $this->zcontent = $rec['zcontent'];
+            $this->display();
+        } else {
+            $this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
+        }
+    }
+
+    public function ex_note_save($zid=-1,$ztitle='',$zcontent='',$zsummary='',$zsubmit=''){
+        if(session('g_logined')!='logined'){//未登录
+            $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            //$this->display();
+            return;
+        }
+        $zid = I('zid');
+        $ztitle = I('ztitle');
+        $zcontent = I('zcontent');
+        $zsummary = I('zsummary');
+        $zsubmit = I('zsubmit');
+        if($zsubmit == 1){
+            if($zcontent == '' || $ztitle == '' || $zsummary == ''){
+                $this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
+                return;
+            }
+        }
+        $m = M('Z');
+        $data['ztitle'] = $ztitle;
+        $data['zcontent'] = $zcontent;
+        $data['zsummary'] = $zsummary;
+        $data['ztype'] = 5;
+        $data['zlast_edited_time'] = date('Y-m-d H:i:s',time());
+        $data['zstate'] = $zsubmit==1?10:0;
+        if($zid == '' || $zid == -1){
+            $data['zcreated_time'] = $data['zlast_edited_time'];
+            $data['zscan_count'] = 0;
+            $data['zcreator'] = session('rid');
+            if($m->add($data)){
+                $this->show('{"result":0,"msg":"saving succeed.","rid":"'.$rid.'"}', 'utf-8');
+            } else {
+                $this->show('{"result":1,"msg":"'.$m->getDbError().'"}', 'utf-8');
+            }
+        } else {
+            $lim['zid'] = $zid;
+            $rec = $m->where($lim)->find();
+            if($rec){
+                if($rec['zcreator'] != session('rid')){
+                    $this->show('{"result":1,"msg":"permission error."}', 'utf-8');
+                    return;
+                }
+            } else {
+                $this->show('{"result":1,"msg":"permission error."}', 'utf-8');
+                return;
+            }
+            $data['zid'] = $zid;
+            if($m->save($data)){
+                $this->show('{"result":0,"msg":"saving succeed.","rid":"'.$rid.'"}', 'utf-8');
+            } else {
+                $this->show('{"result":1,"msg":"'.$m->getDbError().'"}', 'utf-8');
+            }
+        }
+    }
+    public function ex_note_del($zid=-1){
+        if(session('g_logined')!='logined'){
+            $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            return;
+        }
+        $zid = I('zid');
+        if($zid == -1 || $zid == ''){
+            $this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
+            return;
+        }
+        $m = M('Z');
+        $lim['ztype'] = 5;//5-
+        $lim['zid'] = $zid;
+        $rec = $m->where($lim)->find();
+        if($rec){
+            if($rec['zcreator'] == session('rid') || session('rid') == 1/*system*/){
+                $data['zid'] = $zid;
+                $data['zstate'] = 60;//deleted
+                if($m->save($data)){
+                    $this->show('{"result":0,"msg":"deleting succeed."}', 'utf-8');
+                } else{
+                    $this->show('{"result":1,"msg":"'.($m->getDbError()).'"}', 'utf-8');
+                }
+            } else {
+                $this->show('{"result":1,"msg":"permission error."}', 'utf-8');
+            }
+        } else {
+            $this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
+        }
     }
 
 }

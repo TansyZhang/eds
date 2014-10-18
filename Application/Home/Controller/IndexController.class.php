@@ -48,12 +48,12 @@ class IndexController extends EdsController {
 
     public function mhotpost(){
         $this->post_list = array();
-        if(session('g_logined')!='logined'){
+        /*if(session('g_logined')!='logined'){
             $this->result = 1;
             $this->msg = "请先登录！";
             $this->display();
             return;
-        }
+        }//*/
         $this->result = 0;
         $this->msg = "succeed";
         $m = M('PostListView');
@@ -93,7 +93,7 @@ class IndexController extends EdsController {
     	$cond['raccount'] = $raccount;
     	$resultset = $m->where($cond)->field('rid,rpassword,rrole,rstate,rshielded_time')->find();
     	if($resultset == false){
-            $this->show('{"result":2,"msg":"用户不存在！"}'.$raccount,'utf-8');
+            $this->show('{"result":2,"msg":"用户('.$raccount.')不存在！"}','utf-8');
             return;
     	}
         $rpassword = sha1(md5($rpassword));
@@ -177,6 +177,7 @@ class IndexController extends EdsController {
 
             session('uname',$resultset['uname']);
             session('usender',$resultset['usender']);
+            session('usender_name',$resultset['usender_name']);
             session('uno',$resultset['uno']);
             session('ugrade',$resultset['ugrade']);
             session('ucollege_name','南京大学');
