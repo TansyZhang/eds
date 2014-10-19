@@ -3,21 +3,69 @@
 
 <include file="./Application/Home/View/welcome_picmotto.html" pic1="ex_right" pic2="ex_change" />
 
+<style type="text/css">
+.ex_note_item{
+	background-color: rgb(234,234,234);
+	margin-bottom: 5px;
+}
+.ex_note_attach{
+	text-align:right;margin-right:100px;padding-bottom:10px;clear:left;
+}
+.ex_note_content{
+	margin:10px 10px 10px 20px;width:440px;float:left;
+}
+</style>
 
-
-<div class="container" style="padding-left:0px;padding-right:0px;font-style:normal;width:1024px;height:300px;">
-	<div style="width:655px;margin-right:36px;float:left;background-color:rgb(234,234,234);">
-		<div style="padding-top:10px;">
+<div class="container" style="padding-left:0px;padding-right:0px;font-style:normal;width:1024px;">
+	<div style="width:655px;margin-right:36px;float:left;">
+		<div style="padding-top:10px;background-color:rgb(234,234,234);">
 			<span style="font-family:'黑体';font-size:14pt;color:#007768;">交流札记</span>
-			<span style="font-family:'黑体';font-size:14pt;color:#007768;float:right">更多</span>
+			<span style="font-family:'黑体';font-size:14pt;color:#007768;float:right;cursor:pointer;" onclick="for_more(5)" title="查看更多交流札记">更多</span>
 			<div style="border-bottom:solid 7px #007768;"></div>
 		</div>
-		<include file="./Application/Home/View/waiting.html" />
+		
+		<div class="ex_note_list">
+			<?php if(count($ex_note_list)==0){ ?>
+				<div class="ex_note_item" style="margin:50px auto;text-align:center;">
+					暂无数据！
+				</div>
+			<?php } ?>
+			<volist name="ex_note_list" id="ex_note_vo" key="k">
+				<div class="ex_note_item">
+					<div class="ex_note_content">
+						<h4 title="{$ex_note_vo.ztitle}">
+						<?php if($ex_note_vo['zstate']==40){ ?>
+							[顶]
+						<?php } ?>
+						<?php if(mb_strlen($ex_note_vo['ztitle'],'utf8')>17
+							&& strlen($ex_note_vo['ztitle'])-mb_strlen($ex_note_vo['ztitle'],'utf8')>mb_strlen($ex_note_vo['ztitle'],'utf8')-17){ 
+							echo mb_substr($ex_note_vo['ztitle'], 0,16,'utf8')."……";
+						}else{
+							echo $ex_note_vo['ztitle'];
+						} ?>
+						</h4>
+						{$ex_note_vo.zsummary}……&nbsp;&nbsp;&nbsp;&nbsp;
+						<span style="cursor:pointer;" title="阅读全文" onclick="window.location.href='__ROOT__/Home/Ex/detail?zid={$ex_note_vo.zid}';">阅读全文</span>
+					</div>
+					<img style="margin:10px;" 
+					<?php if($ex_note_vo['zflag'] == ''){ ?>
+						src="__PUBLIC__/assets/image/ex_note_default.png"
+					<?php } else { ?>
+						src="__PUBLIC__/uploads{$ex_note_vo.zflag}"
+					<?php } ?>
+					 width="156px" height="198px" />
+					<div class="ex_note_attach">
+						作者：南京大学&nbsp;&nbsp;{$ex_note_vo.zauthor}&nbsp;&nbsp;<span class="time">{$ex_note_vo.zreleased_time}</span>
+					</div>
+				</div>
+			</volist>
+		</div>
+
 	</div>
 	<div style="width:333px;background-color:rgb(234,234,234);margin-left:691px;margin-bottom:10px;">
 		<div style="padding-top:10px;">
 			<span style="font-family:'黑体';font-size:14pt;color:#6D0E6A;">留学动态</span>
-			<span style="font-family:'黑体';font-size:14pt;color:#6D0E6A;float:right">更多</span>
+			<span style="font-family:'黑体';font-size:14pt;color:#6D0E6A;float:right;cursor:pointer;" onclick="for_more(6)" title="查看更多留学动态">更多</span>
 			<div style="border-bottom:solid 7px #6D0E6A;"></div>
 		</div>
 		<include file="./Application/Home/View/waiting.html" />
@@ -25,9 +73,15 @@
 	<div style="width:333px;background-color:rgb(234,234,234);margin-left:691px;">
 		<div style="padding-top:10px;">
 			<span style="font-family:'黑体';font-size:14pt;color:#C51F00;">交换项目</span>
-			<span style="font-family:'黑体';font-size:14pt;color:#C51F00;float:right">更多</span>
+			<span style="font-family:'黑体';font-size:14pt;color:#C51F00;float:right;cursor:pointer;" onclick="for_more(9)" title="查看更多交换项目">更多</span>
 			<div style="border-bottom:solid 7px #C51F00;"></div>
 		</div>
 		<include file="./Application/Home/View/waiting.html" />
 	</div>
 </div>
+
+<script>
+function for_more(ztype){
+	window.location.href="__ROOT__/Home/Ex/exlist?ztype=5#start";
+}
+</script>

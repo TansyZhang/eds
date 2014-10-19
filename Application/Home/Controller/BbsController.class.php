@@ -1648,10 +1648,18 @@ class BbsController extends EdsController {
             $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
             return;
         }
-        $m = M('ExNoteView');
-        $lim['zcreator'] = session('rid');
-        $lim['zstate'] = array('in','0,10,20,30,40');
-        $this->ex_note_list = $m->where($lim)->select();
+        if(session('rrole') > 25){//如果大于25，那么可以创建/删除/修改
+            $m = M('ExNoteView');
+            $lim['zcreator'] = session('rid');
+            $lim['zstate'] = array('in','0,10,20,30,40');
+            $this->ex_note_list = $m->where($lim)->select();
+            $this->tmp_admin = false;
+        } else {//小于25 那么说明是管理员 可以审核
+            $m = M('ExNoteView');
+            $lim['zstate'] = array('in','10,30,40,50');
+            $this->ex_note_list = $m->where($lim)->select();
+            $this->tmp_admin = true;
+        }
         $this->display();
     }
     public function ex_note_edit($zid=-1){
@@ -1668,6 +1676,7 @@ class BbsController extends EdsController {
         $rec = $m->where($lim)->find();
         if($rec){
             $this->zid = $zid;
+            $this->zflag = $rec['zflag'];
             $this->ztitle = $rec['ztitle'];
             $this->zcontent = $rec['zcontent'];
             $this->display();
@@ -1676,7 +1685,7 @@ class BbsController extends EdsController {
         }
     }
 
-    public function ex_note_save($zid=-1,$ztitle='',$zcontent='',$zsummary='',$zsubmit=''){
+    public function ex_note_save($zid=-1,$ztitle='',$zcontent='',$zsummary='',$zsubmit='',$zflag=''){
         if(session('g_logined')!='logined'){//未登录
             $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
             //$this->display();
@@ -1687,6 +1696,7 @@ class BbsController extends EdsController {
         $zcontent = I('zcontent');
         $zsummary = I('zsummary');
         $zsubmit = I('zsubmit');
+        $zflag = I('zflag');
         if($zsubmit == 1){
             if($zcontent == '' || $ztitle == '' || $zsummary == ''){
                 $this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
@@ -1697,6 +1707,7 @@ class BbsController extends EdsController {
         $data['ztitle'] = $ztitle;
         $data['zcontent'] = $zcontent;
         $data['zsummary'] = $zsummary;
+        $data['zflag'] = $zflag;
         $data['ztype'] = 5;
         $data['zlast_edited_time'] = date('Y-m-d H:i:s',time());
         $data['zstate'] = $zsubmit==1?10:0;
@@ -1760,6 +1771,105 @@ class BbsController extends EdsController {
         }
     }
 
+    public function ex_note_top($zid=-1,$ztop=-1){
+        if(session('g_logined')!='logined'){//未登录
+            $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            return;
+        }
+        $zid = I('zid');
+        $ztop = I('ztop');
+        if($zid == -1 || $zid == '' || $ztop == -1 || $ztop == ''){
+            $this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
+            return;
+        }
+        if(session('rrole') > 25 || session('pcheck_ex_note') != 1){
+            $this->show('{"result":1,"msg":"permission error."}', 'utf-8');
+            return;
+        }
+        if($ztop == 0){//0-取消置顶
+            $m = M('Z');
+            $lim['zid'] = $zid;
+            $rec = $m->where($lim)->find();
+            if($rec && $rec['zstate'] == 40){
+                $data['zid'] = $zid;
+                $data['zstate'] = 30;
+                $data['ztop_time'] = date('Y-m-d H:i:s',time());
+                if($m->save($data)){
+                    $this->show('{"result":0,"msg":"saving succeed."}', 'utf-8');
+                } else {
+                    $this->show('{"result":1,"msg":"saving error:'.($m->getDbError()).'"}', 'utf-8');
+                }
+            } else {
+                $this->show('{"result":1,"msg":"parameters error(zid)."}', 'utf-8');
+                return;
+            }
+        } else if($ztop == 1){//置顶
+            $m = M('Z');
+            $lim['zid'] = $zid;
+            $rec = $m->where($lim)->find();
+            if($rec && $rec['zstate'] == 30){
+                $data['zid'] = $zid;
+                $data['zstate'] = 40;
+                $data['ztop_time'] = date('Y-m-d H:i:s',time());
+                if($m->save($data)){
+                    $this->show('{"result":0,"msg":"saving succeed."}', 'utf-8');
+                } else {
+                    $this->show('{"result":1,"msg":"saving error:'.($m->getDbError()).'"}', 'utf-8');
+                }
+            } else {
+                $this->show('{"result":1,"msg":"parameters error(zid)."}', 'utf-8');
+                return;
+            }
+        } else if($ztop == 3){//取消屏蔽
+            $m = M('Z');
+            $lim['zid'] = $zid;
+            $rec = $m->where($lim)->find();
+            if($rec && $rec['zstate'] == 50){
+                $data['zid'] = $zid;
+                $data['zstate'] = 20;
+                //$data['ztop_time'] = date('Y-m-d H:i:s',time());
+                if($m->save($data)){
+                    $this->show('{"result":0,"msg":"saving succeed."}', 'utf-8');
+                } else {
+                    $this->show('{"result":1,"msg":"saving error:'.($m->getDbError()).'"}', 'utf-8');
+                }
+            } else {
+                $this->show('{"result":1,"msg":"parameters error(zid)."}', 'utf-8');
+                return;
+            }
+        } else if($ztop == 4){//发布
+            $m = M('Z');
+            $lim['zid'] = $zid;
+            $rec = $m->where($lim)->find();
+            if($rec && $rec['ztype'] == 5){
+                $data['zid'] = $zid;
+                $data['zstate'] = 30;
+                $data['zreleased_time'] = date('Y-m-d H:i:s',time());
+                if($m->save($data)){
+                    $this->show('{"result":0,"msg":"releasing succeed."}', 'utf-8');
+                    return;
+                }
+            }
+            $this->show('{"result":1,"msg":"parameters error(zid)."}', 'utf-8');
+            return;
+        } else if($ztop == 5){//退回
+            $m = M('Z');
+            $lim['zid'] = $zid;
+            $rec = $m->where($lim)->find();
+            if($rec && $rec['ztype'] == 5){
+                $data['zid'] = $zid;
+                $data['zstate'] = 20;
+                if($m->save($data)){
+                    $this->show('{"result":0,"msg":"releasing succeed."}', 'utf-8');
+                    return;
+                }
+            }
+            $this->show('{"result":1,"msg":"parameters error(zid)."}', 'utf-8');
+            return;
+        } else {
+            $this->show('{"result":1,"msg":"parameters error(ztop)."}', 'utf-8');
+        }
+    }
 }
 
 ?>

@@ -1,0 +1,144 @@
+<layout name="layout" replace="{__REEPLACE__}" />
+
+
+<include file="./Application/Home/View/welcome_picmotto.html" pic1="ex_right" pic2="ex_change" />
+
+
+<style>
+.ex_left{
+	width:774px;
+	float:left;
+	font-style: normal;
+	padding:20px 30px;
+}
+.ex_right{
+	width:1024px;
+	padding:20px 20px;
+	padding-left:794px;
+	font-style: normal;
+}
+.ex_item_top_bar{
+	margin-top: 50px;
+	border-bottom-width: 4px;
+	border-bottom-color: rgb(31,105,228);
+	border-bottom-style: solid;
+}
+.ex_item_img{
+	float:right;
+	padding:15px;
+}
+.ex_item_title{
+	padding: 30px 0 15px 40px;
+	font-size: 14pt;
+	color:rgb(31,105,228);
+	font-family:'Segoe UI';
+}
+.ex_item_content{
+	padding-left: 30px;
+}
+.ex_item_read_all{
+	text-align: right;
+	font-size: 14pt;
+	font-family:'黑体';
+	color:blue;
+	padding-right: 30px;
+}
+.ex_item_by{
+	text-align: right;
+	padding: 5px 30px 15px 0;
+	font-size: 12pt;
+	font-family:'Segoe UI';
+	color:rgb(31,105,228);
+	clear: both;
+}
+.ex_item_bar{
+	margin: 10px 0;
+	border-bottom: rgb(31,105,228) solid 4px;
+}
+.ex_area_title, .ex_type_item {
+	font-size: 14pt;
+	font-family:'黑体';
+	color:rgb(31,105,228);
+}
+.ex_type_item{
+	margin:10px 5px;
+}
+.ex_type_item_out{
+	margin:15px 0;
+}
+
+
+.ex_note_item{
+	background-color: rgb(234,234,234);
+	margin-bottom: 5px;
+}
+.ex_note_attach{
+	text-align:right;margin-right:100px;margin-bottom:10px;clear:left;
+}
+.ex_note_content{
+	margin:10px 10px 10px 20px;width:440px;float:left;
+}
+
+</style>
+
+
+<div class="container" style="padding-left:0px;padding-right:0px;font-style:normal;width:1024px;background-color:rgb(234,234,234);">
+	<include file="./Application/Home/View/layout_banner.html" bgcolor="255,111,61" display0="inline-block" display1="block"
+	title0="国际交流" href0="__ROOT__/Home/Ex" title1="{$sub_title}" href1="__ROOT__/Home/Ex/exlist?ztype={$ztype}#start"  />
+
+	<div class="ex_left">
+		<div class="ex_item_top_bar"></div>
+		<?php if($ztype == 5){ ?>
+			<volist name="ex_note_list" id="ex_note_vo" key="k" >
+				<div class="ex_note_item">
+					<div class="ex_note_content">
+						<h4 title="{$ex_note_vo.ztitle}">
+						<?php if($ex_note_vo['zstate']==40){ ?>
+							[顶]
+						<?php } ?>
+						<?php if(mb_strlen($ex_note_vo['ztitle'],'utf8')>17
+							&& strlen($ex_note_vo['ztitle'])-mb_strlen($ex_note_vo['ztitle'],'utf8')>mb_strlen($ex_note_vo['ztitle'],'utf8')-17){ 
+							echo mb_substr($ex_note_vo['ztitle'], 0,16,'utf8')."……";
+						}else{
+							echo $ex_note_vo['ztitle'];
+						} ?>
+						</h4>
+						{$ex_note_vo.zsummary}……&nbsp;&nbsp;&nbsp;&nbsp;
+						<span onclick="window.location.href='__ROOT__/Home/Ex/detail?zid={$ex_note_vo.zid}';" style="cursor:pointer;" title="阅读“{$ex_note_vo.ztitle}”">阅读全文</span>
+					</div>
+					<img style="margin:10px;" 
+					<?php if($ex_note_vo['zflag'] == ''){ ?>
+						src="__PUBLIC__/assets/image/ex_note_default.png"
+					<?php } else { ?>
+						src="__PUBLIC__/uploads{$ex_note_vo.zflag}"
+					<?php } ?>
+					  width="156px" height="198px" />
+					<div class="ex_note_attach">
+						作者：南京大学 {$ex_note_vo.zauthor} <span class="time">{$ex_note_vo.zreleased_time}</span>
+					</div>
+				</div>
+			</volist>
+		<?php } else if($ztype == 6) {?>
+
+		<?php } else if ($ztype == 9) { ?>
+
+		<?php } ?>
+		<div style="margin:35px 0 100px;text-align:center;"></div>
+	</div>
+	<div class="ex_right">
+		<div class="ex_area_title" style="margin-top:20px;">站内传送>></div>
+		<div class="ex_item_top_bar" style="margin-top:0"></div>
+		<div style="margin-top:30px;">
+			<div class="ex_type_item">
+				<a href="__ROOT__/Home/Ex/exlist?ztype=5#start" />交流札记&nbsp;>></a>
+			</div>
+			<div class="ex_type_item">
+				<a href="__ROOT__/Home/Ex/exlist?ztype=6#start" />留学动态&nbsp;>></a>
+			</div>
+			<div class="ex_type_item">
+				<a href="__ROOT__/Home/Ex/exlist?ztype=9#start" />交换项目&nbsp;>></a>
+			</div>
+		</div>
+	</div>
+
+</div>

@@ -47,19 +47,32 @@
 					<div class="post_item">
 						<span class="op">
 							<span class="time">{$ex_note_vo.zcreated_time}</span>&nbsp;
-							<span><a href="__ROOT__/Home/Bbs/ex_note_edit?zid={$ex_note_vo['zid']}#start" style="color:black;" title="修改“{$ex_note_vo['ztitle']}”">修改</a></span>&nbsp;
-							<span><a href="__ROOT__/Home/Ex/ex_note_dtl?zid={$ex_note_vo['zid']}#start" style="color:black;" title="查看“{$ex_note_vo['ztitle']}”">查看</a></span>&nbsp;
-							<span onclick="ex_note_delete(this,{$ex_note_vo['zid']},'{$ex_note_vo['ztitle']}')" style="cursor:pointer;" title="删除“{$ex_note_vo['ztitle']}”">删除</span>
+							<?php if($tmp_admin){ ?>
+								<?php if($ex_note_vo['zstate'] == 10/*审核中*/){ ?>
+									<span><a href="__ROOT__/Home/Ex/detail?zid={$ex_note_vo.zid}&check=1#start" style="color:black;" title="审核“{$ex_note_vo.ztitle}”">审核</a></span>&nbsp;
+								<?php } else if($ex_note_vo['zstate'] == 30/*已发布*/) { ?>
+									<span style="cursor:pointer;" title="将“{$ex_note_vo.ztitle}”置顶" onclick="ex_note_top({$ex_note_vo.zid},1)">置顶</span>&nbsp;
+								<?php } else if($ex_note_vo['zstate'] == 40/*已置顶*/) { ?>
+									<span style="cursor:pointer;" title="将“{$ex_note_vo.ztitle}”置顶" onclick="ex_note_top({$ex_note_vo.zid},0)">取消置顶</span>&nbsp;
+								<?php } else if($ex_note_vo['zstate'] == 50/*已屏蔽*/) { ?>
+									<span style="cursor:pointer;" title="取消“{$ex_note_vo.ztitle}”屏蔽并置为退回状态" onclick="ex_note_top({$ex_note_vo.zid},2,'{$ex_note_vo.ztitle}')">取消屏蔽</span>&nbsp;
+								<?php } ?>
+							<?php } else { ?>
+								<span><a href="__ROOT__/Home/Bbs/ex_note_edit?zid={$ex_note_vo.zid}#start" style="color:black;" title="修改“{$ex_note_vo['ztitle']}”">修改</a></span>&nbsp;
+								<span><a href="__ROOT__/Home/Ex/ex_note_dtl?zid={$ex_note_vo.zid}#start" style="color:black;" title="查看“{$ex_note_vo['ztitle']}”">查看</a></span>&nbsp;
+								<span onclick="ex_note_delete(this,{$ex_note_vo.zid},'{$ex_note_vo.ztitle}')" style="cursor:pointer;" title="删除“{$ex_note_vo['ztitle']}”">删除</span>
+							<?php } ?>
 						</span>
 						<div>
-							<span title="{$ex_note_vo['ztitle']}">
-								<?php if(mb_strlen($ex_note_vo['ztitle'])>18){ 
-									echo mb_substr($ex_note_vo['ztitle'], 0,17,'utf8')."……";
+							<span title="{$ex_note_vo.ztitle}">
+								<?php if(mb_strlen($ex_note_vo['ztitle'],'utf8')>17
+									&& strlen($ex_note_vo['ztitle'])-mb_strlen($ex_note_vo['ztitle'],'utf8')>mb_strlen($ex_note_vo['ztitle'],'utf8')-17){ 
+									echo mb_substr($ex_note_vo['ztitle'], 0,16,'utf8')."……";
 								}else{
 									echo $ex_note_vo['ztitle'];
 								} ?>
 							</span>
-							<span class="state">({$ex_note_vo['zstate_name']})</span>
+							<span class="state">({$ex_note_vo.zstate_name})</span>
 						</div>
 					</div>
 				</volist>
@@ -88,6 +101,33 @@ function ex_note_delete(elem,zid,ztitle){
 			if(t.result == 0){
 				cdialog.show_info('操作成功！',function(){
 					$(elem).parent().parent().hide();
+				});
+			}else{
+				cdialog.show_alert('操作失败！错误信息：'+t.msg);
+			}
+		},
+		error:function(t){eds_framework.error_handler(url,t);}
+	});
+}
+function ex_note_top(zid,ptop,ztitle){
+	if(ptop == 2){
+		if(!eds_framework.confirm('','您确定要退回“'+ztitle+'”吗？')){
+			return;
+		}
+	}
+	var url = '__ROOT__/Home/Bbs/ex_note_top';
+	$.ajax({
+		url:url,
+		dataType:'json',
+		type:'post',
+		data:{
+			zid:zid,
+			ztop:ptop
+		},
+		success:function(t,s,r){
+			if(t.result == 0){
+				cdialog.show_info('操作成功！',function(){
+					window.location.reload();
 				});
 			}else{
 				cdialog.show_alert('操作失败！错误信息：'+t.msg);

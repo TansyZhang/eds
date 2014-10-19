@@ -1,0 +1,89 @@
+<layout name="layout" replace="{__REEPLACE__}" />
+
+
+<include file="./Application/Home/View/welcome4.html" />
+
+<style>
+</style>
+
+<div class="container" style="padding-left:0px;padding-right:0px;background-color:rgb(234,234,234);width:1024px;">
+	<include file="./Application/Home/View/layout_banner.html" bgcolor="255,111,61" display0="inline-block" display1="block"
+	title0="国际交流" href0="__ROOT__/Home/Ex" title1="{$sub_title}" href1="__ROOT__/Home/Ex/exlist?ztype={$ztype}#start"  />
+
+
+	<div style="padding:100px;">
+		<span id="zid" style="display:none;">{$zid}</span>
+		<div class="ex_title" style="text-align:center;margin-bottom:20px;font-size:16pt;" id="ztitle">{$ztitle}</div>
+		<div class="ex_by" style="text-align:center;margin:10px 0px 30px;">
+			{$zauthor}&nbsp;&nbsp;{$zreleased_time}
+		</div>
+		<div class="ex_by">
+		<?php 
+			echo htmlspecialchars_decode($zcontent,ENT_QUOTES);
+		?>
+		</div>
+		<div style="width:100px;">
+			<?php if($check){ ?>
+				<include file="./Application/Home/View/control_btn.html" id="btn_pass" text="发布" />
+				<include file="./Application/Home/View/control_btn.html" id="btn_refuse" text="退回" />
+				<include file="./Application/Home/View/control_btn.html" id="btn_goback" text="返回" />
+			<?php } ?>
+		</div>
+	</div>
+</div>
+
+<script>
+$(document).ready(function(){
+	$('#btn_goback').click(function(){window.location.href="__ROOT__/Home/Bbs/ex_note#start";});
+	$('#btn_pass').click(function(){
+		if(!eds_framework.confirm('','您确定要发布“'+$('#ztitle').text()+'”吗？')){
+			return;
+		}
+		var url = '__ROOT__/Home/Bbs/ex_note_top';
+		$.ajax({
+			url:url,
+			dataType:'json',
+			type:'post',
+			data:{
+				zid:$('#zid').text(),
+				ztop:4
+			},
+			success:function(t,s,r){
+				if(t.result == 0){
+					cdialog.show_info('操作成功！',function(){
+						window.location.href="__ROOT__/Home/Bbs/ex_note#start";
+					});
+				}else{
+					cdialog.show_alert('操作失败！错误信息：'+t.msg);
+				}
+			},
+			error:function(t){eds_framework.error_handler(url,t);}
+		});
+	});
+	$('#btn_refuse').click(function(){
+		if(!eds_framework.confirm('','您确定要退回“'+$('#ztitle').text()+'”吗？')){
+			return;
+		}
+		var url = '__ROOT__/Home/Bbs/ex_note_top';
+		$.ajax({
+			url:url,
+			dataType:'json',
+			type:'post',
+			data:{
+				zid:$('#zid').text(),
+				ztop:5
+			},
+			success:function(t,s,r){
+				if(t.result == 0){
+					cdialog.show_info('操作成功！',function(){
+						window.location.href="__ROOT__/Home/Bbs/ex_note#start";
+					});
+				}else{
+					cdialog.show_alert('操作失败！错误信息：'+t.msg);
+				}
+			},
+			error:function(t){eds_framework.error_handler(url,t);}
+		});
+	});
+});
+</script>

@@ -28,6 +28,22 @@
 				</span>
 			</div>
 			<div>
+				<span>封面</span>
+				<div class="title" style="text-align:center;">
+					<img id="zflag_show" 
+					<?php if($zflag==''){ ?>
+						src="__PUBLIC__/assets/image/ex_note_default.png"
+					<?php } else { ?>
+						id="zflag_show" src="__PUBLIC__/uploads{$tflag}"
+					<?php } ?> 
+					width="156px" height="198px" style="margin:10px 0;" />
+					<input type="hidden" id="zflag" name="zflag" value="{$zflag}" />
+					<form method="post" enctype="multipart/form-data">
+						<input type="file" id="zflag_input" name="zflag_input" onchange="upload_flag()" class="form-control" />
+					</form>
+				</div>
+			</div>
+			<div>
 				<span>内容</span>
 				<span>
 					<textarea name="zcontent" class="form-control" style="width:100%;height:400px;visibility:hidden;">{$zcontent}</textarea>
@@ -44,6 +60,31 @@
 <script type="text/javascript">
 <include file="./Application/Home/View/control_editor.html" editor="editor" name="zcontent" />
 
+function upload_flag(){
+	//$('#tflag_input').attr('disabled',true);
+	//alert('change');
+	$.ajaxFileUpload({
+		url:'__ROOT__/Home/Bbs/post_img_upload',
+		secureuri:false,
+		fileElementId:'zflag_input',
+		dataType: 'json',
+		data:{},
+		success: function (data, status){
+			if(data.result == 0){
+				$('#zflag_show').attr('src', '__PUBLIC__/uploads'+data.flag);
+				$('#zflag').val(data.flag);
+				$('#zflag_input').val('');
+			} else {
+				cdialog.show_alert('封面上传失败！错误信息：'+data.msg);
+			}
+			//$('#tflag_input').attr('disabled',false);
+		},
+		error: function (data, status, e){
+			cdialog.show_alert(e);
+			//$('#tflag_input').attr('disabled',false);
+		}
+	});
+}
 function handle_submit(elem,psubmit){
 	var url = '__ROOT__/Home/Bbs/ex_note_save';
 	$(elem).attr('disabled',true);
@@ -54,6 +95,7 @@ function handle_submit(elem,psubmit){
 		data:{
 			zid:$('#zid').val(),
 			ztitle:$('#ztitle').val(),
+			zflag:$('#zflag').val(),
 			zsubmit:psubmit,
 			zsummary:editor.text().substr(0,100),
 			zcontent:editor.html()
