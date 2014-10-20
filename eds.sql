@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : localhost
-Source Server Version : 50620
+Source Server Version : 50611
 Source Host           : localhost:3306
 Source Database       : eds
 
 Target Server Type    : MYSQL
-Target Server Version : 50620
+Target Server Version : 50611
 File Encoding         : 65001
 
-Date: 2014-10-19 20:03:34
+Date: 2014-10-20 21:05:38
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -38,12 +38,12 @@ CREATE TABLE `t_bbs` (
   `tscan_count` int(11) NOT NULL DEFAULT '0' COMMENT '帖子被查看次数',
   `tfloor` int(11) DEFAULT '0' COMMENT '帖子楼层，帖子楼层，楼主该字段为0，沙发为1',
   PRIMARY KEY (`tid`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_bbs
 -- ----------------------------
-INSERT INTO `t_bbs` VALUES ('1', null, '太阳系边界现神秘“彩带” 粒子被困环形区域', '1', '【科技讯】8月29日消息，据媒体报道，在太阳系的边缘，科学家发现了一处神秘的边界层，是太阳系物质与银河系介质相互作用的地方，处于日光层的边缘，NASA星际边界探测器发现了一种奇怪的现象，太阳系内部粒子', '&lt;p&gt;\n	&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;【&lt;/span&gt;&lt;a href=&quot;http://www.kejixun.com/&quot; target=&quot;_blank&quot; class=&quot;keylink&quot;&gt;科技&lt;/a&gt;&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;讯】8月29日消息，据媒体报道，在太阳系的边缘，&lt;/span&gt;&lt;a href=&quot;http://www.kejixun.com/kexue/&quot; target=&quot;_blank&quot; class=&quot;keylink&quot;&gt;科学&lt;/a&gt;&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;家发现了一处神秘的边界层，是太阳系物质与银河系介质相互作用的地方，处于日光层的边缘，NASA星际边界探测器发现了一种奇怪的现象，太阳系内部粒子在这一区域中似乎碰到一层壁垒，使得太阳系外围出现类似“边界指纹”的结构，绘制太阳系边界图像体现了这处神秘的区域，但无法对其进行解释。&lt;/span&gt;\n&lt;/p&gt;\n&lt;p style=&quot;text-align:center;&quot;&gt;\n	&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;&lt;img src=&quot;/eds/Public/kindeditor-4.1.10/attached/image/20140830/20140830144420_14273.jpg&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;\n&lt;/span&gt;\n&lt;/p&gt;\n&lt;p&gt;\n	&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;\n	&lt;p style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;&quot;&gt;\n		&amp;nbsp;&amp;nbsp; &amp;nbsp; &amp;nbsp; 太阳系边界处神秘结构酷似巨大的“彩带”飘舞，产生更多高能中性原子，&lt;a href=&quot;http://www.kejixun.com/kexue/&quot; target=&quot;_blank&quot; class=&quot;keylink&quot;&gt;科学&lt;/a&gt;家不清楚是什么原因导致中性原子数量出现增加。科学家设计出相关模拟和理论试图解释彩带的存在原因，彩带存在于一个特殊的位置上，太阳的中性氢原子穿过银河系的磁场，中性原子不受磁场的影响，使得该过程中的运行方向仍然保持原有指向。\n	&lt;/p&gt;\n	&lt;p style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;&quot;&gt;\n		&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 科学家认为，新的理论嵌入了太阳系边缘波动以及磁场震动的因子，使得这些粒子被困于一个环形区域中。科学家认为其中还隐藏了太阳系磁场与银河系磁场的关系，如果这一理论是正确的，太阳系边界的环形色带将告诉我们星际介质与磁场的作用关系，以及这些磁场是如何影响我们的空间环境。\n	&lt;/p&gt;\n&lt;br /&gt;\n&lt;/span&gt;\n&lt;/p&gt;', '6', '20', null, '2014-08-30 20:44:26', '2014-08-30 20:44:26', null, null, '2014-09-10 23:26:52', null, '19', '0');
+INSERT INTO `t_bbs` VALUES ('1', null, '太阳系边界现神秘“彩带” 粒子被困环形区域', '1', '【科技讯】8月29日消息，据媒体报道，在太阳系的边缘，科学家发现了一处神秘的边界层，是太阳系物质与银河系介质相互作用的地方，处于日光层的边缘，NASA星际边界探测器发现了一种奇怪的现象，太阳系内部粒子', '&lt;p&gt;\n	&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;【&lt;/span&gt;&lt;a href=&quot;http://www.kejixun.com/&quot; target=&quot;_blank&quot; class=&quot;keylink&quot;&gt;科技&lt;/a&gt;&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;讯】8月29日消息，据媒体报道，在太阳系的边缘，&lt;/span&gt;&lt;a href=&quot;http://www.kejixun.com/kexue/&quot; target=&quot;_blank&quot; class=&quot;keylink&quot;&gt;科学&lt;/a&gt;&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;家发现了一处神秘的边界层，是太阳系物质与银河系介质相互作用的地方，处于日光层的边缘，NASA星际边界探测器发现了一种奇怪的现象，太阳系内部粒子在这一区域中似乎碰到一层壁垒，使得太阳系外围出现类似“边界指纹”的结构，绘制太阳系边界图像体现了这处神秘的区域，但无法对其进行解释。&lt;/span&gt;\n&lt;/p&gt;\n&lt;p style=&quot;text-align:center;&quot;&gt;\n	&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;&lt;img src=&quot;/eds/Public/kindeditor-4.1.10/attached/image/20140830/20140830144420_14273.jpg&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;\n&lt;/span&gt;\n&lt;/p&gt;\n&lt;p&gt;\n	&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;\n	&lt;p style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;&quot;&gt;\n		&amp;nbsp;&amp;nbsp; &amp;nbsp; &amp;nbsp; 太阳系边界处神秘结构酷似巨大的“彩带”飘舞，产生更多高能中性原子，&lt;a href=&quot;http://www.kejixun.com/kexue/&quot; target=&quot;_blank&quot; class=&quot;keylink&quot;&gt;科学&lt;/a&gt;家不清楚是什么原因导致中性原子数量出现增加。科学家设计出相关模拟和理论试图解释彩带的存在原因，彩带存在于一个特殊的位置上，太阳的中性氢原子穿过银河系的磁场，中性原子不受磁场的影响，使得该过程中的运行方向仍然保持原有指向。\n	&lt;/p&gt;\n	&lt;p style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;&quot;&gt;\n		&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 科学家认为，新的理论嵌入了太阳系边缘波动以及磁场震动的因子，使得这些粒子被困于一个环形区域中。科学家认为其中还隐藏了太阳系磁场与银河系磁场的关系，如果这一理论是正确的，太阳系边界的环形色带将告诉我们星际介质与磁场的作用关系，以及这些磁场是如何影响我们的空间环境。\n	&lt;/p&gt;\n&lt;br /&gt;\n&lt;/span&gt;\n&lt;/p&gt;', '6', '20', null, '2014-08-30 20:44:26', '2014-08-30 20:44:26', null, null, '2014-09-10 23:26:52', null, '20', '0');
 INSERT INTO `t_bbs` VALUES ('2', null, null, '1', '阿三，你又来胡思乱想了，药不能停啊！！！还挺有意思~', '&lt;pre&gt;阿三，你又来胡思乱想了，药不能停啊！！！还挺有意思~&lt;/pre&gt;', null, '0', null, '2014-08-30 20:46:03', null, null, null, null, '1', '0', '0');
 INSERT INTO `t_bbs` VALUES ('3', null, null, '1', '阿三，你又来胡思乱想了，药不能停啊！！！还挺有意思~', '&lt;pre&gt;阿三，你又来胡思乱想了，药不能停啊！！！还挺有意思~&lt;/pre&gt;', null, '20', null, '2014-08-30 21:12:49', null, null, null, null, '1', '0', '0');
 INSERT INTO `t_bbs` VALUES ('4', null, null, '1', '阿三，你又来胡思乱想了，药不能停啊！！！还挺有意思~', '&lt;strong&gt;&lt;span style=&quot;font-size:16px;&quot;&gt;阿三，你又来胡思乱想了，药不能停啊！！！还挺有意思~&lt;/span&gt;&lt;/strong&gt;', null, '0', null, '2014-08-30 21:16:48', null, null, null, null, '1', '0', '0');
@@ -51,10 +51,10 @@ INSERT INTO `t_bbs` VALUES ('5', null, null, '1', '&lt;img src=&quot;/eds/Public
 INSERT INTO `t_bbs` VALUES ('6', null, '罕见超长伽玛射线暴 或源于神秘大质量恒星', '1', '【科技讯】8月29日消息，据媒体报道，伽玛射线暴被认为是宇宙中最强大的爆炸之一，大部分的伽玛射线暴在一分钟左右，科学家提出的新型伽玛暴可持续几个小时。英国研究小组通过观测提出了一种新型伽玛射线暴理论，', '&lt;p&gt;\n	&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;&amp;nbsp;【&lt;/span&gt;&lt;a href=&quot;http://www.kejixun.com/&quot; target=&quot;_blank&quot; class=&quot;keylink&quot;&gt;科技&lt;/a&gt;&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;讯】8月29日消息，据媒体报道，伽玛射线暴被认为是宇宙中最强大的爆炸之一，大部分的伽玛射线暴在一分钟左右，&lt;/span&gt;&lt;a href=&quot;http://www.kejixun.com/kexue/&quot; target=&quot;_blank&quot; class=&quot;keylink&quot;&gt;科学&lt;/a&gt;&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;家提出的新型伽玛暴可持续几个小时。英国研究小组通过观测提出了一种新型伽玛射线暴理论，其形成于质量更大的超巨星。&lt;/span&gt;\n&lt;/p&gt;\n&lt;p style=&quot;text-align:center;&quot;&gt;\n	&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;&lt;img src=&quot;/eds/Public/kindeditor-4.1.10/attached/image/20140830/20140830155625_89689.jpg&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;\n&lt;/span&gt;\n&lt;/p&gt;\n&lt;p&gt;\n	&lt;span style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;line-height:26px;&quot;&gt;\n	&lt;p style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;&quot;&gt;\n		&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 宇宙中存在的大质量恒星，该型恒星的“燃烧”速度非常快，其寿命很短，可形成能量异常高的伽玛射线。&lt;a href=&quot;http://www.kejixun.com/kexue/&quot; target=&quot;_blank&quot; class=&quot;keylink&quot;&gt;科学&lt;/a&gt;家小组观测到不寻常的新型伽玛暴，超长伽玛暴的红移值达到0.847，大约在70亿光年左右，认为其爆炸产生于超巨星，一种质量达到太阳质量20倍以上的天体，爆发瞬间可变成宇宙中最大最亮的恒星之一，半径可达到太阳的1000倍左右。\n	&lt;/p&gt;\n	&lt;p style=&quot;color:#333333;font-family:\'Microsoft YaHei\', MingLiu, Georgia, sans-serif;font-size:15px;&quot;&gt;\n		&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 恒星演化的最后阶段，其自身会在引力作用下坍缩形成一个黑洞，当物质被吸入黑洞时，会在两个垂直方向上形成伽玛射线喷流，其速度可接近光速，一般情况下这个伽玛射线暴仅会持续数秒，发现的恒星质量较大，形成伽玛射线喷流的持续时间也较长。\n	&lt;/p&gt;\n&lt;br /&gt;\n&lt;/span&gt;\n&lt;/p&gt;', '2', '30', null, '2014-08-30 21:56:30', '2014-08-30 21:56:30', null, null, null, null, '1', '0');
 INSERT INTO `t_bbs` VALUES ('7', null, '试试看', '1', '好吧，我就试试看看而发生大法师打发斯蒂芬', '&lt;div style=&quot;text-align:center;&quot;&gt;\n	&lt;span style=&quot;line-height:1.5;&quot;&gt;好吧，我就试试&lt;/span&gt;&lt;span style=&quot;line-height:1.5;&quot;&gt;看看而发生大法师打发斯蒂芬&lt;/span&gt;\n&lt;/div&gt;', '1', '10', null, '2014-08-30 22:42:55', '2014-09-10 22:47:54', null, null, '2014-09-10 23:27:25', null, '1', '0');
 INSERT INTO `t_bbs` VALUES ('8', null, '按时打算', '1', '阿瑟大声道v24534', '阿瑟大声道v24534', '3', '30', null, '2014-09-10 22:01:23', '2014-09-10 22:40:32', null, null, null, null, '0', '0');
-INSERT INTO `t_bbs` VALUES ('9', null, '我就发个帖', '1', '好久没有发帖了 看看这个功能有木有受影响', '好久没有发帖了 看看这个功能有木有受影响', '1', '10', null, '2014-09-11 22:52:03', '2014-09-11 22:52:03', null, null, null, null, '3', '0');
+INSERT INTO `t_bbs` VALUES ('9', null, '我就发个帖', '1', '好久没有发帖了 看看这个功能有木有受影响', '好久没有发帖了 看看这个功能有木有受影响', '1', '10', null, '2014-09-11 22:52:03', '2014-09-11 22:52:03', null, null, null, null, '4', '0');
 INSERT INTO `t_bbs` VALUES ('10', null, null, '1', '看来是没有咦', '看来是没有咦', null, '10', null, '2014-09-11 22:54:30', null, null, null, null, '9', '0', '0');
 INSERT INTO `t_bbs` VALUES ('11', null, null, '1', '这楼层怎么算', '这楼层怎么算', null, '10', null, '2014-09-11 22:54:45', null, null, null, null, '9', '0', '0');
-INSERT INTO `t_bbs` VALUES ('12', '/image/2014_09_21_09_46_19_569334634.png', '测试帖子图标', '1', '只是测试一下帖子图标', '只是测试一下帖子图标', '1', '10', null, '2014-09-21 09:47:00', '2014-09-21 09:47:00', null, null, null, null, '3', '0');
+INSERT INTO `t_bbs` VALUES ('12', '/image/2014_09_21_09_46_19_569334634.png', '测试帖子图标', '1', '只是测试一下帖子图标', '只是测试一下帖子图标', '1', '10', null, '2014-09-21 09:47:00', '2014-09-21 09:47:00', null, null, null, null, '4', '0');
 INSERT INTO `t_bbs` VALUES ('13', null, null, '1', '回复一下', '回复一下', null, '10', null, '2014-09-21 09:47:46', null, null, null, null, '12', '0', '0');
 INSERT INTO `t_bbs` VALUES ('19', null, null, '1', 'werwerwrweeere', 'werwerwrweeere', null, '10', null, '2014-09-21 12:35:26', null, null, null, null, '7', '0', '0');
 INSERT INTO `t_bbs` VALUES ('20', null, null, '1', 'afasdfasdf', 'afasdfasdf', null, '10', null, '2014-09-21 12:36:00', null, null, null, null, '7', '0', '0');
@@ -64,9 +64,11 @@ INSERT INTO `t_bbs` VALUES ('23', '', 'asdfasdfaa', '23', 'sfsdfsd', 'sfsdfsd', 
 INSERT INTO `t_bbs` VALUES ('24', null, null, '23', '回复帖子：罕见超长伽玛射线暴 或源于神秘大质量恒星', '&lt;span style=&quot;color:#434A54;font-family:\'Open Sans\', \'Helvetica Neue\', Helvetica, Arial, sans-serif;font-size:24px;line-height:20px;background-color:#4C33E5;&quot;&gt;&lt;strong&gt;回复帖子：罕见超长伽玛射线暴 或源于神秘大质量恒星&lt;/strong&gt;&lt;/span&gt;', null, '10', null, '2014-10-04 11:39:40', null, null, null, null, '6', '0', '0');
 INSERT INTO `t_bbs` VALUES ('25', null, null, '23', '我也回复一下', '我也回复一下', null, '10', null, '2014-10-04 11:43:08', null, null, null, null, '12', '0', '0');
 INSERT INTO `t_bbs` VALUES ('26', null, null, '23', '再回复一下', '再回复一下', null, '10', null, '2014-10-04 11:43:42', null, null, null, null, '12', '0', '0');
-INSERT INTO `t_bbs` VALUES ('27', '', '新人报到', '40', '大家好 我是新来的张三同学 请大家多多关照！', '&lt;span style=&quot;font-family:NSimSun;color:#E53333;font-size:14px;&quot;&gt;&lt;strong&gt;大家好 我是新来的张三同学 请大家多多关照！&lt;/strong&gt;&lt;/span&gt;', '6', '10', null, '2014-10-06 19:36:00', '2014-10-06 19:36:00', null, null, null, null, '1', '0');
+INSERT INTO `t_bbs` VALUES ('27', '', '新人报到', '40', '大家好 我是新来的张三同学 请大家多多关照！', '&lt;span style=&quot;font-family:NSimSun;color:#E53333;font-size:14px;&quot;&gt;&lt;strong&gt;大家好 我是新来的张三同学 请大家多多关照！&lt;/strong&gt;&lt;/span&gt;', '6', '10', null, '2014-10-06 19:36:00', '2014-10-06 19:36:00', null, null, null, null, '2', '0');
 INSERT INTO `t_bbs` VALUES ('28', null, null, '1', '你好！', '你好！', null, '10', null, '2014-10-06 19:38:02', null, null, null, null, '27', '0', '0');
 INSERT INTO `t_bbs` VALUES ('29', null, null, '23', 'asdfasdfasdfasdfasdfsadfsasdfasdfasdfasdfasdfsadfsasdfasdfasdfasdfasdfsadfsasdfasdfasdfasdfasdfsadfs', '&lt;span&gt;asdfasdfasdfasdfasdfsadfs&lt;span&gt;asdfasdfasdfasdfasdfsadfs&lt;span&gt;asdfasdfasdfasdfasdfsadfs&lt;span&gt;asdfasdfasdfasdfasdfsadfs&lt;span&gt;asdfasdfasdfasdfasdfsadfs&lt;span&gt;asdfasdfasdfasdfasdfsadfs&lt;span&gt;asdfasdfasdfasdfasdfsadfs&lt;span&gt;asdfasdfasdfasdfasdfsadfs&lt;span&gt;asdfasdfasdfasdfasdfsadfs&lt;span&gt;asdfasdfasdfasdfasdfsadfs&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;', null, '10', null, '2014-10-18 21:08:24', null, null, null, null, '1', '0', '0');
+INSERT INTO `t_bbs` VALUES ('30', null, null, '20', '你好', '你好', null, '10', null, '2014-10-20 09:41:08', null, null, null, null, '27', '0', '0');
+INSERT INTO `t_bbs` VALUES ('31', null, null, '1', 'sdfasdfasfsad', 'sdfasdfasfsad', null, '10', null, '2014-10-20 11:24:57', null, null, null, null, '9', '0', '0');
 
 -- ----------------------------
 -- Table structure for `t_college`
@@ -187,7 +189,7 @@ INSERT INTO `t_dic` VALUES ('0', 'usender', '未知', null);
 INSERT INTO `t_dic` VALUES ('0', 'vstate', '未查看', null);
 INSERT INTO `t_dic` VALUES ('0', 'zstate', '编辑中', null);
 INSERT INTO `t_dic` VALUES ('0', 'zsub_type', '中国科学网', '0');
-INSERT INTO `t_dic` VALUES ('0', 'ztype', '资讯', null);
+INSERT INTO `t_dic` VALUES ('0', 'ztype', '新闻资讯', null);
 INSERT INTO `t_dic` VALUES ('1', 'dic_city', '南京市', '1');
 INSERT INTO `t_dic` VALUES ('1', 'dic_province', '江苏省', null);
 INSERT INTO `t_dic` VALUES ('1', 'etype', '物理力学', '1');
@@ -200,9 +202,9 @@ INSERT INTO `t_dic` VALUES ('2', 'lgresult', '用户不存在', null);
 INSERT INTO `t_dic` VALUES ('2', 'zsub_type', 'Nature专区', '0');
 INSERT INTO `t_dic` VALUES ('3', 'lgresult', '密码错误', null);
 INSERT INTO `t_dic` VALUES ('3', 'zsub_type', '拔尖计划专区', '0');
-INSERT INTO `t_dic` VALUES ('3', 'ztype', '成果', null);
+INSERT INTO `t_dic` VALUES ('3', 'ztype', '拔尖计划成果', null);
 INSERT INTO `t_dic` VALUES ('4', 'lgresult', '登录受限', null);
-INSERT INTO `t_dic` VALUES ('4', 'ztype', '通知', null);
+INSERT INTO `t_dic` VALUES ('4', 'ztype', '公告通知', null);
 INSERT INTO `t_dic` VALUES ('5', 'lgresult', '状态异常', null);
 INSERT INTO `t_dic` VALUES ('5', 'ztype', '交流札记', null);
 INSERT INTO `t_dic` VALUES ('6', 'ztype', '留学动态', null);
@@ -211,6 +213,7 @@ INSERT INTO `t_dic` VALUES ('10', 'eattr', '物理图书馆', null);
 INSERT INTO `t_dic` VALUES ('10', 'estate', '审核中', null);
 INSERT INTO `t_dic` VALUES ('10', 'fstate', '已发布', null);
 INSERT INTO `t_dic` VALUES ('10', 'gstate', '审核中', null);
+INSERT INTO `t_dic` VALUES ('10', 'kstate', '已发布', null);
 INSERT INTO `t_dic` VALUES ('10', 'rrole', '超级管理员', null);
 INSERT INTO `t_dic` VALUES ('10', 'rstate', '登录受限', null);
 INSERT INTO `t_dic` VALUES ('10', 'tstate', '已发布', null);
@@ -221,6 +224,7 @@ INSERT INTO `t_dic` VALUES ('20', 'eattr', '公共课件', null);
 INSERT INTO `t_dic` VALUES ('20', 'estate', '审核通过', null);
 INSERT INTO `t_dic` VALUES ('20', 'fstate', '已关闭', null);
 INSERT INTO `t_dic` VALUES ('20', 'gstate', '被退回', null);
+INSERT INTO `t_dic` VALUES ('20', 'kstate', '已置顶', null);
 INSERT INTO `t_dic` VALUES ('20', 'rrole', '普通管理员', null);
 INSERT INTO `t_dic` VALUES ('20', 'rstate', '已删除', null);
 INSERT INTO `t_dic` VALUES ('20', 'tstate', '置顶', null);
@@ -231,6 +235,7 @@ INSERT INTO `t_dic` VALUES ('30', 'eattr', '内部课件', null);
 INSERT INTO `t_dic` VALUES ('30', 'estate', '被退回', null);
 INSERT INTO `t_dic` VALUES ('30', 'fstate', '已删除', null);
 INSERT INTO `t_dic` VALUES ('30', 'gstate', '发布', null);
+INSERT INTO `t_dic` VALUES ('30', 'kstate', '已移除', null);
 INSERT INTO `t_dic` VALUES ('30', 'rrole', '老师', null);
 INSERT INTO `t_dic` VALUES ('30', 'tstate', '被删除', null);
 INSERT INTO `t_dic` VALUES ('30', 'zstate', '已发布', null);
@@ -238,6 +243,7 @@ INSERT INTO `t_dic` VALUES ('35', 'rrole', '助教', null);
 INSERT INTO `t_dic` VALUES ('40', 'estate', '已下架', null);
 INSERT INTO `t_dic` VALUES ('40', 'fstate', '已被管理员屏蔽', null);
 INSERT INTO `t_dic` VALUES ('40', 'gstate', '关闭', null);
+INSERT INTO `t_dic` VALUES ('40', 'kstate', '已删除', null);
 INSERT INTO `t_dic` VALUES ('40', 'rrole', '学生', null);
 INSERT INTO `t_dic` VALUES ('40', 'tstate', '被屏蔽', null);
 INSERT INTO `t_dic` VALUES ('40', 'zstate', '置顶', null);
@@ -293,7 +299,7 @@ CREATE TABLE `t_event` (
   `vstate` int(11) NOT NULL COMMENT '事件状态：0-未查看，1-已忽略，2-已查看，引用自字典表vstate',
   `vref` int(11) DEFAULT NULL COMMENT '引用',
   PRIMARY KEY (`vid`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_event
@@ -301,10 +307,33 @@ CREATE TABLE `t_event` (
 INSERT INTO `t_event` VALUES ('1', '1', '56yergh76u456y456', '这里是标题', null, '1', '/Home/Bbs/post_dtl?tid=1#start', '2014-09-07 12:03:24', '10', '1');
 INSERT INTO `t_event` VALUES ('2', '1', '35y654y656y67u467u6', '试试看', null, '1', '2014-09-21 12:37:36', '0000-00-00 00:00:00', '10', '1');
 INSERT INTO `t_event` VALUES ('3', '1', '4u67uhdfhe4gdrgdf6', '试试看', null, '1', '2014-09-21 12:38:00', '0000-00-00 00:00:00', '10', '1');
-INSERT INTO `t_event` VALUES ('4', '1', '', '罕见超长伽玛射线暴 或源于神秘大质量恒星', null, '1', '/Home/Bbs/post_dtl?tid=1#start', '2014-10-04 11:39:40', '10', '23');
+INSERT INTO `t_event` VALUES ('4', '1', 'w434fet578x3sdfvfg54tewr', '罕见超长伽玛射线暴 或源于神秘大质量恒星', null, '1', '/Home/Bbs/post_dtl?tid=1#start', '2014-10-04 11:39:40', '10', '23');
 INSERT INTO `t_event` VALUES ('5', '1', '45y656y5y5yrtdtyh56y', '测试帖子图标', null, '1', '/Home/Bbs/post_dtl?tid=1#start', '2014-10-04 11:43:09', '10', '23');
 INSERT INTO `t_event` VALUES ('6', '1', '546y56hytru76yh5yery6', '测试帖子图标', null, '1', '/Home/Bbs/post_dtl?tid=1#start', '2014-10-04 11:43:43', '0', '23');
 INSERT INTO `t_event` VALUES ('7', '40', '35y65ygtru765i8u5u767', '新人报到', null, '1', '/Home/Bbs/post_dtl?tid=40#start', '2014-10-06 19:38:02', '0', '1');
+INSERT INTO `t_event` VALUES ('8', '40', 'wGsqhOHLMDF4lCrzRID0', '新人报到', null, '1', '/Home/Bbs/post_dtl?tid=#start', '2014-10-20 09:41:08', '0', '20');
+INSERT INTO `t_event` VALUES ('9', '1', 'ZuVBkk0svdPQdvSSH167', '我就发个帖', null, '1', '/Home/Bbs/post_dtl?tid=#start', '2014-10-20 11:24:57', '0', '1');
+
+-- ----------------------------
+-- Table structure for `t_hotact`
+-- ----------------------------
+DROP TABLE IF EXISTS `t_hotact`;
+CREATE TABLE `t_hotact` (
+  `kid` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `kztype` int(11) NOT NULL,
+  `kstate` int(11) NOT NULL,
+  `kzid` int(11) NOT NULL,
+  `kcreated_time` datetime DEFAULT NULL,
+  `klast_edited_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`kid`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_hotact
+-- ----------------------------
+INSERT INTO `t_hotact` VALUES ('1', '0', '10', '1', '2014-10-20 20:47:22', '2014-10-20 20:47:22');
+INSERT INTO `t_hotact` VALUES ('2', '0', '40', '12', '2014-10-20 21:04:42', '2014-10-20 21:04:42');
+INSERT INTO `t_hotact` VALUES ('3', '0', '10', '6', '2014-10-20 21:05:01', '2014-10-20 21:05:01');
 
 -- ----------------------------
 -- Table structure for `t_login`
@@ -322,7 +351,7 @@ CREATE TABLE `t_login` (
   `lgresult` int(2) NOT NULL COMMENT '登录结果：0-失败，1-成功，引用字典表lgresult',
   PRIMARY KEY (`lgid`),
   KEY `ilgrid` (`lgrid`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_login
@@ -365,6 +394,10 @@ INSERT INTO `t_login` VALUES ('35', '23', null, '2014-10-19 11:53:30', '0.0.0.0'
 INSERT INTO `t_login` VALUES ('36', '1', null, '2014-10-19 11:53:53', '0.0.0.0', null, 'Chrome 34.', 'Windows 7', '0');
 INSERT INTO `t_login` VALUES ('37', '23', null, '2014-10-19 12:23:17', '0.0.0.0', null, 'Chrome 34.', 'Windows 7', '0');
 INSERT INTO `t_login` VALUES ('38', '1', null, '2014-10-19 12:37:47', '0.0.0.0', null, 'Chrome 34.', 'Windows 7', '0');
+INSERT INTO `t_login` VALUES ('39', '1', null, '2014-10-20 08:48:46', '0.0.0.0', null, 'Chrome 34.', 'Windows 7', '0');
+INSERT INTO `t_login` VALUES ('40', '20', null, '2014-10-20 09:33:30', '0.0.0.0', null, 'Chrome 34.', 'Windows 7', '0');
+INSERT INTO `t_login` VALUES ('41', '1', null, '2014-10-20 11:10:22', '0.0.0.0', null, 'Chrome 34.', 'Windows 7', '0');
+INSERT INTO `t_login` VALUES ('42', '2', null, '2014-10-20 13:09:43', '0.0.0.0', null, 'Chrome 34.', 'Windows 7', '0');
 
 -- ----------------------------
 -- Table structure for `t_manager`
@@ -397,7 +430,8 @@ CREATE TABLE `t_manager` (
 -- Records of t_manager
 -- ----------------------------
 INSERT INTO `t_manager` VALUES ('1', '1', '2014-10-05 10:48:50', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
-INSERT INTO `t_manager` VALUES ('11', '20', '2014-10-05 11:20:34', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '0');
+INSERT INTO `t_manager` VALUES ('2', '2', '2014-10-20 13:08:15', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
+INSERT INTO `t_manager` VALUES ('11', '20', '2014-10-20 09:33:17', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '0');
 INSERT INTO `t_manager` VALUES ('12', '21', '2014-10-03 19:17:06', '1', '1', '0', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
 INSERT INTO `t_manager` VALUES ('13', '22', '2014-10-03 19:17:10', '1', '1', '1', '1', '1', '1', '1', '0', '0', '0', '0', '0', '1', '1', '0', '1');
 INSERT INTO `t_manager` VALUES ('14', '39', '2014-10-03 19:20:23', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
@@ -492,7 +526,8 @@ CREATE TABLE `t_register` (
 -- Records of t_register
 -- ----------------------------
 INSERT INTO `t_register` VALUES ('1', 'system', '1f604490cbdd4ec35cfa681bcf3df8fac26e0cb5', '系统管理员', '/assets/image/headphoto/default.png', '0', '0', '0', null, null, null, '2014-10-05 10:48:50', '2014-08-31 19:34:13', null);
-INSERT INTO `t_register` VALUES ('20', 's3423423434234', '1f604490cbdd4ec35cfa681bcf3df8fac26e0cb5', 'nick', '/assets/image/headphoto/default.png', '0', '0', '20', null, null, null, '2014-10-05 11:21:08', '2014-08-31 20:11:06', null);
+INSERT INTO `t_register` VALUES ('2', 'administrator', '1f604490cbdd4ec35cfa681bcf3df8fac26e0cb5', '超级管理员', '/assets/image/headphoto/default.png', '0', '0', '10', null, null, null, '2014-10-20 13:07:43', '2014-10-20 13:07:46', null);
+INSERT INTO `t_register` VALUES ('20', 's111111', '1f604490cbdd4ec35cfa681bcf3df8fac26e0cb5', 'nick', '/assets/image/headphoto/default.png', '0', '0', '20', null, null, null, '2014-10-20 09:33:17', '2014-08-31 20:11:06', null);
 INSERT INTO `t_register` VALUES ('23', 'NJU123', '1f604490cbdd4ec35cfa681bcf3df8fac26e0cb5', '张三', '/assets/image/headphoto/default.png', '0', '0', '30', null, null, null, '2014-10-03 12:23:55', '2014-09-06 14:13:20', null);
 INSERT INTO `t_register` VALUES ('28', 'NJU100', '1f604490cbdd4ec35cfa681bcf3df8fac26e0cb5', '李四', '/assets/image/headphoto/default.png', '0', '0', '30', null, null, null, '2014-09-10 20:00:27', '2014-09-10 20:00:27', null);
 INSERT INTO `t_register` VALUES ('29', 'NJU10', '1f604490cbdd4ec35cfa681bcf3df8fac26e0cb5', '王五', '/assets/image/headphoto/default.png', '0', '0', '30', null, null, null, '2014-10-06 14:17:25', '2014-09-10 20:12:07', null);
@@ -655,7 +690,7 @@ CREATE TABLE `t_z` (
   `zcheckor` int(11) DEFAULT NULL COMMENT '审核者ID，引用自r表',
   `zscan_count` int(11) NOT NULL DEFAULT '0' COMMENT '被浏览的次数',
   PRIMARY KEY (`zid`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_z
@@ -675,6 +710,8 @@ INSERT INTO `t_z` VALUES ('13', '23', '0', '2014-10-18 20:40:06', '2014-10-19 11
 INSERT INTO `t_z` VALUES ('14', '23', '0', '2014-10-19 08:34:03', '2014-10-19 08:34:11', null, '2014-10-19 11:49:38', '2014-10-19 11:51:55', 'iPhone6开卖引来果粉彻夜排队', '20日将有第二批货源\n\n\n	\n		新华报业网讯　国行版本iPhone6/iPhone6 Plus昨天正式发售。尽管南京各首发点只办理前期预约的客户，可是心急的果粉们仍然彻夜排队，以求最快拿到预订的iP', '&lt;p style=&quot;font-family:宋体, Arial;font-size:14px;background-color:#FAFEFF;&quot;&gt;\n	20日将有第二批货源\n&lt;/p&gt;\n&lt;div style=&quot;font-family:宋体, Arial;font-size:14px;background-color:#FAFEFF;&quot;&gt;\n	&lt;p&gt;\n		新华报业网讯　国行版本iPhone6/iPhone6 Plus昨天正式发售。尽管南京各首发点只办理前期预约的客户，可是心急的果粉们仍然彻夜排队，以求最快拿到预订的iPhone6。\n	&lt;/p&gt;\n	&lt;p&gt;\n		市民陈先生前一天晚上7点多就和妻子来到新街口苏宁商茂店门口排队。尽管经历了一夜的寒冷，但是成为电信iPhone6首发点排队的第一人，陈先生说等一夜并不辛苦。南京移动此次首发更是声势浩大，昨天零点在德基二期熙华世、虎踞路、龙江等3家移动营业厅同步首发，现场出现数百人深夜排队。南京移动的负责人表示，此次移动版iPhone6南京首发活动，德基二期熙华世移动营业厅在17日从0点到22：00持续营业，虎踞路、龙江营业厅则实行48小时不间断销售，满足果粉需求。\n	&lt;/p&gt;\n	&lt;p&gt;\n		与iPhone5相比，购买iPhone6大屏、大容量的用户有很大提高。购买iPhone5用户以16G为主，购买iPhone6则以32G为主，同时大屏iPhone6 Plus约定占比也达到了15%。尽管三家运营商都推出了合约计划，但相比而言，移动和电信的合约计划最为优惠。电信版iPhone6/iPhone6 Plus提供59元、99元、199元、299元、399元和499元档套餐可供选择，并依据套餐档位可提供590元—6088元不等的话费补贴。若用户购买5288元16GB版iPhone6礼包，选择24个月399套餐，或36个月299套餐，即可零元购；而购买6088元的16GB版iPhone6 Plus，和64GB版iPhone6，选择24个月499套餐，或36个月399套餐可零元购。移动版16G iPhone6合约价也为5288元，iPhone6(64G)、6 plus(16G)合约价为6088元。参与合约活动的用户可获得相应话费赠送，最高可得6088元话费。除了合约政策外，购机用户可享受赠送10G×3个月的超大流量，发送“30G”到10086即可申请免费开通使用。\n	&lt;/p&gt;\n	&lt;p&gt;\n		据悉，目前iPhone6及6Plus货源有很大缺口。尽管本月20日将有第二批货源到达，但是短期内需求缺口仍然存在。(记者 陈起增)\n	&lt;/p&gt;\n&lt;/div&gt;', '30', '5', '0', null, null, '0');
 INSERT INTO `t_z` VALUES ('15', '23', '0', '2014-10-19 12:37:38', '2014-10-19 12:37:38', null, '2014-10-19 12:39:05', '2014-10-19 12:41:09', 'Win10/Win8商店现已有17.5万Metro应用', '近几年，最令软件巨头微软头痛的项目莫过于自家的Windows操作系统，最新发布的Windows8操作系统由于加入了特色的“现代界面（Modern UI）”并特别针对触摸屏设备优化，微软一直不停地努力说', '&lt;p&gt;\n	&lt;span style=&quot;color:#272A30;font-family:\'Microsoft Yahei\';font-size:14px;line-height:24px;background-color:#FFFFFF;&quot;&gt;近几年，最令软件巨头微软头痛的项目莫过于自家的Windows操作系统，最新发布的&lt;/span&gt;&lt;a class=&quot;s_tag&quot; href=&quot;http://www.win8china.com/&quot; target=&quot;_blank&quot;&gt;Windows8&lt;/a&gt;&lt;span style=&quot;color:#272A30;font-family:\'Microsoft Yahei\';font-size:14px;line-height:24px;background-color:#FFFFFF;&quot;&gt;操作系统由于加入了特色的“现代界面（Modern UI）”并特别针对触摸屏设备优化，微软一直不停地努力说服开发者打造“磁贴”应用程序，如今来看似乎获得了一定的成效。&lt;/span&gt;\n&lt;/p&gt;\n&lt;p style=&quot;text-align:center;&quot;&gt;\n	&lt;span style=&quot;color:#272A30;font-family:\'Microsoft Yahei\';font-size:14px;line-height:24px;background-color:#FFFFFF;&quot;&gt;&lt;img src=&quot;http://img.ithome.com/newsuploadfiles/2014/10/20141019_075354_425.jpg&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;\n&lt;/span&gt;\n&lt;/p&gt;\n&lt;p&gt;\n	&lt;span style=&quot;color:#272A30;font-family:\'Microsoft Yahei\';font-size:14px;line-height:24px;background-color:#FFFFFF;&quot;&gt;&lt;span style=&quot;color:#272A30;font-family:\'Microsoft Yahei\';font-size:14px;line-height:24px;background-color:#FFFFFF;&quot;&gt;日前，微软Windows Store上架的应用程序数量已经达到了175000个。此里程碑表明，更多开发者看到了微软新Windows操作系统的潜力，并努力推广自己针对台式机或&lt;/span&gt;&lt;a class=&quot;s_tag&quot; href=&quot;http://digi.ithome.com/pingban/&quot; target=&quot;_blank&quot;&gt;平板电脑&lt;/a&gt;&lt;span style=&quot;color:#272A30;font-family:\'Microsoft Yahei\';font-size:14px;line-height:24px;background-color:#FFFFFF;&quot;&gt;开发的应用程序。&lt;/span&gt;&lt;/span&gt;\n&lt;/p&gt;\n&lt;p&gt;\n	&lt;span style=&quot;color:#272A30;font-family:\'Microsoft Yahei\';font-size:14px;line-height:24px;background-color:#FFFFFF;&quot;&gt;\n	&lt;p style=&quot;font-size:14px;color:#272A30;font-family:\'Microsoft Yahei\';background-color:#FFFFFF;&quot;&gt;\n		Windows 8发布至今已经有两年时间里，虽然可以说应用程序的数量增长太慢了，但却是一件好事。因为更多的开发者拥抱Windows 8说明了微软最新发布&lt;a class=&quot;s_tag&quot; href=&quot;http://win10.ithome.com/&quot; target=&quot;_blank&quot;&gt;Windows10&lt;/a&gt;新一代系统更具潜力，最重要的是拥有一定的“Metro”应用程序数量作为基础，更有利于了微软实现PC、平板电脑等跨设备统一体验。\n	&lt;/p&gt;\n	&lt;p style=&quot;font-size:14px;color:#272A30;font-family:\'Microsoft Yahei\';background-color:#FFFFFF;&quot;&gt;\n		不过Windows Store里仍充斥着大量低质量或极为垃圾的应用程序，很多用户下载安装应用之后，发现不少应用的功能严重雷同，甚至一些应用一无是处、毫无功能可言，购买者只能忍受上当受骗。对此微软已经承诺提供有效的方式解决，并且调整了相关策略，定期清理质量堪忧的应用程序。\n	&lt;/p&gt;\n	&lt;p style=&quot;font-size:14px;color:#272A30;font-family:\'Microsoft Yahei\';background-color:#FFFFFF;&quot;&gt;\n		实际上，7月份的时候Windows Store的应用程序数量已经达到了170000，在这三个月时间里仅增长了5000个是因为微软已经清理了很大一部分。另外，微软表示将更加密切关注用户的反馈，尽快处理投诉严重的诈骗类应用程序。\n	&lt;/p&gt;\n&lt;br /&gt;\n&lt;/span&gt;\n&lt;/p&gt;', '40', '5', '0', '/image/2014_10_19_12_36_48_376373395.png', null, '0');
 INSERT INTO `t_z` VALUES ('16', '1', '0', '2014-10-19 19:14:26', '2014-10-19 19:30:27', null, '2014-10-19 19:30:27', null, '这里是留学动态标题', '一个非常简单的电话簿教本, 但是应用了一个非常先进并且在快速更新的技术: SQLite, 一个没有服务端的SQL数据库.\n\n\n	一个非常简单的电话簿教本, 但是应用了一个非常先进并且在快速更新的技术:', '&lt;p&gt;\n	一个非常简单的电话簿教本, 但是应用了一个非常先进并且在快速更新的技术: SQLite, 一个没有服务端的SQL数据库.\n&lt;/p&gt;\n&lt;p&gt;\n	一个非常简单的电话簿教本, 但是应用了一个非常先进并且在快速更新的技术: SQLite, 一个没有服务端的SQL数据库.\n&lt;/p&gt;\n&lt;p&gt;\n	一个非常简单的电话簿教本, 但是应用了一个非常先进并且在快速更新的技术: SQLite, 一个没有服务端的SQL数据库.\n&lt;/p&gt;\n&lt;p&gt;\n	一个非常简单的电话簿教本, 但是应用了一个非常先进并且在快速更新的技术: SQLite, 一个没有服务端的SQL数据库.\n&lt;/p&gt;\n&lt;p&gt;\n	一个非常简单的电话簿教本, 但是应用了一个非常先进并且在快速更新的技术: SQLite, 一个没有服务端的SQL数据库.\n&lt;/p&gt;\n&lt;p&gt;\n	一个非常简单的电话簿教本, 但是应用了一个非常先进并且在快速更新的技术: SQLite, 一个没有服务端的SQL数据库.\n&lt;/p&gt;\n&lt;p&gt;\n	dhzxklcvzxjvhzxjckvhxzjkvhxk\n&lt;/p&gt;\n&lt;p&gt;\n	&lt;br /&gt;\n&lt;/p&gt;', '30', '6', '0', null, null, '0');
+INSERT INTO `t_z` VALUES ('17', '1', '0', '2014-10-20 09:32:35', '2014-10-20 09:32:35', null, '2014-10-20 09:32:35', null, '恐怖“宇宙毛毛虫”内涵恒星演化奥秘', '据媒体报道，近日，科学家公布了哈勃空间望远镜此前拍摄到一处恐怖“宇宙毛毛虫”图像，科学家在其中发现了一些原恒星演化阶段的奥秘。\n\n\n	从图中可以看出，这只巨大的“宇宙毛毛虫”有着庞大的身躯，事实上这些', '&lt;p style=&quot;font-family:Verdana, Arial, Helvetica, sans-serif;color:#444444;font-size:14px;background-color:#FFFFFF;&quot;&gt;\n	据媒体报道，近日，科学家公布了哈勃空间望远镜此前拍摄到一处恐怖“宇宙毛毛虫”图像，科学家在其中发现了一些原恒星演化阶段的奥秘。\n&lt;/p&gt;\n&lt;p style=&quot;font-family:Verdana, Arial, Helvetica, sans-serif;color:#444444;font-size:14px;background-color:#FFFFFF;&quot;&gt;\n	从图中可以看出，这只巨大的“宇宙毛毛虫”有着庞大的身躯，事实上这些是质量庞大的星际气体和尘埃，那么它们为什么会形成如何壮观的场景呢？\n&lt;/p&gt;\n&lt;p style=&quot;font-family:Verdana, Arial, Helvetica, sans-serif;color:#444444;font-size:14px;background-color:#FFFFFF;&quot;&gt;\n	奥秘就在于15光年远处的一个巨大的恒星团，其中存在大约65颗炙热的0型主序星，它们产生的强大恒星风和强辐射环境将周围的星际气体和尘埃塑造成一只“毛毛虫”的模样.\n&lt;/p&gt;\n&lt;p style=&quot;font-family:Verdana, Arial, Helvetica, sans-serif;color:#444444;font-size:14px;background-color:#FFFFFF;&quot;&gt;\n	科学家观测结果显示，其长度可绵延10万亿公里，前段的恒星团被称为天鹅座OB2星团(近500颗B型主序星)，其质量超过3万倍太阳质量。\n&lt;/p&gt;\n&lt;p style=&quot;text-align:left;font-family:Verdana, Arial, Helvetica, sans-serif;color:#444444;font-size:14px;background-color:#FFFFFF;&quot;&gt;\n	&lt;span style=&quot;color:#444444;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:14px;line-height:25px;background-color:#FFFFFF;&quot;&gt;科学家对庞大的“毛毛虫”结构中的IRAS 20324+4057天体进行了研究，它处于早期原恒星演化阶段，仍然将周围星际气体和尘埃聚集到自己周围，然而，这一过程受到天鹅座OB2星团强大恒星风的干扰。&lt;/span&gt;\n&lt;/p&gt;\n&lt;p style=&quot;text-align:left;font-family:Verdana, Arial, Helvetica, sans-serif;color:#444444;font-size:14px;background-color:#FFFFFF;&quot;&gt;\n	&lt;p style=&quot;font-family:Verdana, Arial, Helvetica, sans-serif;color:#444444;font-size:14px;background-color:#FFFFFF;&quot;&gt;\n		星系中的恒星风是一种“破坏性”力量，尤其是新生的恒星而言，恒星风会干扰它们正常的物质聚集过程，在恒星风干扰较为严重的空间内，甚至可遏制新恒星的诞生。\n	&lt;/p&gt;\n	&lt;p style=&quot;font-family:Verdana, Arial, Helvetica, sans-serif;color:#444444;font-size:14px;background-color:#FFFFFF;&quot;&gt;\n		科学家认为IRAS 20324+4057会受到周围明亮恒星辐射的干扰，导致其质量降低，目前该天体仍然处于严酷的空间环境中。\n	&lt;/p&gt;\n	&lt;p style=&quot;font-family:Verdana, Arial, Helvetica, sans-serif;color:#444444;font-size:14px;background-color:#FFFFFF;&quot;&gt;\n		这只巨大的宇宙“毛毛虫”位于天鹅座方向上，距离我们大约4500光年之遥，而天鹅座OB2星团聚集了大量明亮的恒星和大质量恒星集群，比如天鹅座OB2-12就是一颗光度极高的蓝特超巨星，几乎达到恒星光度的上限。\n	&lt;/p&gt;\n	&lt;p style=&quot;font-family:Verdana, Arial, Helvetica, sans-serif;color:#444444;font-size:14px;background-color:#FFFFFF;&quot;&gt;\n		科学家目前较为关心的结果是IRAS 20324+4057将来的演化结果，其最终的质量取决于恒星风的干扰情况。\n	&lt;/p&gt;\n&lt;/p&gt;\n&lt;p style=&quot;font-family:Verdana, Arial, Helvetica, sans-serif;color:#444444;font-size:14px;background-color:#FFFFFF;&quot;&gt;\n	&lt;br /&gt;\n&lt;/p&gt;', '30', '9', '0', null, null, '0');
+INSERT INTO `t_z` VALUES ('18', '20', '0', '2014-10-20 09:36:21', '2014-10-20 09:36:21', null, '2014-10-20 09:36:21', null, '教育参赞', '　　教育参赞是我国政府根据与驻在国达成的协议或谅解，由教育部派往驻在国，开展教育双边交流与合作的高级外交官。教育参赞在我国驻外特命全权大使（馆长）的直接领导下开展工作，在涉及双边重大业务上执行我国教育', '　　教育参赞是我国政府根据与驻在国达成的协议或谅解，由教育部派往驻在国，开展教育双边交流与合作的高级外交官。教育参赞在我国驻外特命全权大使（馆长）的直接领导下开展工作，在涉及双边重大业务上执行我国教育部党组的指示，一般业务性工作同教育部有关司局直接联系。教育参赞的主要职责是根据我国的教育方针和政策，根据我国同驻在国达成的有关协议，开展同驻在国的教育交流与合作、管理或服务于我国长驻国外的留学生、维护我国留学生的合法权益、对驻在国的教育状况和值得我国引进的教育成果进行调研、直接领导和管理我驻外使馆教育处的日常工作、或直接完成国内交代的相关事宜。教育参赞开展工作和直接接触的主要对象是驻在国中央政府或州政府的教育（或外交、科技）主管部门、各级各类教育机构、驻在国教育界科技界的专家学者、以及我国长期在外生活和工作的著名学者。我国在美欧等大国，除了派驻教育参赞以外，通常还在有关驻外总领事馆设立教育组，派出教育领事若干名。教育参赞和教育领事均享有外交豁免权。&lt;br /&gt;\n&lt;br /&gt;\n教育参赞大多由我国中央教育主管部门或省级教育主管部门的司局领导担任，教育处和教育组外交官团体多由我国教育界或科技界的干部、学者、教授组成。他们是沟通国外教育科技界和留学生的主要桥梁和纽带，成为我国留学生合法权益和人身安全的“保护神”。&lt;br /&gt;\n&lt;br /&gt;\n金吉列留学特约的前大使、教育参赞、专家常年负责与国外教育界的沟通与交流，不但对驻在国的高等院校多有接触，同时深谙驻在国的教育政策和留学移民政 策。由于长期国外工作经验和广泛的部门及院校关系，他们随时紧密结合国外留学、院校、签证等信息，把十分珍贵的指导性意见传授给国内的莘莘学子，指导他们合理地设计人生的未来。&lt;br /&gt;\n&lt;br /&gt;\n留学行业权威大使、教育参赞专家不但熟悉国外教育体系，同时由于有长期国外工作经验和广泛的部门及院校关系，他们会随时紧密结合国外留学、院校、签证等信息，把十分珍贵的指导性意见传授给国内的莘莘学子，指导他们合理地设计人生的未来。&lt;br /&gt;\n&lt;br /&gt;\n随着我国与世界各国日趋频繁的交往，出国留学的热潮会不断持续和高涨，教育参赞专家团队将会发挥着越来越重要的作用。&lt;br /&gt;', '30', '6', '0', null, null, '0');
 
 -- ----------------------------
 -- View structure for `t_bbs_top_view`
@@ -711,6 +748,12 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- ----------------------------
 DROP VIEW IF EXISTS `t_ex_view`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `t_ex_view` AS select `t_z`.`zid` AS `zid`,`t_z`.`zcreator` AS `zcreator`,`t_z`.`zcreated_time` AS `zcreated_time`,`t_z`.`zlast_edited_time` AS `zlast_edited_time`,`t_z`.`zchecked_time` AS `zchecked_time`,`t_z`.`zreleased_time` AS `zreleased_time`,`t_z`.`ztop_time` AS `ztop_time`,`t_z`.`ztitle` AS `ztitle`,`t_z`.`zsummary` AS `zsummary`,`t_z`.`zcontent` AS `zcontent`,`t_z`.`zstate` AS `zstate`,`t_z`.`ztype` AS `ztype`,`t_z`.`zsub_type` AS `zsub_type`,`t_z`.`zflag` AS `zflag`,`t_z`.`zcheckor` AS `zcheckor`,`t_z`.`zscan_count` AS `zscan_count`,`dic_ztype`.`dic_value` AS `ztype_name`,`dic_zstate`.`dic_value` AS `zstate_name`,`t_creator`.`udisplay_name` AS `udisplay_name`,`t_creator`.`usender` AS `usender`,`t_creator`.`ugrade` AS `ugrade`,`t_creator`.`uname` AS `zauthor` from (((`t_z` join `t_dic` `dic_ztype`) join `t_dic` `dic_zstate`) join `t_user` `t_creator`) where ((`t_z`.`ztype` = 5) and (`t_z`.`ztype` = `dic_ztype`.`dic_key`) and (`dic_ztype`.`dic_type` = 'ztype') and (`t_z`.`zstate` = `dic_zstate`.`dic_key`) and (`dic_zstate`.`dic_type` = 'zstate') and (`t_creator`.`urid` = `t_z`.`zcreator`)) union all select `t_z`.`zid` AS `zid`,`t_z`.`zcreator` AS `zcreator`,`t_z`.`zcreated_time` AS `zcreated_time`,`t_z`.`zlast_edited_time` AS `zlast_edited_time`,`t_z`.`zchecked_time` AS `zchecked_time`,`t_z`.`zreleased_time` AS `zreleased_time`,`t_z`.`ztop_time` AS `ztop_time`,`t_z`.`ztitle` AS `ztitle`,`t_z`.`zsummary` AS `zsummary`,`t_z`.`zcontent` AS `zcontent`,`t_z`.`zstate` AS `zstate`,`t_z`.`ztype` AS `ztype`,`t_z`.`zsub_type` AS `zsub_type`,`t_z`.`zflag` AS `zflag`,`t_z`.`zcheckor` AS `zcheckor`,`t_z`.`zscan_count` AS `zscan_count`,`dic_ztype`.`dic_value` AS `ztype_name`,`dic_zstate`.`dic_value` AS `zstate_name`,`t_register`.`rnickname` AS `udisplay_name`,'1' AS `usender`,'2010' AS `ugrade`,`t_register`.`rnickname` AS `zauthor` from (((`t_z` join `t_dic` `dic_ztype`) join `t_dic` `dic_zstate`) join `t_register`) where ((`t_z`.`ztype` in (6,9)) and (`t_z`.`ztype` = `dic_ztype`.`dic_key`) and (`dic_ztype`.`dic_type` = 'ztype') and (`t_z`.`zstate` = `dic_zstate`.`dic_key`) and (`dic_zstate`.`dic_type` = 'zstate') and (`t_register`.`rid` = `t_z`.`zcreator`)) ;
+
+-- ----------------------------
+-- View structure for `t_hotact_view`
+-- ----------------------------
+DROP VIEW IF EXISTS `t_hotact_view`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `t_hotact_view` AS select `t_hotact`.`kid` AS `kid`,`t_hotact`.`kztype` AS `kztype`,`t_hotact`.`kstate` AS `kstate`,`t_hotact`.`kzid` AS `kzid`,`t_hotact`.`kcreated_time` AS `kcreated_time`,`t_hotact`.`klast_edited_time` AS `klast_edited_time`,`dic_ztype`.`dic_value` AS `dic_value`,`t_z`.`ztitle` AS `ztitle`,`dic_kstate`.`dic_value` AS `kstate_name` from (((`t_hotact` join `t_z`) join `t_dic` `dic_ztype`) join `t_dic` `dic_kstate`) where ((`t_hotact`.`kzid` = `t_z`.`zid`) and (`t_z`.`ztype` = `dic_ztype`.`dic_key`) and (`dic_ztype`.`dic_type` = 'ztype') and (`t_hotact`.`kstate` = `dic_kstate`.`dic_key`) and (`dic_kstate`.`dic_type` = 'kstate')) ;
 
 -- ----------------------------
 -- View structure for `t_login_distinct_view`
