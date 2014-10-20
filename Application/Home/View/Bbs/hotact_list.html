@@ -1,0 +1,17 @@
+
+
+
+{
+	"result":0,
+	"msg":"succeed",
+	"data":[
+
+	<volist name="hotact_list" id="act_vo" key="k">
+	{
+		"id":"{$act_vo.zid}",
+		"title":"{$act_vo.ztitle}"
+	}
+	<?php if(count($hotact_list)!=$k){ ?>,<?php } ?>
+	</volist>
+	]
+}

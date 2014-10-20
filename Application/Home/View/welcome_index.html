@@ -1,5 +1,64 @@
 
+<style>
+.tip-number{
+cursor:pointer;width:20px;background-color:black;color:white;float:right;margin-right:4px;text-align:center;
+}
+#news_title_plain{
+	font-size: 14pt;
+}
+</style>
 
 <div class="container" style="padding-left:0px;margin-bottom:10px;background-color:rgb(35,17,103);width:1024px;">
 	<span><img src="__PUBLIC__/assets/image/head_index.png" width="677px" height="342px" /></span>
+	<span style="float:right;width:320px;color:white;">
+		<div style="top:120px;line-height:40px;position:relative;height:120px;">
+			<div id="_news_title" style="display:none;">
+				<img src="__PUBLIC__/assets/image/plan_arrow.png" />
+				<span id="news_title_plain"></span>
+			</div>
+		</div>
+		<div style="text-align:right;width:320px;right:10px;position:relative;top:180px;">
+			<div class="tip-number" id="btn_slide_news_title_2">3</div>
+			<div class="tip-number" id="btn_slide_news_title_1">2</div>
+			<div class="tip-number" id="btn_slide_news_title_0">1</div>
+		</div>
+	</span>
 </div>
+
+<script>
+(function(){
+	var cur_index = 0;
+	var switch_news = function (pid){
+		if(cur_index == pid){
+			return;
+		}
+		cur_index = pid;
+		$('#_news_title').hide(300);
+		setTimeout((function(){change_title(pid);}),400);
+	};
+	var change_title = function (pid){
+		var titles = [
+			'伯利克大学 2014年暑期交流活动开始接受申请',
+			'这里是另一个标题这里是另一个标题',
+			'这里是另一个标题这里是另一个标题2'
+		];
+		$('#news_title_plain').text(titles[pid]);
+		$('#_news_title').show(300);
+	};
+	var init = function(){
+		var i;
+		change_title(0);
+		for(i = 0;i < 3; i++){
+			(function(i){
+				$('#btn_slide_news_title_'+i).click(function(){
+					switch_news(i);
+				})
+			})(i);
+		}
+	}
+	init();
+})();
+
+
+
+</script>

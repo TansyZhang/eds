@@ -47,9 +47,9 @@
 					<div class="post_item">
 						<span class="op">
 							<span class="time">{$hotact_vo.zcreated_time}</span>&nbsp;
-							<span><a href="__ROOT__/Home/Bbs/hotact_edit?zid={$hotact_vo.zid}#start" style="color:black;" title="修改“{$hotact_vo['ztitle']}”">修改</a></span>&nbsp;
-							<span><a href="__ROOT__/Home/Ex/detail?zid={$hotact_vo.zid}#start" style="color:black;" title="查看“{$hotact_vo['ztitle']}”">查看</a></span>&nbsp;
-							<span onclick="ex_delete(this,{$hotact_vo.zid},'{$hotact_vo.ztitle}')" style="cursor:pointer;" title="删除“{$hotact_vo['ztitle']}”">删除</span>
+							<span><a href="__ROOT__/Home/Bbs/hotact_edit?zid={$hotact_vo.kzid}#start" style="color:black;" title="修改“{$hotact_vo['ztitle']}”">修改</a></span>&nbsp;
+							<span><a href="__ROOT__/Home/Ex/detail?zid={$hotact_vo.kzid}#start" style="color:black;" title="查看“{$hotact_vo['ztitle']}”">查看</a></span>&nbsp;
+							<span onclick="ex_delete(this,{$hotact_vo.kid},'{$hotact_vo.ztitle}')" style="cursor:pointer;" title="删除“{$hotact_vo['ztitle']}”">删除</span>
 						</span>
 						<div>
 							<span title="{$hotact_vo.ztitle}">
@@ -60,7 +60,7 @@
 									echo $hotact_vo['ztitle'];
 								} ?>
 							</span>
-							<span class="state">({$hotact_vo.zstate_name})</span>
+							<span class="state">({$hotact_vo.kstate_name})</span>
 						</div>
 					</div>
 				</volist>
@@ -73,7 +73,7 @@
 </div>
 
 <script type="text/javascript">
-function ex_delete(elem,zid,ztitle){
+function ex_delete(elem,kid,ztitle){
 	if(!eds_framework.confirm('','您确定要删除“'+ztitle+'”吗？')){
 		return;
 	}
@@ -83,7 +83,7 @@ function ex_delete(elem,zid,ztitle){
 		dataType:'json',
 		type:'post',
 		data:{
-			zid:zid
+			kid:kid
 		},
 		success:function(t,s,r){
 			if(t.result == 0){

@@ -2092,6 +2092,115 @@ class BbsController extends EdsController {
             $this->show('{"result":1,"msg":"parameters error(zid)."}', 'utf-8');
         }
     }
+
+    public function hotact(){
+        if(session('g_logined')!='logined'){//未登录
+            $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            return;
+        }
+        if(session('rid')!=1&&session('rid')!=2){
+            $this->show('{"result":1,"msg":"permission error."}', 'utf-8');
+            return;
+        }
+        $m = M('HotactView');
+        $lim['kstate'] = array('in','10,20,30');
+        $this->hotact_list = $m->where($lim)->select();
+        $this->display();
+    }
+
+    public function hotact_del($kid=-1){
+        if(session('g_logined')!='logined'){//未登录
+            $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            return;
+        }
+        if(session('rid')!=1&&session('rid')!=2){
+            $this->show('{"result":1,"msg":"permission error."}', 'utf-8');
+            return;
+        }
+        $kid = I('kid');
+        $m = M('Hotact');
+        $data['kid'] = $kid;
+        $data['kstate'] = 40;//40-删除
+        if($m->save($data)){
+            $this->show('{"result":0,"msg":"saving succeed."}', 'utf-8');
+        } else {
+            $this->show('{"result":1,"msg":"'.($m->getDbError()).'"}', 'utf-8');
+        }
+    }
+
+    public function hotact_edit($kid=-1){
+        if(session('g_logined')!='logined'){//未登录
+            $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            return;
+        }
+        if(session('rid')!=1&&session('rid')!=2){
+            $this->show('{"result":1,"msg":"permission error."}', 'utf-8');
+            return;
+        }
+        $kid = I('kid');
+        if($kid == -1 || $kid == ''){
+            $this->kid = -1;
+        }
+        $m = M('Z');
+        $lim['zstate'] = array('in','30,40');//30-发布，40-置顶
+        $this->hotact_list = $m->where($lim)->field('zid,ztitle,ztype')->order('ztype')->select();
+        $this->display();
+    }
+
+    public function hotact_save($kid=-1,$kzid=-1){
+        if(session('g_logined')!='logined'){//未登录
+            $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            return;
+        }
+        if(session('rid')!=1&&session('rid')!=2){
+            $this->show('{"result":1,"msg":"permission error."}', 'utf-8');
+            return;
+        }
+        $kid = I('kid');
+        $kzid = I('kzid');
+        if($kid == '' || $kzid == -1 || $kzid == ''){
+            $this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
+            return;
+        }
+        if($kid == -1){
+            $m = M('Z');
+            $lim['zid'] = $kzid;
+            $rec = $m->where($lim)->find();
+            if($rec && ($rec['zstate']==30||$rec['zstate']==40)){
+                $m_hotact = M('Hotact');
+                $data['kztype'] = $rec['ztype'];
+                $data['kstate'] = 10;//发布中
+                $data['kzid'] = $kzid;
+                $data['klast_edited_time'] = date('Y-m-d H:i:s',time());
+                $data['kcreated_time'] = $data['klast_edited_time'];
+                if($m_hotact->add($data)){
+                    $this->show('{"result":0,"msg":"adding succeed."}', 'utf-8');
+                    return;
+                } else {
+                    $this->show('{"result":1,"msg":"'.($m_hotact->getDbError()).'"}', 'utf-8');
+                }
+            } else {
+                $this->show('{"result":1,"msg":"parameters error(kzid)."}', 'utf-8');
+            }
+        } else {
+            $m = M('Z');
+            $lim['zid'] = $kzid;
+            $rec = $m->where($lim)->find();
+            if($rec && ($rec['zstate']==30||$rec['zstate']==40)){
+                $m_hotact = M('Hotact');
+                $data['kztype'] = $rec['ztype'];
+                $data['kstate'] = 10;//发布中
+                $data['klast_edited_time'] = date('Y-m-d H:i:s',time());
+                if($m_hotact->save($data)){
+                    $this->show('{"result":0,"msg":"adding succeed."}', 'utf-8');
+                } else {
+                    $this->show('{"result":1,"msg":"'.($m_hotact->getDbError()).'"}', 'utf-8');
+                }
+            } else {
+                $this->show('{"result":1,"msg":"parameters error(kzid)."}', 'utf-8');
+            }
+        }
+    }
 }
 
 ?>
