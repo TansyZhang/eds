@@ -16,7 +16,7 @@
 
 	<div id="hot_act_area" style="float:left;width:308px;">
 		<div class="index_title">
-			<span>热门活动</span>
+			<span style="color:#C51F00;">热门活动</span>
 			<span style="float:right;display:none;">{$more}</span>
 		</div>
 		<div style="width:308px;height:7px;background-color:#C51F00;"></div>
@@ -145,7 +145,7 @@ $(document).ready(function(){
 				'<div class="index_item">'+
 					'<div class="recmd_course_content">'+
 						'<img src="__PUBLIC__/uploads{flag}" width="309px" height="195px" />'+
-						'<div class="recmd_course_content_title">{title}</div>'+
+						'<div class="recmd_course_content_title"><a href="__ROOT__/Home/Course/netcourse_dtl?eid={id}#start">{title}</a></div>'+
 					'</div>'+
 					'<div class="recmd_course_info">'+
 						'<div class="recmd_course_info_text">'+
@@ -158,7 +158,7 @@ $(document).ready(function(){
 						'</div>'+
 					'</div>'+
 				'</div>',
-			tpl_args:["{flag}","{title}","{author_college}","{level}","{author_name}","{author_photo}"],/*使用mdl_args可以加快替换速度*/
+			tpl_args:["{flag}","{title}","{author_college}","{level}","{author_name}","{author_photo}","{id}"],/*使用mdl_args可以加快替换速度*/
 			error:"加载推荐课程列表失败！{status}:{statusText}",
 			clear:true,
 			parent:"#recmd_course_area_items"

@@ -19,8 +19,41 @@ class ExController extends EdsController {
 	    		$this->ex_note_list = array_merge($this->ex_note_list,$ex_note_list);
 	    	}
     	}
-
     	//dump($this->ex_note_list);
+
+        $m_ex = M('ExView');
+        $lim_ex['ztype'] = 6;//留学动态
+        $lim_ex['zstate'] = 40;
+        $this->ex_trend_list = array();
+        $ex_trend_top_list = $m_ex->where($lim_ex)->limit($COUNT)->field('zid,ztitle,zreleased_time')->select();
+        if($ex_trend_top_list){
+            $this->ex_trend_list = $ex_trend_top_list;
+        }
+        if(count($this->ex_trend_list) < $COUNT){
+            $lim_ex['zstate'] = 30;
+            $ex_trend_list = $m_ex->where($lim_ex)->limit($COUNT-count($this->ex_trend_list))->field('zid,ztitle,zreleased_time')->select();
+            if($ex_trend_list){
+                $this->ex_trend_list = array_merge($this->ex_trend_list,$ex_trend_list);
+            }
+        }
+        //dump($this->ex_trend_list);
+
+        $m_ex = M('ExView');
+        $lim_ex['ztype'] = 9;//交换项目
+        $lim_ex['zstate'] = 40;
+        $this->ex_project_list = array();
+        $ex_project_top_list = $m_ex->where($lim_ex)->limit($COUNT)->field('zid,ztitle,zreleased_time')->select();
+        if($ex_project_top_list){
+            $this->ex_project_list = $ex_project_top_list;
+        }
+        if(count($this->ex_project_list) < $COUNT){
+            $lim_ex['zstate'] = 30;
+            $ex_project_list = $m_ex->where($lim_ex)->limit($COUNT-count($this->ex_project_list))->field('zid,ztitle,zreleased_time')->select();
+            if($ex_project_list){
+                $this->ex_project_list = array_merge($this->ex_project_list,$ex_project_list);
+            }
+        }
+        //dump($this->ex_project_list);
 
         $this->display();
     }
@@ -48,10 +81,34 @@ class ExController extends EdsController {
 	    	}
     	} elseif($ztype == 6){
     		$this->sub_title = "留学动态";
-
+            $m_ex = M('ExView');
+            $lim_ex['ztype'] = 6;
+            $lim_ex['zstate'] = 40;
+            $this->ex_trend_list = array();
+            $ex_trend_top_list = $m_ex->where($lim_ex)->select();
+            if($ex_trend_top_list){
+                $this->ex_trend_list = $ex_trend_top_list;
+            }
+            $lim_ex['zstate'] = 30;
+            $ex_trend_list = $m_ex->where($lim_ex)->select();
+            if($ex_trend_list){
+                $this->ex_trend_list = array_merge($this->ex_trend_list,$ex_trend_list);
+            }
     	} else if($ztype == 9){
     		$this->sub_title = "交换项目";
-
+            $m_ex = M('ExView');
+            $lim_ex['ztype'] = 9;
+            $lim_ex['zstate'] = 40;
+            $this->ex_project_list = array();
+            $ex_project_top_list = $m_ex->where($lim_ex)->select();
+            if($ex_project_top_list){
+                $this->ex_project_list = $ex_project_top_list;
+            }
+            $lim_ex['zstate'] = 30;
+            $ex_project_list = $m_ex->where($lim_ex)->select();
+            if($ex_project_list){
+                $this->ex_project_list = array_merge($this->ex_project_list,$ex_project_list);
+            }
     	}
     	//dump($this->ex_note_list);
     	$this->display();

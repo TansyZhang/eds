@@ -70,7 +70,7 @@ class BbsController extends EdsController {
 
     public function post_dtl($tid=-1,$vid='',$vkey=''){
         if(session('g_logined')!='logined'){//未登录
-            $this->redirect('/Home/Bbs?url=/Home/Bbs/post_dtl?tid='.$tid,0,0,'');
+            $this->redirect('/Home/Bbs',0,0,'');
             $this->display();
             return;
         }
@@ -1883,9 +1883,11 @@ class BbsController extends EdsController {
         $m = M('ExView');
         $lim['ztype'] = 6;//留学动态
         $lim['zstate'] = array('in','10,30,40,50');
+        $lim['zcreator'] = session('rid');
         $this->ex_trend_list = $m->where($lim)->select();
         $this->display();
     }
+
 
     public function ex_trend_edit($zid = -1){
         if(session('g_logined')!='logined'){//未登录
@@ -1943,6 +1945,103 @@ class BbsController extends EdsController {
         }
         if($zid == -1 || $zid == ''){//new
             $data['ztype'] = 6;//留学动态
+            $data['zcreated_time'] = $data['zlast_edited_time'];
+            $data['zcreator'] = session('rid');
+            if($m->add($data)){
+                $this->show('{"result":0,"msg":"adding succeed."}', 'utf-8');
+            } else {
+                $this->show('{"result":1,"msg":"'.($m->getDbError()).'"}', 'utf-8');
+            }
+        } else {
+            $lim['zid'] = $zid;
+            $rec = $m->where($lim)->find();
+            if($rec && $rec['zcreator'] == session('rid') && $rec['ztype'] == 6){
+                $data['zid'] = $zid;
+                if($m->save($data)){
+                    $this->show('{"result":0,"msg":"saving succeed."}', 'utf-8');
+                    return;
+                } else {
+                    $this->show('{"result":1,"msg":"'.($m->getDbError()).'"}', 'utf-8');
+                }
+            } else {
+                $this->show('{"result":1,"msg":"parameters error(zid)."}', 'utf-8');     
+            }
+        }
+        return;
+    }
+
+    public function ex_project(){
+        if(session('g_logined')!='logined'){//未登录
+            $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            return;
+        }
+        if(session('rrole') > 25){//大于25，说明不是管理员，不能创建
+            $this->show('{"result":1,"msg":"permission error."}', 'utf-8');
+            return;
+        }
+        $m = M('ExView');
+        $lim['ztype'] = 9;//交换项目
+        $lim['zstate'] = array('in','10,30,40,50');
+        $lim['zcreator'] = session('rid');
+        $this->ex_project_list = $m->where($lim)->select();
+        $this->display();
+    }
+    public function ex_project_edit($zid = -1){
+        if(session('g_logined')!='logined'){//未登录
+            $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            return;
+        }
+        $zid = I('zid');
+        if($zid == -1 || $zid == ''){
+            $this->zid = -1;
+            $this->display();
+            return;
+        }
+        $m = M('ExView');
+        $lim['zid'] = $zid;
+        $rec = $m->where($lim)->find();
+        if($rec){
+            if($rec['ztype'] == 9 && $rec['zcreator'] == session('rid')){
+                $this->zid = $zid;
+                $this->ztitle = $rec['ztitle'];
+                $this->zsummary = $rec['zsummary'];
+                $this->zcontent = $rec['zcontent'];
+                $this->zlast_edited_time = $rec['zlast_edited_time'];
+                $this->zcreated_time = $rec['zcreated_time'];
+                $this->zstate = $rec['zstate'];
+                $this->zstate_name = $rec['zstate_name'];
+                $this->zscan_count = $rec['zscan_count'];
+                $this->display();
+                return;
+            }
+        }
+        $this->show('{"result":1,"msg":"parameters error(zid)."}', 'utf-8');
+    }
+    public function ex_project_save($zid=-1,$ztitle='',$zsummary='',$zcontent='',$zrelease=''){
+        if(session('g_logined')!='logined'){//未登录
+            $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            return;
+        }
+        $zid = I('zid');
+        $ztitle = I('ztitle');
+        $zcontent = I('zcontent');
+        $zsummary = I('zsummary');
+        $zrelease = I('zrelease');
+        if($ztitle == '' || $zsummary == ''){
+            $this->show('{"result":1,"msg":"parameters error(zid)."}', 'utf-8');  
+            return;
+        }
+        $m = M('Z');
+        $data['ztitle'] = $ztitle;
+        $data['zcontent'] = $zcontent;
+        $data['zsummary'] = $zsummary;
+        $data['zlast_edited_time'] = date('Y-m-d H:i:s',time());
+        $data['zstate'] = $zrelease==1?30:0;
+        if($data['zstate'] == 30){
+            $data['zreleased_time'] = $data['zlast_edited_time'];
+        }
+        if($zid == -1 || $zid == ''){//new
+            $data['ztype'] = 9;//交换项目
             $data['zcreated_time'] = $data['zlast_edited_time'];
             $data['zcreator'] = session('rid');
             if($m->add($data)){

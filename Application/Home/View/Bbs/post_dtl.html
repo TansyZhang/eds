@@ -50,7 +50,7 @@
 }
 </style>
 
-<div class="container" style="padding-left:0px;padding-right:0px;width:1024px" id="start">
+<div class="container" style="padding-left:0px;padding-right:0px;width:1024px;" id="start">
 	<div style="width:800px;float:left;">
 		<div class="bbs_t_nav">
 			<div onclick="to_post_list(1);" class="bbs_t_nav_item<?php if($cid==1)echo " chosed-nav-item"; ?>">师生答疑区</div>
@@ -85,7 +85,7 @@
 					<div style="margin-left:15px;margin-right:264px;">
 						<div style="border-top:rgb(139,60,126) 2px solid;"></div>
 						<div>
-							<div class="post-content-real" style="padding-top:10px">
+							<div class="post-content-real" style="padding-top:10px;width:100%;word-wrap:break-word;word-break:break-all;overflow:hidden;">
 								<?php echo htmlspecialchars_decode($reply_vo['tcontent'],ENT_QUOTES); ?>
 							</div>
 							<!--<div style="text-align:right;display:none;">

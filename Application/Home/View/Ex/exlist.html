@@ -79,6 +79,19 @@
 	margin:10px 10px 10px 20px;width:440px;float:left;
 }
 
+.ex_item{
+	margin:10px;
+}
+
+.ex_item .title {
+	margin:10px;
+	font-size: 14pt;
+}
+.ex_item .time {
+	float:right;
+	line-height: 30px;
+}
+
 </style>
 
 
@@ -119,9 +132,23 @@
 				</div>
 			</volist>
 		<?php } else if($ztype == 6) {?>
-
+			<volist name="ex_trend_list" id="ex_trend_vo" key="k">
+				<div class="ex_item">
+					<span class="title" title="{$ex_trend_vo.ztitle}">
+						<a href="__ROOT__/Home/Ex/detail?zid={$ex_trend_vo.zid}#start" style="color:black;">{$ex_trend_vo.ztitle}</a>
+					</span>
+					<span class="time">{$ex_trend_vo.zreleased_time}</span>
+				</div>
+			</volist>
 		<?php } else if ($ztype == 9) { ?>
-
+			<volist name="ex_project_list" id="ex_project_vo" key="k">
+				<div class="ex_item">
+					<span class="title" title="{$ex_project_vo.ztitle}">
+						<a href="__ROOT__/Home/Ex/detail?zid={$ex_project_vo.zid}#start" style="color:black;">{$ex_project_vo.ztitle}</a>
+					</span>
+					<span class="time">{$ex_project_vo.zreleased_time}</span>
+				</div>
+			</volist>
 		<?php } ?>
 		<div style="margin:35px 0 100px;text-align:center;"></div>
 	</div>
@@ -130,13 +157,13 @@
 		<div class="ex_item_top_bar" style="margin-top:0"></div>
 		<div style="margin-top:30px;">
 			<div class="ex_type_item">
-				<a href="__ROOT__/Home/Ex/exlist?ztype=5#start" />交流札记&nbsp;>></a>
+				<a href="__ROOT__/Home/Ex/exlist?ztype=5#start" style="color:rgb(31,105,228);" title="交流札记">交流札记&nbsp;>></a>
 			</div>
 			<div class="ex_type_item">
-				<a href="__ROOT__/Home/Ex/exlist?ztype=6#start" />留学动态&nbsp;>></a>
+				<a href="__ROOT__/Home/Ex/exlist?ztype=6#start" style="color:rgb(31,105,228);" title="留学动态">留学动态&nbsp;>></a>
 			</div>
 			<div class="ex_type_item">
-				<a href="__ROOT__/Home/Ex/exlist?ztype=9#start" />交换项目&nbsp;>></a>
+				<a href="__ROOT__/Home/Ex/exlist?ztype=9#start" style="color:rgb(31,105,228);" title="交换项目">交换项目&nbsp;>></a>
 			</div>
 		</div>
 	</div>
