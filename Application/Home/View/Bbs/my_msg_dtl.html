@@ -1,0 +1,80 @@
+<layout name="layout" replace="{__REEPLACE__}" />
+
+
+<include file="./Application/Home/View/welcome_bbs.html" />
+
+<style>
+.separator{
+	border-bottom:rgb(139,60,126) 2px solid;
+	margin-bottom: 10px;
+}
+.center_title{
+	font-size: 14pt;
+	font-weight: bold;
+	padding: 5px 10px;
+}
+.msg_list_div{
+	margin-bottom: 20px;
+}
+.state{
+	font-size:10pt;
+}
+.op{
+	float:right;
+	font-size: 12pt;
+}
+.msg_item{
+	line-height: 40px;
+	font-size: 14pt;
+}
+.time{
+	font-size: 10pt;
+	color:gray;
+}
+</style>
+
+<div class="container" style="padding-left:0px;padding-right:0px;background-color:rgb(234,234,234);">
+	<include file="./Application/Home/View/layout_banner.html" bgcolor="139,60,126" display0="inline-block" display1="block" display2="block"
+	title0="师生社区" href0="__ROOT__/Home/Bbs" title1="个人中心" href1="__ROOT__/Home/Bbs/center?uid=1#start" 
+	title2="站内信箱" href2="#start" />
+
+	<div style="width:300px;float:right;">
+		<include file="./Application/Home/View/Bbs/right.html" />
+	</div>
+	<div style="width:724px;padding:40px;">
+		
+		<div class="msg_list_div">
+			<div class="center_title">信息详情</div>
+			<div class="separator"></div>
+			<div style="margin:10px;font-size:14pt;color:black;">
+				<span title="标题">{$stitle}</span>
+			</div>
+			<div style="margin:10px;font-size:10pt;">
+				<span title="发送者昵称(发送者ID)">{$sender_nickname}({$ssender})</span>
+				<span>-----></span>
+				<span title="接收者昵称(接收者ID)">{$receiver_nickname}({$sreceiver})</span>
+			</div>
+			<div style="margin:10px;font-size:10pt;color:gray;">
+				<span title="发送时间">{$ssend_time}</span>
+			</div>
+			<div style="margin:10px;">
+				<div>{$scontent}</div>
+			</div>
+		</div>
+
+		<div>
+			<a href="javascript:void(0)" title="返回上一页" 
+			onclick="window.history.go(-1);" style="color:black;">返回</a>
+		</div>
+		<!---->
+
+	</div>
+</div>
+
+
+
+<script>
+$(document).ready(function(){
+	
+});
+</script>

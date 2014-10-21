@@ -1,0 +1,109 @@
+<layout name="layout" replace="{__REEPLACE__}" />
+
+
+<include file="./Application/Home/View/welcome_bbs.html" />
+
+<link rel="stylesheet" href="__PUBLIC__/kindeditor-4.1.10/themes/default/default.css" />
+<script charset="utf-8" src="__PUBLIC__/kindeditor-4.1.10/kindeditor-min.js"></script>
+<script charset="utf-8" src="__PUBLIC__/kindeditor-4.1.10/lang/zh_CN.js"></script>
+
+<style>
+.separator{
+	border-bottom:rgb(139,60,126) 2px solid;
+	margin-bottom: 10px;
+}
+.center_title{
+	font-size: 14pt;
+	font-weight: bold;
+	padding: 5px 10px;
+}
+
+</style>
+
+<div class="container" style="padding-left:0px;padding-right:0px;background-color:rgb(234,234,234);">
+	<include file="./Application/Home/View/layout_banner.html" bgcolor="139,60,126" display0="inline-block" display1="block" display2="block"
+	title0="师生社区" href0="__ROOT__/Home/Bbs" title1="个人中心" href1="__ROOT__/Home/Bbs/center?uid=1#start" 
+	title2="站内信箱" href2="#start" />
+
+	<div style="width:300px;float:right;">
+		<include file="./Application/Home/View/Bbs/right.html" />
+	</div>
+	<div style="width:724px;padding:40px;">
+		
+		<div class="">
+			<div class="center_title">发送站内信</div>
+			<div class="separator"></div>
+			<input type="hidden" id="sid" value="{$sid}" />
+
+			<div>
+				<span>接收者ID</span>
+				<span>
+					<input type="text" id="sreceiver" class="form-control" placeholder="receiver input" value="{$sreceiver}" />
+				</span>
+			</div>
+			<div>
+				<span>标题</span>
+				<span>
+					<input type="text" id="stitle" class="form-control" placeholder="title input" value="{$stitle}" />
+				</span>
+			</div>
+			<div>
+				<span>内容</span>
+				<span>
+					<textarea name="scontent" class="form-control" style="width:100%;height:200px;visibility:hidden;">{$scontent}</textarea>
+				</span>
+			</div>
+		</div>
+
+
+		<div>
+			<include file="./Application/Home/View/control_btn.html" id="btn_save" text="暂存" />
+			<include file="./Application/Home/View/control_btn.html" id="btn_send" text="发送" />
+		</div>
+		<!---->
+
+	</div>
+</div>
+
+<script>
+<include file="./Application/Home/View/control_editor.html" editor="editor" name="scontent" />
+
+function msg_submit(psend){
+	var url = '__ROOT__/Home/Bbs/my_msg_save';
+	$('#btn_save').attr('disabled',true);
+	$('#btn_send').attr('disabled',true);
+	$.ajax({
+		url:url,
+		dataType:'json',
+		type:'post',
+		data:{
+			sid:$('#sid').val(),
+			stitle:$('#stitle').val(),
+			ssend:psend,
+			sreceiver:$('#sreceiver').val(),
+			ssummary:editor.text().substr(0,100),
+			scontent:editor.html()
+		},
+		success:function(t,s,r){
+			if(t.result==0){
+				cdialog.show_info('操作成功！',function(){
+					window.location.href="__ROOT__/Home/Bbs/my_msg#start";
+				});
+			}else {
+				cdialog.show_alert('操作失败！错误消息:'+t.msg);
+			}
+			$('#btn_save').attr('disabled',false);
+			$('#btn_send').attr('disabled',false);
+		},
+		error:function(t){
+			eds_framework.error_handler(url,t);
+			$('#btn_save').attr('disabled',false);
+			$('#btn_send').attr('disabled',false);
+		}
+	});
+}
+$(document).ready(function(){
+	$('#btn_save').click(function(){msg_submit(0);});
+	$('#btn_send').click(function(){msg_submit(1);});
+});
+</script>

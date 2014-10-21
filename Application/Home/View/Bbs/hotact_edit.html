@@ -33,19 +33,20 @@
 <div class="container" style="padding-left:0px;padding-right:0px;background-color:rgb(234,234,234);width:1024px;">
 	<include file="./Application/Home/View/layout_banner.html" bgcolor="139,60,126" display0="inline-block" display1="block" display2="block"
 	title0="师生社区" href0="__ROOT__/Home/Bbs" title1="个人中心" href1="__ROOT__/Home/Bbs/center?uid=1#start" 
-	title2="热门活动" href2="__ROOT__/Home/Bbs/hotact#start" />
+	title2="{$ktype_name}" href2="__ROOT__/Home/Bbs/hotact#start" />
 
 	<div style="width:300px;float:right;">
 		<include file="./Application/Home/View/Bbs/right.html" />
 	</div>
 	<div style="width:724px;padding:40px;">
 		<div class="post_list_div">
-			<div class="center_title">热门活动编辑</div>
+			<div class="center_title">{$ktype_name}编辑</div>
 			<div class="separator"></div>
 			<div>
 				<input type="hidden" id="kid" value="{$kid}" />
+				<input type="hidden" id="ktype" value="{$ktype}" />
 				<div>
-					<span>请选择热门活动</span>
+					<span>请选择{$ktype_name}</span>
 					<span>
 						<select name="kzid" class="selecter_1" id="kzid" >
 							<volist name="hotact_list" id="hotact_vo" key="k">
@@ -53,7 +54,7 @@
 								<?php if($zid == $hotact_vo['zid']){ ?>
 									selected
 								<?php } ?>
-								>{$hotact_vo.ztitle}</option>
+								>({$hotact_vo.ztype_name}){$hotact_vo.ztitle}</option>
 							</volist>
 						</select>
 					</span>
@@ -79,6 +80,7 @@ $(document).ready(function(){
 			type:'post',
 			data:{
 				kid:$('#kid').val(),
+				ktype:$('#ktype').val(),
 				kzid:$('#kzid').val()
 			},
 			success:function(t,s,r){

@@ -10,6 +10,11 @@ class IndexController extends EdsController {
 	}
 	
     public function index(){
+        $m = M('HotactView');
+        $lim['ktype'] = 1;
+        $lim['kstate'] = array('in', '10,20');
+        $this->hotnews_list = $m->where($lim)->select();
+        //dump($this->hotnews_list);
         $this->display();
     }
 
@@ -73,6 +78,24 @@ class IndexController extends EdsController {
         }
         //echo 'asdfas';return;
         //dump($this->post_list);
+        $this->display();
+    }
+
+    public function mhotact(){
+        $this->hotact_list = array();
+        $m = M('HotactView');
+        $lim['ktype'] = 0;
+        $lim['kstate'] = 20;//20-置顶
+        $top_list = $m->where($lim)->order('klast_edited_time desc')->select();
+        if($top_list){
+            $this->hotact_list = $top_list;
+        }
+
+        $lim['kstate'] = 10;//10-发布
+        $act_list = $m->where($lim)->order('klast_edited_time desc')->select();
+        if($act_list){
+            $this->hotact_list = array_merge($this->hotact_list, $act_list);
+        }
         $this->display();
     }
 

@@ -45,8 +45,8 @@ class BbsController extends EdsController {
     	if($cid == ''){
     		$cid = 1;
     	}
-    	$m = M('Bbs');
-        $m2 = M('Bbs');
+    	$m = M('PostListView');
+        $m2 = M('PostListView');
     	$lim['ttopic'] = $cid;
     	$lim['tstate'] = 20;//20-置顶
     	$post_list1 = $m->where($lim)->order('tlast_edited_time desc')->select();
@@ -180,6 +180,29 @@ class BbsController extends EdsController {
             $str.=$strPol[rand(0,$max)];//rand($min,$max)生成介于min和max两个数之间的一个随机整数
         }
         return $str;
+    }
+
+    public function post_shield($tid = -1){
+        if(session('g_logined')!='logined'){//未登录
+            $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            //$this->display();
+            return;
+        }
+        $tid = I('tid');
+        $m = M('Bbs');
+        $lim['tid'] = $tid;
+        $rec = $m->where($lim)->find();
+        if($rec && (session('rid')==1||session('rid')==2 || session('pmanager_bbs')==1)){
+            $data['tid'] = $tid;
+            $data['tstate'] = 40;//40-屏蔽
+            if($m->save($data)){
+                $this->show('{"result":0,"msg":"succeed."}', 'utf-8');
+            } else {
+                $this->show('{"result":1,"msg":"'.str_replace('"', '&', $m->getDbError()).'"}', 'utf-8');
+            }
+        } else {
+            $this->show('{"result":1,"msg":"parameters error(tid) or permission error."}', 'utf-8');
+        }
     }
 
 
@@ -1604,7 +1627,7 @@ class BbsController extends EdsController {
             $this->display();
             return;
         }
-        echo session('rid');
+        //echo session('rid');
         $this->cond_logined = false;
         $event = M('EventView');
         $lim['vrid'] = session('rid');
@@ -2103,8 +2126,16 @@ class BbsController extends EdsController {
             return;
         }
         $m = M('HotactView');
+        $lim['ktype'] = 0;
         $lim['kstate'] = array('in','10,20,30');
         $this->hotact_list = $m->where($lim)->select();
+
+
+        $m = M('HotactView');
+        $lim['ktype'] = 1;
+        //$lim['kstate'] = array('in','10,20,30');
+        $this->hotnews_list = $m->where($lim)->select();
+
         $this->display();
     }
 
@@ -2128,7 +2159,7 @@ class BbsController extends EdsController {
         }
     }
 
-    public function hotact_edit($kid=-1){
+    public function hotact_edit($kid=-1,$ktype=0){
         if(session('g_logined')!='logined'){//未登录
             $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
             return;
@@ -2138,16 +2169,43 @@ class BbsController extends EdsController {
             return;
         }
         $kid = I('kid');
+        $ktype = I('ktype');
         if($kid == -1 || $kid == ''){
             $this->kid = -1;
+        } else {
+            $this->kid = $kid;
+            $m_k = M('HotactView');
+            $lim_k['kid'] = $kid;
+            $rec = $m_k->where($lim_k)->find();
+            if($rec){
+                $this->zid = $rec['kzid'];
+                //dump($this->zid);
+            } else {
+                $this->show('{"result":1,"msg":"parameters error(kid)."}', 'utf-8');
+                return;
+            }
         }
-        $m = M('Z');
+        $this->ktype = $ktype;
+
+        $m = M('ZView');
         $lim['zstate'] = array('in','30,40');//30-发布，40-置顶
-        $this->hotact_list = $m->where($lim)->field('zid,ztitle,ztype')->order('ztype')->select();
+        $this->hotact_list = $m->where($lim)->field('zid,ztitle,ztype,ztype_name')->order('ztype asc')->select();
+
+
+        $m_type = M('dic');
+        $lim_type['dic_key'] = $ktype;
+        $lim_type['dic_type'] = 'ktype';
+        $rec = $m_type->where($lim_type)->find();
+        if($rec){
+            $this->ktype_name = $rec['dic_value'];
+        } else {
+            $this->show('{"result":1,"msg":"parameters error(kid)."}', 'utf-8');
+            return;
+        }
         $this->display();
     }
 
-    public function hotact_save($kid=-1,$kzid=-1){
+    public function hotact_save($kid=-1,$kzid=-1,$ktype=0){
         if(session('g_logined')!='logined'){//未登录
             $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
             return;
@@ -2158,6 +2216,7 @@ class BbsController extends EdsController {
         }
         $kid = I('kid');
         $kzid = I('kzid');
+        $ktype = I('ktype');
         if($kid == '' || $kzid == -1 || $kzid == ''){
             $this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
             return;
@@ -2166,11 +2225,12 @@ class BbsController extends EdsController {
             $m = M('Z');
             $lim['zid'] = $kzid;
             $rec = $m->where($lim)->find();
-            if($rec && ($rec['zstate']==30||$rec['zstate']==40)){
+            if($rec && $rec['ktype']==0 && ($rec['zstate']==30||$rec['zstate']==40)){
                 $m_hotact = M('Hotact');
                 $data['kztype'] = $rec['ztype'];
                 $data['kstate'] = 10;//发布中
                 $data['kzid'] = $kzid;
+                $data['ktype'] = $ktype;
                 $data['klast_edited_time'] = date('Y-m-d H:i:s',time());
                 $data['kcreated_time'] = $data['klast_edited_time'];
                 if($m_hotact->add($data)){
@@ -2186,8 +2246,11 @@ class BbsController extends EdsController {
             $m = M('Z');
             $lim['zid'] = $kzid;
             $rec = $m->where($lim)->find();
-            if($rec && ($rec['zstate']==30||$rec['zstate']==40)){
+            if($rec && $rec['ktype']==0 && ($rec['zstate']==30||$rec['zstate']==40)){
                 $m_hotact = M('Hotact');
+                $data['kid'] = $kid;
+                $data['kzid'] = $kzid;
+                $data['ktype'] = $ktype;
                 $data['kztype'] = $rec['ztype'];
                 $data['kstate'] = 10;//发布中
                 $data['klast_edited_time'] = date('Y-m-d H:i:s',time());
@@ -2199,6 +2262,197 @@ class BbsController extends EdsController {
             } else {
                 $this->show('{"result":1,"msg":"parameters error(kzid)."}', 'utf-8');
             }
+        }
+    }
+
+    public function my_msg(){
+        if(session('g_logined')!='logined'){//未登录
+            $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            return;
+        }
+        $this->display();
+    }
+
+    public function my_msg_send($page=0){
+        if(session('g_logined')!='logined'){//未登录
+            $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            return;
+        }
+        $page = I('page');
+        $m = M('MsgSendPageView');
+        $lim['ssender'] = session('rid');
+        $lim['srecv_type'] = 1;//1v1
+        $this->send_msg_list = $m->where($lim)->select();
+
+        $this->result = 0;
+        $this->msg = "succeed";
+        $this->display();
+    }
+
+    public function my_msg_recv($page=0){
+        if(session('g_logined')!='logined'){//未登录
+            $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            return;
+        }
+        $page = I('page');
+        $m = M('MsgRecvPageView');
+        $lim['sreceiver'] = session('rid');
+        $lim['srecv_type'] = 1;//1v1
+        $this->recv_msg_list = $m->where($lim)->select();
+
+        $this->result = 0;
+        $this->msg = "succeed";
+        $this->display();
+    }
+
+    public function my_msg_dtl($sid=-1){
+        if(session('g_logined')!='logined'){//未登录
+            $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            return;
+        }
+        $sid = I('sid');
+        if($sid == -1 || $sid == ''){
+            $this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
+            return;
+        }
+        $m = M('MsgView');
+        $lim['sid'] = $sid;
+        $rec = $m->where($lim)->find();
+        if($rec && ($rec['ssender'] == session('rid') || $rec['sreceiver'] == session('rid'))
+            || session('rid')==1|| session('rid')==2){
+            $this->sid = $sid;
+            $this->stitle = $rec['stitle'];
+            $this->scontent = htmlspecialchars_decode($rec['scontent'], ENT_QUOTES);
+            $this->sstate = $rec['sstate'];
+            $this->ssender = $rec['ssender'];
+            $this->srecv_type = $rec['srecv_type'];
+            $this->sreceiver = $rec['sreceiver'];
+            $this->screated_time = $rec['screated_time'];
+            $this->ssend_time = $rec['ssend_time'];
+            $this->sender_nickname = $rec['sender_nickname'];
+            $this->receiver_nickname = $rec['receiver_nickname'];
+            //dump($this->scontent);
+
+            if($this->sreceiver == session('rid') && $this->sstate == 10){
+                $data['sid'] = $sid;
+                $data['sstate2'] = 20;//已查看
+                M('Msg')->save($data);
+            }
+
+            $this->display();
+        } else {
+            $this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
+            return;
+        }
+    }
+
+    public function my_msg_edit($sid=-1){
+        if(session('g_logined')!='logined'){//未登录
+            $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            return;
+        }
+        $sid = I('sid');
+        if($sid == -1 || $sid == ''){
+            $this->sid = -1;
+            $this->display();
+            return;
+        }
+        $m = M('Msg');
+        $lim['sid'] = $sid;
+        $rec = $m->where($lim)->find();
+        if($rec){
+            $this->sid = $sid;
+            $this->stitle = $rec['stitle'];
+            $this->scontent = $rec['scontent'];
+            $this->display();
+        } else {
+            $this->show('{"result":1,"msg":"parameters error(sid)."}', 'utf-8');
+        }
+    }
+
+    public function my_msg_save($sid=-1,$sreceiver='',$stitle='',$scontent='',$ssend=''){
+        if(session('g_logined')!='logined'){//未登录
+            $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            return;
+        }
+        $sid = I('sid');
+        $sreceiver = I('sreceiver');
+        $stitle = I('stitle');
+        $scontent = I('scontent');
+        $ssend = I('ssend');
+
+        $m = M('Msg');
+        $data['sreceiver'] = $sreceiver;
+        $data['stitle'] = $stitle;
+        $data['scontent'] = $scontent;
+        if($sid == -1 || $sid == ''){
+            $data['screated_time'] = date('Y-m-d H:i:s', time());
+            $data['sstate'] = $ssend==1?10:0;
+            $data['srecv_type'] = 1;//1-一对一
+            $data['ssender'] = session('rid');
+            if($data['sstate'] == 10){
+                $data['ssend_time'] = $data['screated_time'];
+            }
+            if($m->add($data)){
+                $this->show('{"result":0,"msg":"adding succeed."}', 'utf-8');
+            } else {
+                $this->show('{"result":1,"msg":"'.($m->getDbError()).'"}', 'utf-8');
+            }
+        } else {
+            $lim['sid'] = $sid;
+            $rec = $m->where($lim)->find();
+            if($rec && $rec['ssender'] == session('rid') && $rec['sstate'] == 0){
+                $data['sid'] = $sid;
+                $data['sstate'] = $ssend==1?10:0;
+                if($data['sstate'] == 10){
+                    $data['ssend_time'] = date('Y-m-d H:i:s', time());
+                }
+                if($m->save($data)){
+                    $this->show('{"result":0,"msg":"saving succeed."}', 'utf-8');
+                } else {
+                    $this->show('{"result":1,"msg":"'.($m->getDbError()).'"}', 'utf-8');
+                }
+            } else {
+                $this->show('{"result":1,"msg":"parameters error(sid)."}', 'utf-8');
+            }
+        }
+    }
+    public function my_msg_del($sid=-1,$ssend=0){
+        if(session('g_logined')!='logined'){//未登录
+            $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            return;
+        }
+        $sid = I('sid');
+        if($sid == -1 || $sid == ''){
+            $this->show('{"result":1,"msg":"parameters error(sid)."}', 'utf-8');
+            return;
+        }
+        $m = M('Msg');
+        $lim['sid'] = $sid;
+        $rec = $m->where($lim)->find();
+        if($rec 
+            && (
+                session('rid')==1||session('rid')==2 
+                || $ssend==0&&$rec['ssender']==session('rid')
+                || $ssend==1&&$rec['sreceiver']==session('rid')
+                )
+            ){
+            $data['sid'] = $sid;
+            if($ssend==0){
+                $data['sstate'] = 30;
+            } else if($ssend==1){
+                $data['sstate2'] = 40;
+            } else {
+                $this->show('{"result":1,"msg":"parameters error(ssend)."}', 'utf-8');
+                return;
+            }
+            if($m->save($data)){
+                $this->show('{"result":0,"msg":"deleting succeed."}', 'utf-8');
+            } else {
+                $this->show('{"result":1,"msg":"'.($m->getDbError()).'"}', 'utf-8');
+            }
+        } else {
+            $this->show('{"result":1,"msg":"parameters error(sid) or permission error."}', 'utf-8');
         }
     }
 }

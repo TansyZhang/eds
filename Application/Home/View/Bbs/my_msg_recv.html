@@ -1,0 +1,20 @@
+
+
+
+{
+	"result":"{$result}",
+	"msg":"{$msg}",
+	"data":[
+	<volist name="recv_msg_list" id="msg_vo" key="k">
+	{
+		"id":"{$msg_vo.sid}",
+		"title":"{$msg_vo.stitle}",
+		"state":"{$msg_vo.sstate}",
+		"state2":"{$msg_vo.sstate2}",
+		"time":"{$msg_vo.ssend_time}",
+		"state2_name":"{$msg_vo.sstate2_name}"
+	}
+	<?php if(count($recv_msg_list)!=$k){ ?>,<?php } ?>
+	</volist>
+	]
+}

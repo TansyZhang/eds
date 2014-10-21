@@ -53,6 +53,15 @@
 	text-align:right;
 	padding: 8px 0 2px;
 }
+.op{
+	font-size: 10pt;
+	margin: 0 10px;
+	cursor:pointer;
+	float:right;
+}
+.op:hover{
+	color:black;
+}
 </style>
 
 <div class="container" style="padding-left:0px;padding-right:0px;width:1024px;">
@@ -91,6 +100,14 @@
 							<span>&nbsp;</span>
 							<span>于<span>{$post_vo.tcreated_time}</span></span>
 							<span>{$post_vo.cname}</span>
+							<?php if(session('rid')==1||session('rid')==2 || session('pmanager_bbs')==1){ ?>
+								<span class="op" onclick="post_shield(this,{$post_vo.tid})">屏蔽</span>
+								<?php if($post_vo['tstate']==10){ ?>
+								<span class="op" onclick="post_top({$post_vo.tid},1)">置顶</span>
+								<?php } else if($post_vo['tstate']==20){ ?>
+								<span class="op" onclick="post_top({$post_vo.tid},0)">取消置顶</span>
+								<?php } ?>
+							<?php } ?>
 						</div>
 					</div>
 				</div>
@@ -129,3 +146,52 @@
 		</div>
 	</div>
 </div>
+
+<script>
+function post_shield(elem,ptid){
+	if(!eds_framework.confirm('','您确定要屏蔽此条帖子吗？')){
+		return;
+	}
+	var url = '__ROOT__/Home/Bbs/post_shield';
+	$.ajax({
+		url:url,
+		dataType:'json',
+		type:'post',
+		data:{tid:ptid},
+		success:function(t,s,r){
+			if(t.result==0){
+				$(elem).parent().parent().parent().slideUp(300);
+			}else {
+				cdialog.show_alert('操作失败！错误消息:'+t.msg);
+			}
+		},
+		error:function(t){
+			eds_framework.error_handler(url,t);
+		}
+	});
+}
+function post_top(ptid,ptop){
+	if(!eds_framework.confirm('','您确定要'+(ptop==0?'取消置顶':'置顶')+'此条帖子吗？')){
+		return;
+	}
+	var url = '__ROOT__/Home/Bbs/post_top';
+	$.ajax({
+		url:url,
+		dataType:'json',
+		type:'post',
+		data:{tid:ptid,ttop:ptop},
+		success:function(t,s,r){
+			if(t.result==0){
+				cdialog.show_info('操作成功！',function(){
+					window.location.reload();
+				});
+			}else {
+				cdialog.show_alert('操作失败！错误消息:'+t.msg);
+			}
+		},
+		error:function(t){
+			eds_framework.error_handler(url,t);
+		}
+	});
+}
+</script>

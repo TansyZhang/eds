@@ -5,13 +5,27 @@
 	"msg":"succeed",
 	"data":[
 
-	<volist name="act_list" id="act_vo" key="k">
+	<volist name="hotact_list" id="act_vo" key="k">
 	{
-		"title":"{$act_vo.acttitle}",
+		"title":"{$act_vo.ztitle}",
 		"college":"南京大学",
-		"by":"{$act_vo.actby}"
+		"by":"{$act_vo.zreleased_time}",
+		"url":
+		"<?php 
+		if($act_vo['kztype']==0){
+			?>__ROOT__/Home/News/detail?zid={$act_vo.kzid}<?php
+		} else if($act_vo['kztype']==3){
+			?>__ROOT__/Home/Plan/project_dtl?zid={$act_vo.kzid}#plan_title_span<?php
+		} else if($act_vo['kztype']==4){
+			?>__ROOT__/Home/Notice/detail?zid={$act_vo.kzid}#start<?php
+		} else if($act_vo['kztype']==5 || $act_vo['kztype']==6 || $act_vo['kztype']==9){
+			?>__ROOT__/Home/Ex/detail?zid={$act_vo.kzid}#start<?php
+		} else {
+			?>#<?php
+		}
+		?>"
 	}
-	<?php if(count($act_list)!=$k){ ?>,<?php } ?>
+	<?php if(count($hotact_list)!=$k){ ?>,<?php } ?>
 	</volist>
 	]
 }

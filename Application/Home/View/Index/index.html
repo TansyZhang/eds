@@ -25,7 +25,9 @@
 	<div id="recmd_course_area" style="clear:both;width:628px;display:block;">
 		<div class="index_title">
 			<span style="float:left">推荐课程</span>
-			<span style="float:right;">{$more}</span>
+			<span style="float:right;">
+				<a href="__ROOT__/Home/Course/netcourse#start" style="color:#9A7016;" title="查看更多网络课程">{$more}</a>
+			</span>
 			<span>&nbsp;</span>
 		</div>
 		<div style="width:628px;height:7px;background-color:#9A7016;">&nbsp;</div>
@@ -50,16 +52,32 @@
 		</div>
 		<div style="height:7px;background-color:#A2A012;">&nbsp;</div>
 		<div style="background-color:rgb(234,234,234);width:189px;margin-right:2px;margin-bottom:2px;height:207px;float:left">
-			<div style="margin-top:10px;margin-left:14px;"><img src="__PUBLIC__/assets/image/index_book_1.png" /></div>
+			<div style="margin-top:10px;margin-left:14px;">
+				<a href="http://www.nature.com/" target="_blank">
+					<img src="__PUBLIC__/assets/image/index_book_1.png" />
+				</a>
+			</div>
 		</div>
 		<div style="background-color:rgb(234,234,234);width:189px;margin-bottom:2px;height:207px;float:left">
-			<div style="margin-top:10px;margin-left:14px;"><img src="__PUBLIC__/assets/image/index_book_2.png" /></div>
+			<div style="margin-top:10px;margin-left:14px;">
+				<a href="http://www.sciencemag.org/" target="_blank">
+					<img src="__PUBLIC__/assets/image/index_book_2.png" />
+				</a>
+			</div>
 		</div>
 		<div style="background-color:rgb(234,234,234);width:189px;margin-right:2px;height:207px;float:left">
-			<div style="margin-top:10px;margin-left:14px;"><img src="__PUBLIC__/assets/image/index_book_3.png" /></div>
+			<div style="margin-top:10px;margin-left:14px;">
+				<a href="http://www.cell.com/" target="_blank">
+					<img src="__PUBLIC__/assets/image/index_book_3.png" />
+				</a>
+			</div>
 		</div>
 		<div style="background-color:rgb(234,234,234);width:189px;height:207px;float:left">
-			<div style="margin-top:10px;margin-left:14px;"><img src="__PUBLIC__/assets/image/index_book_4.png" /></div>
+			<div style="margin-top:10px;margin-left:14px;">
+				<a href="http://cpl.iphy.ac.cn/EN/volumn/current.shtml" target="_blank">
+					<img src="__PUBLIC__/assets/image/index_book_4.png" />
+				</a>
+			</div>
 		</div>
 	</div>
 </div>
@@ -122,7 +140,7 @@ $(document).ready(function(){
 			tpl:
 				'<div class="index_item">'+
 					'<div class="index_item_content">'+
-						'<span>{title}</span>'+
+						'<span><a href="{url}">{title}</a></span>'+
 					'</div>'+
 					'<div class="index_item_info">'+
 						'<div>'+
@@ -130,7 +148,7 @@ $(document).ready(function(){
 						'</div>'+
 					'</div>'+
 				'</div>',
-			tpl_args:["{title}","{college}","{by}"],/*使用mdl_args可以加快替换速度*/
+			tpl_args:["{title}","{college}","{by}","{url}"],/*使用mdl_args可以加快替换速度*/
 			error:"加载热门活动列表失败！{status}:{statusText}",
 			clear:true,
 			parent:"#hot_act_area_items"

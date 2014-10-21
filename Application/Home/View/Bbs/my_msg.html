@@ -27,6 +27,13 @@
 	line-height: 40px;
 	font-size: 14pt;
 }
+.time{
+	font-size: 10pt;
+	color:gray;
+}
+.had_read {
+	color:gray;
+}
 </style>
 
 <div class="container" style="padding-left:0px;padding-right:0px;background-color:rgb(234,234,234);">
@@ -38,55 +45,127 @@
 		<include file="./Application/Home/View/Bbs/right.html" />
 	</div>
 	<div style="width:724px;padding:40px;">
-
-				<include file="./Application/Home/View/waiting.html" />
-		<!--
-		<div class="msg_list_div">
-			<div class="center_title">发信箱</div>
-			<div class="separator"></div>
-			<div class="msg_list">
-				<div class="msg_item">
-					<span class="op"><span>2014-08-08 15:45:29</span>&nbsp;<span>修改</span>&nbsp;<span>发送</span>&nbsp;<span>删除</span></span>
-					<div><a href="#">站内信标题</a><span class="state">(编辑中)</span></div>
-				</div>
-				<div class="msg_item">
-					<span class="op"><span>2014-08-08 15:45:29</span>&nbsp;<span>修改</span>&nbsp;<span>发送</span>&nbsp;<span>删除</span></span>
-					<div><a href="#">站内信标题</a><span class="state">(编辑中)</span></div>
-				</div>
-				<div class="msg_item">
-					<span class="op"><span>2014-08-08 15:45:29</span>&nbsp;<span>修改</span>&nbsp;<span>发送</span>&nbsp;<span>删除</span></span>
-					<div><a href="#">站内信标题</a><span class="state">(编辑中)</span></div>
-				</div>
-				<div class="msg_item">
-					<span class="op"><span>2014-08-08 15:45:29</span>&nbsp;<span style="color:gray;cursor:default;" title="已经发送的站内信不能修改">修改</span>&nbsp;<span>查看</span>&nbsp;<span>删除</span></span>
-					<div><a href="#">站内信标题</a><span class="state">(已发送)</span></div>
-				</div>
-			</div>
-		</div>
-
+		
 		<div class="msg_list_div">
 			<div class="center_title">收信箱</div>
 			<div class="separator"></div>
-			<div class="msg_list">
-				<div class="msg_item">
-					<span class="op"><span>2014-08-08 15:45:29</span>&nbsp;<span>查看</span>&nbsp;<span>删除</span></span>
-					<div><a href="#">站内信标题</a><span class="state">(未查看)</span></div>
-				</div>
-				<div class="msg_item">
-					<span class="op"><span>2014-08-08 15:45:29</span>&nbsp;<span>查看</span>&nbsp;<span>删除</span></span>
-					<div><a href="#">站内信标题</a><span class="state">(未查看)</span></div>
-				</div>
-				<div class="msg_item">
-					<span class="op"><span>2014-08-08 15:45:29</span>&nbsp;<span>查看</span>&nbsp;<span>删除</span></span>
-					<div><a href="#">站内信标题站内信标题站内信标题</a><span class="state">(已查看)</span></div>
-				</div>
-				<div class="msg_item">
-					<span class="op"><span>2014-08-08 15:45:29</span>&nbsp;<span>查看</span>&nbsp;<span>删除</span></span>
-					<div><a href="#">站内信标题</a><span class="state">(已查看)</span></div>
-				</div>
-			</div>
+			<div class="msg_list" id="msg_recv_list"></div>
 		</div>
-		-->
+		<div class="msg_list_div">
+			<div class="center_title">发信箱</div>
+			<div class="separator"></div>
+			<div class="msg_list" id="msg_send_list"></div>
+		</div>
+
+		<div>
+			<include file="./Application/Home/View/control_btn.html" id="btn_add" text="发送站内信" />
+		</div>
+		<!---->
 
 	</div>
 </div>
+
+
+
+<script>
+function get_msg_recv(ppage){
+	var url_recv = '__ROOT__/Home/Bbs/my_msg_recv';
+	$.ajax({
+		url:url_recv,
+		dataType:'json',
+		type:'post',
+		data:{page:ppage},
+		success:function(t,s,r){
+			if(t.result==0){
+				var tdata = t.data;
+				var p = $('#msg_recv_list');
+				p.empty();
+				for(var k in tdata){
+					var s = '<div class="msg_item'+(tdata[k].state2!=10?' had_read':'')+'">'
+							+'<span class="op">'
+								+'<span class="time">'+tdata[k].time+'</span>&nbsp;'
+								+'<span><a style="color:black;" href="__ROOT__/Home/Bbs/my_msg_dtl?sid='+tdata[k].id+'#start">查看</a></span>&nbsp;'
+								+'<span onclick="msg_del(this,'+tdata[k].id+',1,false)" style="cursor:pointer;color:black;" title="删除此封站内信">删除</span>'
+							+'</span>'
+							+'<div>'+tdata[k].title+'<span class="state">('
+								+(tdata[k].state2_name)
+							+')</span></div>'
+						+'</div>';
+					p.append(s);
+				}
+			}else {
+				cdialog.show_alert('获取收信箱信息失败！错误消息:'+t.msg);
+			}
+		},
+		error:function(t){
+			eds_framework.error_handler(url_recv,t);
+		}
+	});
+}
+function get_msg_send(ppage){
+	var url_send = '__ROOT__/Home/Bbs/my_msg_send';
+	$.ajax({
+		url:url_send,
+		dataType:'json',
+		type:'post',
+		data:{page:ppage},
+		success:function(t,s,r){
+			if(t.result==0){
+				var tdata = t.data;
+				var p = $('#msg_send_list');
+				p.empty();
+				for(var k in tdata){
+					var s = '<div class="msg_item">'
+						+'<span class="op">'
+							+'<span class="time">'+tdata[k].time+'</span>&nbsp;'
+							+(tdata[k].state==0?'<span>修改</span>&nbsp;':'')
+							+'<span><a style="color:black;" href="__ROOT__/Home/Bbs/my_msg_dtl?sid='+tdata[k].id+'#start">查看</a></span>&nbsp;'
+							+'<span onclick="msg_del(this,'+tdata[k].id+',0,'+(tdata[k].state!=0)+')" style="cursor:pointer;color:black;" title="删除此封站内信">删除</span>'
+						+'</span>'
+						+'<div>'+tdata[k].title+'<span class="state">('+tdata[k].state_name+')</span></div>'
+					'</div>';
+					p.append(s);
+				}
+			}else {
+				cdialog.show_alert('获取发信箱信息失败！错误消息:'+t.msg);
+			}
+		},
+		error:function(t){
+			eds_framework.error_handler(url_send,t);
+		}
+	});
+}
+function msg_del(elem,psid,psend_or_recv,phas_send){
+	if(phas_send && psend_or_recv==0){
+		if(!eds_framework.confirm('','删除此封站内信并不会从接收者的信箱删除该封站内信，您确定要删除吗？')){
+			return;
+		}
+	} else if(!eds_framework.confirm('','您确定要删除此封站内信吗？')){
+		return;
+	}
+	var url = '__ROOT__/Home/Bbs/my_msg_del';
+	$.ajax({
+		url:url,
+		dataType:'json',
+		type:'post',
+		data:{sid:psid,ssend:psend_or_recv},
+		success:function(t,s,r){
+			if(t.result==0){
+				$(elem).parent().parent().hide();
+			}else {
+				cdialog.show_alert('删除失败！错误消息:'+t.msg);
+			}
+		},
+		error:function(t){
+			eds_framework.error_handler(url,t);
+		}
+	});
+}
+$(document).ready(function(){
+	$('#btn_add').click(function(){
+		window.location.href="__ROOT__/Home/Bbs/my_msg_edit#start";
+	});
+	get_msg_recv(0);
+	get_msg_send(0);
+});
+</script>
