@@ -49,27 +49,17 @@
 		<div class="news_content">
 			<textarea name="zcontent" class="form-control" style="width:100%;height:200px;visibility:hidden;">{$zcontent}</textarea>
 		</div>
-		<button type="button" class="btn btn-info btn-block" id="btn_save">暂存</button>
-		<button type="button" class="btn btn-info btn-block" id="btn_release">发布</button>
+
+
+		<div style="padding:10px 0;">
+			<include file="./Application/Home/View/control_btn.html" id="btn_save" text="暂存" />
+			<include file="./Application/Home/View/control_btn.html" id="btn_release" text="发布" />
+		</div>
+
 
 <script type="text/javascript">
-var editor;
-KindEditor.ready(function(K) {
-	editor = K.create('textarea[name="zcontent"]', {
-		resizeType : 1,
-		allowPreviewEmoticons : true,
-		allowImageUpload : true,
-		autoHeightMode : true,
-		allowFileManager: true,
-		afterCreate : function() {
-			this.loadPlugin('autoheight');
-		},
-		items : [
-			'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
-			'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
-			'insertunorderedlist', '|', 'emoticons', 'image', 'link']
-	});
-});
+<include file="./Application/Home/View/control_editor.html" editor="editor" name="zcontent" />
+
 function zsave(url,path,release){
 	var subtype = $('select[name="zsub_type"]').val();
 	$.ajax({

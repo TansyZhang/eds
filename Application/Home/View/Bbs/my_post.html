@@ -23,9 +23,14 @@
 .post_item{
 	line-height: 30px;
 	font-size: 14pt;
+	margin-bottom: 1px;
 }
 .post_item_op{
 	cursor: pointer;
+}
+.datetime{
+	font-size: 10pt;
+	color:gray;
 }
 </style>
 
@@ -70,10 +75,10 @@
 									<span style="color:red" title="该帖子已经被管理员置顶">[顶]</span>
 								<?php } ?>
 								<span style="post_item_title">
-									<?php if(mb_strlen($post_vo['ttitle'],'utf-8') < 10){
+									<?php if(mb_strlen($post_vo['ttitle'],'utf-8') < 15){
 										echo $post_vo['ttitle'];
 									} else { 
-										echo mb_substr($post_vo['ttitle'], 0, 10, 'utf-8').'……';
+										echo mb_substr($post_vo['ttitle'], 0, 15, 'utf-8').'……';
 									} ?>
 								</span>
 							</a>
@@ -125,6 +130,9 @@ function post_2_top(tid,ttop){
 	});
 }
 function post_delete(tid,elem){
+	if(!eds_framework.confirm('','您确定要删除这个帖子吗？')){
+		return;
+	}
 	var url = '__ROOT__/Home/Bbs/post_delete';
 	$(elem).text('正在删除……');
 	$.ajax({

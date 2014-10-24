@@ -92,7 +92,7 @@ function news_delete(zid){
 
 <div class="container" style="padding-left:0px;padding-right:0px;background-color:rgb(234,234,234);width:1024px;">
 	<div id="start" style="height:56px;background-color:rgb(201,48,59);color:white;font-size:16pt;font-family:'Segoe UI';padding:10px 15px;">
-		新闻动态 > {$main_title}
+		<a href="__ROOT__/Home/News" title="新闻动态" style="color:white;">新闻动态</a>&nbsp;>&nbsp;{$main_title}
 	</div>
 	<div class="news_left">
 		<?php if(session('?rrole')&&(session('rrole')==0||session('rrole')<25)){ ?>
@@ -104,7 +104,7 @@ function news_delete(zid){
 				<div>
 					<img src="__PUBLIC__/uploads{$news_vo.zflag}"  class="news_item_img" width="164px" height="182px" />
 					<div class="news_item_title">{$news_vo.ztitle}</div>
-					<div class="news_item_content">{$news_vo.zsummary}
+					<div class="news_item_content">{$news_vo.zsummary}……
 					</div>
 					<div class="news_item_read_all">
 						<?php if(session('?rrole')&&(session('rrole')==0||session('rrole')<25)){ ?>

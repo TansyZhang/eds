@@ -1,6 +1,7 @@
 <?php
 namespace Home\Controller;
 use Think\Controller;
+use Org\Net\Http;
 class CourseController extends EdsController {
     public function index($subtype=0){
 
@@ -62,8 +63,39 @@ class CourseController extends EdsController {
     public function pl_detail($eid=0){
     	$this->display();
     }
-    public function download($eid=0){
-    	$this->show('暂不提供下载！', 'utf-8');
+    public function download($eid=-1){
+        if(session('g_logined')!='logined'){//未登录
+            $this->show('{"result":1,"msg":"validation error."}', 'utf-8');
+            return;
+        }
+        if(session('pdownload_courseware')!=1){
+            $this->show('{"result":1,"msg":"permission error."}', 'utf-8');
+            return;
+        }
+        $eid = I('eid');
+        if($eid == -1 || $eid == ''){
+            $this->show('{"result":1,"msg":"parameters error."}', 'utf-8');
+            return;
+        }
+        $m = M('Courseware');
+        $lim['eid'] = $eid;
+        $lim['estate'] = 20;//审核通过
+        $rec = $m->where($lim)->find();
+        if($rec && strlen($rec['epath']) > 0){
+            $filepath = PRIVATE_PATH.'uploads'.$rec['epath'];
+            //echo $filepath;return;
+            if(is_file($filepath)){
+                //header("Expires: ".gmdate("D, d M Y H:i:s", time() + 3600000)." GMT");
+                //header('Content-type:application/octet-stream', true);
+                Http::download($filepath,$rec['etitle']);
+            } else {
+                $this->show('{"result":1,"msg":"path error."}', 'utf-8');
+            }
+            //$this->show('暂不提供下载！', 'utf-8');
+        } else {
+            $this->show('{"result":1,"msg":"parameters error(eid)."}', 'utf-8');
+            return;
+        }
     }
 
     public function pi($page=0){
@@ -334,6 +366,7 @@ class CourseController extends EdsController {
 
         $m2 = M('Courseware');
         $lim2['efid'] = $fid;
+        $lim2['estate'] = 20;//审核通过
         $this->cw_list = $m2->where($lim2)->order('elast_edited_time asc')->select();
 
         $m3 = M('CourseTaView');

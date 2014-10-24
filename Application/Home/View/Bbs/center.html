@@ -61,15 +61,13 @@ a{
 								?>
 								</a>
 							</span>
-							在帖子“<a title="{$event_vo.vtitle}" href="__ROOT__{$event_vo.vurl}">
-								<?php
+							在帖子“<?php
 									if(mb_strlen($event_vo['vtitle']) < 10){
 										echo $event_vo['vtitle'];
 									} else {
 										echo mb_substr($event_vo['vtitle'],0,10,'utf8')."……";
 									}
-								?>
-							</a>”中回复了你<span>
+								?>”中回复了你<span>
 						</span>
 						</span>
 						<span class="op">
@@ -89,7 +87,7 @@ a{
 
 
 
-		<div class="msg_list_div" style="margin-top:20px;">
+		<div class="msg_list_div" style="margin-top:20px;display:none;">
 			<div class="center_title">站内信</div>
 			<div class="separator"></div>
 			<div class="msg_list">

@@ -27,8 +27,11 @@
 		<div class="notice_content">
 			<textarea name="zcontent" class="form-control" style="width:100%;height:200px;visibility:hidden;">{$zcontent}</textarea>
 		</div>
-		<button type="button" class="btn btn-info btn-block" id="btn_save">暂存</button>
-		<button type="button" class="btn btn-info btn-block" id="btn_release">发布</button>
+
+		<div style="padding:10px 0;">
+			<include file="./Application/Home/View/control_btn.html" id="btn_save" text="暂存" />
+			<include file="./Application/Home/View/control_btn.html" id="btn_release" text="发布" />
+		</div>
 	</div>
 </div>
 

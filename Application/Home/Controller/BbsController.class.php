@@ -15,6 +15,9 @@ class BbsController extends EdsController {
             $this->display();
             return;
         }
+        if(session('pdownload_courseware')!=1){
+            return;
+        }
     	$m = M('PostListView');
         $lim['tstate'] = array('eq', '20');//20-置顶
     	$list1 = $m->where($lim)->order('tlast_edited_time desc')->select();
@@ -145,7 +148,7 @@ class BbsController extends EdsController {
     	}
     	$m = M('Bbs');
 		$data['treply_id'] = $tid;
-    	$data['trid'] = session('rid');//TODO
+    	$data['trid'] = session('rid');
 		$data['tsummary'] = $tsummary;
 		$data['tcontent'] = $tcontent;
     	$data['tstate'] = 10;//发布
@@ -154,12 +157,12 @@ class BbsController extends EdsController {
             $postm = M('Bbs');
             $postdata['tid'] = $tid;
             $postrec = $postm->where($postdata)->find();
-            if($postrec){
+            if($postrec && $postrec['trid']!=session('rid')){
                 $evm = M('Event');
                 $evdata['vrid'] = $postrec['trid'];
                 $evdata['vtitle'] = $postrec['ttitle'];
                 $evdata['vtype'] = 1;//帖子回复
-                $evdata['vurl'] = '/Home/Bbs/post_dtl?tid='.$postrec['treply_id'].'#start';
+                $evdata['vurl'] = '/Home/Bbs/post_dtl?tid='.$tid.'#start';
                 $evdata['vcreated_time'] = date('Y-m-d H:i:s',time());
                 $evdata['vstate'] = 0;//0-未查看
                 $evdata['vref'] = session('rid');
@@ -174,7 +177,7 @@ class BbsController extends EdsController {
     }
     private function get_rand_str($length){
         $str = '';
-        $strPol = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz";
+        $strPol = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz-_";
         $max = strlen($strPol)-1;
         for($i=0;$i<$length;$i++){
             $str.=$strPol[rand(0,$max)];//rand($min,$max)生成介于min和max两个数之间的一个随机整数

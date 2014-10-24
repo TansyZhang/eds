@@ -55,9 +55,9 @@
 	</volist>
 		
 		<div style="text-align:center;font-style:normal;margin:20px;"></div>
-		<div style="font-style:normal;margin:20px;">
+		<div style="font-style:normal;margin:20px;text-align:left;">
 			<?php if(session('?rrole')&&(session('rrole')==0||session('rrole')<25)){ ?>
-			<button type="button" class="btn btn-info btn-block" id="btn_add" onclick="notice_add()">添加</button>
+			<include file="./Application/Home/View/control_btn.html" id="btn_add" text="添加" />
 			<?php } ?>
 		</div>
 	</div>
@@ -86,4 +86,7 @@ function notice_delete(zid){
 		error:function(t){eds_framework.error_handler(url,t);}
 	});
 }
+$(document).ready(function(){
+	$('#btn_add').click(notice_add);
+});
 </script>
